@@ -22,7 +22,13 @@
 
 
 
-## .env
+## Description about the file struture
+
+*Back-end* is coded under **server** folder while *Front-end* coded under **client** folder.
+
+### .env files
+
+*some enviroment variables*
 
 | Back-end                  |
 | ------------------------- |
@@ -32,6 +38,48 @@
 | Front-end |
 | --------- |
 | PORT=8080 |
+
+
+
+### Command lines
+
+#### Install modules
+
+```bash
+yarn install
+```
+
+
+
+#### In Front-end folder
+
+*Run front-end only*
+
+```bash
+yarn start
+```
+
+
+
+#### In Back-end folder
+
+*Run back-end only*
+
+```bash
+yarn server
+```
+
+*Run front-end only*
+
+```bash
+yarn client
+```
+
+*Run both front-end and back-end via concurrently*
+
+```bash
+yarn dev
+```
 
 
 
