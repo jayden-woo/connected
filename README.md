@@ -2,23 +2,21 @@
 
 ## Group Member
 
-|       Name        | Student ID |                            Email                             | Role |
-| :---------------: | :--------: | :----------------------------------------------------------: | ---- |
-| **Xinyue Zhang**  |   984983   | [zxz1@student.unimelb.edu.au](mailto:zxz1@student.unimelb.edu.au) |      |
-|  **Chen Jiang**   |  1127411   | [chenjiang@student.unimelb.edu.au](mailto:chenjiang@student.unimelb.edu.au) |      |
-|  **Zhihui Chen**  |   920971   | [zhihuic2@student.unimelb.edu.au](mailto:zhihuic2@student.unimelb.edu.au) |      |
-| **Jun Cheng Woo** |  1045457   | [woojw@student.unimelb.edu.au](mailto:woojw@student.unimelb.edu.au) |      |
-|  **Linyan Zhu**   |  1074009   | [linyanz1@student.unimelb.edu.au](mailto:linyanz1@student.unimelb.edu.au) |      |
+|       Name        | Student ID |        Role         |                            Email                             |
+| :---------------: | :--------: | :-----------------: | :----------------------------------------------------------: |
+| **Xinyue Zhang**  |   984983   |    Scrum Master     | [zxz1@student.unimelb.edu.au](mailto:zxz1@student.unimelb.edu.au) |
+|  **Chen Jiang**   |  1127411   |    Product Owner    | [chenjiang@student.unimelb.edu.au](mailto:chenjiang@student.unimelb.edu.au) |
+|  **Zhihui Chen**  |   920971   | Testing and QA Lead | [zhihuic2@student.unimelb.edu.au](mailto:zhihuic2@student.unimelb.edu.au) |
+| **Jun Cheng Woo** |  1045457   |   Front-end Lead    | [woojw@student.unimelb.edu.au](mailto:woojw@student.unimelb.edu.au) |
+|  **Linyan Zhu**   |  1074009   |    Back-end Lead    | [linyanz1@student.unimelb.edu.au](mailto:linyanz1@student.unimelb.edu.au) |
 
 
 
 ## Links
 
 - [Confluence](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/overview?homepageId=163848)
-
 - [Jira](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
-
-- [Website Link](https://it-project-connected.herokuapp.com/)
+- [Heroku](https://it-project-connected.herokuapp.com/)
 
 
 
