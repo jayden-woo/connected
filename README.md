@@ -35,42 +35,22 @@
 
 | Front-end |
 | --------- |
-| PORT=8080 |
+| PORT=5000 |
 
 
 
 ### Command lines
 
-#### Install modules
-
-```bash
-yarn install
-```
-
-
-
-#### In Front-end folder
-
-*Run front-end only*
-
-```bash
-yarn start
-```
-
-
-
-#### In Back-end folder
-
-*Run back-end only*
-
-```bash
-yarn server
-```
-
-*Run front-end only*
+*Run front-end*
 
 ```bash
 yarn client
+```
+
+*Run back-end*
+
+```bash
+yarn server
 ```
 
 *Run both front-end and back-end via concurrently*
@@ -91,6 +71,6 @@ Database: MongoDB
 
 Deployment: Heroku
 
-Testing: JEST
+Testing: 
 
 API documentation: Postman
