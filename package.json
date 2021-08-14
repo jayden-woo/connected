@@ -1,0 +1,33 @@
+{
+  "name": "it-project-connected",
+  "version": "1.0.0",
+  "description": "COMP30022 IT Project",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "server": "npm run server --prefix server",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "build": "concurrently \"cd client/ && npm install && npm run build\" \"cd server && npm install\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jpiec/IT-Project-Connected.git"
+  },
+  "keywords": [
+    "react",
+    "node.js",
+    "express"
+  ],
+  "author": "Team CONNECTED",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jpiec/IT-Project-Connected/issues"
+  },
+  "homepage": "https://github.com/Jpiec/IT-Project-Connected#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
