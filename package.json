@@ -28,6 +28,9 @@
   },
   "homepage": "https://github.com/Jpiec/IT-Project-Connected#readme",
   "dependencies": {
-    "concurrently": "^6.2.1"
+    "concurrently": "^6.2.1",
+    "express-jwt": "^6.1.0",
+    "express-jwt-authz": "^2.4.1",
+    "jwks-rsa": "^2.0.4"
   }
 }
