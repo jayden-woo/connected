@@ -1,5 +1,6 @@
 const path = require("path");
 const morgan = require("morgan");
+const express = require("express");
 const debug = require("debug")("app:startup");
 
 module.exports = function (app) {
