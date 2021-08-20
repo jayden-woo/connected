@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const commentSchema = new mongoose.Schema({
   uid: {
@@ -23,4 +24,10 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
-module.exports = commentSchema;
+const validationSchema = Joi.object({
+  uid: Joi.string().required(),
+  content: Joi.string().required().min(5).max(1000),
+  numLikes: Joi.number().min(0),
+});
+
+module.exports = { commentSchema, validationSchema };
