@@ -27,7 +27,7 @@ const submissionSchema = new mongoose.Schema({
 function validateSubmission(submission) {
   const responseSchema = Joi.object({
     index: Joi.number().required().min(0),
-    response: Joi.string().required(),
+    response: Joi.string().required().min(0).max(200),
   });
 
   const submissionSchema = Joi.object({
