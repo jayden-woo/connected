@@ -6,7 +6,9 @@ const getAllPosts = async (req, res) => {
   if (!user) {
     posts = await Post.find().select("-comments").sort("-creationDate");
   } else {
-    posts = await Post.find({ uid: user }).sort("-creationDate");
+    posts = await Post.find({ uid: user })
+      .select("-comments")
+      .sort("-creationDate");
   }
   res.send(posts);
 };
