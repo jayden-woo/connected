@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 
 const responseSchema = new mongoose.Schema({
   index: {
@@ -16,12 +18,27 @@ const submissionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Survey",
   },
-  response: {
+  responses: {
     type: [responseSchema],
     required: true,
   },
 });
 
+function validateSubmission(submission) {
+  const responseSchema = Joi.object({
+    index: Joi.number().required().min(0),
+    response: Joi.string().required(),
+  });
+
+  const submissionSchema = Joi.object({
+    survey: Joi.objectId().required(),
+    responses: Joi.array().items(responseSchema).required().min(1),
+  });
+
+  return submissionSchema.validate(submission);
+}
+
 const Submission = mongoose.model("Submission", submissionSchema);
 
-module.exports = { Submission };
+exports.Submission = Submission;
+exports.validate = validateSubmission;
