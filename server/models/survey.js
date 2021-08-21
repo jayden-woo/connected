@@ -1,3 +1,4 @@
+const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
@@ -23,17 +24,57 @@ const surveySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+    min: 5,
+    max: 100,
+  },
   questions: {
     type: [questionSchema],
     required: true,
-    validate: [arraySize, "Invalid number of questions"],
+  },
+  creationDate: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
+  visible: {
+    type: Boolean,
+    required: true,
+    default: true,
   },
 });
 
-const arraySize = (arr) => {
-  return arr.length > 0;
-};
+function validateSurvey(survey, update = false) {
+  const questionSchema = Joi.object({
+    index: Joi.number().min(0).required(),
+    questionType: Joi.string()
+      .required()
+      .valid("short answer", "multiple choice", "multiple answer"),
+    question: Joi.string().required().min(5).max(100),
+    choices: Joi.array().items(Joi.string(), Joi.number()).min(1),
+  });
+
+  const surveySchema = Joi.object({
+    creator: Joi.string().required(),
+    title: Joi.string().required().min(5).max(100),
+    questions: Joi.array().required().items(questionSchema).min(1),
+  });
+
+  const updateSchema = Joi.object({
+    creator: Joi.string(),
+    title: Joi.string().min(5).max(100),
+    questions: Joi.array().items(questionSchema).min(1),
+    visible: Joi.bool(),
+  });
+
+  if (update) return updateSchema.validate(survey);
+
+  return surveySchema.validate(survey);
+}
 
 const Survey = mongoose.model("Survey", surveySchema);
 
-module.exports = { Survey };
+exports.Survey = Survey;
+exports.validate = validateSurvey;
