@@ -1,7 +1,21 @@
 const { Submission, validate } = require("../models/submission");
+const { Survey } = require("../models/survey");
 
 const getAllSubmissions = async (req, res) => {
-  const submissions = await Submission.find();
+  const surveyId = req.query.survey;
+  let submissions;
+
+  if (surveyId) {
+    const survey = await Survey.findById(surveyId);
+    if (!survey)
+      return res
+        .status(404)
+        .send("The survey with the given ID was not found.");
+    submissions = await Submission.find({ survey: surveyId });
+  } else {
+    submissions = await Submission.find();
+  }
+
   res.send(submissions);
 };
 

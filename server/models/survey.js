@@ -53,7 +53,14 @@ function validateSurvey(survey, update = false) {
       .required()
       .valid("short answer", "multiple choice", "multiple answer"),
     question: Joi.string().required().min(5).max(100),
-    choices: Joi.array().items(Joi.string(), Joi.number()).min(1),
+    choices: Joi.alternatives().conditional("questionType", {
+      is: "short answer",
+      then: Joi.forbidden(),
+      otherwise: Joi.array()
+        .items(Joi.string(), Joi.number())
+        .min(2)
+        .required(),
+    }),
   });
 
   const surveySchema = Joi.object({
