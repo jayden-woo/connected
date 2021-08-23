@@ -1,0 +1,1250 @@
+{
+	"info": {
+		"_postman_id": "41c59cbe-a66e-4454-926a-9bf82fad061f",
+		"name": "API Documentation For CRM Project",
+		"description": "Unimelb COMP30022 2021S2 <br>\nTeam **Connected**\n<br><br><br><br>",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts"
+							]
+						},
+						"description": "Return all the posts in the database. <br><br>\nAll the fields except `comments` of each post would be returned. <br><br>\nResults are sorted by the `creationDate` in descending order.\n> On success, a HTTP `200` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get All Posts Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/posts",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1007"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3ef-iy501dkzYnY6ind7NFKmG1133L0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:38:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"numLikes\": 0,\n        \"numViews\": 0,\n        \"solved\": false,\n        \"_id\": \"611f9e86997d55f11c8cefd1\",\n        \"uid\": \"auth0|1110b5c4c61fd70077d2819d\",\n        \"title\": \"Test Post\",\n        \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n        \"creationDate\": \"2021-08-20T12:22:30.436Z\",\n        \"__v\": 0\n    },\n    {\n        \"numLikes\": 0,\n        \"numViews\": 0,\n        \"solved\": false,\n        \"_id\": \"611f9d21daafc4b67c7f39ad\",\n        \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n        \"title\": \"Test Post\",\n        \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n        \"creationDate\": \"2021-08-20T12:16:33.072Z\",\n        \"__v\": 0\n    },\n    {\n        \"numLikes\": 4,\n        \"numViews\": 0,\n        \"solved\": true,\n        \"_id\": \"611f9bc8895ee260c4e27687\",\n        \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n        \"title\": \"Test Post 2\",\n        \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n        \"creationDate\": \"2021-08-20T12:10:48.819Z\",\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Post By Post ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posts/{{post_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								"{{post_id}}"
+							]
+						},
+						"description": "Return the post with the given `post_id`.\n> On success, a HTTP `200` status code would be returned, along with the specified post.\n>\n> If the post with the given ID was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get Post By Post ID Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/posts/{{post_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"posts",
+										"{{post_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "677"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a5-9jRo3BXH+h+RggDaQcD/99T0a/Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:38:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numLikes\": 4,\n    \"numViews\": 0,\n    \"solved\": true,\n    \"_id\": \"611f9bc8895ee260c4e27687\",\n    \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n    \"title\": \"Test Post 2\",\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n    \"creationDate\": \"2021-08-20T12:10:48.819Z\",\n    \"comments\": [\n        {\n            \"numLikes\": 2,\n            \"_id\": \"611fa94d4c2ad1d198c67ef8\",\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n            \"content\": \"sdfsdfkjslkfjsldkfj\",\n            \"creationDate\": \"2021-08-20T13:08:29.728Z\"\n        },\n        {\n            \"numLikes\": 0,\n            \"_id\": \"611fa94d4c2ad1d198c67ef9\",\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n            \"content\": \"sdfsdfkjslksdffffffjsldkfj\",\n            \"creationDate\": \"2021-08-20T13:08:29.728Z\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Posts By User ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posts/?user={{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								""
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "{{user_id}}"
+								}
+							]
+						},
+						"description": "Return all the posts posted by the user with the given `user_id`. <br><br>\nAll the fields except `comments` of each post would be returned. <br><br>\nResults are sorted by the `creationDate` in descending order.\n> On success, a HTTP `200` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get Posts By User ID Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/posts/?user={{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"posts",
+										""
+									],
+									"query": [
+										{
+											"key": "user",
+											"value": "{{user_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1028"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"404-Oibh5U2h7RSjb1C5Q+C0zzBvEaM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:39:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"numLikes\": 0,\n        \"numViews\": 0,\n        \"solved\": false,\n        \"_id\": \"611f9d21daafc4b67c7f39ad\",\n        \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n        \"title\": \"Test Post\",\n        \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n        \"creationDate\": \"2021-08-20T12:16:33.072Z\",\n        \"comments\": [],\n        \"__v\": 0\n    },\n    {\n        \"numLikes\": 4,\n        \"numViews\": 0,\n        \"solved\": true,\n        \"_id\": \"611f9bc8895ee260c4e27687\",\n        \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n        \"title\": \"Test Post 2\",\n        \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n        \"creationDate\": \"2021-08-20T12:10:48.819Z\",\n        \"comments\": [\n            {\n                \"numLikes\": 2,\n                \"_id\": \"611fa94d4c2ad1d198c67ef8\",\n                \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n                \"content\": \"sdfsdfkjslkfjsldkfj\",\n                \"creationDate\": \"2021-08-20T13:08:29.728Z\"\n            },\n            {\n                \"numLikes\": 0,\n                \"_id\": \"611fa94d4c2ad1d198c67ef9\",\n                \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n                \"content\": \"sdfsdfkjslksdffffffjsldkfj\",\n                \"creationDate\": \"2021-08-20T13:08:29.728Z\"\n            }\n        ],\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add A Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uid\": \"auth0|1110b5c4c61fd70077d2819d\", \r\n    \"title\": \"Test Post 3\",\r\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/posts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts"
+							]
+						},
+						"description": "Add a new post to the database.\n> On success, a HTTP `200` status code would be returned, along with the newly added post.\n>\n> If the format of the request body is illegal, a `400` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Add A Post Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"uid\": \"auth0|1110b5c4c61fd70077d2819d\", \r\n    \"title\": \"Test Post 3\",\r\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/posts",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "350"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15e-L5WiHXKxLAWaB4ag+nFbzgdF4M8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:39:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numLikes\": 0,\n    \"numViews\": 0,\n    \"solved\": false,\n    \"_id\": \"6120adbd897bd96b34ce3ac1\",\n    \"uid\": \"auth0|1110b5c4c61fd70077d2819d\",\n    \"title\": \"Test Post 3\",\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n    \"creationDate\": \"2021-08-21T07:39:41.873Z\",\n    \"comments\": [],\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Update A Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comments\": [\r\n        {\r\n            \"numLikes\": 2,\r\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\r\n            \"content\": \"sdfsdfkjslkfjsldkfj\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/posts/{{post_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								"{{post_id}}"
+							]
+						},
+						"description": "Update fields of the post specified by the `post_id` parameter and the request body.\n<br><br>\n**Note:** If you want to update the `comments` section, you need to provide a full array of objects.\n<br><br>\n> On success, a HTTP `200` status code would be returned, along with the updated post.\n>\n> If the format of the request body is illegal, a `400` status code would be returned.\n>\n> If the post with the given `post_id` was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Update A Post Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comments\": [\r\n        {\r\n            \"numLikes\": 2,\r\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\r\n            \"content\": \"sdfsdfkjslkfjsldkfj\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/posts/{{post_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"posts",
+										"{{post_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "508"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1fc-8nk2UyFs60YAHFoZd9wOFJfA9JE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 09:47:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numLikes\": 0,\n    \"numViews\": 0,\n    \"solved\": false,\n    \"_id\": \"611f9d21daafc4b67c7f39ad\",\n    \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n    \"title\": \"Test Post\",\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n    \"creationDate\": \"2021-08-20T12:16:33.072Z\",\n    \"comments\": [\n        {\n            \"numLikes\": 2,\n            \"_id\": \"6120cba837e37fbd4048e983\",\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n            \"content\": \"sdfsdfkjslkfjsldkfj\",\n            \"creationDate\": \"2021-08-21T09:47:20.844Z\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete A Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/posts/{{post_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"posts",
+								"{{post_id}}"
+							]
+						},
+						"description": "Delete the post with the given `post_id`.\n> On success, a HTTP `200` status code would be returned, along with the deleted post.\n>\n> If the post with the given `post_id` was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Delete A Post Example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/posts/611f9bc8895ee260c4e27687",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"posts",
+										"611f9bc8895ee260c4e27687"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "678"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a6-E9uVIu58v1vEzGTmWlvIqOLCxHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:40:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numLikes\": 13,\n    \"numViews\": 0,\n    \"solved\": true,\n    \"_id\": \"611f9bc8895ee260c4e27687\",\n    \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n    \"title\": \"Test Post 2\",\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n    \"creationDate\": \"2021-08-20T12:10:48.819Z\",\n    \"comments\": [\n        {\n            \"numLikes\": 2,\n            \"_id\": \"611fa94d4c2ad1d198c67ef8\",\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n            \"content\": \"sdfsdfkjslkfjsldkfj\",\n            \"creationDate\": \"2021-08-20T13:08:29.728Z\"\n        },\n        {\n            \"numLikes\": 0,\n            \"_id\": \"611fa94d4c2ad1d198c67ef9\",\n            \"uid\": \"auth0|6110b5c4c61fd70077d2819d\",\n            \"content\": \"sdfsdfkjslksdffffffjsldkfj\",\n            \"creationDate\": \"2021-08-20T13:08:29.728Z\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			],
+			"description": "API calls related to post section. <br><br>\nA `post` has the following schema: <br>\n> - `uid` : user id of the user who creates the post\n> > string, generated by Auth0\n> - `title` : title of this post\n> > string, 5 - 100 characters\n> - `content` : main body of this post\n> > string, 5 - 1000 characters\n> - `creationDate` : date when the user creates this post\n> > date, auto generated by MongoDB when creating the post\n> - `numLikes` : number of likes of this post\n> > int, default: 0\n> - `numViews` : number of views of this post\n> > int, default: 0\n> - `solved` : if this post has been solved\n> > bool, default: false\n> - `comments` : comments of this post\n> > [`comment`], array of `comment` objects which is defined below \n\n<br>\n\nA `comment` has the following schema: <br>\n> - `uid` : user id of the user who writes this comment\n> > string, generated by Auth0\n> - `content` : content of this comment\n> > string, 5 - 1000 characters\n> - `creationDate` : date when the user writes this comment\n> > date, auto generated by MongoDB when create this comment\n> - `numLikes` : number of likes of this comment\n> > int, default: 0"
+		},
+		{
+			"name": "Submission",
+			"item": [
+				{
+					"name": "Get All Submissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/submissions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"submissions"
+							]
+						},
+						"description": "Return all the submissions in the database. <br><br>\n> On success, a HTTP `200` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get All Submissions Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/submissions",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"submissions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "395"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"18b-eUtlks7tefhmSlWTwhsgHHx0aqc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 11:44:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"6120df4352d896ec1c922db6\",\n        \"survey\": \"6120b0a1f77cdbe38c83c9a7\",\n        \"responses\": [\n            {\n                \"_id\": \"6120df4352d896ec1c922db7\",\n                \"index\": 32,\n                \"response\": \"test\"\n            }\n        ],\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6120e6eeb793b9a164582281\",\n        \"survey\": \"6120e2a42dd69c8b001f9efa\",\n        \"responses\": [\n            {\n                \"_id\": \"6120e6eeb793b9a164582282\",\n                \"index\": 0,\n                \"response\": \"Test response\"\n            },\n            {\n                \"_id\": \"6120e6eeb793b9a164582283\",\n                \"index\": 1,\n                \"response\": \"Test response\"\n            }\n        ],\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Submission By Submission ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/submissions/{{submission_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"submissions",
+								"{{submission_id}}"
+							]
+						},
+						"description": "Return the submission with the given `submission_id`.\n> On success, a HTTP `200` status code would be returned, along with the specified submission.\n>\n> If the submission with the given ID was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get Submission By Submission ID Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/submissions/{{submission_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"submissions",
+										"{{submission_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "156"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9c-fvQoPN1tJTdXk5xutxSnxxGQxDA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 11:44:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6120df4352d896ec1c922db6\",\n    \"survey\": \"6120b0a1f77cdbe38c83c9a7\",\n    \"responses\": [\n        {\n            \"_id\": \"6120df4352d896ec1c922db7\",\n            \"index\": 32,\n            \"response\": \"test\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Submissions By Survey ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/submissions/?survey={{survey_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"submissions",
+								""
+							],
+							"query": [
+								{
+									"key": "survey",
+									"value": "{{survey_id}}"
+								}
+							]
+						},
+						"description": "Return all the submissions associated with the survey with the given `survey_id`. <br><br>\n> On success, a HTTP `200` status code would be returned.\n>\n> If the survey with the given `survey_id` was not found, a `404` status code would be returned"
+					},
+					"response": [
+						{
+							"name": "Get All Submissions By Survey ID Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/submissions/?survey={{survey_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"submissions",
+										""
+									],
+									"query": [
+										{
+											"key": "survey",
+											"value": "{{survey_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9e-guP1J+RYotUxXJhq2hSK+kS47+o\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 11:42:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"6120df4352d896ec1c922db6\",\n        \"survey\": \"6120b0a1f77cdbe38c83c9a7\",\n        \"responses\": [\n            {\n                \"_id\": \"6120df4352d896ec1c922db7\",\n                \"index\": 32,\n                \"response\": \"test\"\n            }\n        ],\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add A Submission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"survey\": \"6120e2a42dd69c8b001f9efa\",\r\n    \"responses\": [\r\n        {\r\n            \"index\": 0,\r\n            \"response\": \"Test response\"\r\n        },\r\n        {\r\n            \"index\": 1,\r\n            \"response\": \"Test response\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/submissions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"submissions"
+							]
+						},
+						"description": "Add a new submission to the database.\n> On success, a HTTP `200` status code would be returned, along with the newly added submission.\n>\n> If the format of the request body is illegal, a `400` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Add A Submission Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"survey\": \"6120e2a42dd69c8b001f9efa\",\r\n    \"responses\": [\r\n        {\r\n            \"index\": 0,\r\n            \"response\": \"Test response\"\r\n        },\r\n        {\r\n            \"index\": 1,\r\n            \"response\": \"Test response\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/submissions",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"submissions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "236"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ec-eGjj+3kfUFttoCeYaxRROR4tSfM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 11:43:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6120e6eeb793b9a164582281\",\n    \"survey\": \"6120e2a42dd69c8b001f9efa\",\n    \"responses\": [\n        {\n            \"_id\": \"6120e6eeb793b9a164582282\",\n            \"index\": 0,\n            \"response\": \"Test response\"\n        },\n        {\n            \"_id\": \"6120e6eeb793b9a164582283\",\n            \"index\": 1,\n            \"response\": \"Test response\"\n        }\n    ],\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			],
+			"description": "API calls related to submission section. <br><br>\nA `submission` has the following schema: <br>\n> - `survey` : survey id of the survey associated with this submission\n> > object id, generated by MongoDB\n> - `responses` : responses to the survey\n> > [`response`], array of `response` objects which is defined below \n\n<br>\n\nA `response` has the following schema: <br>\n> - `index` : index of the question\n> > int\n> - `response` : response to the question\n> > string, 0 - 200 characters"
+		},
+		{
+			"name": "Survey",
+			"item": [
+				{
+					"name": "Get All Surveys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/surveys",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"surveys"
+							]
+						},
+						"description": "Return all the surveys in the database. <br><br>\nOnle `title` and `creationDate` of each post would be returned. <br><br>\nResults are sorted by the `creationDate` in descending order.\n> On success, a HTTP `200` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get All Surveys Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/surveys",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"surveys"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "207"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cf-pw1rTwvEq8IuWvDUi2CCQ/ddu1w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 08:02:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"6120b313124c36e50cfc1ecd\",\n        \"title\": \"Visible Survey 2\",\n        \"creationDate\": \"2021-08-21T08:02:27.318Z\"\n    },\n    {\n        \"_id\": \"6120b0a1f77cdbe38c83c9a7\",\n        \"title\": \"Visible Survey\",\n        \"creationDate\": \"2021-08-21T07:52:01.718Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Survey By Survey ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/surveys/{{survey_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"surveys",
+								"{{survey_id}}"
+							]
+						},
+						"description": "Return the survey with the given `survey_id`.\n> On success, a HTTP `200` status code would be returned, along with the specified survey.\n>\n> If the survey with the given ID was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Get Survey By Survey ID Example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/surveys/{{survey_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"surveys",
+										"{{survey_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "433"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b1-mhLwQQ61s9zH/O8IbSDXhiIxgxo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:52:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"visible\": true,\n    \"_id\": \"6120b0aaf77cdbe38c83c9ab\",\n    \"creator\": \"auth0|6110b5c4c61fd70077d2819d\",\n    \"title\": \"Hidden Survey\",\n    \"questions\": [\n        {\n            \"questionType\": \"multiple choice\",\n            \"choices\": [],\n            \"_id\": \"6120b0aaf77cdbe38c83c9ac\",\n            \"index\": 0,\n            \"question\": \"This is a test question\"\n        },\n        {\n            \"questionType\": \"short answer\",\n            \"choices\": [],\n            \"_id\": \"6120b0aaf77cdbe38c83c9ad\",\n            \"index\": 1,\n            \"question\": \"This is a test question\"\n        }\n    ],\n    \"creationDate\": \"2021-08-21T07:52:10.296Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Add A Survey",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creator\": \"auth0|6110b5c4c61fd70077d2819d\",\r\n    \"title\": \"Visible Survey 2\",\r\n    \"questions\": [\r\n        {\r\n            \"index\": 0,\r\n            \"questionType\": \"short answer\",\r\n            \"question\": \"This is a test question\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/surveys",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"surveys"
+							]
+						},
+						"description": "Add a new survey to the database.\n> On success, a HTTP `200` status code would be returned, along with the newly added survey.\n>\n> If the format of the request body is illegal, a `400` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Add A Survey Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"creator\": \"auth0|6110b5c4c61fd70077d2819d\",\r\n    \"title\": \"Test Survey 3\",\r\n    \"questions\": [\r\n        {\r\n            \"index\": 0,\r\n            \"questionType\": \"multiple choice\",\r\n            \"question\": \"This is a test question\"\r\n        },\r\n        {\r\n            \"index\": 1,\r\n            \"questionType\": \"short answer\",\r\n            \"question\": \"This is a test question\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/surveys",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"surveys"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "433"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b1-UOySS6QHyvJGE1hR4qtRTRKYVDA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 07:49:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"visible\": true,\n    \"_id\": \"6120b01f2e97589ad00e31f1\",\n    \"creator\": \"auth0|6110b5c4c61fd70077d2819d\",\n    \"title\": \"Test Survey 3\",\n    \"questions\": [\n        {\n            \"questionType\": \"multiple choice\",\n            \"choices\": [],\n            \"_id\": \"6120b01f2e97589ad00e31f2\",\n            \"index\": 0,\n            \"question\": \"This is a test question\"\n        },\n        {\n            \"questionType\": \"short answer\",\n            \"choices\": [],\n            \"_id\": \"6120b01f2e97589ad00e31f3\",\n            \"index\": 1,\n            \"question\": \"This is a test question\"\n        }\n    ],\n    \"creationDate\": \"2021-08-21T07:49:51.314Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Update A Survey",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creationDate\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/surveys/{{survey_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"surveys",
+								"{{survey_id}}"
+							]
+						},
+						"description": "Update fields of the survey specified by the `survey_id` parameter and the request body.\n<br><br>\n**Note:** If you want to update the `questions` section, you need to provide a full array of objects.\n<br><br>\n> On success, a HTTP `200` status code would be returned, along with the updated survey.\n>\n> If the format of the request body is illegal, a `400` status code would be returned.\n>\n> If the survey with the given `survey_id` was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Update A Survey Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"visible\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/surveys/{{survey_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"surveys",
+										"{{survey_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "434"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b2-v4m9XAqwPd4NDtApGgvCAfCixLs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 21 Aug 2021 08:02:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"visible\": false,\n    \"_id\": \"6120b0aaf77cdbe38c83c9ab\",\n    \"creator\": \"auth0|6110b5c4c61fd70077d2819d\",\n    \"title\": \"Hidden Survey\",\n    \"questions\": [\n        {\n            \"questionType\": \"multiple choice\",\n            \"choices\": [],\n            \"_id\": \"6120b0aaf77cdbe38c83c9ac\",\n            \"index\": 0,\n            \"question\": \"This is a test question\"\n        },\n        {\n            \"questionType\": \"short answer\",\n            \"choices\": [],\n            \"_id\": \"6120b0aaf77cdbe38c83c9ad\",\n            \"index\": 1,\n            \"question\": \"This is a test question\"\n        }\n    ],\n    \"creationDate\": \"2021-08-21T07:52:10.296Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			],
+			"description": "API calls related to survey section. <br><br>\nA `survey` has the following schema: <br>\n> - `creator` : user id of the user who creates the survey\n> > string, generated by Auth0\n> - `title` : title of this survey\n> > string, 5 - 100 characters\n> - `questions` : questions of this survey\n> > [`question`], array of `question` objects which is defined below \n> - `creationDate` : date when the user creates this survey\n> > date, auto generated by MongoDB when create this curvey\n> - `visible` : if this survey is currently visible to other users\n> > bool, default: true\n\n<br>\n\nA `question` has the following schema: <br>\n> - `index` : index of the question\n> > int\n> - `questionType` : type of this question\n> > enum, [\"short answer\", \"multiple choice\", \"multiple answer\"]\n> - `question` : the actual question asked\n> > string, 5 - 100 characters\n> - `choices` : choices for the user when answering \"multiple choice/answer\" type of questions\n> > int or string, required for multiple choice/answer type of questions, forbidden for \"short answer\" type of questions"
+		}
+	]
+}
