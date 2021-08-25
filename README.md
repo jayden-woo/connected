@@ -64,6 +64,6 @@ Database: MongoDB
 
 Deployment: Heroku
 
-Testing:
+Testing: JEST
 
 API documentation: Postman
