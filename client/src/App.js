@@ -11,8 +11,8 @@ function App() {
     return (
       <div>
         <Layout>
-          <Header style={{height:'8vh'}}> <Navigation/> </Header>
-          <Content style={{height:'92vh'}}>
+          <Header> <Navigation/> </Header>
+          <Content>
             <BrowserRouter>
               <Switch>
               </Switch>
