@@ -30,7 +30,7 @@ const Navigation = () => {
 
           <Navbar.Collapse fill className="justify-content-end">
             {!isAuthenticated && (
-              <Nav>
+              <Nav fill>
                 <Nav.Link 
                   style={{fontWeight:'bold', color:'#000766'}} 
                   onClick={() => loginWithRedirect()}
