@@ -1,0 +1,66 @@
+.container {
+  width: 1000px;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.btn {
+  border-radius: 0%;
+}
+
+/* Survey Editor */
+.se__add-btn-container {
+  padding: 0.5rem 0;
+}
+
+.se__btn-add {
+  width: 31%;
+  height: 2.8rem;
+}
+
+.se__btn-publish {
+  margin-top: 0.5rem;
+  width: 5rem;
+  height: 2.8rem;
+}
+
+/* Question Editor */
+.qe {
+  margin: 1rem;
+  padding: 0.2rem 0.5rem;
+  border: solid rgb(231, 231, 231);
+  border-width: 1px;
+  background-color: rgb(251, 251, 251);
+}
+
+.qe__remove {
+  margin: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.edit-option__option {
+  margin: 0 0.6rem;
+  display: inline-block;
+  width: auto;
+  max-width: 90%;
+  vertical-align: middle;
+}
+
+.edit-option__icon {
+  margin-left: 0.8rem;
+  margin-top: 3px;
+  vertical-align: middle;
+}
+
+.edit-option__btn {
+  margin: 0.5rem 0.2rem;
+  border-radius: 0;
+}
+
+.edit-question {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
