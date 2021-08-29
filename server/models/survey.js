@@ -19,32 +19,37 @@ const questionSchema = new mongoose.Schema({
   choices: [String],
 });
 
-const surveySchema = new mongoose.Schema({
-  creator: {
-    type: String,
-    required: true,
+const surveySchema = new mongoose.Schema(
+  {
+    creator: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+      min: 5,
+      max: 100,
+    },
+    subTitle: {
+      type: String,
+      min: 5,
+      max: 100,
+    },
+    questions: {
+      type: [questionSchema],
+      required: true,
+    },
+    visible: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
-  title: {
-    type: String,
-    required: true,
-    min: 5,
-    max: 100,
-  },
-  questions: {
-    type: [questionSchema],
-    required: true,
-  },
-  creationDate: {
-    type: Date,
-    required: true,
-    default: Date.now,
-  },
-  visible: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 function validateSurvey(survey, update = false) {
   const questionSchema = Joi.object({
@@ -66,12 +71,14 @@ function validateSurvey(survey, update = false) {
   const surveySchema = Joi.object({
     creator: Joi.string().required(),
     title: Joi.string().required().min(5).max(100),
+    subTitle: Joi.string().min(5).max(100),
     questions: Joi.array().required().items(questionSchema).min(1),
   });
 
   const updateSchema = Joi.object({
     creator: Joi.string(),
     title: Joi.string().min(5).max(100),
+    subTitle: Joi.string().min(5).max(100),
     questions: Joi.array().items(questionSchema).min(1),
     visible: Joi.bool(),
   });
