@@ -9,23 +9,19 @@ import SurveyEditor from "./components/surveyEditor/SurveyEditor";
 const { Header, Content } = Layout;
 
 function App() {
-  return (
-    <div>
-      {/* <Layout>
-        <Header style={{ height: "8vh" }}>
-          {" "}
-          <Navigation />{" "}
-        </Header>
-        <Content style={{ height: "92vh" }}>
-          <BrowserRouter>
-            <Switch>
-            </Switch>
-          </BrowserRouter>
-        </Content>
-      </Layout> */}
-      <SurveyEditor />
-    </div>
-  );
+    return (
+      <div>
+        <Layout>
+          <Header> <Navigation/> </Header>
+          <Content>
+            <BrowserRouter>
+              <Switch>
+              </Switch>
+            </BrowserRouter>
+          </Content>
+        </Layout>
+      </div>
+    );
 }
 
 export default App;

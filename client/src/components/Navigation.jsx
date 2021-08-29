@@ -1,5 +1,5 @@
-import { Navbar, Nav, NavDropdown, Container, Image } from 'react-bootstrap';
-import logo from '../assets/connected.svg';
+import { Navbar, Nav, Container, Image } from 'react-bootstrap';
+import logo from '../assets/connected.png';
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navigation = () => {
@@ -13,7 +13,6 @@ const Navigation = () => {
               src={logo}
               width="50"
               height="50"
-              // className="d-inline-block align-top"
               alt="TEAM CONNECTED logo"
             />{' '}
           CONNECTED               
@@ -28,9 +27,9 @@ const Navigation = () => {
             </Nav>
           </Navbar.Collapse>
 
-          <Navbar.Collapse fill className="justify-content-end">
+          <Navbar.Collapse className="justify-content-end">
             {!isAuthenticated && (
-              <Nav>
+              <Nav fill>
                 <Nav.Link 
                   style={{fontWeight:'bold', color:'#000766'}} 
                   onClick={() => loginWithRedirect()}
@@ -52,7 +51,10 @@ const Navigation = () => {
                       />
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link>{user.name}</Nav.Link>
+                      <Nav.Link>
+                        {user.name}
+                        {!user.name && user.email}
+                      </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link 
