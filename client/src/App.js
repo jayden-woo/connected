@@ -1,9 +1,10 @@
 import React from "react";
-import { Layout } from 'antd';
-import 'antd/dist/antd.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Layout } from "antd";
+import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import SurveyEditor from "./components/surveyEditor/SurveyEditor";
 
 const { Header, Content } = Layout;
 

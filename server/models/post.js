@@ -2,46 +2,46 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const { commentSchema, validationSchema } = require("./comment");
 
-const postSchema = new mongoose.Schema({
-  uid: {
-    type: String,
-    required: true,
+const postSchema = new mongoose.Schema(
+  {
+    uid: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+      min: 5,
+      max: 100,
+    },
+    content: {
+      type: String,
+      required: true,
+      min: 5,
+      max: 1000,
+    },
+    numLikes: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    numViews: {
+      type: Number,
+      required: true,
+      default: 0,
+      min: 0,
+    },
+    solved: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    comments: [commentSchema],
   },
-  title: {
-    type: String,
-    required: true,
-    min: 5,
-    max: 100,
-  },
-  content: {
-    type: String,
-    required: true,
-    min: 5,
-    max: 1000,
-  },
-  creationDate: {
-    type: Date,
-    required: true,
-    default: Date.now,
-  },
-  numLikes: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
-  numViews: {
-    type: Number,
-    required: true,
-    default: 0,
-    min: 0,
-  },
-  solved: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
-  comments: [commentSchema],
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Post = mongoose.model("Posts", postSchema);
 

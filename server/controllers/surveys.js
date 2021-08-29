@@ -2,8 +2,8 @@ const { Survey, validate } = require("../models/survey");
 
 const getAllSurveys = async (req, res) => {
   const surveys = await Survey.find({ visible: true })
-    .select("title creationDate")
-    .sort("-creationDate");
+    .select("title updatedAt")
+    .sort("-updatedAt");
   res.send(surveys);
 };
 
@@ -23,6 +23,7 @@ const addSurvey = async (req, res) => {
   const survey = new Survey({
     creator: req.body.creator,
     title: req.body.title,
+    subTitle: req.body.subTitle,
     questions: req.body.questions,
   });
   await survey.save();

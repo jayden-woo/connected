@@ -16,6 +16,7 @@
 - [Jira](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
 - [Heroku](https://it-project-connected.herokuapp.com/)
 - [API Documentation](https://documenter.getpostman.com/view/17086104/TzzDJEme)
+- [MongoDB Connection String](mongodb+srv://IT-PROJECT:CONNECTED@team-connected.94ydr.mongodb.net/CRM?authSource=admin&replicaSet=atlas-we19e0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true)
 
 ## Description about the file struture
 
