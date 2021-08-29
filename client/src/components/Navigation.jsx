@@ -6,7 +6,7 @@ const Navigation = () => {
     const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
     
     return (
-      <Navbar fixed="top" expand="lg" bg="light">
+      <Navbar fixed="top" expand="xl" bg="light">
         <Container>
           <Navbar.Brand style={{fontWeight:'bold', color:'#000766'}} href="#home">
             <Image
@@ -21,9 +21,9 @@ const Navigation = () => {
 
           <Navbar.Collapse fill className="justify-content-center">
             <Nav fill>
-              <Nav.Link href="#home">&emsp;&emsp;HOME&emsp;&emsp;</Nav.Link>
-              <Nav.Link href="#link">&emsp;&emsp;SURVEY&emsp;&emsp;</Nav.Link>
-              <Nav.Link href="#link">&emsp;&emsp;ABOUT&emsp;&emsp;</Nav.Link>
+              <Nav.Link href="#home">&emsp;HOME&emsp;</Nav.Link>
+              <Nav.Link href="#link">&emsp;SURVEY&emsp;</Nav.Link>
+              <Nav.Link href="#link">&emsp;ABOUT&emsp;</Nav.Link>
             </Nav>
           </Navbar.Collapse>
 
@@ -41,30 +41,27 @@ const Navigation = () => {
             {isAuthenticated && (
               <>
                 <Nav fill>
-                    <Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link>
                       <Image 
                         src={user.picture} 
                         width="50" 
                         height="50" 
                         alt="ProfilePic"
                         roundedCircle
-                      />
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link>
-                        {user.name}
-                        {!user.name && user.email}
-                      </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link 
-                        style={{fontWeight:'bold', color:'#000766'}} 
-                        onClick={() => logout({ returnTo: window.location.origin })}
-                      >
-                        LOG OUT
-                      </Nav.Link>
-                    </Nav.Item>
-                  </Nav>
+                      />{'  '}           
+                      {user.name}
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link 
+                      style={{fontWeight:'bold', color:'#000766'}} 
+                      onClick={() => logout({ returnTo: window.location.origin })}
+                    >
+                      LOG OUT
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
               </>
             )}
           </Navbar.Collapse>
