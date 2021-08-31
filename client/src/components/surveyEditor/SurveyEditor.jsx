@@ -103,9 +103,9 @@ export default function SurveyEditor() {
 	};
 
 	return (
-		<div className="se__container">
+		<div className="se__container" id="top">
 			<div className="se__top-cut-off" />
-			<div className="se__content">
+			<div className="se__title-section">
 				<EditText
 					className="edit-text se__title"
 					placeholder="Add title here ..."
@@ -116,25 +116,27 @@ export default function SurveyEditor() {
 					placeholder="Add sub title here ..."
 					onSave={({ value }) => setSubTitle(value)}
 				/>
+			</div>
+			<div className="se__content">
 				<div>
 					<div className="se__add-btn-container">
 						<Button
 							className="se__btn-add se__btn--red shadow-none"
 							onClick={() => handleAdd('short answer')}
 						>
-							Add Short Answer
+							+ Add Short Answer
 						</Button>
 						<Button
 							className="se__btn-add se__btn--blue shadow-none"
 							onClick={() => handleAdd('multiple choice')}
 						>
-							Add Multiple Choice
+							+ Add Multiple Choice
 						</Button>
 						<Button
 							className="se__btn-add se__btn--green shadow-none"
 							onClick={() => handleAdd('multiple answer')}
 						>
-							Add Multiple Answer
+							+ Add Multiple Answer
 						</Button>
 					</div>
 					<div>
@@ -151,7 +153,9 @@ export default function SurveyEditor() {
 					</div>
 				</div>
 			</div>
-			<div className="se__bottom-cut-off" />
+			<div className="se__bottom-cut-off">
+				<a href="#top">BACK TO TOP</a>
+			</div>
 			<div className="se__publish">
 				<Button className="se__btn-cancel shadow-none">Cancel</Button>
 				<Button className="se__btn-publish shadow-none" onClick={onSubmit}>

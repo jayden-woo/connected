@@ -13,8 +13,7 @@ function App() {
 		<div>
 			<Layout>
 				<Header>
-					{' '}
-					<Navigation />{' '}
+					<Navigation />
 				</Header>
 				<Content>
 					<BrowserRouter>
