@@ -56,7 +56,7 @@ export default function SurveyEditor() {
 			}
 
 			if (q.questionType !== 'short answer') {
-				if (q.choices.length < 2) {
+				if (!q.choices || q.choices.length < 2) {
 					alert('Multiple option question must have at least 2 options.');
 					return false;
 				}
@@ -119,19 +119,19 @@ export default function SurveyEditor() {
 				<div>
 					<div className="se__add-btn-container">
 						<Button
-							className="se__btn-add se__btn--red"
+							className="se__btn-add se__btn--red shadow-none"
 							onClick={() => handleAdd('short answer')}
 						>
 							Add Short Answer
 						</Button>
 						<Button
-							className="se__btn-add se__btn--blue"
+							className="se__btn-add se__btn--blue shadow-none"
 							onClick={() => handleAdd('multiple choice')}
 						>
 							Add Multiple Choice
 						</Button>
 						<Button
-							className="se__btn-add se__btn--green"
+							className="se__btn-add se__btn--green shadow-none"
 							onClick={() => handleAdd('multiple answer')}
 						>
 							Add Multiple Answer
@@ -153,8 +153,8 @@ export default function SurveyEditor() {
 			</div>
 			<div className="se__bottom-cut-off" />
 			<div className="se__publish">
-				<Button className="se__btn-cancel">Cancel</Button>
-				<Button className="se__btn-publish" onClick={onSubmit}>
+				<Button className="se__btn-cancel shadow-none">Cancel</Button>
+				<Button className="se__btn-publish shadow-none" onClick={onSubmit}>
 					Publish
 				</Button>
 			</div>

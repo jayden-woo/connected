@@ -23,36 +23,32 @@ export default function EditBtn({
 		<div>
 			{!isEditing && (
 				<Button
-					className="edit-option__btn"
-					variant="outline-dark"
+					className="qe__btn qe__btn--blue shadow-none"
 					onClick={toggleEditing}
 				>
-					Edit Option
+					Edit
 				</Button>
 			)}
 			{isEditing && (
 				<div>
 					<Button
-						className="edit-option__btn"
-						variant="outline-dark"
+						className="qe__btn qe__btn--blue shadow-none"
+						onClick={clickFinish}
+					>
+						Finish
+					</Button>
+					<Button
+						className="qe__btn qe__btn--blue shadow-none"
 						onClick={handleAdd}
 					>
 						Add
 					</Button>
 					<Button
-						className="edit-option__btn"
-						variant="outline-dark"
+						className="qe__btn qe__btn--blue shadow-none"
 						onClick={handleRemove}
 						disabled={numOptions === 0}
 					>
 						Remove
-					</Button>
-					<Button
-						className="edit-option__btn"
-						variant="outline-dark"
-						onClick={clickFinish}
-					>
-						Finish
 					</Button>
 				</div>
 			)}

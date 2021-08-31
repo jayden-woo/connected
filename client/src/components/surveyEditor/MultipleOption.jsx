@@ -42,29 +42,31 @@ export default function MultipleOption({
 	};
 
 	return (
-		<div>
-			<EditText
-				className="edit-question"
-				placeholder="Click me to edit question title ..."
-				onSave={({ value }) => editQuestion(id, value)}
-			/>
-			{options.map((o) => (
-				<div key={o.id}>
-					{questionType === 'multiple choice' && (
-						<i className="far fa-dot-circle edit-option__icon" />
-					)}
-					{questionType === 'multiple answer' && (
-						<i className="far fa-check-square edit-option__icon" />
-					)}
-
-					<EditText
-						className="edit-option__option"
-						placeholder="Click me to edit option ..."
-						onSave={({ value }) => handleSave(o.id, value)}
-					/>
-				</div>
-			))}
+		<div className="edit-option__wrapper">
+			<div className="edit-option__text">
+				<EditText
+					className="edit-text edit-question"
+					placeholder="Click me to edit question title ..."
+					onSave={({ value }) => editQuestion(id, value)}
+				/>
+				{options.map((o) => (
+					<div key={o.id}>
+						{questionType === 'multiple choice' && (
+							<i className="far fa-dot-circle edit-option__icon" />
+						)}
+						{questionType === 'multiple answer' && (
+							<i className="far fa-check-square edit-option__icon" />
+						)}
+						<EditText
+							className="edit-text edit-option__option"
+							placeholder="Click me to edit option ..."
+							onSave={({ value }) => handleSave(o.id, value)}
+						/>
+					</div>
+				))}
+			</div>
 			<EditBtn
+				className="edit-option__btns"
 				handleAdd={handleAdd}
 				handleRemove={handleRemove}
 				handleFinish={handleFinish}

@@ -3,6 +3,7 @@
 	--color-secondary: #8ab5ab;
 	--color-accent: #ff0000;
 	--color-headings: #c9ccff;
+	--color-text: #190e89;
 	--color-background: #f2f6fb;
 	--color-border: #ccc;
 	--border-radius: 0px;
@@ -19,6 +20,11 @@ html {
 
 .btn {
 	border-radius: 0%;
+}
+
+.btn:focus {
+	outline: none;
+	box-shadow: none;
 }
 
 .edit-text {
@@ -83,7 +89,7 @@ html {
 .se__add-btn-container {
 	display: flex;
 	justify-content: space-evenly;
-	padding: 0.5rem 0;
+	margin: 2rem 0;
 }
 
 .se__btn--red {
@@ -129,38 +135,57 @@ html {
 
 /* Question Editor */
 .qe {
-	margin: 1rem;
-	padding: 0.2rem 0.5rem;
-	border: solid rgb(231, 231, 231);
-	border-width: 1px;
-	background-color: rgb(251, 251, 251);
+	min-height: 10rem;
+	margin: 1rem 2rem;
+}
+.qe__btn {
+	margin-top: 1rem;
+	margin-right: 3rem;
+	float: right;
+	width: 9rem;
+	height: 3rem;
+	font-size: 1.7rem;
+	border-width: 0;
+	padding: 0;
 }
 
-.qe__remove {
-	margin: 0.2rem;
-	margin-bottom: 0.5rem;
+.qe__btn--mt {
+	margin-top: 2.3rem;
 }
 
+.qe__btn--blue {
+	background-color: var(--color-primary);
+}
+
+.edit-question {
+	font-size: 2.5rem;
+	height: 5rem;
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+	margin: 0.5rem 0;
+	color: var(--color-text);
+}
+
+/* Edit Option */
 .edit-option__option {
-	margin: 0 0.6rem;
+	color: var(--color-text);
+	font-size: 1.8rem;
+	margin: 0.3rem 1rem;
+	padding: 0;
+	padding-left: 1rem;
 	display: inline-block;
+	height: 3rem;
 	width: auto;
 	max-width: 90%;
 	vertical-align: middle;
 }
 
 .edit-option__icon {
-	margin-left: 0.8rem;
-	margin-top: 3px;
+	margin-left: 2.5rem;
 	vertical-align: middle;
 }
 
 .edit-option__btn {
 	margin: 0.5rem 0.2rem;
 	border-radius: 0;
-}
-
-.edit-question {
-	font-size: 1.2rem;
-	font-weight: 500;
 }
