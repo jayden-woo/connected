@@ -10,6 +10,7 @@
 		"antd": "^4.16.13",
 		"axios": "^0.21.1",
 		"bootstrap": "^5.1.0",
+		"cloudinary-react": "^1.7.0",
 		"eslint": "^7.32.0",
 		"eslint-config-airbnb": "^18.2.1",
 		"eslint-config-prettier": "^8.3.0",

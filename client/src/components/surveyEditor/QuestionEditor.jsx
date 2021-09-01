@@ -8,6 +8,10 @@ import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { EditText } from 'react-edit-text';
 import EditBtn from './EditBtn';
+import http from '../../services/httpService';
+
+const cloudinaryApiEndpoint =
+	'https://api.cloudinary.com/v1_1/ip-connected/image/upload';
 
 export default function QuestionEditor({
 	id: qid,
@@ -17,7 +21,7 @@ export default function QuestionEditor({
 	editOption,
 }) {
 	const [options, setOptions] = useState([]);
-	const [image, setImage] = useState(null);
+	const [image, setImage] = useState({ src: '', alt: '' });
 
 	const handleAddOption = () => {
 		const newOptions = [...options];
@@ -49,9 +53,30 @@ export default function QuestionEditor({
 	};
 
 	const handleSelectImage = (e) => {
-		console.log('id', qid);
-		console.log('image', e.target.files[0]);
-		setImage(URL.createObjectURL(e.target.files[0]));
+		const i = e.target.files[0];
+		if (!i) return;
+		setImage({ src: URL.createObjectURL(i), alt: i.name });
+	};
+
+	const uploadImage = (file) => {
+		const data = new FormData();
+		data.append('file', file);
+		data.append('upload_preset', 'jbqt2xhd');
+		return http.post(cloudinaryApiEndpoint, data, {
+			onUploadProgress: (progressEvent) => {
+				console.log(
+					Math.round((progressEvent.loaded / progressEvent.total) * 100),
+				);
+			},
+		});
+	};
+
+	const handleUpload = async () => {
+		const file = await fetch(image.src).then((r) => r.blob());
+		const res = await uploadImage(file);
+		if (res.status === 200) {
+			console.log(res.data.secure_url);
+		}
 	};
 
 	return (
@@ -63,7 +88,11 @@ export default function QuestionEditor({
 						placeholder="Click me to edit question title ..."
 						onSave={({ value }) => editQuestion(qid, value)}
 					/>
-					{image && <Image src={image} className="qe__image" />}
+					<Image
+						src={image.src || null}
+						alt={image.alt || null}
+						className="qe__image"
+					/>
 					{questionType !== 'short answer' &&
 						options.map((o) => (
 							<div key={o.id}>
@@ -93,6 +122,7 @@ export default function QuestionEditor({
 						handleRemove={handleRemoveOption}
 						handleFinish={handleFinishEditOptions}
 						handleSelectImage={handleSelectImage}
+						handleUpload={handleUpload}
 						editOptions={questionType !== 'short answer'}
 						numOptions={options.length}
 					/>

@@ -7,6 +7,7 @@ export default function EditBtn({
 	handleRemove,
 	handleFinish,
 	handleSelectImage,
+	handleUpload,
 	editOptions,
 	numOptions,
 }) {
@@ -40,12 +41,23 @@ export default function EditBtn({
 					>
 						Finish
 					</Button>
-					<input type="file" onChange={handleSelectImage} ref={imageSelector} />
+					<input
+						type="file"
+						onChange={handleSelectImage}
+						ref={imageSelector}
+						accept="image/*"
+					/>
 					<Button
 						className="qe__btn qe__btn--blue shadow-none"
 						onClick={() => imageSelector.current.click()}
 					>
 						Add IMG
+					</Button>
+					<Button
+						className="qe__btn qe__btn--blue shadow-none"
+						onClick={handleUpload}
+					>
+						Upload
 					</Button>
 					{editOptions && (
 						<div>
@@ -75,6 +87,7 @@ EditBtn.propTypes = {
 	handleRemove: PropTypes.func.isRequired,
 	handleFinish: PropTypes.func.isRequired,
 	handleSelectImage: PropTypes.func.isRequired,
+	handleUpload: PropTypes.func.isRequired,
 	editOptions: PropTypes.bool.isRequired,
 	numOptions: PropTypes.number.isRequired,
 };
