@@ -3,32 +3,30 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 
 export default function EditBtn({
+	handleDelete,
 	handleAdd,
 	handleRemove,
-	handleFinish,
 	handleSelectImage,
 	handleUpload,
-	editOptions,
+	showEditOptions,
 	numOptions,
+	canUpload,
 }) {
 	const [isEditing, setIsEditing] = useState(false);
 	const imageSelector = useRef();
 
-	const toggleEditing = () => {
-		setIsEditing(!isEditing);
-	};
-
-	const clickFinish = () => {
-		toggleEditing();
-		handleFinish();
-	};
-
 	return (
 		<div>
+			<Button
+				className="qe__btn qe__btn--mt qe__btn--red shadow-none"
+				onClick={handleDelete}
+			>
+				Delete
+			</Button>
 			{!isEditing && (
 				<Button
 					className="qe__btn qe__btn--blue shadow-none"
-					onClick={toggleEditing}
+					onClick={() => setIsEditing(!isEditing)}
 				>
 					Edit
 				</Button>
@@ -37,7 +35,7 @@ export default function EditBtn({
 				<div>
 					<Button
 						className="qe__btn qe__btn--blue shadow-none"
-						onClick={clickFinish}
+						onClick={() => setIsEditing(!isEditing)}
 					>
 						Finish
 					</Button>
@@ -56,10 +54,11 @@ export default function EditBtn({
 					<Button
 						className="qe__btn qe__btn--blue shadow-none"
 						onClick={handleUpload}
+						disabled={!canUpload}
 					>
 						Upload
 					</Button>
-					{editOptions && (
+					{showEditOptions && (
 						<div>
 							<Button
 								className="qe__btn qe__btn--blue shadow-none"
@@ -83,11 +82,12 @@ export default function EditBtn({
 }
 
 EditBtn.propTypes = {
+	handleDelete: PropTypes.func.isRequired,
 	handleAdd: PropTypes.func.isRequired,
 	handleRemove: PropTypes.func.isRequired,
-	handleFinish: PropTypes.func.isRequired,
 	handleSelectImage: PropTypes.func.isRequired,
 	handleUpload: PropTypes.func.isRequired,
-	editOptions: PropTypes.bool.isRequired,
+	showEditOptions: PropTypes.bool.isRequired,
 	numOptions: PropTypes.number.isRequired,
+	canUpload: PropTypes.bool.isRequired,
 };

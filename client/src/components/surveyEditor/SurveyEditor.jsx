@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { EditText } from 'react-edit-text';
-import _ from 'lodash';
 import QuestionEditor from './QuestionEditor';
 
 export default function SurveyEditor() {
@@ -21,24 +21,17 @@ export default function SurveyEditor() {
 		]);
 	};
 
-	const handleRemove = (id) => {
+	const handleDelete = (id) => {
 		const newQuestions = [...questions];
 		const index = questions.findIndex((q) => q.id === id);
 		newQuestions.splice(index, 1);
 		setQuestions(newQuestions);
 	};
 
-	const editQuestion = (id, question) => {
+	const updateQuestion = (id, key, value) => {
 		const newQuestions = [...questions];
 		const index = questions.findIndex((q) => q.id === id);
-		newQuestions[index].question = question;
-		setQuestions(newQuestions);
-	};
-
-	const editOption = (id, options) => {
-		const newQuestions = [...questions];
-		const index = questions.findIndex((q) => q.id === id);
-		newQuestions[index].choices = options;
+		newQuestions[index][key] = value;
 		setQuestions(newQuestions);
 	};
 
@@ -118,40 +111,35 @@ export default function SurveyEditor() {
 				/>
 			</div>
 			<div className="se__content">
-				<div>
-					<div className="se__add-btn-container">
-						<Button
-							className="se__btn-add se__btn--red shadow-none"
-							onClick={() => handleAdd('short answer')}
-						>
-							+ Add Short Answer
-						</Button>
-						<Button
-							className="se__btn-add se__btn--blue shadow-none"
-							onClick={() => handleAdd('multiple choice')}
-						>
-							+ Add Multiple Choice
-						</Button>
-						<Button
-							className="se__btn-add se__btn--green shadow-none"
-							onClick={() => handleAdd('multiple answer')}
-						>
-							+ Add Multiple Answer
-						</Button>
-					</div>
-					<div>
-						{questions.map((q) => (
-							<QuestionEditor
-								key={q.id}
-								id={q.id}
-								questionType={q.questionType}
-								handleRemove={handleRemove}
-								editQuestion={editQuestion}
-								editOption={editOption}
-							/>
-						))}
-					</div>
+				<div className="se__add-btn-container">
+					<Button
+						className="se__btn-add se__btn--red shadow-none"
+						onClick={() => handleAdd('short answer')}
+					>
+						+ Add Short Answer
+					</Button>
+					<Button
+						className="se__btn-add se__btn--blue shadow-none"
+						onClick={() => handleAdd('single choice')}
+					>
+						+ Add Single Choice
+					</Button>
+					<Button
+						className="se__btn-add se__btn--green shadow-none"
+						onClick={() => handleAdd('multiple choice')}
+					>
+						+ Add Multiple Choice
+					</Button>
 				</div>
+				{questions.map((q) => (
+					<QuestionEditor
+						key={q.id}
+						id={q.id}
+						questionType={q.questionType}
+						handleDelete={handleDelete}
+						updateQuestion={updateQuestion}
+					/>
+				))}
 			</div>
 			<div className="se__bottom-cut-off">
 				<a href="#top">BACK TO TOP</a>
