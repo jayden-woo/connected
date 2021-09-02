@@ -4,8 +4,10 @@ import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import Footer from'./components/Footer'
 import SurveyEditor from './components/surveyEditor/SurveyEditor';
 import About from './components/About';
+
 
 const { Header, Content } = Layout;
 
@@ -25,6 +27,9 @@ function App() {
 						</Switch>
 					</BrowserRouter>
 				</Content>
+				<Footer>
+					<Footer/>
+				</Footer>
 			</Layout>
 		</div>
 	);
