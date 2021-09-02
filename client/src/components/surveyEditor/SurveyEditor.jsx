@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { toast, ToastContainer } from 'react-toastify';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { EditText } from 'react-edit-text';
@@ -99,12 +100,30 @@ export default function SurveyEditor() {
 			newQuestions.push(newQ);
 		});
 
-		console.log({
+		const survey = {
 			title,
 			subTitle,
 			questions: newQuestions,
 			creator: 'auth0|6110b5c4c61fd70077d2819d',
 			thumbnail: thumbnailURL,
+		};
+
+		if (!survey.thumbnail) delete survey.thumbnail;
+
+		console.log(survey);
+	};
+
+	const successNotify = () => {
+		toast.success('Successfully Uploaded!', {
+			position: toast.POSITION.BOTTOM_RIGHT,
+			autoClose: 2000,
+		});
+	};
+
+	const errorNotify = (message) => {
+		toast.error(message, {
+			position: toast.POSITION.BOTTOM_RIGHT,
+			autoClose: 2000,
 		});
 	};
 
@@ -135,7 +154,6 @@ export default function SurveyEditor() {
 								/>
 							)}
 							{!thumbnail.src && <div className="se__thumbnail" />}
-							{isUploading && <ProgressBar now={progress} />}
 							<input
 								type="file"
 								onChange={(e) => {
@@ -152,12 +170,15 @@ export default function SurveyEditor() {
 							</Button>
 							<Button
 								className="se__thumbnail-btn shadow-none"
+								disabled={!thumbnail.src}
 								onClick={async () => {
 									setThumbnailURL(
 										await uploadImage.handleUpload(
 											setIsUploading,
 											setProgress,
 											thumbnail,
+											successNotify,
+											errorNotify,
 										),
 									);
 								}}
@@ -166,6 +187,9 @@ export default function SurveyEditor() {
 							</Button>
 						</Col>
 					</Row>
+					{isUploading && (
+						<ProgressBar className="se__progress-bar" now={progress} />
+					)}
 				</Container>
 			</div>
 			<div className="se__content">
@@ -216,6 +240,7 @@ export default function SurveyEditor() {
 					Publish
 				</Button>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 }

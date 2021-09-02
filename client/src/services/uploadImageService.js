@@ -45,9 +45,17 @@ const uploadImage = (file, setProgress) => {
  * @param 	{function} 	setProgress - SetState function to set the value of the progress bar.
  * @param 	{Object} 		image - The image object.
  * @param 	{string} 		image.src - Local URL of the image.
+ * @param 	{function} 	successNotify - Show a toast using react-toastify on success.
+ * @param 	{function} 	errorNotify - Show a toast using react-toastify on error.
  * @return 	{string} -  On success, the url of the uploaded image is returned. Otherwise, return undefined.
  */
-const handleUpload = async (setIsUploading, setProgress, image) => {
+const handleUpload = async (
+	setIsUploading,
+	setProgress,
+	image,
+	successNotify,
+	errorNotify,
+) => {
 	try {
 		setIsUploading(true);
 		setProgress(0);
@@ -57,9 +65,10 @@ const handleUpload = async (setIsUploading, setProgress, image) => {
 
 		setIsUploading(false);
 		console.log(res.data.secure_url);
+		if (successNotify) successNotify();
 		return res.data.secure_url;
 	} catch (e) {
-		console.log('Errors in uploading:', e.message);
+		if (errorNotify) errorNotify('An error occured:', e.message);
 		setIsUploading(false);
 		return undefined;
 	}
