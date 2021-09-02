@@ -164,3 +164,13 @@ html {
 	font-size: 1.2rem;
 	font-weight: 500;
 }
+
+/* header image*/
+.center-headerImage{
+	text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+}
