@@ -10,7 +10,7 @@ function App() {
 	return (
 		<div>
 			<Layout>
-				<Navigation />
+				<Navigation id="top" />
 				<BrowserRouter>
 					<Switch>
 						<Route path="/create-survey" component={SurveyEditor} />
