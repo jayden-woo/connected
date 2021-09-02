@@ -66,9 +66,11 @@ const About = () => (
             channels. It may also automatically pull in other information, such as recent news about the company&apos;s activity, and it can store personal details, such as a client&apos;s personal preferences 
             on communications. The CRM tool organises this information to give you a complete record of individuals and companies overall, so you can better understand your relationship over time.<br/>
             A CRM platform can also connect to other business apps that help you to develop customer relationships. CRM solutions today are more open and can integrate with your favourite business tools, such 
-            as document signing, accounting and billing, and surveys, so that information flows both ways to give you a true 360-degree view of your customer.And a new generation of CRM goes one step further: Built-in intelligence automates administrative tasks, like data entry and lead or service case routing, so you can free up time for more 
+            as document signing, accounting and billing, and surveys, so that information flows both ways to give you a true 360-degree view of your customer.And a new generation of CRM goes one step further: 
+            Built-in intelligence automates administrative tasks, like data entry and lead or service case routing, so you can free up time for more 
             valuable activities. Automatically generated insights help you understand your customers better, even predicting how they will feel and act so that you can prepare the right outreach.<br/><br/>
 
+            <b>Resource:</b> CRM 101: What is CRM? 02/09/2021 Retrieved from: https://www.salesforce.com/au/crm/what-is-crm/ <br/>
         </p>
     </div>
 
