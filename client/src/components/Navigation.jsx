@@ -7,7 +7,7 @@ const Navigation = () => {
 	const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
 	return (
-		<Navbar expand="xl" bg="light">
+		<Navbar expand="xl" bg="light" id="top">
 			<Container>
 				<Navbar.Brand
 					style={{ fontWeight: 'bold', color: '#000766' }}

@@ -25,6 +25,19 @@ a:visited {
 
 .btn {
 	border-radius: var(--border-radius);
+	border-width: 0;
+}
+
+.btn--blue {
+	background-color: var(--color-primary);
+}
+
+.btn--red {
+	background-color: var(--color-accent);
+}
+
+.btn--green {
+	background-color: var(--color-secondary);
 }
 
 .edit-text {
@@ -43,11 +56,11 @@ a:visited {
 
 .se__container {
 	background-color: var(--color-background);
-	min-height: calc(100vh - 64px);
+	min-height: calc(100vh - 66.25px);
 }
 
 .se__top-cut-off {
-	height: 8rem;
+	height: 6rem;
 	width: 100vw;
 	background-color: var(--color-primary);
 }
@@ -89,14 +102,19 @@ a:visited {
 }
 
 .se__title-section {
-	background-color: white;
-	padding: 4rem 0;
+	background-color: rgb(255, 255, 255);
 }
 
-.se__title {
+.se__title-container {
+	padding: 4rem 0;
+	/* background-color: rgba(0, 0, 0, 0.5); */
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.se__title {
+	margin-top: 0;
 	height: 7.5rem;
 	font-size: 5rem;
 	color: var(--color-headings);
@@ -104,38 +122,33 @@ a:visited {
 }
 
 .se__sub-title {
-	width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
 	margin-top: 2rem;
+	margin-bottom: 0;
 	height: 7.5rem;
 	font-size: 5rem;
 	-webkit-text-stroke: 1px var(--color-headings);
-	color: white;
+	color: transparent;
 	border: 1px solid var(--color-primary);
 }
 
-.se__add-btn-container {
-	display: flex;
-	justify-content: space-evenly;
-	margin: 2rem 0;
+.se__thumbnail {
+	width: 100%;
+	height: 14rem;
+	object-fit: cover;
+	background-color: var(--color-border);
 }
 
-.se__btn--red {
-	background-color: var(--color-accent);
-}
-
-.se__btn--blue {
+.se__thumbnail-btn {
 	background-color: var(--color-primary);
-}
-
-.se__btn--green {
-	background-color: var(--color-secondary);
+	height: 3rem;
+	font-size: 1.5rem;
+	font-weight: 300;
+	width: 50%;
 }
 
 .se__btn-add {
 	font-size: 1.8rem;
-	width: 31%;
+	width: 90%;
 	height: 6rem;
 	border-width: 0;
 }
@@ -164,37 +177,32 @@ a:visited {
 
 /* Question Editor */
 .qe {
-	min-height: 10rem;
-	margin: 1rem 2rem;
+	width: 95%;
+	/* min-height: 10rem; */
+	margin: 2rem auto;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	background-color: rgba(255, 255, 255, 0.3);
+	box-shadow: 0 0 20px 0 rgb(230, 230, 230);
+	box-sizing: border-box;
 }
 
 .qe__image {
 	width: 100%;
 	height: auto;
-	padding: 2rem;
+	padding: 0 2rem 1.5rem;
 }
 
 .qe__btn {
 	margin-top: 1rem;
-	margin-right: 3rem;
-	float: right;
-	width: 9rem;
-	height: 3rem;
+	width: 10rem;
+	height: 3.2rem;
 	font-size: 1.7rem;
-	border-width: 0;
 	padding: 0;
 }
 
 .qe__btn--mt {
-	margin-top: 2.3rem;
-}
-
-.qe__btn--blue {
-	background-color: var(--color-primary);
-}
-
-.qe__btn--red {
-	background-color: var(--color-accent);
+	margin-top: 0;
 }
 
 .qe__question {
@@ -202,7 +210,7 @@ a:visited {
 	height: 5rem;
 	padding-top: 0.7rem;
 	padding-bottom: 0.7rem;
-	margin: 0.5rem 0;
+	margin: 0 0 1rem;
 	color: var(--color-text);
 }
 

@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { EditText } from 'react-edit-text';
 import QuestionEditor from './QuestionEditor';
+import uploadImage from '../../services/uploadImageService';
 
 export default function SurveyEditor() {
 	const [questions, setQuestions] = useState([]);
 	const [title, setTitle] = useState('');
 	const [subTitle, setSubTitle] = useState('');
+	const [thumbnail, setThumbnail] = useState({ src: '', alt: '' });
+	const [thumbnailURL, setThumbnailURL] = useState('');
+	const [isUploading, setIsUploading] = useState(false);
+	const [progress, setProgress] = useState(0);
+
+	const imageSelector = useRef();
 
 	const handleAdd = (type) => {
 		setQuestions([
@@ -92,45 +104,99 @@ export default function SurveyEditor() {
 			subTitle,
 			questions: newQuestions,
 			creator: 'auth0|6110b5c4c61fd70077d2819d',
+			thumbnail: thumbnailURL,
 		});
 	};
 
 	return (
-		<div className="se__container" id="top">
+		<div className="se__container">
 			<div className="se__top-cut-off" />
 			<div className="se__title-section">
-				<EditText
-					className="edit-text se__title"
-					placeholder="Add title here ..."
-					onSave={({ value }) => setTitle(value)}
-				/>
-				<EditText
-					className="edit-text se__sub-title"
-					placeholder="Add sub title here ..."
-					onSave={({ value }) => setSubTitle(value)}
-				/>
+				<Container className="se__title-container">
+					<Row>
+						<Col sm={9}>
+							<EditText
+								className="edit-text se__title"
+								placeholder="Add title here ..."
+								onSave={({ value }) => setTitle(value)}
+							/>
+							<EditText
+								className="edit-text se__sub-title"
+								placeholder="Add sub title here ..."
+								onSave={({ value }) => setSubTitle(value)}
+							/>
+						</Col>
+						<Col>
+							{thumbnail.src && (
+								<Image
+									className="se__thumbnail"
+									src={thumbnail.src}
+									alt={thumbnail.alt}
+								/>
+							)}
+							{!thumbnail.src && <div className="se__thumbnail" />}
+							{isUploading && <ProgressBar now={progress} />}
+							<input
+								type="file"
+								onChange={(e) => {
+									uploadImage.handleSelect(e, setThumbnail);
+								}}
+								ref={imageSelector}
+								accept="image/*"
+							/>
+							<Button
+								className="se__thumbnail-btn shadow-none"
+								onClick={() => imageSelector.current.click()}
+							>
+								Add Thumbnail
+							</Button>
+							<Button
+								className="se__thumbnail-btn shadow-none"
+								onClick={async () => {
+									setThumbnailURL(
+										await uploadImage.handleUpload(
+											setIsUploading,
+											setProgress,
+											thumbnail,
+										),
+									);
+								}}
+							>
+								Upload
+							</Button>
+						</Col>
+					</Row>
+				</Container>
 			</div>
 			<div className="se__content">
-				<div className="se__add-btn-container">
-					<Button
-						className="se__btn-add se__btn--red shadow-none"
-						onClick={() => handleAdd('short answer')}
-					>
-						+ Add Short Answer
-					</Button>
-					<Button
-						className="se__btn-add se__btn--blue shadow-none"
-						onClick={() => handleAdd('single choice')}
-					>
-						+ Add Single Choice
-					</Button>
-					<Button
-						className="se__btn-add se__btn--green shadow-none"
-						onClick={() => handleAdd('multiple choice')}
-					>
-						+ Add Multiple Choice
-					</Button>
-				</div>
+				<Container>
+					<Row className="align-items-center justify-content-between">
+						<Col className="text-start" style={{ padding: 0 }}>
+							<Button
+								className="se__btn-add btn--red shadow-none"
+								onClick={() => handleAdd('short answer')}
+							>
+								+ Add Short Answer
+							</Button>
+						</Col>
+						<Col className="text-center" style={{ padding: 0 }}>
+							<Button
+								className="se__btn-add btn--blue shadow-none"
+								onClick={() => handleAdd('single choice')}
+							>
+								+ Add Single Choice
+							</Button>
+						</Col>
+						<Col className="text-end" style={{ padding: 0 }}>
+							<Button
+								className="se__btn-add btn--green shadow-none"
+								onClick={() => handleAdd('multiple choice')}
+							>
+								+ Add Multiple Choice
+							</Button>
+						</Col>
+					</Row>
+				</Container>
 				{questions.map((q) => (
 					<QuestionEditor
 						key={q.id}

@@ -9,10 +9,7 @@ import PropTypes from 'prop-types';
 import { EditText } from 'react-edit-text';
 import EditBtn from './EditBtn';
 import Option from './Option';
-import http from '../../services/httpService';
-
-const cloudinaryApiEndpoint =
-	'https://api.cloudinary.com/v1_1/ip-connected/image/upload';
+import uploadImage from '../../services/uploadImageService';
 
 export default function QuestionEditor({
 	id: qid,
@@ -50,58 +47,18 @@ export default function QuestionEditor({
 		setOptions(newOptions);
 	};
 
-	const handleSelectImage = (e) => {
-		const i = e.target.files[0];
-		if (!i) return;
-		if (i.size >= 10 * 1024 * 1024) {
-			alert('Image size is limited to 10MB.');
-			return;
-		}
-		setImage({ src: URL.createObjectURL(i), alt: i.name });
-	};
-
-	const uploadImage = (file) => {
-		const data = new FormData();
-		data.append('file', file);
-		data.append('upload_preset', 'jbqt2xhd');
-		return http.post(cloudinaryApiEndpoint, data, {
-			onUploadProgress: (progressEvent) => {
-				setProgress(
-					Math.round((progressEvent.loaded / progressEvent.total) * 100),
-				);
-			},
-		});
-	};
-
-	const handleUpload = async () => {
-		try {
-			setIsUploading(true);
-			setProgress(0);
-			const file = await fetch(image.src).then((r) => r.blob());
-			const res = await uploadImage(file);
-			updateQuestion(qid, 'image', res.data.secure_url);
-			console.log(res.data.secure_url);
-		} catch (e) {
-			console.log('Errors in uploading:', e.message);
-		} finally {
-			setIsUploading(false);
-		}
-	};
-
 	return (
 		<Container className="qe">
 			<Row>
-				<Col sm={10}>
+				<Col sm={10} style={{ borderRight: '1px solid #ccc' }}>
 					<EditText
 						className="edit-text qe__question"
 						placeholder="Click me to edit question title ..."
 						onSave={({ value }) => updateQuestion(qid, 'question', value)}
 					/>
-					<Image
-						src={image.src || null}
-						alt={image.alt || null}
-						className="qe__image"
-					/>
+					{image.src && (
+						<Image src={image.src} alt={image.alt} className="qe__image" />
+					)}
 					{isUploading && <ProgressBar now={progress} />}
 					{questionType !== 'short answer' &&
 						options.map((o) => (
@@ -117,8 +74,18 @@ export default function QuestionEditor({
 						handleDelete={() => handleDelete(qid)}
 						handleAdd={handleAddOption}
 						handleRemove={handleRemoveOption}
-						handleSelectImage={handleSelectImage}
-						handleUpload={handleUpload}
+						handleSelect={(e) => uploadImage.handleSelect(e, setImage)}
+						handleUpload={async () => {
+							updateQuestion(
+								qid,
+								'image',
+								await uploadImage.handleUpload(
+									setIsUploading,
+									setProgress,
+									image,
+								),
+							);
+						}}
 						showEditOptions={questionType !== 'short answer'}
 						numOptions={options.length}
 						canUpload={!!image.src}

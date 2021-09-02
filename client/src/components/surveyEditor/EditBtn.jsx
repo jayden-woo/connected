@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
 
 export default function EditBtn({
 	handleDelete,
 	handleAdd,
 	handleRemove,
-	handleSelectImage,
+	handleSelect,
 	handleUpload,
 	showEditOptions,
 	numOptions,
@@ -17,66 +18,79 @@ export default function EditBtn({
 
 	return (
 		<div>
-			<Button
-				className="qe__btn qe__btn--mt qe__btn--red shadow-none"
-				onClick={handleDelete}
-			>
-				Delete
-			</Button>
-			{!isEditing && (
+			<Row className="justify-content-center">
 				<Button
-					className="qe__btn qe__btn--blue shadow-none"
-					onClick={() => setIsEditing(!isEditing)}
+					className="qe__btn qe__btn--mt btn--red shadow-none"
+					onClick={handleDelete}
 				>
-					Edit
+					Delete
 				</Button>
+			</Row>
+			{!isEditing && (
+				<Row className="justify-content-center">
+					<Button
+						className="qe__btn btn--blue shadow-none"
+						onClick={() => setIsEditing(!isEditing)}
+					>
+						Edit
+					</Button>
+				</Row>
 			)}
 			{isEditing && (
-				<div>
+				<Row className="justify-content-center">
 					<Button
-						className="qe__btn qe__btn--blue shadow-none"
+						className="qe__btn btn--blue shadow-none"
 						onClick={() => setIsEditing(!isEditing)}
 					>
 						Finish
 					</Button>
-					<input
-						type="file"
-						onChange={handleSelectImage}
-						ref={imageSelector}
-						accept="image/*"
-					/>
+				</Row>
+			)}
+			{isEditing && (
+				<Row className="justify-content-center">
 					<Button
-						className="qe__btn qe__btn--blue shadow-none"
+						className="qe__btn btn--blue shadow-none"
 						onClick={() => imageSelector.current.click()}
 					>
 						Add IMG
 					</Button>
+				</Row>
+			)}
+			{isEditing && (
+				<Row className="justify-content-center">
 					<Button
-						className="qe__btn qe__btn--blue shadow-none"
+						className="qe__btn btn--blue shadow-none"
 						onClick={handleUpload}
 						disabled={!canUpload}
 					>
 						Upload
 					</Button>
-					{showEditOptions && (
-						<div>
-							<Button
-								className="qe__btn qe__btn--blue shadow-none"
-								onClick={handleAdd}
-							>
-								Add
-							</Button>
-							<Button
-								className="qe__btn qe__btn--blue shadow-none"
-								onClick={handleRemove}
-								disabled={numOptions === 0}
-							>
-								Remove
-							</Button>
-						</div>
-					)}
-				</div>
+				</Row>
 			)}
+			{isEditing && showEditOptions && (
+				<Row className="justify-content-center">
+					<Button className="qe__btn btn--blue shadow-none" onClick={handleAdd}>
+						Add
+					</Button>
+				</Row>
+			)}
+			{isEditing && showEditOptions && (
+				<Row className="justify-content-center">
+					<Button
+						className="qe__btn btn--blue shadow-none"
+						onClick={handleRemove}
+						disabled={numOptions === 0}
+					>
+						Remove
+					</Button>
+				</Row>
+			)}
+			<input
+				type="file"
+				onChange={handleSelect}
+				ref={imageSelector}
+				accept="image/*"
+			/>
 		</div>
 	);
 }
@@ -85,7 +99,7 @@ EditBtn.propTypes = {
 	handleDelete: PropTypes.func.isRequired,
 	handleAdd: PropTypes.func.isRequired,
 	handleRemove: PropTypes.func.isRequired,
-	handleSelectImage: PropTypes.func.isRequired,
+	handleSelect: PropTypes.func.isRequired,
 	handleUpload: PropTypes.func.isRequired,
 	showEditOptions: PropTypes.bool.isRequired,
 	numOptions: PropTypes.number.isRequired,
