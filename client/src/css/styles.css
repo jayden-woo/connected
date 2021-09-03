@@ -3,6 +3,7 @@
 	--color-secondary: #8ab5ab;
 	--color-accent: #ff0000;
 	--color-headings: #c9ccff;
+	--color-text: #190e89;
 	--color-background: #f2f6fb;
 	--color-border: #ccc;
 	--border-radius: 0px;
@@ -12,13 +13,31 @@ html {
 	font-size: 62.5%;
 }
 
-.space-between {
-	display: flex;
-	justify-content: space-evenly;
+input[type='file'] {
+	display: none;
+}
+
+a:link,
+a:visited {
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .btn {
-	border-radius: 0%;
+	border-radius: var(--border-radius);
+	border-width: 0;
+}
+
+.btn--blue {
+	background-color: var(--color-primary);
+}
+
+.btn--red {
+	background-color: var(--color-accent);
+}
+
+.btn--green {
+	background-color: var(--color-secondary);
 }
 
 .edit-text {
@@ -26,7 +45,7 @@ html {
 	outline: none;
 	border: none;
 	border-radius: 0;
-	padding: 0 2rem 1rem;
+	padding: 0 2rem;
 }
 
 .edit-text:focus {
@@ -37,11 +56,11 @@ html {
 
 .se__container {
 	background-color: var(--color-background);
-	min-height: calc(100vh - 64px);
+	min-height: calc(100vh - 66.25px);
 }
 
 .se__top-cut-off {
-	height: 80px;
+	height: 6rem;
 	width: 100vw;
 	background-color: var(--color-primary);
 }
@@ -50,6 +69,21 @@ html {
 	height: 6rem;
 	width: 100vw;
 	background-color: var(--color-primary);
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.6rem;
+	font-weight: 300;
+	margin-top: 3rem;
+}
+
+.se__bottom-cut-off a {
+	color: #a8a1c0;
+}
+
+.se__bottom-cut-off a:hover {
+	color: #ddd9e9;
 }
 
 .se__content {
@@ -67,40 +101,58 @@ html {
 	height: 10rem;
 }
 
+.se__title-section {
+	background-color: rgb(255, 255, 255);
+}
+
+.se__title-container {
+	padding: 4rem 0;
+	/* background-color: rgba(0, 0, 0, 0.5); */
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.se__progress-bar {
+	margin-top: 1rem;
+}
+
 .se__title {
+	margin-top: 0;
 	height: 7.5rem;
 	font-size: 5rem;
 	color: var(--color-headings);
+	border: 1px solid var(--color-primary);
 }
 
 .se__sub-title {
+	margin-top: 2rem;
+	margin-bottom: 0;
 	height: 7.5rem;
 	font-size: 5rem;
 	-webkit-text-stroke: 1px var(--color-headings);
-	color: white;
+	color: transparent;
+	border: 1px solid var(--color-primary);
 }
 
-.se__add-btn-container {
-	display: flex;
-	justify-content: space-evenly;
-	padding: 0.5rem 0;
+.se__thumbnail {
+	width: 100%;
+	height: 14rem;
+	object-fit: cover;
+	background-color: #f1f1f1;
 }
 
-.se__btn--red {
-	background-color: var(--color-accent);
-}
-
-.se__btn--blue {
+.se__thumbnail-btn {
 	background-color: var(--color-primary);
-}
-
-.se__btn--green {
-	background-color: var(--color-secondary);
+	height: 3rem;
+	font-size: 1.5rem;
+	font-weight: 300;
+	width: 50%;
 }
 
 .se__btn-add {
-	font-size: 1.7rem;
-	width: 31%;
+	font-size: 1.8rem;
+	width: 90%;
 	height: 6rem;
 	border-width: 0;
 }
@@ -129,38 +181,63 @@ html {
 
 /* Question Editor */
 .qe {
-	margin: 1rem;
-	padding: 0.2rem 0.5rem;
-	border: solid rgb(231, 231, 231);
-	border-width: 1px;
-	background-color: rgb(251, 251, 251);
+	width: 95%;
+	margin: 2rem auto;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	transition: all 0.2s ease-out;
 }
 
-.qe__remove {
-	margin: 0.2rem;
-	margin-bottom: 0.5rem;
+.qe:hover {
+	box-shadow: 0 0 20px 0 rgb(230, 230, 230);
+	background-color: rgba(255, 255, 255, 0.3);
 }
 
-.edit-option__option {
-	margin: 0 0.6rem;
+.qe__image {
+	width: 100%;
+	height: auto;
+	padding: 0 2rem 1.5rem;
+}
+
+.qe__progress-bar {
+	margin: 0 2rem 0.5rem;
+}
+
+.qe__btn {
+	margin-top: 1rem;
+	width: 10rem;
+	height: 3.2rem;
+	font-size: 1.7rem;
+	padding: 0;
+}
+
+.qe__btn--mt {
+	margin-top: 0;
+}
+
+.qe__question {
+	font-size: 2.5rem;
+	height: 5rem;
+	padding-top: 0.7rem;
+	padding-bottom: 0.7rem;
+	margin: 0 0 1rem;
+	color: var(--color-text);
+}
+
+.qe__option {
+	color: var(--color-text);
+	font-size: 1.8rem;
+	margin: 0.3rem 1rem;
+	padding: 0;
+	padding-left: 1rem;
 	display: inline-block;
+	height: 3rem;
 	width: auto;
-	max-width: 90%;
+	width: 90%;
 	vertical-align: middle;
 }
 
-.edit-option__icon {
-	margin-left: 0.8rem;
-	margin-top: 3px;
+.qe__option-icon {
+	margin-left: 2.5rem;
 	vertical-align: middle;
-}
-
-.edit-option__btn {
-	margin: 0.5rem 0.2rem;
-	border-radius: 0;
-}
-
-.edit-question {
-	font-size: 1.2rem;
-	font-weight: 500;
 }
