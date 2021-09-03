@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { EditText } from 'react-edit-text';
 
 import uploadImage from '../../services/uploadImageService';
-import notifyService from '../../services/notifyService';
+import notify from '../../services/notifyService';
 
 import EditBtn from './EditBtn';
 import Option from './Option';
@@ -23,8 +23,10 @@ export default function QuestionEditor({
 }) {
 	const [options, setOptions] = useState([]);
 	const [image, setImage] = useState({ src: '', alt: '' });
-	const [isUploading, setIsUploading] = useState(false);
-	const [progress, setProgress] = useState(0);
+	const [progressBar, setProgressBar] = useState({
+		visible: false,
+		progress: 0,
+	});
 
 	const handleAddOption = () => {
 		const newOptions = [...options];
@@ -64,8 +66,11 @@ export default function QuestionEditor({
 						{image.src && (
 							<Image src={image.src} alt={image.alt} className="qe__image" />
 						)}
-						{isUploading && (
-							<ProgressBar className="qe__progress-bar" now={progress} />
+						{progressBar.visible && (
+							<ProgressBar
+								className="qe__progress-bar"
+								now={progressBar.progress}
+							/>
 						)}
 						{questionType !== 'short answer' &&
 							options.map((o) => (
@@ -87,14 +92,11 @@ export default function QuestionEditor({
 									qid,
 									'image',
 									await uploadImage.handleUpload(
-										setIsUploading,
-										setProgress,
+										setProgressBar,
 										image,
-										() => notifyService.successNotify('Successfully uploaded!'),
+										() => notify.successNotify('Successfully uploaded!'),
 										() =>
-											notifyService.errorNotify(
-												'Upload failed, please try again.',
-											),
+											notify.errorNotify('Upload failed, please try again.'),
 									),
 								);
 							}}

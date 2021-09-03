@@ -65,7 +65,7 @@ function validateSurvey(survey, update = false) {
 		index: Joi.number().min(0).required(),
 		questionType: Joi.string()
 			.required()
-			.valid('short answer', 'single choice', 'multiple answer'),
+			.valid('short answer', 'single choice', 'multiple choice'),
 		question: Joi.string().required().min(5).max(100),
 		choices: Joi.alternatives().conditional('questionType', {
 			is: 'short answer',

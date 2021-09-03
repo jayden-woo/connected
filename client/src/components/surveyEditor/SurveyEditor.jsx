@@ -12,54 +12,64 @@ import { EditText } from 'react-edit-text';
 
 import uploadImage from '../../services/uploadImageService';
 import http from '../../services/httpService';
-import notifyService from '../../services/notifyService';
+import notify from '../../services/notifyService';
 
 import QuestionEditor from './QuestionEditor';
 
 export default function SurveyEditor() {
-	const [questions, setQuestions] = useState([]);
-	const [title, setTitle] = useState('');
-	const [subTitle, setSubTitle] = useState('');
+	const [survey, setSurvey] = useState({ questions: [] });
 	const [thumbnail, setThumbnail] = useState({ src: '', alt: '' });
-	const [thumbnailURL, setThumbnailURL] = useState('');
-	const [isUploading, setIsUploading] = useState(false);
-	const [progress, setProgress] = useState(0);
+	const [progressBar, setProgressBar] = useState({
+		visible: false,
+		progress: 0,
+	});
 
 	const imageSelector = useRef();
 
 	const handleAdd = (type) => {
-		setQuestions([
-			...questions,
+		const newQuestions = [
+			...survey.questions,
 			{
 				question: '',
 				questionType: type,
 				id: uuidv4(),
 			},
-		]);
+		];
+		setSurvey((prevState) => ({
+			...prevState,
+			questions: newQuestions,
+		}));
 	};
 
 	const handleDelete = (id) => {
-		const newQuestions = [...questions];
-		const index = questions.findIndex((q) => q.id === id);
+		const newQuestions = [...survey.questions];
+		const index = survey.questions.findIndex((q) => q.id === id);
 		newQuestions.splice(index, 1);
-		setQuestions(newQuestions);
+		setSurvey((prevState) => ({
+			...prevState,
+			questions: newQuestions,
+		}));
 	};
 
 	const updateQuestion = (id, key, value) => {
-		const newQuestions = [...questions];
-		const index = questions.findIndex((q) => q.id === id);
+		const newQuestions = [...survey.questions];
+		const index = survey.questions.findIndex((q) => q.id === id);
 		newQuestions[index][key] = value;
-		setQuestions(newQuestions);
+		setSurvey((prevState) => ({
+			...prevState,
+			questions: newQuestions,
+		}));
 	};
 
+	// TODO: proper validation
 	const validate = () => {
-		if (questions.length === 0) {
+		if (survey.questions.length === 0) {
 			alert('Survey cannot be empty.');
 			return false;
 		}
 
 		/* eslint-disable-next-line */
-		for (const q of questions) {
+		for (const q of survey.questions) {
 			if (q.question === '') {
 				alert('All questions must have a title.');
 				return false;
@@ -91,7 +101,7 @@ export default function SurveyEditor() {
 
 		const newQuestions = [];
 
-		questions.forEach((q, index) => {
+		survey.questions.forEach((q, index) => {
 			const newQ = _.cloneDeep(q);
 			newQ.index = index;
 			delete newQ.id;
@@ -104,21 +114,21 @@ export default function SurveyEditor() {
 			newQuestions.push(newQ);
 		});
 
-		const survey = {
-			title,
-			subTitle,
+		const data = {
+			title: survey.title,
+			subTitle: survey.subTitle,
 			questions: newQuestions,
 			creator: 'auth0|6110b5c4c61fd70077d2819d',
-			thumbnail: thumbnailURL,
+			thumbnail: survey.thumbnail,
 		};
 
-		if (!survey.thumbnail) delete survey.thumbnail;
+		if (!data.thumbnail) delete data.thumbnail;
 
 		try {
-			await http.post('http://localhost:3000/api/surveys', survey);
-			notifyService.successNotify('Successfully Published!');
+			await http.post('http://localhost:3000/api/surveys', data);
+			notify.successNotify('Successfully Published!');
 		} catch (e) {
-			notifyService.errorNotify(e.response.data.message);
+			notify.errorNotify(e.response.data.message);
 		}
 	};
 
@@ -132,12 +142,16 @@ export default function SurveyEditor() {
 							<EditText
 								className="edit-text se__title"
 								placeholder="Add title here ..."
-								onSave={({ value }) => setTitle(value)}
+								onSave={({ value }) =>
+									setSurvey((prevState) => ({ ...prevState, title: value }))
+								}
 							/>
 							<EditText
 								className="edit-text se__sub-title"
 								placeholder="Add sub title here ..."
-								onSave={({ value }) => setSubTitle(value)}
+								onSave={({ value }) =>
+									setSurvey((prevState) => ({ ...prevState, subTitle: value }))
+								}
 							/>
 						</Col>
 						<Col>
@@ -167,27 +181,25 @@ export default function SurveyEditor() {
 								className="se__thumbnail-btn shadow-none"
 								disabled={!thumbnail.src}
 								onClick={async () => {
-									setThumbnailURL(
-										await uploadImage.handleUpload(
-											setIsUploading,
-											setProgress,
-											thumbnail,
-											() =>
-												notifyService.successNotify('Successfully Uploaded!'),
-											() =>
-												notifyService.errorNotify(
-													'Upload failed, please try again.',
-												),
-										),
+									const url = await uploadImage.handleUpload(
+										setProgressBar,
+										thumbnail,
+										() => notify.successNotify('Successfully Uploaded!'),
+										() =>
+											notify.errorNotify('Upload failed, please try again.'),
 									);
+									setSurvey((prevState) => ({ ...prevState, thumbnail: url }));
 								}}
 							>
 								Upload
 							</Button>
 						</Col>
 					</Row>
-					{isUploading && (
-						<ProgressBar className="se__progress-bar" now={progress} />
+					{progressBar.visible && (
+						<ProgressBar
+							className="se__progress-bar"
+							now={progressBar.progress}
+						/>
 					)}
 				</Container>
 			</div>
@@ -220,7 +232,7 @@ export default function SurveyEditor() {
 						</Col>
 					</Row>
 				</Container>
-				{questions.map((q) => (
+				{survey.questions.map((q) => (
 					<QuestionEditor
 						key={q.id}
 						id={q.id}
