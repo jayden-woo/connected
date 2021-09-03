@@ -4,14 +4,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { EditText } from 'react-edit-text';
-import { toast, ToastContainer } from 'react-toastify';
+
+import uploadImage from '../../services/uploadImageService';
+import notifyService from '../../services/notifyService';
+
 import EditBtn from './EditBtn';
 import Option from './Option';
-import uploadImage from '../../services/uploadImageService';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function QuestionEditor({
 	id: qid,
@@ -47,20 +49,6 @@ export default function QuestionEditor({
 		newOptions[index].content = value;
 		updateQuestion(qid, 'choices', newOptions);
 		setOptions(newOptions);
-	};
-
-	const successNotify = () => {
-		toast.success('Successfully Uploaded!', {
-			position: toast.POSITION.BOTTOM_RIGHT,
-			autoClose: 2000,
-		});
-	};
-
-	const errorNotify = (message) => {
-		toast.error(message, {
-			position: toast.POSITION.BOTTOM_RIGHT,
-			autoClose: 2000,
-		});
 	};
 
 	return (
@@ -102,8 +90,11 @@ export default function QuestionEditor({
 										setIsUploading,
 										setProgress,
 										image,
-										successNotify,
-										errorNotify,
+										() => notifyService.successNotify('Successfully uploaded!'),
+										() =>
+											notifyService.errorNotify(
+												'Upload failed, please try again.',
+											),
 									),
 								);
 							}}
@@ -114,7 +105,6 @@ export default function QuestionEditor({
 					</Col>
 				</Row>
 			</Container>
-			<ToastContainer />
 		</div>
 	);
 }

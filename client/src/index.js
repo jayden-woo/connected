@@ -5,6 +5,7 @@ import App from './App';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-edit-text/dist/index.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './css/styles.css';
 
 ReactDOM.render(

@@ -5,12 +5,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { toast, ToastContainer } from 'react-toastify';
+
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { EditText } from 'react-edit-text';
-import QuestionEditor from './QuestionEditor';
+
 import uploadImage from '../../services/uploadImageService';
+import http from '../../services/httpService';
+import notifyService from '../../services/notifyService';
+
+import QuestionEditor from './QuestionEditor';
 
 export default function SurveyEditor() {
 	const [questions, setQuestions] = useState([]);
@@ -80,7 +84,7 @@ export default function SurveyEditor() {
 		return true;
 	};
 
-	const onSubmit = () => {
+	const onSubmit = async () => {
 		if (!validate()) {
 			return;
 		}
@@ -110,21 +114,12 @@ export default function SurveyEditor() {
 
 		if (!survey.thumbnail) delete survey.thumbnail;
 
-		console.log(survey);
-	};
-
-	const successNotify = () => {
-		toast.success('Successfully Uploaded!', {
-			position: toast.POSITION.BOTTOM_RIGHT,
-			autoClose: 2000,
-		});
-	};
-
-	const errorNotify = (message) => {
-		toast.error(message, {
-			position: toast.POSITION.BOTTOM_RIGHT,
-			autoClose: 2000,
-		});
+		try {
+			await http.post('http://localhost:3000/api/surveys', survey);
+			notifyService.successNotify('Successfully Published!');
+		} catch (e) {
+			notifyService.errorNotify(e.response.data.message);
+		}
 	};
 
 	return (
@@ -177,8 +172,12 @@ export default function SurveyEditor() {
 											setIsUploading,
 											setProgress,
 											thumbnail,
-											successNotify,
-											errorNotify,
+											() =>
+												notifyService.successNotify('Successfully Uploaded!'),
+											() =>
+												notifyService.errorNotify(
+													'Upload failed, please try again.',
+												),
 										),
 									);
 								}}
@@ -240,7 +239,6 @@ export default function SurveyEditor() {
 					Publish
 				</Button>
 			</div>
-			<ToastContainer />
 		</div>
 	);
 }
