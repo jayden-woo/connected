@@ -6,6 +6,7 @@ import 'normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-edit-text/dist/index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'survey-react/modern.css';
 import './index.css';
 import './css/styles.css';
 
