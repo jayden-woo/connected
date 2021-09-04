@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
-import './index.css';
+import 'normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-edit-text/dist/index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
 import './css/styles.css';
 
 ReactDOM.render(

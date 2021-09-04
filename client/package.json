@@ -19,6 +19,7 @@
 		"eslint-plugin-react": "^7.25.1",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"lodash": "^4.17.21",
+		"normalize.css": "^8.0.1",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-bootstrap": "^1.6.1",
