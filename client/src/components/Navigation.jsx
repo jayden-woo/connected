@@ -11,29 +11,32 @@ const Navigation = () => {
 			<Container>
 				<Navbar.Brand
 					style={{ fontWeight: 'bold', color: '#000766' }}
-					href="#home"
+					href="/"
 				>
 					<Image src={logo} width="50" height="50" alt="TEAM CONNECTED logo" />{' '}
 					CONNECTED
 				</Navbar.Brand>
-				&emsp;&emsp;&emsp;&emsp;
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+				&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse fill className="justify-content-center">
 					<Nav fill>
-						<Nav.Link href="#home">&emsp;HOME&emsp;</Nav.Link>
-						<Nav.Link href="/create-survey">&emsp;SURVEY&emsp;</Nav.Link>
-						<Nav.Link href="#link">&emsp;ABOUT&emsp;</Nav.Link>
+						<Nav.Link href="/">&emsp;&emsp;HOME&emsp;&emsp;</Nav.Link>
+						<Nav.Link href="/create-survey">&emsp;&emsp;SURVEY&emsp;&emsp;</Nav.Link>
+						<Nav.Link href="#link">&emsp;&emsp;ABOUT&emsp;&emsp;</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
-				<Navbar.Collapse className="justify-content-end">
+				<Navbar.Collapse fill className="justify-content-end">
 					{!isAuthenticated && (
 						<Nav fill>
-							<Nav.Link
-								style={{ fontWeight: 'bold', color: '#000766' }}
-								onClick={() => loginWithRedirect()}
-							>
-								LOG IN
-							</Nav.Link>
+							<Nav.Item>
+								<Nav.Link
+									style={{ fontWeight: 'bold', color: '#000766' }}
+									onClick={() => loginWithRedirect()}
+								>
+									LOG IN
+								</Nav.Link>
+							</Nav.Item>
 						</Nav>
 					)}
 					{isAuthenticated && (
@@ -41,14 +44,13 @@ const Navigation = () => {
 							<Nav fill>
 								<Nav.Item>
 									<Nav.Link>
-										<Image
-											src={user.picture}
-											width="50"
-											height="50"
-											alt="ProfilePic"
-											roundedCircle
-										/>
-										{'  '}
+										<Image src={user.picture} width="45" height="45" alt="ProfilePic" roundedCircle />
+									</Nav.Link>
+								</Nav.Item>
+							</Nav>
+							<Nav fill>
+								<Nav.Item>
+									<Nav.Link>
 										{user.name}
 									</Nav.Link>
 								</Nav.Item>
