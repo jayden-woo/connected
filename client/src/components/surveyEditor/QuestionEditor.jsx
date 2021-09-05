@@ -16,8 +16,8 @@ import EditBtn from './EditBtn';
 import Option from './Option';
 
 export default function QuestionEditor({
-	id: qid,
-	questionType,
+	name,
+	type,
 	handleDelete,
 	updateQuestion,
 }) {
@@ -34,14 +34,14 @@ export default function QuestionEditor({
 			id: uuidv4(),
 			content: '',
 		});
-		updateQuestion(qid, 'choices', newOptions);
+		updateQuestion(name, 'choices', newOptions);
 		setOptions(newOptions);
 	};
 
 	const handleRemoveOption = () => {
 		const newOptions = [...options];
 		newOptions.pop();
-		updateQuestion(qid, 'choices', newOptions);
+		updateQuestion(name, 'choices', newOptions);
 		setOptions(newOptions);
 	};
 
@@ -49,7 +49,7 @@ export default function QuestionEditor({
 		const newOptions = [...options];
 		const index = options.findIndex((o) => o.id === oid);
 		newOptions[index].content = value;
-		updateQuestion(qid, 'choices', newOptions);
+		updateQuestion(name, 'choices', newOptions);
 		setOptions(newOptions);
 	};
 
@@ -61,7 +61,7 @@ export default function QuestionEditor({
 						<EditText
 							className="edit-text qe__question"
 							placeholder="Click me to edit question title ..."
-							onSave={({ value }) => updateQuestion(qid, 'question', value)}
+							onSave={({ value }) => updateQuestion(name, 'title', value)}
 						/>
 						{image.src && (
 							<Image src={image.src} alt={image.alt} className="qe__image" />
@@ -72,24 +72,24 @@ export default function QuestionEditor({
 								now={progressBar.progress}
 							/>
 						)}
-						{questionType !== 'short answer' &&
+						{type !== 'text' &&
 							options.map((o) => (
 								<Option
 									key={o.id}
-									questionType={questionType}
+									type={type}
 									onSave={({ value }) => handleSaveOption(o.id, value)}
 								/>
 							))}
 					</Col>
 					<Col>
 						<EditBtn
-							handleDelete={() => handleDelete(qid)}
+							handleDelete={() => handleDelete(name)}
 							handleAdd={handleAddOption}
 							handleRemove={handleRemoveOption}
 							handleSelect={(e) => uploadImage.handleSelect(e, setImage)}
 							handleUpload={async () => {
 								updateQuestion(
-									qid,
+									name,
 									'image',
 									await uploadImage.handleUpload(
 										setProgressBar,
@@ -100,7 +100,7 @@ export default function QuestionEditor({
 									),
 								);
 							}}
-							showEditOptions={questionType !== 'short answer'}
+							showEditOptions={type !== 'text'}
 							numOptions={options.length}
 							canUpload={!!image.src}
 						/>
@@ -112,8 +112,8 @@ export default function QuestionEditor({
 }
 
 QuestionEditor.propTypes = {
-	id: PropTypes.string.isRequired,
-	questionType: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 	handleDelete: PropTypes.func.isRequired,
 	updateQuestion: PropTypes.func.isRequired,
 };

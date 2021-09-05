@@ -23,7 +23,7 @@ const addSurvey = async (req, res) => {
 	const survey = new Survey({
 		creator: req.body.creator,
 		title: req.body.title,
-		subTitle: req.body.subTitle,
+		description: req.body.description,
 		thumbnail: req.body.thumbnail,
 		questions: req.body.questions,
 	});

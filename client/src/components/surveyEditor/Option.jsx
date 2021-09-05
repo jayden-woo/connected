@@ -2,13 +2,13 @@ import React from 'react';
 import { EditText } from 'react-edit-text';
 import PropTypes from 'prop-types';
 
-export default function Option({ questionType, onSave }) {
+export default function Option({ type, onSave }) {
 	return (
 		<div>
-			{questionType === 'single choice' && (
+			{type === 'radiogroup' && (
 				<i className="far fa-dot-circle fa-2x qe__option-icon" />
 			)}
-			{questionType === 'multiple choice' && (
+			{type === 'checkbox' && (
 				<i className="far fa-check-square fa-2x qe__option-icon" />
 			)}
 			<EditText
@@ -21,6 +21,6 @@ export default function Option({ questionType, onSave }) {
 }
 
 Option.propTypes = {
-	questionType: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
 	onSave: PropTypes.func.isRequired,
 };

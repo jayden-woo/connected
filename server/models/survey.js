@@ -2,17 +2,17 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
-	index: {
-		type: Number,
-		required: true,
-	},
-	questionType: {
+	name: {
 		type: String,
-		enum: ['short answer', 'single choice', 'multiple choice'],
 		required: true,
-		default: 'short answer',
 	},
-	question: {
+	type: {
+		type: String,
+		enum: ['text', 'radiogroup', 'checkbox'],
+		required: true,
+		default: 'text',
+	},
+	title: {
 		type: String,
 		required: true,
 	},
@@ -37,7 +37,7 @@ const surveySchema = new mongoose.Schema(
 			min: 5,
 			max: 100,
 		},
-		subTitle: {
+		description: {
 			type: String,
 			min: 5,
 			max: 100,
@@ -62,13 +62,11 @@ const surveySchema = new mongoose.Schema(
 
 function validateSurvey(survey, update = false) {
 	const questionSchema = Joi.object({
-		index: Joi.number().min(0).required(),
-		questionType: Joi.string()
-			.required()
-			.valid('short answer', 'single choice', 'multiple choice'),
-		question: Joi.string().required().min(5).max(100),
-		choices: Joi.alternatives().conditional('questionType', {
-			is: 'short answer',
+		name: Joi.string().required(),
+		type: Joi.string().required().valid('text', 'radiogroup', 'checkbox'),
+		title: Joi.string().required().min(5).max(100),
+		choices: Joi.alternatives().conditional('type', {
+			is: 'text',
 			then: Joi.forbidden(),
 			otherwise: Joi.array().items(Joi.string()).min(2).required(),
 		}),
@@ -78,7 +76,7 @@ function validateSurvey(survey, update = false) {
 	const surveySchema = Joi.object({
 		creator: Joi.string().required(),
 		title: Joi.string().required().min(5).max(100),
-		subTitle: Joi.string().min(5).max(100),
+		description: Joi.string().min(5).max(100),
 		thumbnail: Joi.string(),
 		questions: Joi.array().required().items(questionSchema).min(1),
 	});
@@ -86,7 +84,7 @@ function validateSurvey(survey, update = false) {
 	const updateSchema = Joi.object({
 		creator: Joi.string(),
 		title: Joi.string().min(5).max(100),
-		subTitle: Joi.string().min(5).max(100),
+		description: Joi.string().min(5).max(100),
 		thumbnail: Joi.string(),
 		questions: Joi.array().items(questionSchema).min(1),
 		visible: Joi.bool(),

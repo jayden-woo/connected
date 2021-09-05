@@ -30,9 +30,9 @@ export default function SurveyEditor() {
 		const newQuestions = [
 			...survey.questions,
 			{
-				question: '',
-				questionType: type,
-				id: uuidv4(),
+				title: '',
+				type,
+				name: uuidv4(),
 			},
 		];
 		setSurvey((prevState) => ({
@@ -41,9 +41,9 @@ export default function SurveyEditor() {
 		}));
 	};
 
-	const handleDelete = (id) => {
+	const handleDelete = (name) => {
 		const newQuestions = [...survey.questions];
-		const index = survey.questions.findIndex((q) => q.id === id);
+		const index = survey.questions.findIndex((q) => q.name === name);
 		newQuestions.splice(index, 1);
 		setSurvey((prevState) => ({
 			...prevState,
@@ -51,9 +51,9 @@ export default function SurveyEditor() {
 		}));
 	};
 
-	const updateQuestion = (id, key, value) => {
+	const updateQuestion = (name, key, value) => {
 		const newQuestions = [...survey.questions];
-		const index = survey.questions.findIndex((q) => q.id === id);
+		const index = survey.questions.findIndex((q) => q.name === name);
 		newQuestions[index][key] = value;
 		setSurvey((prevState) => ({
 			...prevState,
@@ -70,12 +70,12 @@ export default function SurveyEditor() {
 
 		/* eslint-disable-next-line */
 		for (const q of survey.questions) {
-			if (q.question === '') {
+			if (q.title === '') {
 				alert('All questions must have a title.');
 				return false;
 			}
 
-			if (q.questionType !== 'short answer') {
+			if (q.type !== 'text') {
 				if (!q.choices || q.choices.length < 2) {
 					alert('Multiple option question must have at least 2 options.');
 					return false;
@@ -101,10 +101,8 @@ export default function SurveyEditor() {
 
 		const newQuestions = [];
 
-		survey.questions.forEach((q, index) => {
+		survey.questions.forEach((q) => {
 			const newQ = _.cloneDeep(q);
-			newQ.index = index;
-			delete newQ.id;
 
 			if (newQ.choices) {
 				const choices = newQ.choices.map((c) => c.content);
@@ -116,7 +114,7 @@ export default function SurveyEditor() {
 
 		const data = {
 			title: survey.title,
-			subTitle: survey.subTitle,
+			description: survey.description,
 			questions: newQuestions,
 			creator: 'auth0|6110b5c4c61fd70077d2819d',
 			thumbnail: survey.thumbnail,
@@ -124,9 +122,12 @@ export default function SurveyEditor() {
 
 		if (!data.thumbnail) delete data.thumbnail;
 
+		console.log(data);
+
 		try {
-			await http.post('http://localhost:3000/api/surveys', data);
+			const res = await http.post('http://localhost:3000/api/surveys', data);
 			notify.successNotify('Successfully Published!');
+			console.log(res.data);
 		} catch (e) {
 			notify.errorNotify(e.response.data.message);
 		}
@@ -148,9 +149,12 @@ export default function SurveyEditor() {
 							/>
 							<EditText
 								className="edit-text se__sub-title"
-								placeholder="Add sub title here ..."
+								placeholder="Add description here ..."
 								onSave={({ value }) =>
-									setSurvey((prevState) => ({ ...prevState, subTitle: value }))
+									setSurvey((prevState) => ({
+										...prevState,
+										description: value,
+									}))
 								}
 							/>
 						</Col>
@@ -209,34 +213,34 @@ export default function SurveyEditor() {
 						<Col className="text-start" style={{ padding: 0 }}>
 							<Button
 								className="se__btn-add btn--red shadow-none"
-								onClick={() => handleAdd('short answer')}
+								onClick={() => handleAdd('text')}
 							>
-								+ Add Short Answer
+								+ Add Simple Text
 							</Button>
 						</Col>
 						<Col className="text-center" style={{ padding: 0 }}>
 							<Button
 								className="se__btn-add btn--blue shadow-none"
-								onClick={() => handleAdd('single choice')}
+								onClick={() => handleAdd('radiogroup')}
 							>
-								+ Add Single Choice
+								+ Add Radiogroup
 							</Button>
 						</Col>
 						<Col className="text-end" style={{ padding: 0 }}>
 							<Button
 								className="se__btn-add btn--green shadow-none"
-								onClick={() => handleAdd('multiple choice')}
+								onClick={() => handleAdd('checkbox')}
 							>
-								+ Add Multiple Choice
+								+ Add Checkbox
 							</Button>
 						</Col>
 					</Row>
 				</Container>
 				{survey.questions.map((q) => (
 					<QuestionEditor
-						key={q.id}
-						id={q.id}
-						questionType={q.questionType}
+						key={q.name}
+						name={q.name}
+						type={q.type}
 						handleDelete={handleDelete}
 						updateQuestion={updateQuestion}
 					/>
