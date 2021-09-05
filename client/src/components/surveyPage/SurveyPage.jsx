@@ -4,13 +4,9 @@ import { useHistory } from 'react-router-dom';
 import * as Survey from 'survey-react';
 import PropTypes from 'prop-types';
 import http from '../../services/httpService';
+import loadingIcon from '../../assets/loading.svg';
 
 Survey.StylesManager.applyTheme('modern');
-
-const handleComplete = (sender) => {
-	console.log(sender.data);
-	console.log(JSON.stringify(sender.data));
-};
 
 export default function SurveyPage({ id }) {
 	const [isLoading, setIsLoading] = useState(true);
@@ -20,10 +16,13 @@ export default function SurveyPage({ id }) {
 
 	useEffect(async () => {
 		try {
-			const res = await http.get(`http://localhost:3000/api/surveys/${id}`);
+			// TODO: remove delay
+			setTimeout(async () => {
+				const res = await http.get(`http://localhost:3000/api/surveys/${id}`);
 
-			setIsLoading(false);
-			setSurvey(res.data);
+				setIsLoading(false);
+				setSurvey(res.data);
+			}, 200);
 		} catch (e) {
 			// TODO: redirect to not found page
 			if (e.response.status === 404) {
@@ -31,6 +30,22 @@ export default function SurveyPage({ id }) {
 			}
 		}
 	}, []);
+
+	const handleComplete = async (sender) => {
+		const submission = {
+			survey: id,
+			responses: sender.data,
+		};
+		try {
+			const res = await http.post(
+				'http://localhost:3000/api/submissions',
+				submission,
+			);
+			console.log(res.data);
+		} catch (e) {
+			console.log(e.response.data.message);
+		}
+	};
 
 	return (
 		<div
@@ -42,14 +57,11 @@ export default function SurveyPage({ id }) {
 			}}
 		>
 			{isLoading && (
-				<p
-					style={{
-						fontSize: '5rem',
-						textAlign: 'center',
-					}}
-				>
-					Loading Survey Details ...{' '}
-				</p>
+				<img
+					src={loadingIcon}
+					alt="Loading"
+					style={{ display: 'block', margin: '10rem auto' }}
+				/>
 			)}
 			{!isLoading && (
 				<Survey.Survey json={survey} onComplete={handleComplete} />
