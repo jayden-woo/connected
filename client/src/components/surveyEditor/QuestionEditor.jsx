@@ -3,7 +3,6 @@ import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
@@ -20,13 +19,10 @@ export default function QuestionEditor({
 	question,
 	handleDelete,
 	updateQuestion,
+	setProgressBar,
 }) {
 	const [options, setOptions] = useState([]);
 	const [image, setImage] = useState({ src: '', alt: '' });
-	const [progressBar, setProgressBar] = useState({
-		visible: false,
-		progress: 0,
-	});
 
 	const handleAddOption = () => {
 		const newOptions = [...options];
@@ -81,12 +77,6 @@ export default function QuestionEditor({
 						{image.src && (
 							<Image src={image.src} alt={image.alt} className="qe__image" />
 						)}
-						{progressBar.visible && (
-							<ProgressBar
-								className="qe__progress-bar"
-								now={progressBar.progress}
-							/>
-						)}
 						{question.type !== 'text' &&
 							options.map((o) => (
 								<Option
@@ -138,4 +128,8 @@ QuestionEditor.propTypes = {
 	}).isRequired,
 	handleDelete: PropTypes.func.isRequired,
 	updateQuestion: PropTypes.func.isRequired,
+	setProgressBar: PropTypes.shape({
+		visible: PropTypes.bool.isRequired,
+		progress: PropTypes.number.isRequired,
+	}).isRequired,
 };

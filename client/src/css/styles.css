@@ -1,7 +1,9 @@
 :root {
-	--color-primary: #000767;
+	/* --color-primary: #000767; */
+	--color-primary: #4c5085;
 	--color-secondary: #8ab5ab;
-	--color-accent: #ff0000;
+	--color-accent: #df5757;
+	/* --color-accent: #ff0000; */
 	--color-headings: #c9ccff;
 	--color-text: #190e89;
 	--color-background: #f2f6fb;
@@ -28,6 +30,18 @@ a:visited {
 	border-width: 0;
 }
 
+.btn:hover {
+	background-color: #3a3e6d;
+}
+
+.btn-primary:disabled {
+	background-color: #42467c;
+}
+
+.btn--blue {
+	background-color: var(--color-primary);
+}
+
 .btn--blue {
 	background-color: var(--color-primary);
 }
@@ -36,8 +50,16 @@ a:visited {
 	background-color: var(--color-accent);
 }
 
+.btn--red:hover {
+	background-color: rgb(199, 70, 70);
+}
+
 .btn--green {
 	background-color: var(--color-secondary);
+}
+
+.btn--green:hover {
+	background-color: #769b92;
 }
 
 .ant-layout {
@@ -54,6 +76,15 @@ a:visited {
 
 .edit-text:focus {
 	border-bottom: 1px solid var(--color-primary);
+}
+
+.progress-bar {
+	position: fixed;
+	top: 66.25px;
+	left: 0;
+	height: 3px;
+	z-index: 99;
+	background-color: var(--color-secondary);
 }
 
 /* Survey Editor */
@@ -82,7 +113,7 @@ a:visited {
 }
 
 .se__bottom-cut-off a {
-	color: #a8a1c0;
+	color: #b4acce;
 }
 
 .se__bottom-cut-off a:hover {
@@ -114,10 +145,6 @@ a:visited {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.se__progress-bar {
-	margin-top: 1rem;
 }
 
 .se__title {
@@ -200,10 +227,6 @@ a:visited {
 	width: 100%;
 	height: auto;
 	padding: 0 2rem 1.5rem;
-}
-
-.qe__progress-bar {
-	margin: 0 2rem 0.5rem;
 }
 
 .qe__btn {

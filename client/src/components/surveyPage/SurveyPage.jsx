@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import _ from 'lodash';
 import * as Survey from 'survey-react';
 import PropTypes from 'prop-types';
 import http from '../../services/httpService';

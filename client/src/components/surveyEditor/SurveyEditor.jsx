@@ -5,9 +5,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { EditText } from 'react-edit-text';
 
@@ -17,13 +17,9 @@ import notify from '../../services/notifyService';
 
 import QuestionEditor from './QuestionEditor';
 
-export default function SurveyEditor() {
+export default function SurveyEditor({ setProgressBar }) {
 	const [survey, setSurvey] = useState({ questions: [] });
 	const [thumbnail, setThumbnail] = useState({ src: '', alt: '' });
-	const [progressBar, setProgressBar] = useState({
-		visible: false,
-		progress: 0,
-	});
 
 	const imageSelector = useRef();
 
@@ -204,12 +200,6 @@ export default function SurveyEditor() {
 							</Button>
 						</Col>
 					</Row>
-					{progressBar.visible && (
-						<ProgressBar
-							className="se__progress-bar"
-							now={progressBar.progress}
-						/>
-					)}
 				</Container>
 			</div>
 			<div className="se__content">
@@ -247,6 +237,7 @@ export default function SurveyEditor() {
 						question={q}
 						handleDelete={handleDelete}
 						updateQuestion={updateQuestion}
+						setProgressBar={setProgressBar}
 					/>
 				))}
 			</div>
@@ -262,3 +253,10 @@ export default function SurveyEditor() {
 		</div>
 	);
 }
+
+SurveyEditor.propTypes = {
+	setProgressBar: PropTypes.shape({
+		visible: PropTypes.bool.isRequired,
+		progress: PropTypes.number.isRequired,
+	}).isRequired,
+};
