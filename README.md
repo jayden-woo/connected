@@ -68,6 +68,6 @@ Database: MongoDB
 
 Deployment: Heroku
 
-Testing: JEST
+Testing: Mocha
 
 API documentation: Postman
