@@ -244,3 +244,12 @@ a:visited {
 	margin-left: 2.5rem;
 	vertical-align: middle;
 }
+
+.qe .sv-body__page {
+	margin-top: 2.4rem;
+	margin-bottom: 1rem;
+}
+
+.qe .sv-footer {
+	display: none;
+}

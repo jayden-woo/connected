@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -25,6 +26,9 @@ export default function SurveyEditor() {
 	});
 
 	const imageSelector = useRef();
+
+	// TODO: remove this
+	const history = useHistory();
 
 	const handleAdd = (type) => {
 		const newQuestions = [
@@ -122,12 +126,13 @@ export default function SurveyEditor() {
 
 		if (!data.thumbnail) delete data.thumbnail;
 
-		console.log(data);
-
+		// TODO: remove unneccesary lines
 		try {
 			const res = await http.post('http://localhost:3000/api/surveys', data);
 			notify.successNotify('Successfully Published!');
 			console.log(res.data);
+			// eslint-disable-next-line no-underscore-dangle
+			history.push(`/surveys/${res.data._id}`);
 		} catch (e) {
 			notify.errorNotify(e.response.data.message);
 		}
@@ -239,8 +244,7 @@ export default function SurveyEditor() {
 				{survey.questions.map((q) => (
 					<QuestionEditor
 						key={q.name}
-						name={q.name}
-						type={q.type}
+						question={q}
 						handleDelete={handleDelete}
 						updateQuestion={updateQuestion}
 					/>

@@ -36,12 +36,15 @@ export default function SurveyPage({ id }) {
 			survey: id,
 			responses: sender.data,
 		};
+
+		// TODO:
 		try {
-			const res = await http.post(
-				'http://localhost:3000/api/submissions',
-				submission,
-			);
-			console.log(res.data);
+			// const res = await http.post(
+			// 	'http://localhost:3000/api/submissions',
+			// 	submission,
+			// );
+			// console.log(res.data);
+			console.log(submission);
 		} catch (e) {
 			console.log(e.response.data.message);
 		}
