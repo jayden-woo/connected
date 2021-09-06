@@ -7,7 +7,7 @@ import SurveyEditor from "./components/surveyEditor/SurveyEditor";
 import About from "./components/About";
 import Home from "./components/Home/Home";
 import SurveyPage from "./components/surveyPage/SurveyPage";
-import ProgressContext from "./components/common/progressContext";
+import ProgressContext from "./components/common/ProgressContext";
 import UploadProgressBar from "./components/common/UploadProgressBar";
 
 function App() {

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import ProgressContext from "./progressContext";
+import ProgressContext from "./ProgressContext";
 
 export default function UploadProgressBar() {
   const { visible, progress } = useContext(ProgressContext);
