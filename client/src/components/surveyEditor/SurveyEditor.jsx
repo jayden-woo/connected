@@ -1,246 +1,241 @@
-import React, { useRef, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import { toast, ToastContainer } from 'react-toastify';
-import _ from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
-import { EditText } from 'react-edit-text';
-import QuestionEditor from './QuestionEditor';
-import uploadImage from '../../services/uploadImageService';
+import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
 
-export default function SurveyEditor() {
-	const [questions, setQuestions] = useState([]);
-	const [title, setTitle] = useState('');
-	const [subTitle, setSubTitle] = useState('');
-	const [thumbnail, setThumbnail] = useState({ src: '', alt: '' });
-	const [thumbnailURL, setThumbnailURL] = useState('');
-	const [isUploading, setIsUploading] = useState(false);
-	const [progress, setProgress] = useState(0);
+import _ from "lodash";
+import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
+import { EditText } from "react-edit-text";
 
-	const imageSelector = useRef();
+import uploadImage from "../../services/uploadImageService";
+import http from "../../services/httpService";
+import notify from "../../services/notifyService";
 
-	const handleAdd = (type) => {
-		setQuestions([
-			...questions,
-			{
-				question: '',
-				questionType: type,
-				id: uuidv4(),
-			},
-		]);
-	};
+import QuestionEditor from "./QuestionEditor";
 
-	const handleDelete = (id) => {
-		const newQuestions = [...questions];
-		const index = questions.findIndex((q) => q.id === id);
-		newQuestions.splice(index, 1);
-		setQuestions(newQuestions);
-	};
+export default function SurveyEditor({ setProgressBar }) {
+  const [survey, setSurvey] = useState({ questions: [] });
+  const [thumbnail, setThumbnail] = useState({ src: "", alt: "" });
 
-	const updateQuestion = (id, key, value) => {
-		const newQuestions = [...questions];
-		const index = questions.findIndex((q) => q.id === id);
-		newQuestions[index][key] = value;
-		setQuestions(newQuestions);
-	};
+  const imageSelector = useRef();
 
-	const validate = () => {
-		if (questions.length === 0) {
-			alert('Survey cannot be empty.');
-			return false;
-		}
+  // TODO: remove this
+  const history = useHistory();
 
-		/* eslint-disable-next-line */
-		for (const q of questions) {
-			if (q.question === '') {
-				alert('All questions must have a title.');
-				return false;
-			}
+  const handleAdd = (type) => {
+    const newQuestions = [
+      ...survey.questions,
+      {
+        title: "",
+        type,
+        name: uuidv4(),
+      },
+    ];
+    setSurvey((prevState) => ({
+      ...prevState,
+      questions: newQuestions,
+    }));
+  };
 
-			if (q.questionType !== 'short answer') {
-				if (!q.choices || q.choices.length < 2) {
-					alert('Multiple option question must have at least 2 options.');
-					return false;
-				}
+  const handleDelete = (name) => {
+    const newQuestions = [...survey.questions];
+    const index = survey.questions.findIndex((q) => q.name === name);
+    newQuestions.splice(index, 1);
+    setSurvey((prevState) => ({
+      ...prevState,
+      questions: newQuestions,
+    }));
+  };
 
-				/* eslint-disable-next-line */
-				for (const c of q.choices) {
-					if (c === '') {
-						alert('Question cannot have empty option.');
-						return false;
-					}
-				}
-			}
-		}
+  const updateQuestion = (name, key, value) => {
+    const newQuestions = [...survey.questions];
+    const index = survey.questions.findIndex((q) => q.name === name);
+    newQuestions[index][key] = value;
+    setSurvey((prevState) => ({
+      ...prevState,
+      questions: newQuestions,
+    }));
+  };
 
-		return true;
-	};
+  // TODO: proper validation
+  const validate = () => {
+    if (survey.questions.length === 0) {
+      alert("Survey cannot be empty.");
+      return false;
+    }
 
-	const onSubmit = () => {
-		if (!validate()) {
-			return;
-		}
+    /* eslint-disable-next-line */
+    for (const q of survey.questions) {
+      if (q.title === "") {
+        alert("All questions must have a title.");
+        return false;
+      }
 
-		const newQuestions = [];
+      if (q.type !== "text") {
+        if (!q.choices || q.choices.length < 2) {
+          alert("Multiple option question must have at least 2 options.");
+          return false;
+        }
 
-		questions.forEach((q, index) => {
-			const newQ = _.cloneDeep(q);
-			newQ.index = index;
-			delete newQ.id;
+        /* eslint-disable-next-line */
+        for (const c of q.choices) {
+          if (c === "") {
+            alert("Question cannot have empty option.");
+            return false;
+          }
+        }
+      }
+    }
 
-			if (newQ.choices) {
-				const choices = newQ.choices.map((c) => c.content);
-				newQ.choices = choices;
-			}
+    return true;
+  };
 
-			newQuestions.push(newQ);
-		});
+  const onSubmit = async () => {
+    if (!validate()) {
+      return;
+    }
 
-		const survey = {
-			title,
-			subTitle,
-			questions: newQuestions,
-			creator: 'auth0|6110b5c4c61fd70077d2819d',
-			thumbnail: thumbnailURL,
-		};
+    const newQuestions = [];
 
-		if (!survey.thumbnail) delete survey.thumbnail;
+    survey.questions.forEach((q) => {
+      const newQ = _.cloneDeep(q);
 
-		console.log(survey);
-	};
+      if (newQ.choices) {
+        const choices = newQ.choices.map((c) => c.content);
+        newQ.choices = choices;
+      }
 
-	const successNotify = () => {
-		toast.success('Successfully Uploaded!', {
-			position: toast.POSITION.BOTTOM_RIGHT,
-			autoClose: 2000,
-		});
-	};
+      newQuestions.push(newQ);
+    });
 
-	const errorNotify = (message) => {
-		toast.error(message, {
-			position: toast.POSITION.BOTTOM_RIGHT,
-			autoClose: 2000,
-		});
-	};
+    const data = {
+      title: survey.title,
+      description: survey.description,
+      questions: newQuestions,
+      creator: "auth0|6110b5c4c61fd70077d2819d",
+      thumbnail: survey.thumbnail,
+    };
 
-	return (
-		<div className="se__container">
-			<div className="se__top-cut-off" />
-			<div className="se__title-section">
-				<Container className="se__title-container">
-					<Row>
-						<Col sm={9}>
-							<EditText
-								className="edit-text se__title"
-								placeholder="Add title here ..."
-								onSave={({ value }) => setTitle(value)}
-							/>
-							<EditText
-								className="edit-text se__sub-title"
-								placeholder="Add sub title here ..."
-								onSave={({ value }) => setSubTitle(value)}
-							/>
-						</Col>
-						<Col>
-							{thumbnail.src && (
-								<Image
-									className="se__thumbnail"
-									src={thumbnail.src}
-									alt={thumbnail.alt}
-								/>
-							)}
-							{!thumbnail.src && <div className="se__thumbnail" />}
-							<input
-								type="file"
-								onChange={(e) => {
-									uploadImage.handleSelect(e, setThumbnail);
-								}}
-								ref={imageSelector}
-								accept="image/*"
-							/>
-							<Button
-								className="se__thumbnail-btn shadow-none"
-								onClick={() => imageSelector.current.click()}
-							>
-								Add Thumbnail
-							</Button>
-							<Button
-								className="se__thumbnail-btn shadow-none"
-								disabled={!thumbnail.src}
-								onClick={async () => {
-									setThumbnailURL(
-										await uploadImage.handleUpload(
-											setIsUploading,
-											setProgress,
-											thumbnail,
-											successNotify,
-											errorNotify,
-										),
-									);
-								}}
-							>
-								Upload
-							</Button>
-						</Col>
-					</Row>
-					{isUploading && (
-						<ProgressBar className="se__progress-bar" now={progress} />
-					)}
-				</Container>
-			</div>
-			<div className="se__content">
-				<Container>
-					<Row className="align-items-center justify-content-between">
-						<Col className="text-start" style={{ padding: 0 }}>
-							<Button
-								className="se__btn-add btn--red shadow-none"
-								onClick={() => handleAdd('short answer')}
-							>
-								+ Add Short Answer
-							</Button>
-						</Col>
-						<Col className="text-center" style={{ padding: 0 }}>
-							<Button
-								className="se__btn-add btn--blue shadow-none"
-								onClick={() => handleAdd('single choice')}
-							>
-								+ Add Single Choice
-							</Button>
-						</Col>
-						<Col className="text-end" style={{ padding: 0 }}>
-							<Button
-								className="se__btn-add btn--green shadow-none"
-								onClick={() => handleAdd('multiple choice')}
-							>
-								+ Add Multiple Choice
-							</Button>
-						</Col>
-					</Row>
-				</Container>
-				{questions.map((q) => (
-					<QuestionEditor
-						key={q.id}
-						id={q.id}
-						questionType={q.questionType}
-						handleDelete={handleDelete}
-						updateQuestion={updateQuestion}
-					/>
-				))}
-			</div>
-			<div className="se__bottom-cut-off">
-				<a href="#top">BACK TO TOP</a>
-			</div>
-			<div className="se__publish">
-				<Button className="se__btn-cancel shadow-none">Cancel</Button>
-				<Button className="se__btn-publish shadow-none" onClick={onSubmit}>
-					Publish
-				</Button>
-			</div>
-			<ToastContainer />
-		</div>
-	);
+    if (!data.thumbnail) delete data.thumbnail;
+
+    // TODO: remove unneccesary lines
+    try {
+      const res = await http.post("http://localhost:3000/api/surveys", data);
+      notify.successNotify("Successfully Published!");
+      console.log(res.data);
+      // eslint-disable-next-line no-underscore-dangle
+      history.push(`/surveys/${res.data._id}`);
+    } catch (e) {
+      notify.errorNotify(e.response.data.message);
+    }
+  };
+
+  return (
+    <div className="se__container">
+      <div className="se__top-cut-off" />
+      <div className="se__title-section">
+        <Container className="se__title-container">
+          <Row>
+            <Col sm={9}>
+              <EditText
+                className="edit-text se__title"
+                placeholder="Add title here ..."
+                onSave={({ value }) => setSurvey((prevState) => ({ ...prevState, title: value }))}
+              />
+              <EditText
+                className="edit-text se__sub-title"
+                placeholder="Add description here ..."
+                onSave={({ value }) =>
+                  setSurvey((prevState) => ({
+                    ...prevState,
+                    description: value,
+                  }))
+                }
+              />
+            </Col>
+            <Col>
+              {thumbnail.src && <Image className="se__thumbnail" src={thumbnail.src} alt={thumbnail.alt} />}
+              {!thumbnail.src && <div className="se__thumbnail" />}
+              <input
+                type="file"
+                onChange={(e) => {
+                  uploadImage.handleSelect(e, setThumbnail);
+                }}
+                ref={imageSelector}
+                accept="image/*"
+              />
+              <Button className="se__thumbnail-btn shadow-none" onClick={() => imageSelector.current.click()}>
+                Add Thumbnail
+              </Button>
+              <Button
+                className="se__thumbnail-btn shadow-none"
+                disabled={!thumbnail.src}
+                onClick={async () => {
+                  const url = await uploadImage.handleUpload(
+                    setProgressBar,
+                    thumbnail,
+                    () => notify.successNotify("Successfully Uploaded!"),
+                    () => notify.errorNotify("Upload failed, please try again.")
+                  );
+                  setSurvey((prevState) => ({ ...prevState, thumbnail: url }));
+                }}
+              >
+                Upload
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+      <div className="se__content">
+        <Container>
+          <Row className="align-items-center justify-content-between">
+            <Col className="text-start" style={{ padding: 0 }}>
+              <Button className="se__btn-add btn--red shadow-none" onClick={() => handleAdd("text")}>
+                + Add Simple Text
+              </Button>
+            </Col>
+            <Col className="text-center" style={{ padding: 0 }}>
+              <Button className="se__btn-add btn--blue shadow-none" onClick={() => handleAdd("radiogroup")}>
+                + Add Radiogroup
+              </Button>
+            </Col>
+            <Col className="text-end" style={{ padding: 0 }}>
+              <Button className="se__btn-add btn--green shadow-none" onClick={() => handleAdd("checkbox")}>
+                + Add Checkbox
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+        {survey.questions.map((q) => (
+          <QuestionEditor
+            key={q.name}
+            question={q}
+            handleDelete={handleDelete}
+            updateQuestion={updateQuestion}
+            setProgressBar={setProgressBar}
+          />
+        ))}
+      </div>
+      <div className="se__bottom-cut-off">
+        <a href="#top">BACK TO TOP</a>
+      </div>
+      <div className="se__publish">
+        <Button className="se__btn-cancel shadow-none">Cancel</Button>
+        <Button className="se__btn-publish shadow-none" onClick={onSubmit}>
+          Publish
+        </Button>
+      </div>
+    </div>
+  );
 }
+
+SurveyEditor.propTypes = {
+  setProgressBar: PropTypes.shape({
+    visible: PropTypes.bool.isRequired,
+    progress: PropTypes.number.isRequired,
+  }).isRequired,
+};
