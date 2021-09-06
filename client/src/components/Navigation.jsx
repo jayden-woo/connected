@@ -18,6 +18,8 @@ const Navigation = () => {
           <Nav fill>
             <Nav.Link href="/">HOME</Nav.Link>
             <Nav.Link href="/about">ABOUT</Nav.Link>
+            <Nav.Link href="/create-survey">&emsp;CREATE SURVEY&emsp;</Nav.Link>
+            <Nav.Link href="/surveys/613204c630d68e45f0c22e92" />
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse fill className="justify-content-end">
@@ -58,8 +60,6 @@ const Navigation = () => {
       </Container>
     </Navbar>
   );
-						<Nav.Link href="/create-survey">&emsp;CREATE SURVEY&emsp;</Nav.Link>
-						<Nav.Link href="/surveys/613204c630d68e45f0c22e92">
 };
 
 export default Navigation;

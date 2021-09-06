@@ -1,20 +1,20 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const successNotify = (message) => {
-	toast.success(message, {
-		position: toast.POSITION.TOP_RIGHT,
-		autoClose: 2000,
-	});
+  toast.success(message, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 2000,
+  });
 };
 
 const errorNotify = (message) => {
-	toast.error(message, {
-		position: toast.POSITION.TOP_RIGHT,
-		autoClose: 4000,
-	});
+  toast.error(message, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 4000,
+  });
 };
 
 export default {
-	successNotify,
-	errorNotify,
+  successNotify,
+  errorNotify,
 };

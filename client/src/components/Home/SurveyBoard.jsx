@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import styled from "styled-components";
 
 // TEMP
