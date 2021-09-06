@@ -12,7 +12,7 @@
 }
 
 html {
-	font-size: 62.5%;
+	font-size: 87.5%;
 }
 
 input[type='file'] {
@@ -266,6 +266,16 @@ a:visited {
 .qe__option-icon {
 	margin-left: 2.5rem;
 	vertical-align: middle;
+}
+
+/* header image*/
+.center-headerImage{
+	text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
 }
 
 .qe .sv-body__page {

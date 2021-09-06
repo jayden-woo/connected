@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Layout } from 'antd';
-import 'antd/dist/antd.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
+import SurveyEditor from "./components/surveyEditor/SurveyEditor";
+import About from "./components/About";
+import Home from "./components/Home/Home";
 import { ToastContainer } from 'react-toastify';
-import Navigation from './components/Navigation';
-import SurveyEditor from './components/surveyEditor/SurveyEditor';
 import SurveyPage from './components/surveyPage/SurveyPage';
 import ProgressContext from './components/common/progressContext';
 import UploadProgressBar from './components/common/UploadProgressBar';
@@ -17,13 +17,11 @@ function App() {
 	});
 
 	return (
-		<div>
 			<ToastContainer />
 			<ProgressContext.Provider value={progressBar}>
 				<UploadProgressBar />
 				<Layout>
 					<Navigation id="top" />
-					<BrowserRouter>
 						<Switch>
 							<Route
 								path="/create-survey"
@@ -35,11 +33,16 @@ function App() {
 								render={(props) => <SurveyPage id={props.match.params.id} />}
 							/>
 						</Switch>
-					</BrowserRouter>
 				</Layout>
 			</ProgressContext.Provider>
-		</div>
 	);
+          <Route path="/about" component={About} />
+      <Footer />
+      <Router>
+      </Router>
+          <Route path="/" exact component={Home} />
+    </>
+    <>
 }
 
 export default App;
