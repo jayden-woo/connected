@@ -6,7 +6,7 @@ const testCases = require('./api.survey.testCase');
 describe('API survey', function () {
   this.timeout(10000);
   /**
-   * 在测试用例之前执行，获取不同用户角色的token, 暂时用不到
+   * no role needed
    */
   before(async function () {
     // this.timeout(20000);
@@ -17,7 +17,7 @@ describe('API survey', function () {
       method: 'GET',
       url: common.BASE_URL + '/surveys',
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       json: true
     });
@@ -30,14 +30,14 @@ describe('API survey', function () {
         method: 'POST',
         url: common.BASE_URL + '/surveys',
         headers: {
-          'authorization': ''     //token验证信息，暂时没有
+          'authorization': ''     //no token info
         },
         body: testCases.addCompleteCase[i],
         json: true
       });
       expect(body).to.be.an('object');
       expect(body._id).to.be.a('string');
-      // 问卷id 赋值到全局，供下面使用
+      // survey id 
       survey_id = body._id;
     });
   }
@@ -49,7 +49,7 @@ describe('API survey', function () {
           method: 'POST',
           url: common.BASE_URL + '/surveys',
           headers: {
-            'authorization': ''     //token验证信息，暂时没有
+            'authorization': ''     //no token info
           },
           body: testCases.addErrorCase[i],
           json: true
@@ -65,7 +65,7 @@ describe('API survey', function () {
       method: 'GET',
       url: common.BASE_URL + '/surveys/' + survey_id,
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       json: true
     });
@@ -78,7 +78,7 @@ describe('API survey', function () {
       method: 'PUT',
       url: common.BASE_URL + '/surveys/' + survey_id,
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       body: {
         title: 'title to update'
@@ -95,7 +95,7 @@ describe('API survey', function () {
         method: 'PUT',
         url: common.BASE_URL + '/surveys/' + survey_id,
         headers: {
-          'authorization': ''     //token验证信息，暂时没有
+          'authorization': ''     //no token info
         },
         body: testCases.updateCompleteCase[i],
         json: true
@@ -111,7 +111,7 @@ describe('API survey', function () {
           method: 'PUT',
           url: common.BASE_URL + '/surveys/' + survey_id,
           headers: {
-            'authorization': ''     //token验证信息，暂时没有
+            'authorization': ''     //no token info
           },
           body: testCases.updateCompleteCase[i],
           json: true
@@ -128,7 +128,7 @@ describe('API survey', function () {
         method: 'GET',
         url: common.BASE_URL + '/surveys/' + '111',
         headers: {
-          'authorization': ''     //token验证信息，暂时没有
+          'authorization': ''     //no token info
         },
         json: true
       });

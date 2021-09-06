@@ -2,15 +2,11 @@ const expect = require('chai').expect;
 const common = require('../common');
 const rp = require('request-promise');
 const testCases = require('./api.post.testCase');
-/**
- * about post api test
- * 一个it就是一个测试用例执行，按照it方法的顺序执行
- */
 
 describe('API post', function () {
     this.timeout(20000);
     /**
-     * 在测试用例之前执行，获取不同用户角色的token, 暂时用不到
+     * no role needed
      */
     before(async function () {
         // this.timeout(20000);
@@ -21,7 +17,7 @@ describe('API post', function () {
             method: 'GET',
             url: common.BASE_URL + '/posts',
             headers: {
-                'authorization': ''     //token验证信息，暂时没有
+                'authorization': ''     //no token info
             },
             json: true
         });
@@ -34,14 +30,14 @@ describe('API post', function () {
                 method: 'POST',
                 url: common.BASE_URL + '/posts',
                 headers: {
-                    'authorization': ''     //token验证信息，暂时没有
+                    'authorization': ''     //no token info
                 },
                 body: testCases.addCompleteCase[i],
                 json: true
             });
             expect(body).to.be.an('object');
             expect(body._id).to.be.a('string');
-            // id 赋值到全局，供下面使用
+            // give the id
             post_id = body._id;
         });
     }
@@ -53,7 +49,7 @@ describe('API post', function () {
                     method: 'POST',
                     url: common.BASE_URL + '/posts',
                     headers: {
-                        'authorization': ''     //token验证信息，暂时没有
+                        'authorization': ''     //no token info
                     },
                     body: testCases.addErrorCase[i],
                     json: true
@@ -69,7 +65,7 @@ describe('API post', function () {
             method: 'GET',
             url: common.BASE_URL + '/posts/' + post_id,
             headers: {
-                'authorization': ''     //token验证信息，暂时没有
+                'authorization': ''     //no token info
             },
             json: true
         });
@@ -82,7 +78,7 @@ describe('API post', function () {
             method: 'PUT',
             url: common.BASE_URL + '/posts/' + post_id,
             headers: {
-                'authorization': ''     //token验证信息，暂时没有
+                'authorization': ''     //no token info
             },
             body: {
                 title: 'title to update'
@@ -99,7 +95,7 @@ describe('API post', function () {
                 method: 'PUT',
                 url: common.BASE_URL + '/posts/' + post_id,
                 headers: {
-                    'authorization': ''     //token验证信息，暂时没有
+                    'authorization': ''     //no token info
                 },
                 body: testCases.updateCompleteCase[i],
                 json: true
@@ -115,7 +111,7 @@ describe('API post', function () {
                     method: 'PUT',
                     url: common.BASE_URL + '/posts/' + post_id,
                     headers: {
-                        'authorization': ''     //token验证信息，暂时没有
+                        'authorization': ''     //no token info
                     },
                     body: testCases.updateErrorCase[i],
                     json: true
@@ -131,7 +127,7 @@ describe('API post', function () {
             method: 'DELETE',
             url: common.BASE_URL + '/posts/' + post_id,
             headers: {
-                'authorization': ''     //token验证信息，暂时没有
+                'authorization': ''     //no token info
             },
             method: 'DELETE',
             json: true
@@ -145,7 +141,7 @@ describe('API post', function () {
                 method: 'DELETE',
                 url: common.BASE_URL + '/posts/' + '1111',
                 headers: {
-                    'authorization': ''     //token验证信息，暂时没有
+                    'authorization': ''     //no token info
                 },
                 method: 'DELETE',
                 json: true
@@ -161,7 +157,7 @@ describe('API post', function () {
                 method: 'GET',
                 url: common.BASE_URL + '/posts/' + post_id,
                 headers: {
-                    'authorization': ''     //token验证信息，暂时没有
+                    'authorization': ''     //no token info
                 },
                 json: true
             });

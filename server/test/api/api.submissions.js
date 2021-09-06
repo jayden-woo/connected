@@ -7,16 +7,16 @@ const surveyTestCases = require('./api.survey.testCase');
 describe('API submissions', function () {
   // this.timeout(100000);
   /**
-   * 在测试用例之前执行，获取不同用户角色的token, 暂时用不到
+   * no role token
    */
   before('', async () => {
     this.timeout(5000);
-    //先创建一个问卷
+    //create a post
     let body = await rp({
       method: 'POST',
       url: common.BASE_URL + '/surveys',
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       body: surveyTestCases.addCompleteCase[0],
       json: true
@@ -29,7 +29,7 @@ describe('API submissions', function () {
       method: 'GET',
       url: common.BASE_URL + '/submissions',
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       json: true
     });
@@ -43,14 +43,14 @@ describe('API submissions', function () {
       method: 'POST',
       url: common.BASE_URL + '/submissions',
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       body: postBody,
       json: true
     });
     expect(body).to.be.an('object');
     expect(body._id).to.be.a('string');
-    // id 赋值到全局，供下面使用
+    // give the id
     submissions_id = body._id;
   });
 
@@ -64,7 +64,7 @@ describe('API submissions', function () {
           method: 'POST',
           url: common.BASE_URL + '/submissions',
           headers: {
-            'authorization': ''     //token验证信息，暂时没有
+            'authorization': ''     //no token info
           },
           body: postBody,
           json: true
@@ -81,7 +81,7 @@ describe('API submissions', function () {
       method: 'GET',
       url: common.BASE_URL + '/submissions/' + submissions_id,
       headers: {
-        'authorization': ''     //token验证信息，暂时没有
+        'authorization': ''     //no token info
       },
       json: true
     });
@@ -95,7 +95,7 @@ describe('API submissions', function () {
         method: 'GET',
         url: common.BASE_URL + '/submissions/' + '111',
         headers: {
-          'authorization': ''     //token验证信息，暂时没有
+          'authorization': ''     //no token info
         },
         json: true
       });
