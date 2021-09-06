@@ -10,6 +10,7 @@
 		"antd": "^4.16.13",
 		"axios": "^0.21.1",
 		"bootstrap": "^5.1.0",
+		"cloudinary-react": "^1.7.0",
 		"eslint": "^7.32.0",
 		"eslint-config-airbnb": "^18.2.1",
 		"eslint-config-prettier": "^8.3.0",
@@ -17,6 +18,7 @@
 		"eslint-plugin-jsx-a11y": "^6.4.1",
 		"eslint-plugin-react": "^7.25.1",
 		"eslint-plugin-react-hooks": "^4.2.0",
+		"history": "^5.0.1",
 		"lodash": "^4.17.21",
 		"mime": "^1.6.0",
 		"mime-types": "^2.1.32",
@@ -28,6 +30,7 @@
 		"react-edit-text": "^4.2.0",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
+		"react-toastify": "^8.0.2",
 		"uuid": "^8.3.2",
 		"web-vitals": "^1.0.1"
 	},
