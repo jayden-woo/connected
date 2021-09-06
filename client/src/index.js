@@ -1,13 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
-import "./index.css";
+import App from "./App";
+import "normalize.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-edit-text/dist/index.css";
-import "./styles.css";
+import "react-toastify/dist/ReactToastify.css";
+import "survey-react/modern.css";
+import "./css/styles.css";
+import history from "./utils/history";
 
+const onRedirectCallback = (appState) => {
+  history.push(appState && appState.returnTo ? appState.returnTo : window.location.pathname);
+};
+
+// Please see https://auth0.github.io/auth0-react/interfaces/auth0_provider.auth0provideroptions.html
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
@@ -16,14 +23,12 @@ ReactDOM.render(
       redirectUri={window.location.origin}
       audience="localhost:3000/api/"
       scope="read:posts"
+      onRedirectCallback={onRedirectCallback}
+      useRefreshTokens
+      cacheLocation="localstorage"
     >
       <App />
     </Auth0Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

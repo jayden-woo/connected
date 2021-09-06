@@ -1,0 +1,77 @@
+const posts = [
+  {
+    _id: "612b6d564daff1674053fff3",
+    title: "a Lorem Ipsum",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id porta justo, nec fringilla sapien. Sed commodo eget tellus interdum efficitur. Cras lorem quam, pharetra ut fringilla at, dictum vitae sapien. Duis at mattis nunc, commodo dictum eros.",
+    createdAt: "2021-08-29T11:19:50.930Z",
+    numViews: 20,
+    numComments: 2,
+    solved: true,
+    following: false,
+  },
+  {
+    _id: "612b6d564daff1674054fff3",
+    title: "h Lorem Ipsum",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    createdAt: "2021-08-30T12:20:12.930Z",
+    numViews: 129,
+    numComments: 18,
+    solved: false,
+    following: true,
+  },
+  {
+    _id: "612b6d564daff1674055fff3",
+    title: "b Lorem Ipsum",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id porta justo, nec fringilla sapien.",
+    createdAt: "2021-09-02T08:15:29.930Z",
+    numViews: 38,
+    numComments: 10,
+    solved: false,
+    following: false,
+  },
+  {
+    _id: "612b6d564daff1674355fff3",
+    title: "n Lorem Ipsum",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id porta justo, nec fringilla sapien. Sed commodo eget tellus interdum efficitur. Cras lorem quam, pharetra ut fringilla at, dictum vitae sapien. Duis at mattis nunc, commodo dictum eros. Cras euismod bibendum lacinia.",
+    createdAt: "2021-09-04T14:23:29.930Z",
+    numViews: 20,
+    numComments: 8,
+    solved: true,
+    following: false,
+  },
+  {
+    _id: "612b6d564daff2674055fff3",
+    title: "i Lorem Ipsum",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id porta justo, nec fringilla sapien. Sed commodo eget tellus interdum efficitur. Cras lorem quam, pharetra ut fringilla at, dictum vitae sapien. Duis at mattis nunc, commodo dictum eros. Cras euismod bibendum lacinia. Suspendisse potenti. Sed interdum mollis euismod. Cras suscipit nec elit sit amet dignissim. Etiam non est luctus, convallis nunc non, finibus tellus. Praesent a dictum velit, quis blandit lacus. Quisque in est est. Pellentesque malesuada pharetra turpis vitae aliquam.",
+    createdAt: "2021-09-01T05:18:40.930Z",
+    numViews: 72,
+    numComments: 32,
+    solved: true,
+    following: true,
+  },
+  {
+    _id: "612b6d564daff1f74055fff3",
+    title: "e Lorem Ipsum",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    createdAt: "2021-09-02T12:43:21.930Z",
+    numViews: 10,
+    numComments: 3,
+    solved: false,
+    following: true,
+  },
+  {
+    _id: "612b6d564daff1f74055fff7",
+    title: "E Lorem Ipsum",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    createdAt: "2021-08-12T02:04:31.930Z",
+    numViews: 127,
+    numComments: 54,
+    solved: true,
+    following: false,
+  },
+];
+
+export default posts;
