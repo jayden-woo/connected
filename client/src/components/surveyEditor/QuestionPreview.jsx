@@ -9,7 +9,7 @@ export default function QuestionPreview({ question, setActiveQuestion }) {
         type: question.type,
         title: question.title ? question.title : "Question Preview",
         name: question.name,
-        choices: question.choices ? question.choices.map((c) => c.content) : undefined,
+        choices: question.choices ? question.choices.map((c) => c.value) : undefined,
       },
     ],
   };

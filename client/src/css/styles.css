@@ -178,10 +178,20 @@ a:visited {
 }
 
 .se__btn-add {
-  font-size: 1.5rem;
-  width: 100%;
+  font-size: 1.3rem;
+  width: 90%;
   height: 4rem;
   border-width: 0;
+  background-color: transparent;
+  color: var(--color-primary);
+  border-bottom: 1px solid #ccc;
+  padding-left: 3rem;
+  text-align: start;
+}
+
+.se__btn-add:hover {
+  background-color: transparent;
+  color: var(--color-headings);
 }
 
 .se__btn-publish {

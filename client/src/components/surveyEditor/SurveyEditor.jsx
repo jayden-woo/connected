@@ -35,6 +35,7 @@ export default function SurveyEditor({ setProgressBar }) {
         title: "",
         type,
         name: uuidv4(),
+        choices: [],
       },
     ];
     setSurvey((prevState) => ({
@@ -48,6 +49,34 @@ export default function SurveyEditor({ setProgressBar }) {
     const newQuestions = [...survey.questions];
     const index = survey.questions.findIndex((q) => q.name === name);
     newQuestions.splice(index, 1);
+    setSurvey((prevState) => ({
+      ...prevState,
+      questions: newQuestions,
+    }));
+  };
+
+  const handleMoveUp = (name) => {
+    const newQuestions = [...survey.questions];
+    const index = survey.questions.findIndex((q) => q.name === name);
+    if (index === 0) return;
+    const question = newQuestions[index];
+    const prevQuestion = newQuestions[index - 1];
+    newQuestions.splice(index, 1, prevQuestion);
+    newQuestions.splice(index - 1, 1, question);
+    setSurvey((prevState) => ({
+      ...prevState,
+      questions: newQuestions,
+    }));
+  };
+
+  const handleMoveDown = (name) => {
+    const newQuestions = [...survey.questions];
+    const index = survey.questions.findIndex((q) => q.name === name);
+    if (index === newQuestions.length - 1) return;
+    const question = newQuestions[index];
+    const nextQuestion = newQuestions[index + 1];
+    newQuestions.splice(index, 1, nextQuestion);
+    newQuestions.splice(index + 1, 1, question);
     setSurvey((prevState) => ({
       ...prevState,
       questions: newQuestions,
@@ -107,9 +136,11 @@ export default function SurveyEditor({ setProgressBar }) {
     survey.questions.forEach((q) => {
       const newQ = _.cloneDeep(q);
 
-      if (newQ.choices) {
-        const choices = newQ.choices.map((c) => c.content);
+      if (newQ.type !== "text") {
+        const choices = newQ.choices.map((c) => c.value);
         newQ.choices = choices;
+      } else {
+        delete newQ.choices;
       }
 
       newQuestions.push(newQ);
@@ -143,24 +174,36 @@ export default function SurveyEditor({ setProgressBar }) {
       <div>
         <Container className="se__content">
           <Row>
-            <Col sm={12} md={3} xl={2} style={{ maxHeight: "60vh", overflowY: "auto" }}>
-              <Button className="se__btn-add btn--red shadow-none" onClick={() => handleAdd("text")}>
-                + Add Simple Text
+            <Col className="text-center" sm={12} md={3} xl={2} style={{ maxHeight: "60vh", overflowY: "auto" }}>
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
+                + Simple Text
               </Button>
-              <Button className="se__btn-add btn--blue shadow-none" onClick={() => handleAdd("radiogroup")}>
-                + Add Radiogroup
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("radiogroup")}>
+                + Radiogroup
               </Button>
-              <Button className="se__btn-add btn--green shadow-none" onClick={() => handleAdd("checkbox")}>
-                + Add Checkbox
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("checkbox")}>
+                + Checkbox
               </Button>
-              <Button className="se__btn-add btn--green shadow-none" onClick={() => handleAdd("checkbox")}>
-                + Add Checkbox
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("dropdown")}>
+                + Dropdown
               </Button>
-              <Button className="se__btn-add btn--green shadow-none" onClick={() => handleAdd("checkbox")}>
-                + Add Checkbox
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("boolean")}>
+                + Boolean
               </Button>
-              <Button className="se__btn-add btn--green shadow-none" onClick={() => handleAdd("checkbox")}>
-                + Add Checkbox
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("rating")}>
+                + Rating
+              </Button>
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("ranking")}>
+                + Ranking
+              </Button>
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("comment")}>
+                + Comment
+              </Button>
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("html")}>
+                + Image
+              </Button>
+              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("imagepicker")}>
+                + Image Picker
               </Button>
             </Col>
             <Col sm={12} md={5} xl={6} style={{ borderLeft: "1px solid #ccc", borderRight: "1px solid #ccc" }}>
@@ -224,11 +267,17 @@ export default function SurveyEditor({ setProgressBar }) {
               ))}
             </Col>
             <Col sm={12} md={4} xl={4}>
+              <p>PROPERTIES</p>
+
               {activeQuestion && (
                 <QuestionEditor
                   key={activeQuestion}
                   question={_.find(survey.questions, { name: activeQuestion })}
+                  index={survey.questions.findIndex((q) => q.name === activeQuestion)}
+                  numQuestions={survey.questions.length}
                   handleDelete={handleDelete}
+                  handleMoveUp={handleMoveUp}
+                  handleMoveDown={handleMoveDown}
                   updateQuestion={updateQuestion}
                   setProgressBar={setProgressBar}
                 />
