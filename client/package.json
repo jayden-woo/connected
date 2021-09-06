@@ -20,6 +20,9 @@
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"history": "^5.0.1",
 		"lodash": "^4.17.21",
+		"mime": "^1.6.0",
+		"mime-types": "^2.1.32",
+		"mine": "^0.1.0",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-bootstrap": "^1.6.1",
@@ -54,5 +57,6 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	}
+	},
+	"devDependencies": {}
 }

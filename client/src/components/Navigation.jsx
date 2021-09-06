@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, Image } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../assets/connected.png';
 
+
 const Navigation = () => {
 	const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
@@ -23,7 +24,7 @@ const Navigation = () => {
 					<Nav fill>
 						<Nav.Link href="/">&emsp;&emsp;HOME&emsp;&emsp;</Nav.Link>
 						<Nav.Link href="/create-survey">&emsp;&emsp;SURVEY&emsp;&emsp;</Nav.Link>
-						<Nav.Link href="#link">&emsp;&emsp;ABOUT&emsp;&emsp;</Nav.Link>
+						<Nav.Link href="/about">ABOUT</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 				<Navbar.Collapse fill className="justify-content-end">

@@ -241,3 +241,13 @@ a:visited {
 	margin-left: 2.5rem;
 	vertical-align: middle;
 }
+
+/* header image*/
+.center-headerImage{
+	text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+}
