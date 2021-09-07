@@ -29,15 +29,64 @@ export default function SurveyEditor({ setProgressBar }) {
   const history = useHistory();
 
   const handleAdd = (type) => {
-    const newQuestions = [
-      ...survey.questions,
-      {
-        title: "",
-        type,
-        name: uuidv4(),
-        choices: [],
-      },
-    ];
+    const newQ = {
+      title: "",
+      type,
+      name: uuidv4(),
+      isRequired: false,
+    };
+    switch (type) {
+      case "text":
+        newQ.placeHolder = "";
+        newQ.inputType = "text";
+        break;
+      case "radiogroup":
+        newQ.colCount = 4;
+        newQ.choices = [];
+        break;
+      case "dropdown":
+      case "ranking":
+        newQ.choices = [];
+        break;
+      case "checkbox":
+        newQ.choices = [];
+        newQ.colCount = 4;
+        break;
+      case "boolean":
+        newQ.label = "Question label";
+        newQ.labelTrue = "Yes";
+        newQ.labelFalse = "No";
+        newQ.showTitle = true;
+        break;
+      case "rating":
+        newQ.rateMin = 1;
+        newQ.rateMax = 5;
+        newQ.minRateDescription = "Lowest";
+        newQ.maxRateDescription = "Highest";
+        break;
+      case "comment":
+        newQ.placeHolder = "";
+        break;
+      case "imagepicker":
+        newQ.choices = [];
+        newQ.imageHeight = 150;
+        newQ.imageWidth = 200;
+        newQ.imageFit = "contain";
+        break;
+      case "image":
+        newQ.imageLink =
+          "https://res.cloudinary.com/ip-connected/image/upload/v1630900645/connected/oixg4zsudf6t5wx70knu.jpg";
+        newQ.imageHeight = 300;
+        newQ.imageWidth = 400;
+        newQ.imageFit = "contain";
+        break;
+      case "html":
+        newQ.html = "<p>Add your html here ... </p>";
+        break;
+      default:
+        break;
+    }
+    const newQuestions = [...survey.questions, newQ];
     setSurvey((prevState) => ({
       ...prevState,
       questions: newQuestions,
@@ -47,8 +96,7 @@ export default function SurveyEditor({ setProgressBar }) {
   const handleDelete = (name) => {
     setActiveQuestion("");
     const newQuestions = [...survey.questions];
-    const index = survey.questions.findIndex((q) => q.name === name);
-    newQuestions.splice(index, 1);
+    _.remove(newQuestions, { name });
     setSurvey((prevState) => ({
       ...prevState,
       questions: newQuestions,
@@ -171,121 +219,126 @@ export default function SurveyEditor({ setProgressBar }) {
   return (
     <div className="se__container">
       <div className="se__top-cut-off" />
-      <div>
-        <Container className="se__content">
-          <Row>
-            <Col className="text-center" sm={12} md={3} xl={2} style={{ maxHeight: "60vh", overflowY: "auto" }}>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
-                + Simple Text
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("radiogroup")}>
-                + Radiogroup
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("checkbox")}>
-                + Checkbox
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("dropdown")}>
-                + Dropdown
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("boolean")}>
-                + Boolean
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("rating")}>
-                + Rating
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("ranking")}>
-                + Ranking
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("comment")}>
-                + Comment
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("html")}>
-                + Image
-              </Button>
-              <Button className="se__btn-add shadow-none" onClick={() => handleAdd("imagepicker")}>
-                + Image Picker
-              </Button>
-            </Col>
-            <Col sm={12} md={5} xl={6} style={{ borderLeft: "1px solid #ccc", borderRight: "1px solid #ccc" }}>
-              <div className="se__title-section">
-                <Container className="se__title-container">
-                  <Row>
-                    <Col>
-                      <EditText
-                        className="edit-text se__title"
-                        placeholder="Add title here ..."
-                        onSave={({ value }) => setSurvey((prevState) => ({ ...prevState, title: value }))}
-                      />
-                      <EditText
-                        className="edit-text se__sub-title"
-                        placeholder="Add description here ..."
-                        onSave={({ value }) =>
-                          setSurvey((prevState) => ({
-                            ...prevState,
-                            description: value,
-                          }))
-                        }
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      {thumbnail.src && <Image className="se__thumbnail" src={thumbnail.src} alt={thumbnail.alt} />}
-                      <input
-                        type="file"
-                        onChange={(e) => {
-                          uploadImage.handleSelect(e, setThumbnail);
-                        }}
-                        ref={imageSelector}
-                        accept="image/*"
-                      />
-                      <Button className="se__thumbnail-btn shadow-none" onClick={() => imageSelector.current.click()}>
-                        Select Thumbnail
-                      </Button>
-                      <Button
-                        className="se__thumbnail-btn shadow-none"
-                        disabled={!thumbnail.src}
-                        onClick={async () => {
-                          const url = await uploadImage.handleUpload(
-                            setProgressBar,
-                            thumbnail,
-                            () => notify.successNotify("Successfully Uploaded!"),
-                            () => notify.errorNotify("Upload failed, please try again.")
-                          );
-                          setSurvey((prevState) => ({ ...prevState, thumbnail: url }));
-                        }}
-                      >
-                        Upload
-                      </Button>
-                    </Col>
-                  </Row>
-                </Container>
-              </div>
-              {survey.questions.map((q) => (
-                // eslint-disable-next-line
-                <QuestionPreview key={q.name} question={q} setActiveQuestion={setActiveQuestion} />
-              ))}
-            </Col>
-            <Col sm={12} md={4} xl={4}>
-              <p>PROPERTIES</p>
+      <Container className="se__content">
+        <Row>
+          <Col className="text-center" sm={12} md={3} xl={2} style={{ maxHeight: "60vh", overflowY: "auto" }}>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
+              + Simple Text
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("radiogroup")}>
+              + Radiogroup
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("checkbox")}>
+              + Checkbox
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("dropdown")}>
+              + Dropdown
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("boolean")}>
+              + Boolean
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("rating")}>
+              + Rating
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("ranking")}>
+              + Ranking
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("comment")}>
+              + Comment
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("html")}>
+              + HTML
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("image")}>
+              + Image
+            </Button>
+            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("imagepicker")}>
+              + Image Picker
+            </Button>
+          </Col>
+          <Col sm={12} md={5} xl={6} style={{ borderLeft: "1px solid #ccc", borderRight: "1px solid #ccc" }}>
+            <div className="se__title-section">
+              <Container className="se__title-container">
+                <Row>
+                  <Col>
+                    <EditText
+                      className="edit-text se__title"
+                      placeholder="Add title here ..."
+                      onSave={({ value }) => setSurvey((prevState) => ({ ...prevState, title: value }))}
+                    />
+                    <EditText
+                      className="edit-text se__sub-title"
+                      placeholder="Add description here ..."
+                      onSave={({ value }) =>
+                        setSurvey((prevState) => ({
+                          ...prevState,
+                          description: value,
+                        }))
+                      }
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    {thumbnail.src && <Image className="se__thumbnail" src={thumbnail.src} alt={thumbnail.alt} />}
+                    <input
+                      type="file"
+                      onChange={(e) => {
+                        uploadImage.handleSelect(e, setThumbnail);
+                      }}
+                      ref={imageSelector}
+                      accept="image/*"
+                    />
+                    <Button className="se__thumbnail-btn shadow-none" onClick={() => imageSelector.current.click()}>
+                      Select Thumbnail
+                    </Button>
+                    <Button
+                      className="se__thumbnail-btn shadow-none"
+                      disabled={!thumbnail.src}
+                      onClick={async () => {
+                        const url = await uploadImage.handleUpload(
+                          setProgressBar,
+                          thumbnail,
+                          () => notify.successNotify("Successfully Uploaded!"),
+                          () => notify.errorNotify("Upload failed, please try again.")
+                        );
+                        setSurvey((prevState) => ({ ...prevState, thumbnail: url }));
+                      }}
+                    >
+                      Upload
+                    </Button>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+            {survey.questions.map((q) => (
+              <QuestionPreview
+                key={q.name}
+                question={q}
+                isActive={activeQuestion === q.name}
+                setActiveQuestion={setActiveQuestion}
+              />
+            ))}
+          </Col>
+          <Col sm={12} md={4} xl={4}>
+            <p>PROPERTIES</p>
 
-              {activeQuestion && (
-                <QuestionEditor
-                  key={activeQuestion}
-                  question={_.find(survey.questions, { name: activeQuestion })}
-                  index={survey.questions.findIndex((q) => q.name === activeQuestion)}
-                  numQuestions={survey.questions.length}
-                  handleDelete={handleDelete}
-                  handleMoveUp={handleMoveUp}
-                  handleMoveDown={handleMoveDown}
-                  updateQuestion={updateQuestion}
-                  setProgressBar={setProgressBar}
-                />
-              )}
-            </Col>
-          </Row>
-        </Container>
-      </div>
+            {activeQuestion && (
+              <QuestionEditor
+                key={activeQuestion}
+                question={_.find(survey.questions, { name: activeQuestion })}
+                index={survey.questions.findIndex((q) => q.name === activeQuestion)}
+                numQuestions={survey.questions.length}
+                handleDelete={handleDelete}
+                handleMoveUp={handleMoveUp}
+                handleMoveDown={handleMoveDown}
+                updateQuestion={updateQuestion}
+                setProgressBar={setProgressBar}
+              />
+            )}
+          </Col>
+        </Row>
+      </Container>
       <div className="se__bottom-cut-off">
         <a href="#top">BACK TO TOP</a>
       </div>
@@ -300,8 +353,5 @@ export default function SurveyEditor({ setProgressBar }) {
 }
 
 SurveyEditor.propTypes = {
-  setProgressBar: PropTypes.shape({
-    visible: PropTypes.bool.isRequired,
-    progress: PropTypes.number.isRequired,
-  }).isRequired,
+  setProgressBar: PropTypes.func.isRequired,
 };

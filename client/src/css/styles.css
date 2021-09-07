@@ -225,6 +225,10 @@ a:visited {
   display: none;
 }
 
+.qp--active {
+  border: 1px solid #ccc;
+}
+
 /* Question Editor */
 .qe {
   margin: 0;
