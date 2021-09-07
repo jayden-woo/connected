@@ -25,11 +25,9 @@ export default function QuestionPreview({ question, setActiveQuestion }) {
         rateStep: question.type === "rating" ? question.rateStep : undefined,
         minRateDescription: question.type === "rating" ? question.minRateDescription : undefined,
         maxRateDescription: question.type === "rating" ? question.maxRateDescription : undefined,
-        imageHeight:
-          question.type === ["image", "imagepicker"].includes(question.type) ? question.imageHeight : undefined,
-        imageWidth:
-          question.type === ["image", "imagepicker"].includes(question.type) ? question.imageWidth : undefined,
-        imageFit: question.type === ["image", "imagepicker"].includes(question.type) ? question.imageFit : undefined,
+        imageHeight: question.type === "image" ? question.imageHeight : undefined,
+        imageWidth: question.type === "image" ? question.imageWidth : undefined,
+        imageFit: question.type === "image" ? question.imageFit : undefined,
         imageLink: question.type === "image" ? question.imageLink : undefined,
         html: question.type === "html" ? question.html : undefined,
       },

@@ -68,12 +68,6 @@ export default function SurveyEditor({ setProgressBar }) {
       case "comment":
         newQ.placeHolder = "";
         break;
-      case "imagepicker":
-        newQ.choices = [];
-        newQ.imageHeight = "150px";
-        newQ.imageWidth = "200px";
-        newQ.imageFit = "contain";
-        break;
       case "image":
         newQ.imageLink =
           "https://res.cloudinary.com/ip-connected/image/upload/v1630900645/connected/oixg4zsudf6t5wx70knu.jpg";
@@ -252,9 +246,6 @@ export default function SurveyEditor({ setProgressBar }) {
             </Button>
             <Button className="se__btn-add shadow-none" onClick={() => handleAdd("image")}>
               + Image
-            </Button>
-            <Button className="se__btn-add shadow-none" onClick={() => handleAdd("imagepicker")}>
-              + Image Picker
             </Button>
           </Col>
           <Col sm={12} md={5} xl={6} style={{ borderLeft: "1px solid #ccc", borderRight: "1px solid #ccc" }}>
