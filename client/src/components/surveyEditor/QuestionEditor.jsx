@@ -11,6 +11,8 @@ import PropTypes from "prop-types";
 
 import Common from "./properties/Common";
 import Choices from "./properties/Choices";
+import InputType from "./properties/InputType";
+import PlaceHolder from "./properties/PlaceHolder";
 
 // eslint-disable-next-line no-unused-vars
 export default function QuestionEditor({
@@ -32,6 +34,10 @@ export default function QuestionEditor({
         Move Down
       </Button>
       {!["image", "html"].includes(question.type) && <Common question={question} updateQuestion={updateQuestion} />}
+      {question.type === "text" && <InputType question={question} updateQuestion={updateQuestion} />}
+      {["text", "comment"].includes(question.type) && (
+        <PlaceHolder question={question} updateQuestion={updateQuestion} />
+      )}
       {["radiogroup", "checkbox", "dropdown", "ranking"].includes(question.type) && (
         <Choices question={question} updateQuestion={updateQuestion} />
       )}
