@@ -1,5 +1,5 @@
-const Joi = require('joi');
-const mongoose = require('mongoose');
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
 	name: {
@@ -8,21 +8,21 @@ const questionSchema = new mongoose.Schema({
 	},
 	type: {
 		type: String,
-		enum: ['text', 'radiogroup', 'checkbox'],
+		enum: ["text", "radiogroup", "checkbox", "image"],
 		required: true,
-		default: 'text',
+		default: "text",
 	},
 	title: {
 		type: String,
-		required: true,
 	},
 	choices: {
 		type: [String],
 		default: void 0,
 	},
-	image: {
-		type: String,
-	},
+	imageFit: String,
+	imageHeight: String,
+	imageWidth: String,
+	imageLink: String,
 });
 
 const surveySchema = new mongoose.Schema(
@@ -63,14 +63,13 @@ const surveySchema = new mongoose.Schema(
 function validateSurvey(survey, update = false) {
 	const questionSchema = Joi.object({
 		name: Joi.string().required(),
-		type: Joi.string().required().valid('text', 'radiogroup', 'checkbox'),
+		type: Joi.string().required().valid("text", "radiogroup", "checkbox"),
 		title: Joi.string().required().min(5).max(100),
-		choices: Joi.alternatives().conditional('type', {
-			is: 'text',
+		choices: Joi.alternatives().conditional("type", {
+			is: "text",
 			then: Joi.forbidden(),
 			otherwise: Joi.array().items(Joi.string()).min(2).required(),
 		}),
-		image: Joi.string(),
 	});
 
 	const surveySchema = Joi.object({
@@ -95,7 +94,7 @@ function validateSurvey(survey, update = false) {
 	return surveySchema.validate(survey);
 }
 
-const Survey = mongoose.model('Survey', surveySchema);
+const Survey = mongoose.model("Survey", surveySchema);
 
 exports.Survey = Survey;
 exports.validate = validateSurvey;

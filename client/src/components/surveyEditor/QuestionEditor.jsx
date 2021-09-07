@@ -12,6 +12,9 @@ import PlaceHolder from "./properties/PlaceHolder";
 import Choices from "./properties/Choices";
 import ColCount from "./properties/ColCount";
 import Bool from "./properties/Bool";
+import Rating from "./properties/Rating";
+import Image from "./properties/Image";
+import HTML from "./properties/HTML";
 
 // eslint-disable-next-line no-unused-vars
 export default function QuestionEditor({
@@ -44,6 +47,9 @@ export default function QuestionEditor({
         <ColCount question={question} updateQuestion={updateQuestion} />
       )}
       {question.type === "boolean" && <Bool question={question} updateQuestion={updateQuestion} />}
+      {question.type === "rating" && <Rating question={question} updateQuestion={updateQuestion} />}
+      {question.type === "image" && <Image question={question} updateQuestion={updateQuestion} />}
+      {question.type === "html" && <HTML question={question} updateQuestion={updateQuestion} />}
     </div>
   );
 }

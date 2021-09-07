@@ -70,15 +70,15 @@ export default function SurveyEditor({ setProgressBar }) {
         break;
       case "imagepicker":
         newQ.choices = [];
-        newQ.imageHeight = 150;
-        newQ.imageWidth = 200;
+        newQ.imageHeight = "150px";
+        newQ.imageWidth = "200px";
         newQ.imageFit = "contain";
         break;
       case "image":
         newQ.imageLink =
           "https://res.cloudinary.com/ip-connected/image/upload/v1630900645/connected/oixg4zsudf6t5wx70knu.jpg";
-        newQ.imageHeight = 300;
-        newQ.imageWidth = 400;
+        newQ.imageHeight = "300px";
+        newQ.imageWidth = "400px";
         newQ.imageFit = "contain";
         break;
       case "html":
@@ -176,21 +176,19 @@ export default function SurveyEditor({ setProgressBar }) {
   };
 
   const onSubmit = async () => {
-    if (!validate()) {
-      return;
-    }
+    if (!validate()) console.log("sdfsdf");
 
     const newQuestions = [];
 
     survey.questions.forEach((q) => {
       const newQ = _.cloneDeep(q);
 
-      if (newQ.type !== "text") {
-        const choices = newQ.choices.map((c) => c.value);
-        newQ.choices = choices;
-      } else {
-        delete newQ.choices;
-      }
+      // if (newQ.type !== "text") {
+      //   const choices = newQ.choices.map((c) => c.value);
+      //   newQ.choices = choices;
+      // } else {
+      //   delete newQ.choices;
+      // }
 
       newQuestions.push(newQ);
     });
@@ -204,6 +202,8 @@ export default function SurveyEditor({ setProgressBar }) {
     };
 
     if (!data.thumbnail) delete data.thumbnail;
+
+    console.log(data);
 
     // TODO: remove unneccesary lines
     try {

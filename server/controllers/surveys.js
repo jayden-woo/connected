@@ -1,9 +1,9 @@
-const { Survey, validate } = require('../models/survey');
+const { Survey, validate } = require("../models/survey");
 
 const getAllSurveys = async (req, res) => {
 	const surveys = await Survey.find({ visible: true })
-		.select('title updatedAt thumbnail')
-		.sort('-updatedAt');
+		.select("title updatedAt thumbnail")
+		.sort("-updatedAt");
 	res.send(surveys);
 };
 
@@ -11,14 +11,14 @@ const getSurveyByID = async (req, res) => {
 	const survey = await Survey.findById(req.params.id);
 
 	if (!survey)
-		return res.status(404).send('The survey with the given ID was not found.');
+		return res.status(404).send("The survey with the given ID was not found.");
 
 	res.send(survey);
 };
 
 const addSurvey = async (req, res) => {
-	const { error } = validate(req.body);
-	if (error) return res.status(400).send(error.details[0]);
+	// const { error } = validate(req.body);
+	// if (error) return res.status(400).send(error.details[0]);
 
 	const survey = new Survey({
 		creator: req.body.creator,
@@ -40,7 +40,7 @@ const updateSurvey = async (req, res) => {
 		new: true,
 	});
 	if (!survey)
-		return res.status(404).send('The survey with the given ID was not found.');
+		return res.status(404).send("The survey with the given ID was not found.");
 
 	res.send(survey);
 };
