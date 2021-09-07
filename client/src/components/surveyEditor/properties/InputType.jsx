@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function Common({ question, updateQuestion }) {
+export default function InputType({ question, updateQuestion }) {
   const [type, setType] = useState("");
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Common({ question, updateQuestion }) {
   );
 }
 
-Common.propTypes = {
+InputType.propTypes = {
   question: PropTypes.shape({
     name: PropTypes.string.isRequired,
     inputType: PropTypes.string.isRequired,

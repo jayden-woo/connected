@@ -22,6 +22,7 @@ export default function QuestionPreview({ question, setActiveQuestion }) {
         showTitle: question.type === "boolean" ? question.showTitle : undefined,
         rateMin: question.type === "rating" ? question.rateMin : undefined,
         rateMax: question.type === "rating" ? question.rateMax : undefined,
+        rateStep: question.type === "rating" ? question.rateStep : undefined,
         minRateDescription: question.type === "rating" ? question.minRateDescription : undefined,
         maxRateDescription: question.type === "rating" ? question.maxRateDescription : undefined,
         imageHeight:
@@ -69,6 +70,7 @@ QuestionPreview.propTypes = {
     showTitle: PropTypes.bool,
     rateMin: PropTypes.number,
     rateMax: PropTypes.number,
+    rateStep: PropTypes.number,
     minRateDescription: PropTypes.string,
     maxRateDescription: PropTypes.string,
     imageHeight: PropTypes.number,

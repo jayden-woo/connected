@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function Common({ question, updateQuestion }) {
+export default function PlaceHolder({ question, updateQuestion }) {
   const [placeHolder, setPlaceHolder] = useState("");
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Common({ question, updateQuestion }) {
   );
 }
 
-Common.propTypes = {
+PlaceHolder.propTypes = {
   question: PropTypes.shape({
     name: PropTypes.string.isRequired,
     placeHolder: PropTypes.string.isRequired,

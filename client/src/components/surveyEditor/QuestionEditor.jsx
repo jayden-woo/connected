@@ -1,8 +1,5 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-// import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
 
 import PropTypes from "prop-types";
 
@@ -10,9 +7,11 @@ import PropTypes from "prop-types";
 // import notify from "../../services/notifyService";
 
 import Common from "./properties/Common";
-import Choices from "./properties/Choices";
 import InputType from "./properties/InputType";
 import PlaceHolder from "./properties/PlaceHolder";
+import Choices from "./properties/Choices";
+import ColCount from "./properties/ColCount";
+import Bool from "./properties/Bool";
 
 // eslint-disable-next-line no-unused-vars
 export default function QuestionEditor({
@@ -41,6 +40,10 @@ export default function QuestionEditor({
       {["radiogroup", "checkbox", "dropdown", "ranking"].includes(question.type) && (
         <Choices question={question} updateQuestion={updateQuestion} />
       )}
+      {["radiogroup", "checkbox"].includes(question.type) && (
+        <ColCount question={question} updateQuestion={updateQuestion} />
+      )}
+      {question.type === "boolean" && <Bool question={question} updateQuestion={updateQuestion} />}
     </div>
   );
 }
@@ -50,7 +53,6 @@ QuestionEditor.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    choices: PropTypes.arrayOf(PropTypes.string.isRequired),
   }).isRequired,
   index: PropTypes.number.isRequired,
   numQuestions: PropTypes.number.isRequired,
@@ -58,8 +60,4 @@ QuestionEditor.propTypes = {
   handleMoveUp: PropTypes.func.isRequired,
   handleMoveDown: PropTypes.func.isRequired,
   updateQuestion: PropTypes.func.isRequired,
-  // setProgressBar: PropTypes.shape({
-  //   visible: PropTypes.bool.isRequired,
-  //   progress: PropTypes.number.isRequired,
-  // }).isRequired,
 };

@@ -41,7 +41,7 @@ export default function SurveyEditor({ setProgressBar }) {
         newQ.inputType = "text";
         break;
       case "radiogroup":
-        newQ.colCount = 4;
+        newQ.colCount = 1;
         newQ.choices = [];
         break;
       case "dropdown":
@@ -50,17 +50,18 @@ export default function SurveyEditor({ setProgressBar }) {
         break;
       case "checkbox":
         newQ.choices = [];
-        newQ.colCount = 4;
+        newQ.colCount = 1;
         break;
       case "boolean":
         newQ.label = "Question label";
         newQ.labelTrue = "Yes";
         newQ.labelFalse = "No";
-        newQ.showTitle = true;
+        newQ.showTitle = false;
         break;
       case "rating":
         newQ.rateMin = 1;
         newQ.rateMax = 5;
+        newQ.rateStep = 1;
         newQ.minRateDescription = "Lowest";
         newQ.maxRateDescription = "Highest";
         break;
