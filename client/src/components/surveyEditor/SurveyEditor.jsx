@@ -5,11 +5,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import Form from "react-bootstrap/Form";
 
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
-import { EditText } from "react-edit-text";
 
 import uploadImage from "../../services/uploadImageService";
 import http from "../../services/httpService";
@@ -208,7 +208,7 @@ export default function SurveyEditor({ setProgressBar }) {
       <div className="se__top-cut-off" />
       <Container className="se__content">
         <Row>
-          <Col className="text-center" sm={12} md={3} xl={2} style={{ maxHeight: "60vh", overflowY: "auto" }}>
+          <Col className="se__add-btn-group" sm={12} md={3} xl={2}>
             <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
               + Simple Text
             </Button>
@@ -240,60 +240,61 @@ export default function SurveyEditor({ setProgressBar }) {
               + Image
             </Button>
           </Col>
-          <Col sm={12} md={5} xl={6} style={{ borderLeft: "1px solid #ccc", borderRight: "1px solid #ccc" }}>
-            <div className="se__title-section">
-              <Container className="se__title-container">
-                <Row>
-                  <Col>
-                    <EditText
-                      className="edit-text se__title"
-                      placeholder="Add title here ..."
-                      onSave={({ value }) => setSurvey((prevState) => ({ ...prevState, title: value }))}
-                    />
-                    <EditText
-                      className="edit-text se__sub-title"
-                      placeholder="Add description here ..."
-                      onSave={({ value }) =>
-                        setSurvey((prevState) => ({
-                          ...prevState,
-                          description: value,
-                        }))
-                      }
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    {thumbnail.src && <Image className="se__thumbnail" src={thumbnail.src} alt={thumbnail.alt} />}
-                    <input
-                      type="file"
-                      onChange={(e) => {
-                        uploadImage.handleSelect(e, setThumbnail);
-                      }}
-                      ref={imageSelector}
-                      accept="image/*"
-                    />
-                    <Button className="se__thumbnail-btn shadow-none" onClick={() => imageSelector.current.click()}>
-                      Select Thumbnail
-                    </Button>
-                    <Button
-                      className="se__thumbnail-btn shadow-none"
-                      disabled={!thumbnail.src}
-                      onClick={async () => {
-                        const url = await uploadImage.handleUpload(
-                          setProgressBar,
-                          thumbnail,
-                          () => notify.successNotify("Successfully Uploaded!"),
-                          () => notify.errorNotify("Upload failed, please try again.")
-                        );
-                        setSurvey((prevState) => ({ ...prevState, thumbnail: url }));
-                      }}
-                    >
-                      Upload
-                    </Button>
-                  </Col>
-                </Row>
-              </Container>
+          <Col className="se__survey-preview" sm={12} md={5} xl={6}>
+            <Form>
+              <Form.Group>
+                <Form.Label style={{ display: "none" }}>Survey Title</Form.Label>
+                <Form.Control
+                  className="shadow-none se__title"
+                  type="text"
+                  placeholder="Enter survey title here ..."
+                  onChange={(e) => setSurvey((prevState) => ({ ...prevState, title: e.target.value }))}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ display: "none" }}>Survey Description</Form.Label>
+                <Form.Control
+                  className="shadow-none se__title se__desc"
+                  type="text"
+                  placeholder="Enter survey description here ..."
+                  onChange={(e) => setSurvey((prevState) => ({ ...prevState, description: e.target.value }))}
+                />
+              </Form.Group>
+            </Form>
+            <div className="se__thumbnail">
+              {thumbnail.src && <Image src={thumbnail.src} alt={thumbnail.alt} />}
+              <input
+                type="file"
+                onChange={(e) => {
+                  uploadImage.handleSelect(e, setThumbnail);
+                }}
+                ref={imageSelector}
+                accept="image/*"
+              />
+              <Row>
+                <Col xs={12} md={6}>
+                  <Button className="se__thumbnail-btn shadow-none" onClick={() => imageSelector.current.click()}>
+                    Select Thumbnail
+                  </Button>
+                </Col>
+                <Col xs={12} md={6}>
+                  <Button
+                    className="se__thumbnail-btn shadow-none"
+                    disabled={!thumbnail.src}
+                    onClick={async () => {
+                      const url = await uploadImage.handleUpload(
+                        setProgressBar,
+                        thumbnail,
+                        () => notify.successNotify("Successfully Uploaded!"),
+                        () => notify.errorNotify("Upload failed, please try again.")
+                      );
+                      setSurvey((prevState) => ({ ...prevState, thumbnail: url }));
+                    }}
+                  >
+                    Upload
+                  </Button>
+                </Col>
+              </Row>
             </div>
             {survey.questions.map((q) => (
               <QuestionPreview

@@ -4,11 +4,13 @@
   --color-secondary: #8ab5ab;
   --color-accent: #df5757;
   /* --color-accent: #ff0000; */
-  --color-headings: #c9ccff;
+  --color-headings: #838b93;
   --color-text: #190e89;
   --color-background: #f2f6fb;
   --color-border: #ccc;
   --border-radius: 0px;
+  --height-nav-bar: 73px;
+  --height-footer: 132px;
 }
 
 html {
@@ -66,21 +68,9 @@ a:visited {
   background-color: var(--color-background);
 }
 
-.edit-text {
-  background-color: transparent;
-  outline: none;
-  border: none;
-  border-radius: 0;
-  padding: 0 1.4rem;
-}
-
-.edit-text:focus {
-  border-bottom: 1px solid var(--color-primary);
-}
-
 .progress-bar {
   position: fixed;
-  top: 73px;
+  top: calc(--height-nav-bar);
   left: 0;
   height: 5px;
   z-index: 99;
@@ -90,83 +80,95 @@ a:visited {
 /* Survey Editor */
 
 .se__container {
-  min-height: calc(100vh - 73px - 80px - 52px);
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
   background-color: var(--color-background);
 }
 
 .se__top-cut-off {
-  margin-top: 73px;
-  height: 4.3rem;
-  width: 100vw;
+  margin-top: var(--height-nav-bar);
+  height: 4rem;
   background-color: var(--color-primary);
 }
 
 .se__bottom-cut-off {
-  height: 4.3rem;
-  width: 100vw;
+  height: 4rem;
   background-color: var(--color-primary);
-  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 300;
-  margin-top: 2.1rem;
 }
 
 .se__bottom-cut-off a {
-  color: #b4acce;
+  color: #d5cfeb;
+  transition: color 0.3s;
 }
 
 .se__bottom-cut-off a:hover {
-  color: #ddd9e9;
+  color: #e9e6f6;
 }
 
 .se__content {
-  width: 100vw;
-  max-width: 100vw;
-  margin: 0;
-  padding: 0;
+  max-width: 100%;
+  margin: 2rem 0;
 }
 
 .se__publish {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  align-items: center;
+  margin: 1rem 0;
   height: 7rem;
 }
 
-.se__title-container {
-  padding: 0;
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  width: 100%;
-  /* max-width: 1000px; */
-  margin-left: auto;
-  margin-right: auto;
+.se__add-btn-group {
+  padding: 0 2rem 0.5rem;
+}
+
+.se__survey-preview {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 0 2rem;
 }
 
 .se__title {
-  margin: 0;
-  padding-bottom: 1rem;
-  height: 5rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid transparent;
+  height: 6rem;
   font-size: 3.5rem;
   color: var(--color-headings);
+  transition: background-color 0.3s ease-out;
 }
 
-.se__sub-title {
-  padding-top: 0.3rem;
-  margin: 0 0 1rem 0;
+.se__title:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.se__title:focus {
+  color: var(--color-headings);
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.se__desc {
   height: 3rem;
   font-size: 1.5rem;
   color: var(--color-headings);
+  margin-bottom: 1rem;
 }
 
 .se__thumbnail {
-  text-align: center;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.se__thumbnail img {
   width: 100%;
-  height: auto;
   object-fit: cover;
-  background-color: #f1f1f1;
 }
 
 .se__thumbnail-btn {
@@ -174,24 +176,26 @@ a:visited {
   height: 3rem;
   font-size: 1.2rem;
   font-weight: 300;
-  width: 50%;
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .se__btn-add {
   font-size: 1.3rem;
-  width: 90%;
+  width: 100%;
   height: 4rem;
-  border-width: 0;
+  border-width: none;
   background-color: transparent;
   color: var(--color-primary);
   border-bottom: 1px solid #ccc;
-  padding-left: 3rem;
+  padding-left: 10%;
   text-align: start;
+  transition: all 0.3s;
 }
 
 .se__btn-add:hover {
   background-color: transparent;
-  color: var(--color-headings);
+  color: #a9aee6;
 }
 
 .se__btn-publish {
