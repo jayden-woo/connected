@@ -41,16 +41,13 @@ export default function SurveyEditor({ setProgressBar }) {
         newQ.inputType = "text";
         break;
       case "radiogroup":
+      case "checkbox":
         newQ.colCount = 1;
         newQ.choices = [];
         break;
       case "dropdown":
       case "ranking":
         newQ.choices = [];
-        break;
-      case "checkbox":
-        newQ.choices = [];
-        newQ.colCount = 1;
         break;
       case "boolean":
         newQ.label = "Question label";
@@ -79,6 +76,7 @@ export default function SurveyEditor({ setProgressBar }) {
         newQ.html = "<p>Add your html here ... </p>";
         break;
       default:
+        notify.errorNotify("Invalid question type!");
         break;
     }
     const newQuestions = [...survey.questions, newQ];
@@ -138,35 +136,31 @@ export default function SurveyEditor({ setProgressBar }) {
 
   // TODO: proper validation
   const validate = () => {
-    if (survey.questions.length === 0) {
-      alert("Survey cannot be empty.");
-      return false;
-    }
-
-    /* eslint-disable-next-line */
-    for (const q of survey.questions) {
-      if (q.title === "") {
-        alert("All questions must have a title.");
-        return false;
-      }
-
-      if (q.type !== "text") {
-        if (!q.choices || q.choices.length < 2) {
-          alert("Multiple option question must have at least 2 options.");
-          return false;
-        }
-
-        /* eslint-disable-next-line */
-        for (const c of q.choices) {
-          if (c === "") {
-            alert("Question cannot have empty option.");
-            return false;
-          }
-        }
-      }
-    }
-
-    return true;
+    // if (survey.questions.length === 0) {
+    //   alert("Survey cannot be empty.");
+    //   return false;
+    // }
+    // /* eslint-disable-next-line */
+    // for (const q of survey.questions) {
+    //   if (q.title === "") {
+    //     alert("All questions must have a title.");
+    //     return false;
+    //   }
+    //   if (q.type !== "text") {
+    //     if (!q.choices || q.choices.length < 2) {
+    //       alert("Multiple option question must have at least 2 options.");
+    //       return false;
+    //     }
+    //     /* eslint-disable-next-line */
+    //     for (const c of q.choices) {
+    //       if (c === "") {
+    //         alert("Question cannot have empty option.");
+    //         return false;
+    //       }
+    //     }
+    //   }
+    // }
+    // return true;
   };
 
   const onSubmit = async () => {
@@ -177,12 +171,10 @@ export default function SurveyEditor({ setProgressBar }) {
     survey.questions.forEach((q) => {
       const newQ = _.cloneDeep(q);
 
-      // if (newQ.type !== "text") {
-      //   const choices = newQ.choices.map((c) => c.value);
-      //   newQ.choices = choices;
-      // } else {
-      //   delete newQ.choices;
-      // }
+      if (newQ.choices) {
+        const choices = newQ.choices.map((c) => c.value);
+        newQ.choices = choices;
+      }
 
       newQuestions.push(newQ);
     });

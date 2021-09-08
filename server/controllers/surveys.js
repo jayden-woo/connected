@@ -17,8 +17,8 @@ const getSurveyByID = async (req, res) => {
 };
 
 const addSurvey = async (req, res) => {
-	// const { error } = validate(req.body);
-	// if (error) return res.status(400).send(error.details[0]);
+	const { error } = validate(req.body);
+	if (error) return res.status(400).send(error.details[0]);
 
 	const survey = new Survey({
 		creator: req.body.creator,
