@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as Survey from "survey-react";
 import PropTypes from "prop-types";
+import Image from "react-bootstrap/Image";
 import http from "../../services/httpService";
 import loadingIcon from "../../assets/loading.svg";
 
@@ -21,7 +22,7 @@ export default function SurveyPage({ id }) {
 
         setIsLoading(false);
         setSurvey(res.data);
-      }, 200);
+      }, 20);
     } catch (e) {
       // TODO: redirect to not found page
       if (e.response.status === 404) {
@@ -50,16 +51,11 @@ export default function SurveyPage({ id }) {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "calc(100vh - 66.25px)",
-        maxWidth: "1000px",
-        width: "100%",
-        margin: "0 auto",
-      }}
-    >
-      {isLoading && <img src={loadingIcon} alt="Loading" style={{ display: "block", margin: "10rem auto" }} />}
-      {!isLoading && <Survey.Survey json={survey} onComplete={handleComplete} />}
+    <div className="sp-container">
+      <div className="sp__survey">
+        {isLoading && <Image className="sp__loading" src={loadingIcon} alt="Loading" />}
+        {!isLoading && <Survey.Survey json={survey} onComplete={handleComplete} />}
+      </div>
     </div>
   );
 }

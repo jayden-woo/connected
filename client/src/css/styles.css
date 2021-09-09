@@ -8,6 +8,7 @@
   --color-text: #190e89;
   --color-background: #f2f6fb;
   --color-border: #ccc;
+  --color-primary-transparent: rgba(76, 80, 133, 0.2);
   --border-radius: 0px;
   --height-nav-bar: 73px;
   --height-footer: 132px;
@@ -20,6 +21,11 @@ html {
 * {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
 }
 
 input[type="file"] {
@@ -247,6 +253,10 @@ a:visited {
   border: 1px solid #ccc;
 }
 
+.se__qp input:focus {
+  border-color: var(--color-primary) !important;
+}
+
 .se__pp {
   padding: 1rem 2rem 0;
 }
@@ -342,6 +352,105 @@ a:visited {
 
 .qe__btn--img {
   margin: 2rem 1rem 0 0;
+}
+
+/* Survey Page */
+
+.sp-container {
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  background-color: var(--color-background);
+  margin-top: var(--height-nav-bar);
+  padding-bottom: 25px;
+}
+
+.sp__survey {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sp__loading {
+  margin: 200px calc(50% - 60px);
+  width: 120px;
+  height: 120px;
+}
+
+.sp-container .sv-container-modern__title h3 {
+  color: rgb(90, 90, 90);
+  font-size: 4rem;
+}
+
+.sp-container .sv-container-modern__title h5 {
+  color: var(--color-headings);
+  font-size: 1.7rem;
+}
+
+.sp-container input:focus {
+  border-color: var(--color-primary) !important;
+}
+
+/* Override SurveyJS Library Styles */
+
+.sv-footer__complete-btn {
+  background-color: var(--color-primary) !important;
+}
+
+.sv-completedpage {
+  background-color: transparent !important;
+}
+
+.sv-header__text {
+  width: 100% !important;
+}
+
+.sv-checkbox--checked .sv-checkbox__svg {
+  background-color: var(--color-primary) !important;
+}
+
+.sv-rating__item--selected .sv-rating__item-text {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.sv-rating input:focus + .sv-rating__min-text + .sv-rating__item-text,
+.sv-rating input:focus + .sv-rating__item-text {
+  outline-color: var(--color-primary) !important;
+}
+
+.sv-item__control:focus:focus + .sv-item__decorator {
+  border-color: var(--color-primary) !important;
+}
+
+.sv-question__title--answer {
+  background-color: var(--color-primary-transparent) !important;
+}
+
+.sv-boolean__switch {
+  background-color: var(--color-primary) !important;
+}
+
+.sv-dropdown option {
+  background-color: var(--color-background);
+}
+
+.sv-ranking-item__content {
+  background-color: transparent !important;
+}
+
+.sv-ranking-item__index {
+  background-color: var(--color-primary-transparent) !important;
+}
+
+.sv-ranking-item__icon {
+  fill: var(--color-primary) !important;
+}
+
+.sv-ranking-item__ghost {
+  background: none !important;
+}
+
+.sv-comment:focus {
+  border-color: var(--color-primary) !important;
 }
 
 /* header image*/
