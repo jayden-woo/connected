@@ -4,15 +4,17 @@ const cloudinaryApiEndpoint = "https://api.cloudinary.com/v1_1/ip-connected/imag
 
 /**
  * The image object has the following structure.
- * @param {Object} image The image object.
+ *
+ * @param {object} image The image object.
  * @param {string} image.src The local URL of the image file.
  * @param {string} image.alt The alt description of the image.
  */
 
 /**
  * Handle selecting the image using \<input\>.
- * @param 	{function} 	e - The onChange event of \<input\>.
- * @param 	{function} 	setImage - SetState function to set the image object.
+ *
+ * @param 	{Function} 	e - The onChange event of \<input\>.
+ * @param 	{Function} 	setImage - SetState function to set the image object.
  */
 const handleSelect = (e, setImage) => {
   const i = e.target.files[0];
@@ -41,12 +43,13 @@ const uploadImage = (file, setProgressBar) => {
 
 /**
  * Upload the image to Cloudinary.
- * @param 	{function} 	setProgressBar - SetState function to set the property of progress bar.
+ *
+ * @param 	{Function} 	setProgressBar - SetState function to set the property of progress bar.
  * @param 	{Object} 	image - The image object.
  * @param 	{string} 	image.src - Local URL of the image.
- * @param 	{function} 	successNotify - Show a toast using react-toastify on success.
- * @param 	{function} 	errorNotify - Show a toast using react-toastify on error.
- * @return 	{string} -  On success, the url of the uploaded image is returned. Otherwise, return undefined.
+ * @param 	{Function} 	successNotify - Show a toast using react-toastify on success.
+ * @param 	{Function} 	errorNotify - Show a toast using react-toastify on error.
+ * @returns 	{string|undefined} -  On success, the url of the uploaded image is returned. Otherwise, return undefined.
  */
 const handleUpload = async (setProgressBar, image, successNotify, errorNotify) => {
   try {

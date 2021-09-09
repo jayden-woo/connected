@@ -38,13 +38,7 @@ export default function QuestionPreview({ question, isActive, setActiveQuestion 
 
   return (
     // eslint-disable-next-line
-    <div
-      className={className}
-      onClick={() => {
-        console.log(question.name);
-        setActiveQuestion(question.name);
-      }}
-    >
+    <div className={className} onClick={() => setActiveQuestion(question.name)}>
       <Survey.Survey json={json} showQuestionNumbers="off" focusFirstQuestionAutomatic={false} />
     </div>
   );

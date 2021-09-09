@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function Image({ question, updateQuestion }) {
+import uploadImage from "../../../services/uploadImageService";
+import notify from "../../../services/notifyService";
+
+export default function ImageProp({ question, updateQuestion, setProgressBar }) {
   const [imageHeight, setImageHeight] = useState("");
   const [imageWidth, setImageWidth] = useState("");
   const [imageFit, setImageFit] = useState("");
+  const [image, setImage] = useState({ src: "", alt: "" });
+
+  const imageSelector = useRef();
 
   useEffect(() => {
     setImageHeight(question.imageHeight);
@@ -48,11 +56,38 @@ export default function Image({ question, updateQuestion }) {
           <option>fill</option>
         </Form.Select>
       </Form.Group>
+      {image.src && <Image src={image.src} alt={image.alt} />}
+      <Button className="qe__btn btn--blue qe__btn--img shadow-none" onClick={() => imageSelector.current.click()}>
+        Add IMG
+      </Button>
+      <Button
+        className="qe__btn btn--blue qe__btn--img shadow-none"
+        onClick={async () => {
+          const url = await uploadImage.handleUpload(
+            setProgressBar,
+            image,
+            () => notify.successNotify("Successfully Uploaded!"),
+            () => notify.errorNotify("Upload failed, please try again.")
+          );
+          updateQuestion(question.name, "imageLink", url);
+        }}
+        disabled={!image.src}
+      >
+        Upload
+      </Button>
+      <input
+        type="file"
+        onChange={(e) => {
+          uploadImage.handleSelect(e, setImage);
+        }}
+        ref={imageSelector}
+        accept="image/*"
+      />
     </Form>
   );
 }
 
-Image.propTypes = {
+ImageProp.propTypes = {
   question: PropTypes.shape({
     name: PropTypes.string.isRequired,
     imageHeight: PropTypes.string.isRequired,
@@ -60,4 +95,5 @@ Image.propTypes = {
     imageFit: PropTypes.string.isRequired,
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
+  setProgressBar: PropTypes.func.isRequired,
 };

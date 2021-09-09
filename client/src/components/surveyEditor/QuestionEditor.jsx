@@ -13,7 +13,7 @@ import Choices from "./properties/Choices";
 import ColCount from "./properties/ColCount";
 import Bool from "./properties/Bool";
 import Rating from "./properties/Rating";
-import Image from "./properties/Image";
+import ImageProp from "./properties/ImageProp";
 import HTML from "./properties/HTML";
 
 // eslint-disable-next-line no-unused-vars
@@ -25,6 +25,7 @@ export default function QuestionEditor({
   handleMoveUp,
   handleMoveDown,
   updateQuestion,
+  setProgressBar,
 }) {
   return (
     <div className="qe">
@@ -41,7 +42,9 @@ export default function QuestionEditor({
       )}
       {question.type === "boolean" && <Bool question={question} updateQuestion={updateQuestion} />}
       {question.type === "rating" && <Rating question={question} updateQuestion={updateQuestion} />}
-      {question.type === "image" && <Image question={question} updateQuestion={updateQuestion} />}
+      {question.type === "image" && (
+        <ImageProp question={question} updateQuestion={updateQuestion} setProgressBar={setProgressBar} />
+      )}
       {question.type === "html" && <HTML question={question} updateQuestion={updateQuestion} />}
       <div className="qe__btn-group">
         <Button
@@ -78,4 +81,5 @@ QuestionEditor.propTypes = {
   handleMoveUp: PropTypes.func.isRequired,
   handleMoveDown: PropTypes.func.isRequired,
   updateQuestion: PropTypes.func.isRequired,
+  setProgressBar: PropTypes.func.isRequired,
 };

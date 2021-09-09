@@ -335,6 +335,15 @@ a:visited {
   padding: 0;
 }
 
+.qe img {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.qe__btn--img {
+  margin: 2rem 1rem 0 0;
+}
+
 /* header image*/
 .center-headerImage {
   text-align: center;
