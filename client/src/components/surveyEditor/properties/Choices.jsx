@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -21,6 +24,13 @@ export default function Choices({ question, updateQuestion }) {
     setChoices(question.choices);
   };
 
+  const handleRemoveChoice = () => {
+    const newChoices = [...question.choices];
+    newChoices.pop();
+    updateQuestion(question.name, "choices", newChoices);
+    setChoices(question.choices);
+  };
+
   const handleEditChoice = (e, id) => {
     const newChoices = [...choices];
     const index = newChoices.findIndex((c) => c.id === id);
@@ -34,26 +44,43 @@ export default function Choices({ question, updateQuestion }) {
   };
 
   return (
-    <Form>
-      <Form.Group>
+    <Container>
+      <Row>
         <Form.Label>Choices</Form.Label>
-        <Button onClick={handleAddChoice}>Add New</Button>
-        <Button onClick={handleRemoveAll}>Remove All</Button>
-        {choices &&
-          choices.map((c) => (
+      </Row>
+      {choices &&
+        choices.map((c) => (
+          <Form>
             <Form.Group key={c.id}>
-              <Form.Label>Value</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Add choice here ..."
-                value={c.value}
-                onChange={(e) => handleEditChoice(e, c.id)}
-                onBlur={() => updateQuestion(question.name, "choices", choices)}
-              />
+              <Row>
+                <Col md={2}>
+                  <Form.Label>Value</Form.Label>
+                </Col>
+                <Col md={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Add choice here ..."
+                    value={c.value}
+                    onChange={(e) => handleEditChoice(e, c.id)}
+                    onBlur={() => updateQuestion(question.name, "choices", choices)}
+                  />
+                </Col>
+              </Row>
             </Form.Group>
-          ))}
-      </Form.Group>
-    </Form>
+          </Form>
+        ))}
+      <Row>
+        <Button className="btn--blue qe__btn" onClick={handleAddChoice}>
+          Add
+        </Button>
+        <Button className="btn--blue qe__btn" onClick={handleRemoveChoice}>
+          Remove
+        </Button>
+        <Button className="btn--red qe__btn" onClick={handleRemoveAll}>
+          Remove All
+        </Button>
+      </Row>
+    </Container>
   );
 }
 

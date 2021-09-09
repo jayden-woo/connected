@@ -208,7 +208,7 @@ export default function SurveyEditor({ setProgressBar }) {
       <div className="se__top-cut-off" />
       <Container className="se__content">
         <Row>
-          <Col className="se__add-btn-group" sm={12} md={3} xl={2}>
+          <Col className="se__add-btn-group" md={12} xl={2}>
             <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
               + Simple Text
             </Button>
@@ -240,8 +240,8 @@ export default function SurveyEditor({ setProgressBar }) {
               + Image
             </Button>
           </Col>
-          <Col className="se__survey-preview" sm={12} md={5} xl={6}>
-            <Form>
+          <Col className="se__survey-preview" md={12} xl={6}>
+            <Form id="top">
               <Form.Group>
                 <Form.Label style={{ display: "none" }}>Survey Title</Form.Label>
                 <Form.Control
@@ -305,22 +305,23 @@ export default function SurveyEditor({ setProgressBar }) {
               />
             ))}
           </Col>
-          <Col sm={12} md={4} xl={4}>
-            <p>PROPERTIES</p>
-
-            {activeQuestion && (
-              <QuestionEditor
-                key={activeQuestion}
-                question={_.find(survey.questions, { name: activeQuestion })}
-                index={survey.questions.findIndex((q) => q.name === activeQuestion)}
-                numQuestions={survey.questions.length}
-                handleDelete={handleDelete}
-                handleMoveUp={handleMoveUp}
-                handleMoveDown={handleMoveDown}
-                updateQuestion={updateQuestion}
-                setProgressBar={setProgressBar}
-              />
-            )}
+          <Col md={12} xl={4}>
+            <div className="se__pp">
+              <p className="se__pp__title">PROPERTY PANEL</p>
+              {activeQuestion && (
+                <QuestionEditor
+                  key={activeQuestion}
+                  question={_.find(survey.questions, { name: activeQuestion })}
+                  index={survey.questions.findIndex((q) => q.name === activeQuestion)}
+                  numQuestions={survey.questions.length}
+                  handleDelete={handleDelete}
+                  handleMoveUp={handleMoveUp}
+                  handleMoveDown={handleMoveDown}
+                  updateQuestion={updateQuestion}
+                  setProgressBar={setProgressBar}
+                />
+              )}
+            </div>
           </Col>
         </Row>
       </Container>
@@ -328,7 +329,9 @@ export default function SurveyEditor({ setProgressBar }) {
         <a href="#top">BACK TO TOP</a>
       </div>
       <div className="se__publish">
-        <Button className="se__btn-cancel shadow-none">Cancel</Button>
+        <Button className="se__btn-cancel shadow-none" onClick={history.goBack}>
+          Cancel
+        </Button>
         <Button className="se__btn-publish shadow-none" onClick={onSubmit}>
           Publish
         </Button>

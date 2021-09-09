@@ -2,7 +2,7 @@ import React from "react";
 import * as Survey from "survey-react";
 import PropTypes from "prop-types";
 
-export default function QuestionPreview({ question, setActiveQuestion }) {
+export default function QuestionPreview({ question, isActive, setActiveQuestion }) {
   const json = {
     questions: [
       {
@@ -34,9 +34,12 @@ export default function QuestionPreview({ question, setActiveQuestion }) {
     ],
   };
 
+  const className = isActive ? "se__qp se__qp--active" : "se__qp";
+
   return (
     // eslint-disable-next-line
     <div
+      className={className}
       onClick={() => {
         console.log(question.name);
         setActiveQuestion(question.name);
@@ -77,5 +80,6 @@ QuestionPreview.propTypes = {
     imageLink: PropTypes.string,
     html: PropTypes.string,
   }).isRequired,
+  isActive: PropTypes.bool.isRequired,
   setActiveQuestion: PropTypes.func.isRequired,
 };

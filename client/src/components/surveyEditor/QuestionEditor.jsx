@@ -27,14 +27,7 @@ export default function QuestionEditor({
   updateQuestion,
 }) {
   return (
-    <div>
-      <Button onClick={() => handleDelete(question.name)}>Delete</Button>
-      <Button onClick={() => handleMoveUp(question.name)} disabled={index === 0}>
-        Move Up
-      </Button>
-      <Button onClick={() => handleMoveDown(question.name)} disabled={index === numQuestions - 1}>
-        Move Down
-      </Button>
+    <div className="qe">
       {!["image", "html"].includes(question.type) && <Common question={question} updateQuestion={updateQuestion} />}
       {question.type === "text" && <InputType question={question} updateQuestion={updateQuestion} />}
       {["text", "comment"].includes(question.type) && (
@@ -50,6 +43,25 @@ export default function QuestionEditor({
       {question.type === "rating" && <Rating question={question} updateQuestion={updateQuestion} />}
       {question.type === "image" && <Image question={question} updateQuestion={updateQuestion} />}
       {question.type === "html" && <HTML question={question} updateQuestion={updateQuestion} />}
+      <div className="qe__btn-group">
+        <Button
+          className="shadow-none btn--blue qe__btn qe__btn--small"
+          onClick={() => handleMoveUp(question.name)}
+          disabled={index === 0}
+        >
+          <i className="fas fa-chevron-up" />
+        </Button>
+        <Button
+          className="shadow-none btn--blue qe__btn qe__btn--small"
+          onClick={() => handleMoveDown(question.name)}
+          disabled={index === numQuestions - 1}
+        >
+          <i className="fas fa-chevron-down" />
+        </Button>
+        <Button className="shadow-none btn--red qe__btn qe__btn--delete" onClick={() => handleDelete(question.name)}>
+          <i className="fas fa-trash-alt" />
+        </Button>
+      </div>
     </div>
   );
 }
