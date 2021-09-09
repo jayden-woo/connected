@@ -70,13 +70,13 @@ export default function Choices({ question, updateQuestion }) {
           </Form>
         ))}
       <Row>
-        <Button className="btn--blue qe__btn" onClick={handleAddChoice}>
+        <Button className="shadow-none btn--blue qe__btn" onClick={handleAddChoice}>
           Add
         </Button>
-        <Button className="btn--blue qe__btn" onClick={handleRemoveChoice}>
+        <Button className="shadow-none btn--blue qe__btn" onClick={handleRemoveChoice}>
           Remove
         </Button>
-        <Button className="btn--red qe__btn" onClick={handleRemoveAll}>
+        <Button className="shadow-none btn--red qe__btn" onClick={handleRemoveAll}>
           Remove All
         </Button>
       </Row>

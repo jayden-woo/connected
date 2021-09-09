@@ -14,6 +14,7 @@ export default function HTML({ question, updateQuestion }) {
       <Form.Group>
         <Form.Label>HTML</Form.Label>
         <Form.Control
+          className="shadow-none"
           as="textarea"
           placeholder="Enter html here ..."
           value={html}

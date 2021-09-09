@@ -44,6 +44,7 @@ export default function ImageProp({ question, updateQuestion, setProgressBar }) 
       <Form.Group>
         <Form.Label>Image Fit</Form.Label>
         <Form.Select
+          className="shadow-none"
           onChange={(e) => {
             updateQuestion(question.name, "imageFit", e.target.value);
             setImageFit(e.target.value);

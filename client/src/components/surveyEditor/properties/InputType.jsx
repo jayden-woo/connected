@@ -14,6 +14,7 @@ export default function InputType({ question, updateQuestion }) {
       <Form.Group>
         <Form.Label>Input Type</Form.Label>
         <Form.Select
+          className="shadow-none"
           onChange={(e) => {
             updateQuestion(question.name, "inputType", e.target.value);
             setType(e.target.value);

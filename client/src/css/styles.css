@@ -115,8 +115,8 @@ a:visited {
 }
 
 .se__content {
-  max-width: 100%;
-  margin: 2rem 0;
+  max-width: 1800px;
+  margin: 2rem auto;
 }
 
 .se__publish {
