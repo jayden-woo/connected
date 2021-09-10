@@ -34,17 +34,18 @@ export default function SurveyPage({ id }) {
   const handleComplete = async (sender) => {
     const submission = {
       survey: id,
-      responses: sender.data,
+      responses: [],
     };
 
-    // TODO:
+    survey.questions.forEach((q) => {
+      if (q.type !== "image" && q.type !== "html" && sender.data[q.name] !== undefined) {
+        submission.responses.push({ name: q.name, response: sender.data[q.name] });
+      }
+    }, survey.questions);
+
     try {
-      // const res = await http.post(
-      // 	'http://localhost:3000/api/submissions',
-      // 	submission,
-      // );
-      // console.log(res.data);
-      console.log(submission);
+      const res = await http.post("http://localhost:3000/api/submissions", submission);
+      console.log(res.data);
     } catch (e) {
       console.log(e.response.data.message);
     }
