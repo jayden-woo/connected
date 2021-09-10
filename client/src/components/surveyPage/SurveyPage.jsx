@@ -8,7 +8,8 @@ import loadingIcon from "../../assets/loading.svg";
 
 Survey.StylesManager.applyTheme("modern");
 
-export default function SurveyPage({ id }) {
+// match.params.id
+export default function SurveyPage({ match }) {
   const [isLoading, setIsLoading] = useState(true);
   const [survey, setSurvey] = useState({});
 
@@ -16,13 +17,9 @@ export default function SurveyPage({ id }) {
 
   useEffect(async () => {
     try {
-      // TODO: remove delay
-      setTimeout(async () => {
-        const res = await http.get(`http://localhost:3000/api/surveys/${id}`);
-
-        setIsLoading(false);
-        setSurvey(res.data);
-      }, 20);
+      const res = await http.get(`http://localhost:3000/api/surveys/${match.params.id}`);
+      setIsLoading(false);
+      setSurvey(res.data);
     } catch (e) {
       // TODO: redirect to not found page
       if (e.response.status === 404) {
@@ -33,7 +30,7 @@ export default function SurveyPage({ id }) {
 
   const handleComplete = async (sender) => {
     const submission = {
-      survey: id,
+      survey: match.params.id,
       responses: [],
     };
 
@@ -44,8 +41,7 @@ export default function SurveyPage({ id }) {
     }, survey.questions);
 
     try {
-      const res = await http.post("http://localhost:3000/api/submissions", submission);
-      console.log(res.data);
+      await http.post("http://localhost:3000/api/submissions", submission);
     } catch (e) {
       console.log(e.response.data.message);
     }
@@ -62,5 +58,7 @@ export default function SurveyPage({ id }) {
 }
 
 SurveyPage.propTypes = {
-  id: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
+  }).isRequired,
 };

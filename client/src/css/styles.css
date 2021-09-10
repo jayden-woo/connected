@@ -390,6 +390,31 @@ a:visited {
   border-color: var(--color-primary) !important;
 }
 
+/* Submission Page */
+
+.sb-container {
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  background-color: var(--color-background);
+  margin-top: var(--height-nav-bar);
+  padding-bottom: 25px;
+}
+
+.sb__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sb__content .sv-footer {
+  display: none;
+}
+
+.sb__pair {
+  min-height: 300px;
+  padding: 1rem 0 5rem;
+  border-bottom: 1px solid #ccc;
+}
+
 /* Override SurveyJS Library Styles */
 
 .sv-footer__complete-btn {

@@ -9,6 +9,7 @@ import Home from "./components/Home/Home";
 import SurveyPage from "./components/surveyPage/SurveyPage";
 import ProgressContext from "./components/common/progressContext";
 import UploadProgressBar from "./components/common/UploadProgressBar";
+import Submissions from "./components/submissions/Submissions";
 
 function App() {
   const [progressBar, setProgressBar] = useState({
@@ -27,11 +28,8 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/create-survey" render={() => <SurveyEditor setProgressBar={setProgressBar} />} />
-            <Route
-              path="/surveys/:id"
-              // eslint-disable-next-line react/prop-types
-              render={(props) => <SurveyPage id={props.match.params.id} />}
-            />
+            <Route path="/surveys/:id" component={SurveyPage} />
+            <Route path="/submissions" component={Submissions} />
           </Switch>
         </Router>
         <Footer />
