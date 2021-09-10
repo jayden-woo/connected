@@ -1,10 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-
 import PropTypes from "prop-types";
-
-// import uploadImage from "../../services/uploadImageService";
-// import notify from "../../services/notifyService";
 
 import Common from "./properties/Common";
 import InputType from "./properties/InputType";
@@ -16,7 +12,6 @@ import Rating from "./properties/Rating";
 import ImageProp from "./properties/ImageProp";
 import HTML from "./properties/HTML";
 
-// eslint-disable-next-line no-unused-vars
 export default function QuestionEditor({
   question,
   index,

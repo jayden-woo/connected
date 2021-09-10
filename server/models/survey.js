@@ -125,7 +125,7 @@ function validateSurvey(survey, update = false) {
 				"html",
 			),
 		title: Joi.alternatives().conditional("type", {
-			is: Joi.string().valid("image", "html"),
+			is: Joi.string().valid("image", "html", "boolean"),
 			then: Joi.string().allow(""),
 			otherwise: Joi.string().required(),
 		}),

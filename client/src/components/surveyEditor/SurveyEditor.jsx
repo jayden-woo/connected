@@ -241,7 +241,7 @@ export default function SurveyEditor({ setProgressBar }) {
             </Button>
           </Col>
           <Col className="se__survey-preview" md={12} xl={6}>
-            <Form id="top">
+            <Form id="survey-top">
               <Form.Group>
                 <Form.Label style={{ display: "none" }}>Survey Title</Form.Label>
                 <Form.Control
@@ -310,7 +310,7 @@ export default function SurveyEditor({ setProgressBar }) {
               <p className="se__pp__title">PROPERTY PANEL</p>
               {activeQuestion && (
                 <QuestionEditor
-                  key={activeQuestion}
+                  key={`question:${activeQuestion}`}
                   question={_.find(survey.questions, { name: activeQuestion })}
                   index={survey.questions.findIndex((q) => q.name === activeQuestion)}
                   numQuestions={survey.questions.length}
@@ -326,7 +326,7 @@ export default function SurveyEditor({ setProgressBar }) {
         </Row>
       </Container>
       <div className="se__bottom-cut-off">
-        <a href="#top">BACK TO TOP</a>
+        <a href="#survey-top">BACK TO TOP</a>
       </div>
       <div className="se__publish">
         <Button className="se__btn-cancel shadow-none" onClick={history.goBack}>

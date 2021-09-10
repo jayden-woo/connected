@@ -19,7 +19,7 @@ const Navigation = () => {
             <Nav.Link href="/">HOME</Nav.Link>
             <Nav.Link href="/about">ABOUT</Nav.Link>
             <Nav.Link href="/create-survey">&emsp;CREATE SURVEY&emsp;</Nav.Link>
-            <Nav.Link href="/surveys/613a18d54377ba42600c39a7">SURVEY</Nav.Link>
+            <Nav.Link href="/surveys/613afcb3b5dded7270bbab69">SURVEY</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse fill className="justify-content-end">
