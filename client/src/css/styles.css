@@ -386,10 +386,6 @@ a:visited {
   font-size: 1.7rem;
 }
 
-.sp-container input:focus {
-  border-color: var(--color-primary) !important;
-}
-
 /* Submission Page */
 
 .sb-container {
@@ -405,17 +401,80 @@ a:visited {
   margin: 0 auto;
 }
 
+.sb__content .sv-body__page {
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+
 .sb__content .sv-footer {
   display: none;
 }
 
 .sb__pair {
   min-height: 300px;
-  padding: 1rem 0 5rem;
+  padding: 1rem 0;
   border-bottom: 1px solid #ccc;
 }
 
+.sb__pie-icon {
+  background-image: url(../assets/chartIcons/pieChart.svg);
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.sb__bar-icon {
+  background-image: url(../assets/chartIcons/barChart.svg);
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.sb__hex-icon {
+  background-image: url(../assets/chartIcons/hexagon.svg);
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.sb__btn-switch {
+  margin-top: 1rem;
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.sb__btn-switch:hover,
+.sb__btn-switch:focus {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.sb__empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.8rem;
+  color: rgb(172, 172, 172);
+}
+
+.sb__list {
+  height: 100%;
+  max-height: 400px;
+  overflow: auto;
+  font-size: 1.4rem;
+  margin: 2.5rem 0;
+  padding: 0 1.5rem 0 4rem;
+}
+
+.sb__chart {
+  margin: 2.5rem 1rem;
+}
+
 /* Override SurveyJS Library Styles */
+
+.sv-question__content input:focus {
+  border-color: var(--color-primary) !important;
+}
 
 .sv-footer__complete-btn {
   background-color: var(--color-primary) !important;

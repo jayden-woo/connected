@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import PropTypes from "prop-types";
 
 import Chart from "./Chart";
+import List from "./List";
 
 export default function Pair({ question, responses }) {
   const survey = {
@@ -21,7 +22,12 @@ export default function Pair({ question, responses }) {
           ["boolean", "dropdown", "radiogroup", "rating", "checkbox"].includes(question.type) && (
             <Chart responses={responses} />
           )}
-        {responses.length === 0 && <p>No responses yet.</p>}
+        {responses.length !== 0 && ["text", "comment"].includes(question.type) && <List responses={responses} />}
+        {responses.length === 0 && (
+          <div className="sb__empty">
+            <p>No responses yet.</p>
+          </div>
+        )}
       </Col>
     </Row>
   );

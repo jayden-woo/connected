@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-// import Container from "react-bootstrap/Container";
 
 import PropTypes from "prop-types";
 import qs from "query-string";
