@@ -36,31 +36,49 @@ const COLORS = [
   "#0B1426",
 ];
 
-export default function Chart({ responses }) {
+export default function Chart({ responses, isRanking }) {
   const [chartType, setChartType] = useState(0);
   const data = [];
 
-  responses.forEach((r) => {
-    if (Array.isArray(r)) {
-      r.forEach((o) => {
-        const index = _.findIndex(data, { name: JSON.stringify(o) });
-        if (index === -1) {
-          data.push({ name: JSON.stringify(o), value: 1 });
+  if (isRanking) {
+    responses.forEach((r) => {
+      r.forEach((option, index) => {
+        const i = _.findIndex(data, { name: option });
+        if (i === -1) {
+          data.push({ name: option, frequency: index + 1 });
         } else {
-          data[index] = { name: JSON.stringify(o), value: data[index].value + 1 };
+          data[i] = { name: option, frequency: data[i].frequency + index + 1 };
         }
       });
-    } else {
-      const index = _.findIndex(data, { name: JSON.stringify(r) });
-      if (index === -1) {
-        data.push({ name: JSON.stringify(r), value: 1 });
-      } else {
-        data[index] = { name: JSON.stringify(r), value: data[index].value + 1 };
-      }
-    }
-  });
+    });
 
-  console.log(data);
+    const min = responses.length / _.minBy(data, "frequency").frequency;
+
+    data.forEach((d) => {
+      // eslint-disable-next-line no-param-reassign
+      d.frequency = responses.length / d.frequency / min;
+    });
+  } else {
+    responses.forEach((r) => {
+      if (Array.isArray(r)) {
+        r.forEach((o) => {
+          const index = _.findIndex(data, { name: JSON.stringify(o) });
+          if (index === -1) {
+            data.push({ name: JSON.stringify(o), frequency: 1 });
+          } else {
+            data[index] = { name: JSON.stringify(o), frequency: data[index].frequency + 1 };
+          }
+        });
+      } else {
+        const index = _.findIndex(data, { name: JSON.stringify(r) });
+        if (index === -1) {
+          data.push({ name: JSON.stringify(r), frequency: 1 });
+        } else {
+          data[index] = { name: JSON.stringify(r), frequency: data[index].frequency + 1 };
+        }
+      }
+    });
+  }
 
   return (
     <div className="sb__chart">
@@ -68,7 +86,7 @@ export default function Chart({ responses }) {
         {chartType === 0 && (
           <ResponsiveContainer>
             <PieChart>
-              <Pie dataKey="value" data={data} innerRadius={40} outerRadius={80}>
+              <Pie dataKey="frequency" data={data} innerRadius={40} outerRadius={80}>
                 {data.map((entry) => (
                   <Cell key={entry} fill={COLORS[Math.floor(Math.random() * COLORS.length)]} />
                 ))}
@@ -85,7 +103,7 @@ export default function Chart({ responses }) {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="value">
+              <Bar dataKey="frequency">
                 {data.map((entry) => (
                   <Cell key={entry} fill={COLORS[Math.floor(Math.random() * COLORS.length)]} />
                 ))}
@@ -93,13 +111,13 @@ export default function Chart({ responses }) {
             </BarChart>
           </ResponsiveContainer>
         )}
-        {chartType === 2 && (
+        {data.length > 2 && chartType === 2 && (
           <ResponsiveContainer>
             <RadarChart outerRadius="80%" data={data}>
               <PolarGrid />
               <PolarAngleAxis dataKey="name" />
               <PolarRadiusAxis />
-              <Radar dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+              <Radar dataKey="frequency" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
             </RadarChart>
           </ResponsiveContainer>
         )}
@@ -111,14 +129,19 @@ export default function Chart({ responses }) {
         <Button className="shadow-none sb__btn-switch" onClick={() => setChartType(1)}>
           <div className="sb__bar-icon" />
         </Button>
-        <Button className="shadow-none sb__btn-switch" onClick={() => setChartType(2)}>
-          <div className="sb__hex-icon" />
-        </Button>
+        {data.length > 2 && (
+          <Button className="shadow-none sb__btn-switch" onClick={() => setChartType(2)}>
+            <div className="sb__hex-icon" />
+          </Button>
+        )}
       </div>
     </div>
   );
 }
 
 Chart.propTypes = {
-  responses: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  responses: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool, PropTypes.arrayOf(PropTypes.string)])
+  ).isRequired,
+  isRanking: PropTypes.bool.isRequired,
 };

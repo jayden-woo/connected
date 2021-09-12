@@ -204,7 +204,7 @@ export default function SurveyEditor({ setProgressBar }) {
   };
 
   return (
-    <div className="se__container">
+    <div className="se-container">
       <div className="se__top-cut-off" />
       <Container className="se__content">
         <Row>

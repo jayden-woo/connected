@@ -48,7 +48,11 @@ export default function Submissions({ location }) {
           <h3>{survey.title}</h3>
           <h5>{survey.description}</h5>
           {Object.keys(qrPair).map((question) => (
-            <Pair question={survey.questions.filter((q) => q.name === question)[0]} responses={qrPair[question]} />
+            <Pair
+              key={question}
+              question={survey.questions.filter((q) => q.name === question)[0]}
+              responses={qrPair[question]}
+            />
           ))}
         </div>
       )}

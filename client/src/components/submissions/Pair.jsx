@@ -19,8 +19,8 @@ export default function Pair({ question, responses }) {
       </Col>
       <Col sm={12} md={6}>
         {responses.length !== 0 &&
-          ["boolean", "dropdown", "radiogroup", "rating", "checkbox"].includes(question.type) && (
-            <Chart responses={responses} />
+          ["boolean", "dropdown", "radiogroup", "rating", "checkbox", "ranking"].includes(question.type) && (
+            <Chart responses={responses} isRanking={question.type === "ranking"} />
           )}
         {responses.length !== 0 && ["text", "comment"].includes(question.type) && <List responses={responses} />}
         {responses.length === 0 && (
@@ -35,5 +35,7 @@ export default function Pair({ question, responses }) {
 
 Pair.propTypes = {
   question: PropTypes.shape().isRequired,
-  responses: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  responses: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number, PropTypes.arrayOf(PropTypes.string)])
+  ).isRequired,
 };
