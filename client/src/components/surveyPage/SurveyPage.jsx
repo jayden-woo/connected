@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import * as Survey from "survey-react";
 import PropTypes from "prop-types";
-import Image from "react-bootstrap/Image";
+import Spinner from "react-bootstrap/Spinner";
 import http from "../../services/httpService";
-import loadingIcon from "../../assets/loading.svg";
 
 Survey.StylesManager.applyTheme("modern");
 
-// match.params.id
 export default function SurveyPage({ match }) {
   const [isLoading, setIsLoading] = useState(true);
   const [survey, setSurvey] = useState({});
@@ -50,7 +48,13 @@ export default function SurveyPage({ match }) {
   return (
     <div className="sp-container">
       <div className="sp__survey">
-        {isLoading && <Image className="sp__loading" src={loadingIcon} alt="Loading" />}
+        {isLoading && (
+          <div className="text-center">
+            <Spinner animation="border" role="status" className="loading">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        )}
         {!isLoading && <Survey.Survey json={survey} onComplete={handleComplete} />}
       </div>
     </div>

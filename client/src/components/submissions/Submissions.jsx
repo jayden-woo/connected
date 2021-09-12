@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
 
 import PropTypes from "prop-types";
 import qs from "query-string";
@@ -45,8 +46,8 @@ export default function Submissions({ location }) {
     <div className="sb-container">
       {!isLoading && (
         <div className="sb__content">
-          <h3>{survey.title}</h3>
-          <h5>{survey.description}</h5>
+          <h3 className="sb__title">{survey.title}</h3>
+          <h5 className="sb__desc">{survey.description}</h5>
           {Object.keys(qrPair).map((question) => (
             <Pair
               key={question}
@@ -54,6 +55,13 @@ export default function Submissions({ location }) {
               responses={qrPair[question]}
             />
           ))}
+        </div>
+      )}
+      {isLoading && (
+        <div className="text-center">
+          <Spinner animation="border" role="status" className="loading">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         </div>
       )}
     </div>

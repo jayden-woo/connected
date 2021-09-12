@@ -88,6 +88,13 @@ a:visited {
   background-color: var(--color-secondary);
 }
 
+.loading {
+  margin-top: 10rem;
+  width: 50px;
+  height: 50px;
+  border-width: 5px;
+}
+
 /* Survey Editor */
 
 .se-container {
@@ -463,11 +470,25 @@ a:visited {
   overflow: auto;
   font-size: 1.4rem;
   margin: 2.5rem 0;
-  padding: 0 1.5rem 0 5rem;
+  padding: 0 5rem;
 }
 
 .sb__chart {
   margin: 2.5rem 1rem;
+}
+
+.sb__title {
+  padding-top: 4rem;
+  font-size: 4rem;
+  margin-left: 2.5rem;
+  color: rgb(90, 90, 90);
+}
+
+.sb__desc {
+  font-size: 1.7rem;
+  color: var(--color-headings);
+  margin-bottom: 2rem;
+  margin-left: 2.5rem;
 }
 
 /* Override SurveyJS Library Styles */
