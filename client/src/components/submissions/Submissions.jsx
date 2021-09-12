@@ -7,7 +7,7 @@ import qs from "query-string";
 import http from "../../services/httpService";
 import Pair from "./Pair";
 
-export default function Submissions({ location }) {
+const Submissions = ({ location }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [survey, setSurvey] = useState({});
   const [qrPair, setQrPair] = useState({});
@@ -66,10 +66,12 @@ export default function Submissions({ location }) {
       )}
     </div>
   );
-}
+};
 
 Submissions.propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string.isRequired,
   }).isRequired,
 };
+
+export default Submissions;

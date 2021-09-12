@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function PlaceHolder({ question, updateQuestion }) {
+const PlaceHolder = ({ question, updateQuestion }) => {
   const [placeHolder, setPlaceHolder] = useState("");
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function PlaceHolder({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 PlaceHolder.propTypes = {
   question: PropTypes.shape({
@@ -32,3 +32,5 @@ PlaceHolder.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default PlaceHolder;

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import Chart from "./Chart";
 import List from "./List";
 
-export default function Pair({ question, responses }) {
+const Pair = ({ question, responses }) => {
   const survey = {
     questions: [{ ...question }],
   };
@@ -31,7 +31,7 @@ export default function Pair({ question, responses }) {
       </Col>
     </Row>
   );
-}
+};
 
 Pair.propTypes = {
   question: PropTypes.shape().isRequired,
@@ -39,3 +39,5 @@ Pair.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number, PropTypes.arrayOf(PropTypes.string)])
   ).isRequired,
 };
+
+export default Pair;

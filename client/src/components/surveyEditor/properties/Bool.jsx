@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function Bool({ question, updateQuestion }) {
+const Bool = ({ question, updateQuestion }) => {
   const [label, setLabel] = useState("");
   const [labelTrue, setLabelTrue] = useState("");
   const [labelFalse, setLabelFalse] = useState("");
@@ -57,7 +57,7 @@ export default function Bool({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 Bool.propTypes = {
   question: PropTypes.shape({
@@ -69,3 +69,5 @@ Bool.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default Bool;

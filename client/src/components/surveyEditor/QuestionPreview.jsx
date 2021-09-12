@@ -2,7 +2,7 @@ import React from "react";
 import * as Survey from "survey-react";
 import PropTypes from "prop-types";
 
-export default function QuestionPreview({ question, isActive, setActiveQuestion }) {
+const QuestionPreview = ({ question, isActive, setActiveQuestion }) => {
   const json = {
     questions: [
       {
@@ -42,7 +42,7 @@ export default function QuestionPreview({ question, isActive, setActiveQuestion 
       <Survey.Survey json={json} showQuestionNumbers="off" focusFirstQuestionAutomatic={false} />
     </div>
   );
-}
+};
 
 QuestionPreview.propTypes = {
   question: PropTypes.shape({
@@ -77,3 +77,5 @@ QuestionPreview.propTypes = {
   isActive: PropTypes.bool.isRequired,
   setActiveQuestion: PropTypes.func.isRequired,
 };
+
+export default QuestionPreview;

@@ -7,7 +7,7 @@ import http from "../../services/httpService";
 
 Survey.StylesManager.applyTheme("modern");
 
-export default function SurveyPage({ match }) {
+const SurveyPage = ({ match }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [survey, setSurvey] = useState({});
 
@@ -59,10 +59,12 @@ export default function SurveyPage({ match }) {
       </div>
     </div>
   );
-}
+};
 
 SurveyPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
   }).isRequired,
 };
+
+export default SurveyPage;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function Common({ question, updateQuestion }) {
+const Common = ({ question, updateQuestion }) => {
   const [title, setTitle] = useState("");
   const [isRequired, setIsRequired] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Common({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 Common.propTypes = {
   question: PropTypes.shape({
@@ -44,3 +44,5 @@ Common.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default Common;

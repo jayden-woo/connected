@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import uploadImage from "../../../services/uploadImageService";
 import notify from "../../../services/notifyService";
 
-export default function ImageProp({ question, updateQuestion, setProgressBar }) {
+const ImageProp = ({ question, updateQuestion, setProgressBar }) => {
   const [imageHeight, setImageHeight] = useState("");
   const [imageWidth, setImageWidth] = useState("");
   const [imageFit, setImageFit] = useState("");
@@ -86,7 +86,7 @@ export default function ImageProp({ question, updateQuestion, setProgressBar }) 
       />
     </Form>
   );
-}
+};
 
 ImageProp.propTypes = {
   question: PropTypes.shape({
@@ -98,3 +98,5 @@ ImageProp.propTypes = {
   updateQuestion: PropTypes.func.isRequired,
   setProgressBar: PropTypes.func.isRequired,
 };
+
+export default ImageProp;

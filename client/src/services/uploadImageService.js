@@ -1,4 +1,5 @@
 import http from "./httpService";
+import notify from "./notifyService";
 
 const cloudinaryApiEndpoint = "https://api.cloudinary.com/v1_1/ip-connected/image/upload";
 
@@ -20,7 +21,7 @@ const handleSelect = (e, setImage) => {
   const i = e.target.files[0];
   if (!i) return;
   if (i.size >= 10 * 1024 * 1024) {
-    alert("Image size is limited to 10MB.");
+    notify.errorNotify("Image size is limited to 10MB.");
     return;
   }
   setImage({ src: URL.createObjectURL(i), alt: i.name });
@@ -45,7 +46,7 @@ const uploadImage = (file, setProgressBar) => {
  * Upload the image to Cloudinary.
  *
  * @param 	{Function} 	setProgressBar - SetState function to set the property of progress bar.
- * @param 	{Object} 	image - The image object.
+ * @param 	{object} 	image - The image object.
  * @param 	{string} 	image.src - Local URL of the image.
  * @param 	{Function} 	successNotify - Show a toast using react-toastify on success.
  * @param 	{Function} 	errorNotify - Show a toast using react-toastify on error.

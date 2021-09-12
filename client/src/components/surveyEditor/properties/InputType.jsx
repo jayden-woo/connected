@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function InputType({ question, updateQuestion }) {
+const InputType = ({ question, updateQuestion }) => {
   const [type, setType] = useState("");
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function InputType({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 InputType.propTypes = {
   question: PropTypes.shape({
@@ -47,3 +47,5 @@ InputType.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default InputType;

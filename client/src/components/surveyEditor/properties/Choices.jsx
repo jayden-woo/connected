@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Choices({ question, updateQuestion }) {
+const Choices = ({ question, updateQuestion }) => {
   const [choices, setChoices] = useState([]);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Choices({ question, updateQuestion }) {
       </Row>
     </Container>
   );
-}
+};
 
 Choices.propTypes = {
   question: PropTypes.shape({
@@ -96,3 +96,5 @@ Choices.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default Choices;

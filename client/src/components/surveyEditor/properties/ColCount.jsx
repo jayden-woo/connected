@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function ColCount({ question, updateQuestion }) {
+const ColCount = ({ question, updateQuestion }) => {
   const [colCount, setColCount] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function ColCount({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 ColCount.propTypes = {
   question: PropTypes.shape({
@@ -31,3 +31,5 @@ ColCount.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default ColCount;

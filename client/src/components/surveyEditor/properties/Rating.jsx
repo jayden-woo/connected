@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function Rating({ question, updateQuestion }) {
+const Rating = ({ question, updateQuestion }) => {
   const [rateMin, setRateMin] = useState(0);
   const [rateMax, setRateMax] = useState(0);
   const [rateStep, setRateStep] = useState(0);
@@ -68,7 +68,7 @@ export default function Rating({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 Rating.propTypes = {
   question: PropTypes.shape({
@@ -81,3 +81,5 @@ Rating.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default Rating;

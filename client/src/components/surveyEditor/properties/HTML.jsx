@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-export default function HTML({ question, updateQuestion }) {
+const HTML = ({ question, updateQuestion }) => {
   const [html, setHtml] = useState("");
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function HTML({ question, updateQuestion }) {
       </Form.Group>
     </Form>
   );
-}
+};
 
 HTML.propTypes = {
   question: PropTypes.shape({
@@ -39,3 +39,5 @@ HTML.propTypes = {
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
 };
+
+export default HTML;

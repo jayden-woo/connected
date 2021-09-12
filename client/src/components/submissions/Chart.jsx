@@ -36,7 +36,7 @@ const COLORS = [
   "#0B1426",
 ];
 
-export default function Chart({ responses, isRanking }) {
+const Chart = ({ responses, isRanking }) => {
   const [chartType, setChartType] = useState(0);
   const data = [];
 
@@ -137,7 +137,7 @@ export default function Chart({ responses, isRanking }) {
       </div>
     </div>
   );
-}
+};
 
 Chart.propTypes = {
   responses: PropTypes.arrayOf(
@@ -145,3 +145,5 @@ Chart.propTypes = {
   ).isRequired,
   isRanking: PropTypes.bool.isRequired,
 };
+
+export default Chart;

@@ -18,7 +18,7 @@ import notify from "../../services/notifyService";
 import QuestionEditor from "./QuestionEditor";
 import QuestionPreview from "./QuestionPreview";
 
-export default function SurveyEditor({ setProgressBar }) {
+const SurveyEditor = ({ setProgressBar }) => {
   const [survey, setSurvey] = useState({ questions: [] });
   const [thumbnail, setThumbnail] = useState({ src: "", alt: "" });
   const [activeQuestion, setActiveQuestion] = useState("");
@@ -338,8 +338,10 @@ export default function SurveyEditor({ setProgressBar }) {
       </div>
     </div>
   );
-}
+};
 
 SurveyEditor.propTypes = {
   setProgressBar: PropTypes.func.isRequired,
 };
+
+export default SurveyEditor;

@@ -11,7 +11,7 @@ import ProgressContext from "./components/common/progressContext";
 import UploadProgressBar from "./components/common/UploadProgressBar";
 import Submissions from "./components/submissions/Submissions";
 
-function App() {
+const App = () => {
   const [progressBar, setProgressBar] = useState({
     visible: false,
     progress: 0,
@@ -36,6 +36,6 @@ function App() {
       </ProgressContext.Provider>
     </>
   );
-}
+};
 
 export default App;
