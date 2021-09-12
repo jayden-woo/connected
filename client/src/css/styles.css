@@ -81,7 +81,7 @@ a:visited {
 
 .progress-bar {
   position: fixed;
-  top: calc(--height-nav-bar);
+  top: calc(var(--height-nav-bar));
   left: 0;
   height: 5px;
   z-index: 99;
