@@ -14,6 +14,7 @@ import history from "./utils/history";
 import GetProfileInfo from "./components/profile/GetProfileInfo";
 import Submissions from "./components/submissions/Submissions";
 import AddPost from "./components/post/AddPost";
+import Error from "./components/Error";
 
 const App = () => {
   const [progressBar, setProgressBar] = useState({
@@ -30,13 +31,14 @@ const App = () => {
           <Navigation id="top" />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/create-survey" render={() => <SurveyEditor setProgressBar={setProgressBar} />} />
-            <Route path="/profile" component={GetProfileInfo} />
+            <Route path="/about" exact component={About} />
+            <Route path="/create-survey" exact render={() => <SurveyEditor setProgressBar={setProgressBar} />} />
+            <Route path="/profile" exact component={GetProfileInfo} />
             <Route path="/posts/add" exact component={AddPost} />
             <Route path="/posts/:id" component={Post} />
             <Route path="/surveys/:id" component={SurveyPage} />
-            <Route path="/submissions" component={Submissions} />
+            <Route path="/submissions" exact component={Submissions} />
+            <Route component={Error} />
           </Switch>
           <Footer />
         </ProgressContext.Provider>
