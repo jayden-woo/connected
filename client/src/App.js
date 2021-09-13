@@ -13,6 +13,7 @@ import Post from "./components/post/Post";
 import history from "./utils/history";
 import GetProfileInfo from "./components/profile/GetProfileInfo";
 import Submissions from "./components/submissions/Submissions";
+import AddPost from "./components/post/AddPost";
 
 const App = () => {
   const [progressBar, setProgressBar] = useState({
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/about" component={About} />
             <Route path="/create-survey" render={() => <SurveyEditor setProgressBar={setProgressBar} />} />
             <Route path="/profile" component={GetProfileInfo} />
+            <Route path="/posts/add" exact component={AddPost} />
             <Route path="/posts/:id" component={Post} />
             <Route path="/surveys/:id" component={SurveyPage} />
             <Route path="/submissions" component={Submissions} />
