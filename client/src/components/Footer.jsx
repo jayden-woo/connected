@@ -6,8 +6,8 @@ import LinkedIn from "../assets/socialMedia/LinkedIn.png";
 import Twitter from "../assets/socialMedia/Twitter.png";
 
 const Footer = () => (
-  <div style={{ background: "#FFF", height: 80 }}>
-    <p style={{ textAlign: "center", marginTop: 35 }}>
+  <div style={{ background: "#FFF", bottom: 0, height: 59, width: "100%", position: "fixed" }}>
+    <p style={{ textAlign: "center", paddingTop: 21 }}>
       <text style={{ fontWeight: "bold", color: "#000766", marginRight: 100 }}>
         © 2021 Proudly Created by Team 15 Connected
       </text>
