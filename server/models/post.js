@@ -20,12 +20,7 @@ const postSchema = new mongoose.Schema(
       min: 5,
       max: 1000,
     },
-    numLikes: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    numViews: {
+    views: {
       type: Number,
       required: true,
       default: 0,
@@ -35,6 +30,10 @@ const postSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
       default: false,
+    },
+    followers: {
+      type: [String],
+      default: [],
     },
     comments: [commentSchema],
   },
@@ -56,9 +55,9 @@ function validatePost(post, update = false) {
     uid: Joi.string(),
     title: Joi.string().min(5).max(100),
     content: Joi.string().min(5).max(1000),
-    numLikes: Joi.number().min(0),
-    numViews: Joi.number().min(0),
+    views: Joi.number().min(0),
     solved: Joi.boolean(),
+    followers: Joi.array().items(Joi.string()),
     comments: Joi.array().items(validationSchema),
   });
 

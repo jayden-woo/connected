@@ -28,8 +28,8 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
           <Col>
             <StyledLink to={`/posts/${postId}`}>
               <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>{body.length < 150 ? body : body.substring(0, 150).concat("...")}</Card.Text>
+                <Card.Title>{title.length < 170 ? title : title.substring(0, 170).concat("...")}</Card.Title>
+                <Card.Text>{body.length < 300 ? body : body.substring(0, 300).concat("...")}</Card.Text>
                 <Card.Text>
                   <small className="text-muted">Posted on {date.toUTCString()}</small>
                 </Card.Text>
@@ -38,12 +38,12 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
                     <Col xs={4} sm={5} lg={3}>
                       <FontAwesomeIcon icon="eye" size="lg" color="var(--color-primary)" />
                       {` ${views}`}
-                      <MediaQuery minWidth={768}>{` Views`}</MediaQuery>
+                      <MediaQuery minWidth={768}>{views > 1 ? ` Views` : ` View`}</MediaQuery>
                     </Col>
                     <Col xs={4} sm={5} lg={3}>
                       <FontAwesomeIcon icon="comments" size="lg" color="var(--color-primary)" />
-                      {` ${comments}`}
-                      <MediaQuery minWidth={768}>{` Comments`}</MediaQuery>
+                      {` ${comments.length}`}
+                      <MediaQuery minWidth={768}>{comments.length > 1 ? ` Comments` : ` Comment`}</MediaQuery>
                     </Col>
                     <Col xs={2} sm={1} lg={3}>
                       {solved ? (
@@ -76,9 +76,6 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
               </Card.Body>
             </StyledLink>
           </Col>
-          <Col xs={1}>
-            <FontAwesomeIcon icon="ellipsis-v" size="lg" color="var(--color-primary)" />
-          </Col>
         </Row>
       </Container>
     </StyledCard>
@@ -87,7 +84,7 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
 
 PostSummary.defaultProps = {
   views: 0,
-  comments: 0,
+  comments: [],
   solved: false,
   following: false,
 };
@@ -98,7 +95,7 @@ PostSummary.propTypes = {
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   views: PropTypes.number,
-  comments: PropTypes.number,
+  comments: PropTypes.arrayOf(PropTypes.object),
   solved: PropTypes.bool,
   following: PropTypes.bool,
 };
