@@ -18,14 +18,14 @@ const PostStats = ({ views, comments, solved }) => (
       <Col>
         <FontAwesomeIcon icon="eye" size="lg" color="var(--color-primary)" />
         &nbsp;{` ${views}`}
-        <MediaQuery minWidth={768}>{` Views`}</MediaQuery>
+        <MediaQuery minWidth={768}>{views > 1 ? ` Views` : ` View`}</MediaQuery>
       </Col>
     </Row>
     <Row className="p-3 align-items-center">
       <Col>
         <FontAwesomeIcon icon="comments" size="lg" color="var(--color-primary)" />
         &nbsp;{` ${comments}`}
-        <MediaQuery minWidth={768}>{` Comments`}</MediaQuery>
+        <MediaQuery minWidth={768}>{comments > 1 ? ` Comments` : ` Comment`}</MediaQuery>
       </Col>
     </Row>
     <Row className="p-3 pb-4 align-items-center">

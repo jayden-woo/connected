@@ -138,6 +138,7 @@ const QuestionBoard = () => {
       sort: e.target.elements.filterSortRadios.value,
     });
     setShowFilter(!showFilter);
+    setMaxPosts(INITIAL_MAX_POSTS);
   };
 
   const handleShowButtonClick = (e) => {
