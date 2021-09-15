@@ -13,11 +13,6 @@ const commentSchema = new mongoose.Schema(
       min: 5,
       max: 1000,
     },
-    numLikes: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
   },
   {
     timestamps: true,
@@ -25,9 +20,11 @@ const commentSchema = new mongoose.Schema(
 );
 
 const validationSchema = Joi.object({
+  _id: Joi.string().optional(),
   uid: Joi.string().required(),
   content: Joi.string().required().min(5).max(1000),
-  numLikes: Joi.number().min(0),
+  updatedAt: Joi.date().optional(),
+  createdAt: Joi.date().optional(),
 });
 
 module.exports = { commentSchema, validationSchema };

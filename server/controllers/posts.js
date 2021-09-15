@@ -4,11 +4,13 @@ const getAllPosts = async (req, res) => {
   const user = req.query.user;
   let posts;
   if (!user) {
-    posts = await Post.find().select("-comments").sort("-updatedAt");
+    posts = await Post.find().sort("-updatedAt");
+    // posts = await Post.find().select("-comments").sort("-updatedAt");
   } else {
-    posts = await Post.find({ uid: user })
-      .select("-comments")
-      .sort("-updatedAt");
+    posts = await Post.find({ uid: user }).sort("-updatedAt");
+    // posts = await Post.find({ uid: user })
+    //   .select("-comments")
+    //   .sort("-updatedAt");
   }
   res.send(posts);
 };
@@ -49,6 +51,21 @@ const updatePost = async (req, res) => {
   res.send(post);
 };
 
+const addComments = async (req, res) => {
+  const { error } = validate(req.body, true);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const post = await Post.findByIdAndUpdate(req.params.id, {
+    $push: { comments: { $each: req.body.comments} }
+  }, {
+    new: true,
+  });
+  if (!post)
+    return res.status(404).send("The post with the given ID was not found.");
+
+  res.send(post);
+}
+
 const deletePost = async (req, res) => {
   const post = await Post.findByIdAndDelete(req.params.id);
 
@@ -58,4 +75,4 @@ const deletePost = async (req, res) => {
   res.send(post);
 };
 
-module.exports = { getAllPosts, getPostByID, addPost, updatePost, deletePost };
+module.exports = { getAllPosts, getPostByID, addPost, updatePost, addComments, deletePost };

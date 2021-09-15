@@ -11,6 +11,9 @@ router.post("/", (req, res) => controller.addPost(req, res));
 router.put("/:id", validateObjectId, (req, res) =>
   controller.updatePost(req, res)
 );
+router.put("/:id/comment", validateObjectId, (req, res) =>
+  controller.addComments(req, res)
+);
 router.delete("/:id", validateObjectId, (req, res) =>
   controller.deletePost(req, res)
 );

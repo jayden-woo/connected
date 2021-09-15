@@ -21,7 +21,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const FilterMenu = ({ handleFilterSubmit }) => (
+const FilterMenu = ({ isAuthenticated, handleFilterSubmit }) => (
   <StyledDiv id="filterMenu">
     <Container fluid="sm">
       <Form onSubmit={handleFilterSubmit}>
@@ -36,8 +36,15 @@ const FilterMenu = ({ handleFilterSubmit }) => (
                   <option value="false">False</option>
                 </Form.Select>
               </FloatingLabel>
-              <FloatingLabel controlId="filterFollowing" label="Following">
+              <FloatingLabel className="pb-2" controlId="filterFollowing" label="Following">
                 <Form.Select id="filterFollowingOption" aria-label="Following filter option">
+                  <option value="none">None</option>
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </Form.Select>
+              </FloatingLabel>
+              <FloatingLabel controlId="filterMine" label="Mine" hidden={!isAuthenticated}>
+                <Form.Select id="filterMineOption" aria-label="Mine filter option">
                   <option value="none">None</option>
                   <option value="true">True</option>
                   <option value="false">False</option>
@@ -99,7 +106,12 @@ const FilterMenu = ({ handleFilterSubmit }) => (
   </StyledDiv>
 );
 
+FilterMenu.defaultProps = {
+  isAuthenticated: false,
+};
+
 FilterMenu.propTypes = {
+  isAuthenticated: PropTypes.bool,
   handleFilterSubmit: PropTypes.func.isRequired,
 };
 
