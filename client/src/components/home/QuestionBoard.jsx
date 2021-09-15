@@ -122,7 +122,7 @@ const QuestionBoard = () => {
   const [maxPosts, setMaxPosts] = useState(INITIAL_MAX_POSTS);
 
   useEffect(async () => {
-    const baseUrl = process.env.API_URL || "http://localhost:3000";
+    const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
     await axios.get(`${baseUrl}/api/posts`).then((res) => {
       console.log(res);
       setAllPosts(res.data);
