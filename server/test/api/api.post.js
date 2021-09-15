@@ -24,8 +24,8 @@ describe('API post', function () {
         expect(body).to.be.an('array');
     });
 
-    for (let i = 0; i < testCases.addCompleteCase.length; i++) {
-        it('add right post index : ' + i, async () => {
+    it('add some right post', async () => {
+        for (let i = 0; i < testCases.addCompleteCase.length; i++) {
             let body = await rp({
                 method: 'POST',
                 url: common.BASE_URL + '/posts',
@@ -39,11 +39,11 @@ describe('API post', function () {
             expect(body._id).to.be.a('string');
             // give the id
             post_id = body._id;
-        });
-    }
+        }
+    })
 
-    for (let i = 0; i < testCases.addErrorCase.length; i++) {
-        it('add error post index :' + i, async () => {
+    it('add some error post', async () => {
+        for (let i = 0; i < testCases.addErrorCase.length; i++) {
             try {
                 let body = await rp({
                     method: 'POST',
@@ -57,8 +57,8 @@ describe('API post', function () {
             } catch (error) {
                 expect(error.statusCode).to.equal(400);
             }
-        });
-    }
+        }
+    })
 
     it('get a post_id exist post', async () => {
         let body = await rp({
@@ -89,8 +89,8 @@ describe('API post', function () {
         expect(body.title).to.equal('title to update');
     });
 
-    for (let i = 0; i < testCases.updateCompleteCase.length; i++) {
-        it('update right post index :' + i, async () => {
+    it('update some right post', async () => {
+        for (let i = 0; i < testCases.updateCompleteCase.length; i++) {
             let body = await rp({
                 method: 'PUT',
                 url: common.BASE_URL + '/posts/' + post_id,
@@ -101,11 +101,11 @@ describe('API post', function () {
                 json: true
             });
             expect(body).to.be.an('object');
-        });
-    }
+        }
+    })
 
-    for (let i = 0; i < testCases.updateErrorCase.length; i++) {
-        it('update error post index :' + i, async () => {
+    it('update some error post', async () => {
+        for (let i = 0; i < testCases.updateErrorCase.length; i++) {
             try {
                 let body = await rp({
                     method: 'PUT',
@@ -119,8 +119,8 @@ describe('API post', function () {
             } catch (error) {
                 expect(error.statusCode).to.equal(400);
             }
-        });
-    }
+        }
+    });
 
     it('delete a post', async () => {
         let body = await rp({
