@@ -2,6 +2,7 @@ const cors = require('cors');
 
 const whitelist = [
 	'https://it-project-connected.herokuapp.com/',
+	'https://team-15-connected.herokuapp.com/',
 	'http://localhost:5000',
 ];
 
