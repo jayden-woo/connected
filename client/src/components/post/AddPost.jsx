@@ -89,7 +89,7 @@ const CancelButton = styled(SubmitButton)`
 `;
 
 const AddPost = () => {
-  const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
+  const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   const { user, isAuthenticated } = useAuth0();
   const [showTooltip, setShowTooltip] = useState(false);
   const target = useRef(null);

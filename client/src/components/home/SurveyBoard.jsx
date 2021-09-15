@@ -48,7 +48,7 @@ const SurveyBoard = () => {
   console.log(allSurveys);
 
   // useEffect(() => {
-  //   const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:3000";
+  //   const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   //   axios.get(`${baseUrl}/api/surveys`).then((res) => {
   //     console.log(res);
   //     setAllSurveys(res.data);
