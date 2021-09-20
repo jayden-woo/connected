@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import PropTypes from "prop-types";
 
 const HTML = ({ question, updateQuestion }) => {
@@ -10,25 +11,26 @@ const HTML = ({ question, updateQuestion }) => {
   }, []);
 
   return (
-    <Form>
-      <Form.Group>
-        <Form.Label>HTML</Form.Label>
-        <Form.Control
-          className="shadow-none"
-          as="textarea"
-          placeholder="Enter html here ..."
-          value={html}
-          onChange={(e) => setHtml(e.target.value)}
-          onBlur={() => {
-            if (html) {
-              updateQuestion(question.name, "html", html);
-            } else {
-              updateQuestion(question.name, "html", "Enter html here ...");
-            }
-          }}
-        />
-      </Form.Group>
-    </Form>
+    <div className="ck-container">
+      <CKEditor
+        editor={ClassicEditor}
+        data={html}
+        config={{
+          toolbar: ["heading", "bold", "italic", "bulletedList", "numberedList", "undo", "redo", "indent", "outdent"],
+        }}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          setHtml(data);
+        }}
+        onBlur={() => {
+          if (html) {
+            updateQuestion(question.name, "html", html);
+          } else {
+            updateQuestion(question.name, "html", "<p>Add your html here ... </p>");
+          }
+        }}
+      />
+    </div>
   );
 };
 

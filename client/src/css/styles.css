@@ -293,6 +293,10 @@ a:visited {
   margin-bottom: 0;
 }
 
+.qe .ck-container {
+  margin: 2rem 0;
+}
+
 .qe__btn {
   width: 8rem;
   height: 2.8rem;

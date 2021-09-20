@@ -135,6 +135,7 @@ const SurveyEditor = ({ setProgressBar }) => {
   };
 
   // TODO: proper validation
+  // TODO: unique choices
   const validate = () => {
     // if (survey.questions.length === 0) {
     //   alert("Survey cannot be empty.");
@@ -189,13 +190,11 @@ const SurveyEditor = ({ setProgressBar }) => {
 
     if (!data.thumbnail) delete data.thumbnail;
 
-    console.log(data);
-
     // TODO: remove unneccesary lines
     try {
       const res = await http.post("http://localhost:3000/api/surveys", data);
       notify.successNotify("Successfully Published!");
-      console.log(res.data);
+
       // eslint-disable-next-line no-underscore-dangle
       history.push(`/surveys/${res.data._id}`);
     } catch (e) {
