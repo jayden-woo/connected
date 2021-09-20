@@ -202,9 +202,9 @@ a:visited {
 }
 
 .se__btn-add {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   width: 100%;
-  height: 4rem;
+  height: 4.5rem;
   border-width: none;
   background-color: transparent;
   color: var(--color-primary);
@@ -270,9 +270,16 @@ a:visited {
 }
 
 .se__pp__title {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 500;
   margin-bottom: 1rem;
+}
+
+.se__tb__title {
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
 }
 
 /* Question Editor */

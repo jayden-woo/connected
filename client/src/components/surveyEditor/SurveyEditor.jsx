@@ -209,6 +209,7 @@ const SurveyEditor = ({ setProgressBar }) => {
       <Container className="se__content">
         <Row>
           <Col className="se__add-btn-group" md={12} xl={2}>
+            <p className="se__tb__title">TOOLBOX</p>
             <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
               + Simple Text
             </Button>
