@@ -11,7 +11,6 @@ import ProgressContext from "./components/common/progressContext";
 import UploadProgressBar from "./components/common/UploadProgressBar";
 import Post from "./components/post/Post";
 import history from "./utils/history";
-import GetProfileInfo from "./components/profile/GetProfileInfo";
 import Submissions from "./components/submissions/Submissions";
 import AddPost from "./components/post/AddPost";
 import Error from "./components/Error";
@@ -33,7 +32,6 @@ const App = () => {
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
             <Route path="/create-survey" exact render={() => <SurveyEditor setProgressBar={setProgressBar} />} />
-            <Route path="/profile" exact component={GetProfileInfo} />
             <Route path="/posts/add" exact component={AddPost} />
             <Route path="/posts/:id" component={Post} />
             <Route path="/surveys/:id" component={SurveyPage} />

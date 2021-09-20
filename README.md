@@ -30,12 +30,12 @@ _some enviroment variables_
 | MONGO_USERNAME=IT-PROJECT |
 | MONGO_PASSWORD=CONNECTED  |
 
-| Front-end                                                    |
-| ------------------------------------------------------------ |
-| PORT=5000                                                    |
+| Front-end                                                          |
+| ------------------------------------------------------------------ |
+| PORT=5000                                                          |
 | REACT_APP_AUTH0_AUDIENCE=https://dev-8p7irqly.us.auth0.com/api/v2/ |
-| REACT_APP_AUTH0_DOMAIN=dev-8p7irqly.us.auth0.com             |
-| REACT_APP_AUTH0_CLIENT_ID=nQuq0RRvq1qHJm71fVywenxJndfhMvAY   |
+| REACT_APP_AUTH0_DOMAIN=dev-8p7irqly.us.auth0.com                   |
+| REACT_APP_AUTH0_CLIENT_ID=nQuq0RRvq1qHJm71fVywenxJndfhMvAY         |
 
 #### MongoDB Connection String
 

@@ -590,3 +590,7 @@ a:visited {
   margin: auto;
   width: 100%;
 }
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: white;
+}

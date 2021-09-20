@@ -35,18 +35,13 @@ body {
   background: linear-gradient(to right, #160b88, #4a51aa);
 }
 
-.img-fluid {
-  max-width: 90%;
-  height: auto;
-}
-
 .img-thumbnail {
   background-color: #190e89;
   padding: 0;
 }
 
 .user-profile {
-  padding: 40px 0;
+  padding: 3.5rem 0;
 }
 
 .card-block {
