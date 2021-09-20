@@ -296,6 +296,11 @@ const SurveyEditor = ({ setProgressBar }) => {
                 </Col>
               </Row>
             </div>
+            {survey.questions.length === 0 && (
+              <div className="se__empty">
+                <p>Choose a question type from the toolbox</p>
+              </div>
+            )}
             {survey.questions.map((q) => (
               <QuestionPreview
                 key={q.name}

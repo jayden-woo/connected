@@ -5,6 +5,7 @@ import Spinner from "react-bootstrap/Spinner";
 import PropTypes from "prop-types";
 import qs from "query-string";
 import http from "../../services/httpService";
+import notify from "../../services/notifyService";
 import Pair from "./Pair";
 
 const Submissions = ({ location }) => {
@@ -17,7 +18,7 @@ const Submissions = ({ location }) => {
   useEffect(async () => {
     try {
       const { data: surveyData } = await http.get(`http://localhost:3000/api/surveys/${query.survey}`);
-      const { data: submissionsDate } = await http.get(`http://localhost:3000/api/submissions/?survey=${query.survey}`);
+      const { data: submissionsData } = await http.get(`http://localhost:3000/api/submissions/?survey=${query.survey}`);
 
       const pairs = {};
 
@@ -25,8 +26,12 @@ const Submissions = ({ location }) => {
         pairs[q.name] = [];
       });
 
-      submissionsDate.forEach((s) => {
+      submissionsData.forEach((s) => {
         s.responses.forEach((r) => {
+          if (!pairs[r.name]) {
+            notify.errorNotify("Response does not have a matching question!");
+            history.push("/");
+          }
           pairs[r.name].push(r.response);
         });
       });
@@ -36,8 +41,10 @@ const Submissions = ({ location }) => {
       setIsLoading(false);
     } catch (e) {
       // TODO: redirect to not found page
-      if (e.response.status === 404) {
+      if (e.response && e.response.status === 404) {
         history.push("/");
+      } else {
+        notify.errorNotify(e.message);
       }
     }
   }, []);
