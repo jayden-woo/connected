@@ -4,7 +4,7 @@ const app = express();
 // run with DEBUG=app:* yarn server
 const debug = require("debug")("app:startup");
 
-// require("./startup/morgan")(app);
+require("./startup/morgan")(app);
 require("./startup/cors")(app);
 require("./startup/routes")(app);
 require("./startup/db")();
