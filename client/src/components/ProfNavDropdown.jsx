@@ -46,7 +46,7 @@ const ProfNavDropdown = () => {
             userId: user_id,
             loading: false,
           });
-          localStorage.setItem("Admin", user_metadata.Role === "Admin");
+          localStorage.setItem("isAdmin", user_metadata.Role === "Admin");
         } catch (error) {
           setState({
             ...state,
