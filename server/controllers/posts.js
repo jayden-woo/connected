@@ -29,7 +29,8 @@ const addPost = async (req, res) => {
   if (error) return res.status(400).send(error.details[0]);
 
   const post = new Post({
-    uid: req.body.uid,
+    // uid: req.body.uid,
+    author: req.body.author,
     title: req.body.title,
     content: req.body.content,
   });

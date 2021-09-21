@@ -4,9 +4,19 @@ const { commentSchema, validationSchema } = require("./comment");
 
 const postSchema = new mongoose.Schema(
   {
-    uid: {
-      type: String,
-      required: true,
+    author: {
+      uid: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      picture: {
+        type: String,
+        required: true,
+      },
     },
     title: {
       type: String,
@@ -46,13 +56,21 @@ const Post = mongoose.model("Posts", postSchema);
 
 function validatePost(post, update = false) {
   const creationSchema = Joi.object({
-    uid: Joi.string().required(),
+    author: Joi.object({
+      uid: Joi.string().required(),
+      name: Joi.string().required(),
+      picture: Joi.string().required(),
+    }),
     title: Joi.string().required().min(5).max(100),
     content: Joi.string().required().min(5).max(1000),
   });
 
   const updateSchema = Joi.object({
-    uid: Joi.string(),
+    author: Joi.object({
+      uid: Joi.string().required(),
+      name: Joi.string().required(),
+      picture: Joi.string().required(),
+    }),
     title: Joi.string().min(5).max(100),
     content: Joi.string().min(5).max(1000),
     views: Joi.number().min(0),
