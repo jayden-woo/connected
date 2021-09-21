@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Spinner, Col, Container, Row, Modal } from "react-bootstrap";
+import { Col, Container, Row, Modal } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 import axios from "axios";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ import backgroundImg from "../../assets/mainHeader.png";
 import PostStats from "./PostStats";
 import PostContent from "./PostContent";
 import PostReply from "./PostReply";
+import Loading from "../Loading";
 
 const Background = styled.div`
   background-color: var(--color-background);
@@ -110,6 +111,8 @@ const Post = () => {
   const { id } = useParams();
   const history = useHistory();
   const { user, isAuthenticated } = useAuth0();
+  const isAdmin = localStorage.getItem("isAdmin");
+  const [isAuthor, setIsAuthor] = useState(false);
   const [post, setPost] = useState();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -124,6 +127,7 @@ const Post = () => {
       .then((res) => {
         console.log(res);
         setPost(res.data);
+        setIsAuthor(isAuthenticated && res.data.author.uid === user.sub);
       });
   }, []);
 
@@ -167,7 +171,11 @@ const Post = () => {
 
   const handlePublish = (reply) => {
     const comment = {
-      uid: user.sub,
+      author: {
+        uid: user.sub,
+        name: user.email === user.name ? user.nickname : user.name,
+        picture: user.picture,
+      },
       content: reply,
     };
     axios.put(`${baseUrl}/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
@@ -177,13 +185,7 @@ const Post = () => {
   };
 
   if (post === undefined) {
-    return (
-      <div className="text-center">
-        <Spinner animation="border" role="status" className="loading">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <Background>
@@ -200,14 +202,21 @@ const Post = () => {
           <Row>
             <Col xs="8" className="ps-4">
               <Row>
-                <PostContent user={post.uid} createdAt={post.createdAt} title={post.title} content={post.content} />
+                <PostContent
+                  author={post.author.name}
+                  picture={post.author.picture}
+                  createdAt={post.createdAt}
+                  title={post.title}
+                  content={post.content}
+                />
               </Row>
               <Row>
                 {post.comments.map((comment) => (
                   <PostContent
                     // eslint-disable-next-line no-underscore-dangle
                     key={comment._id}
-                    user={comment.uid}
+                    author={comment.author.name}
+                    picture={comment.author.picture}
                     createdAt={comment.createdAt}
                     content={comment.content}
                   />
@@ -240,13 +249,17 @@ const Post = () => {
                 </Row>
               )}
               {/* Only show marking as solved for post owner */}
-              {isAuthenticated && post.uid === user.sub && (
+              {isAuthor && (
+                <Row>
+                  <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
+                    Mark as {post.solved ? " Unsolved" : " Solved"}
+                  </SolveButton>
+                </Row>
+              )}
+              {/* Only show marking as solved for admin and post owner only */}
+              {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
+              {(isAdmin || isAuthor) && (
                 <>
-                  <Row>
-                    <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
-                      Mark as {post.solved ? " Unsolved" : " Solved"}
-                    </SolveButton>
-                  </Row>
                   <Row>
                     <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
                   </Row>

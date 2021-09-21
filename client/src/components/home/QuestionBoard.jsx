@@ -161,22 +161,29 @@ const QuestionBoard = () => {
       return true;
     })
     .filter((post) => {
-      let display = true;
+      // let display = true;
       if (filter.solved !== "none" && post.solved.toString() !== filter.solved) {
-        display = false;
+        // display = false;
+        return false;
       }
       if (filter.following !== "none" && post.following.toString() !== filter.following) {
-        display = false;
+        // display = false;
+        return false;
       }
       if (isAuthenticated && filter.mine !== "none") {
-        if (filter.mine === "true" && post.uid !== user.sub) {
-          display = false;
+        // if (filter.mine === "true" && post.uid !== user.sub) {
+        if (filter.mine === "true" && post.author.uid !== user.sub) {
+          // display = false;
+          return false;
         }
-        if (filter.mine === "false" && post.uid === user.sub) {
-          display = false;
+        // if (filter.mine === "false" && post.uid === user.sub) {
+        if (filter.mine === "false" && post.author.uid === user.sub) {
+          // display = false;
+          return false;
         }
       }
-      return display;
+      // return display;
+      return true;
     })
     .sort((a, b) => {
       if (filter.sort === "newest") {
@@ -220,6 +227,7 @@ const QuestionBoard = () => {
           postId={post._id}
           title={post.title}
           body={post.content}
+          author={post.author.name}
           createdAt={post.createdAt}
           views={post.views}
           comments={post.comments}

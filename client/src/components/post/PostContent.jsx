@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
@@ -26,7 +26,7 @@ const LineBreak = styled.hr`
   }
 `;
 
-const PostContent = ({ user, createdAt, title, content }) => {
+const PostContent = ({ author, picture, createdAt, title, content }) => {
   const date = new Date(createdAt);
 
   return (
@@ -34,7 +34,8 @@ const PostContent = ({ user, createdAt, title, content }) => {
       <Container>
         <Row>
           <Col as="p" xs="8" className="ps-4 pe-2 pt-3">
-            {user}
+            <Image src={picture} width="35" height="35" alt="ProfilePic" roundedCircle />
+            &nbsp; {author}
           </Col>
           <Col as="p" xs="4" className="pe-4 pt-3 text-end">
             {moment(date).fromNow()}
@@ -63,7 +64,8 @@ PostContent.defaultProps = {
 };
 
 PostContent.propTypes = {
-  user: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   title: PropTypes.string,
   content: PropTypes.string.isRequired,

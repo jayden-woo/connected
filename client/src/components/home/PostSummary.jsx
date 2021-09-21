@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, following }) => {
+const PostSummary = ({ postId, title, body, author, createdAt, views, comments, solved, following }) => {
   const date = new Date(createdAt);
 
   return (
@@ -31,7 +31,9 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
                 <Card.Title>{title.length < 170 ? title : title.substring(0, 170).concat("...")}</Card.Title>
                 <Card.Text>{body.length < 300 ? body : body.substring(0, 300).concat("...")}</Card.Text>
                 <Card.Text>
-                  <small className="text-muted">Posted on {date.toUTCString()}</small>
+                  <small className="text-muted">
+                    Posted by ( {author} ) on ( {date.toUTCString()} )
+                  </small>
                 </Card.Text>
                 <Card.Text as="div">
                   <Row className="align-items-center">
@@ -93,6 +95,7 @@ PostSummary.propTypes = {
   postId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   views: PropTypes.number,
   comments: PropTypes.arrayOf(PropTypes.object),

@@ -4,9 +4,10 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import axios from "axios";
 import backgroundImg from "../../assets/mainHeader.png";
+import Loading from "../Loading";
 
 const Background = styled.div`
   background-color: var(--color-background);
@@ -106,23 +107,33 @@ const AddPost = () => {
       setValidated(true);
       return;
     }
-    axios.post(`${baseUrl}/api/posts`, { uid: user.sub, title, content }).then((res) => {
-      console.log(res);
-      toast.success("Your post has been successfully submitted.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-        draggable: false,
-        progress: undefined,
+    axios
+      .post(`${baseUrl}/api/posts`, {
+        author: {
+          uid: user.sub,
+          name: user.name === user.email ? user.nickname : user.name,
+          picture: user.picture,
+        },
+        title,
+        content,
+      })
+      .then((res) => {
+        console.log(res);
+        toast.success("Your post has been successfully submitted.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          pauseOnFocusLoss: false,
+          draggable: false,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          // eslint-disable-next-line no-underscore-dangle
+          history.push(`/posts/${res.data._id}`);
+        }, 3000);
       });
-      setTimeout(() => {
-        // eslint-disable-next-line no-underscore-dangle
-        history.push(`/posts/${res.data._id}`);
-      }, 3000);
-    });
   };
 
   return (
@@ -220,4 +231,6 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default withAuthenticationRequired(AddPost, {
+  onRedirecting: () => <Loading />,
+});
