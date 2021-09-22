@@ -4,10 +4,10 @@ const getAllPosts = async (req, res) => {
   const user = req.query.user;
   let posts;
   if (!user) {
-    posts = await Post.find().sort("-updatedAt");
+    posts = await Post.find().sort("-createdAt");
     // posts = await Post.find().select("-comments").sort("-updatedAt");
   } else {
-    posts = await Post.find({ uid: user }).sort("-updatedAt");
+    posts = await Post.find({ "author.uid": user }).sort("-createdAt");
     // posts = await Post.find({ uid: user })
     //   .select("-comments")
     //   .sort("-updatedAt");

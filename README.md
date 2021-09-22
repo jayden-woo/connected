@@ -15,7 +15,7 @@
 - [Confluence](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/overview?homepageId=163848)
 - [Jira](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
 - [Heroku](https://it-project-connected.herokuapp.com/)
-- [API Documentation](https://documenter.getpostman.com/view/17086104/TzzDJEme)
+- [API Documentation](https://documenter.getpostman.com/view/15417117/UUxwBoPp)
 
 ## Description about the file struture
 
