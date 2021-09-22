@@ -52,6 +52,10 @@ const SurveyNav = styled(StyledNav)`
 
 const StyledNavLink = styled(Nav.Link)`
   color: white;
+  &:hover {
+    color: white;
+    filter: brightness(75%);
+  }
 `;
 
 const Home = () => (
