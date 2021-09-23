@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -11,7 +11,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 import Loading from "../Loading";
 import uploadImage from "../../services/uploadImageService";
 import http from "../../services/httpService";
@@ -20,16 +20,22 @@ import notify from "../../services/notifyService";
 import QuestionEditor from "./QuestionEditor";
 import QuestionPreview from "./QuestionPreview";
 
-// import isAdmin from "../profile/isAdmin";
 import NotAuthenticated from "../NotAuthenticated";
 
 const SurveyEditor = ({ setProgressBar }) => {
   const [survey, setSurvey] = useState({ questions: [] });
   const [thumbnail, setThumbnail] = useState({ src: "", alt: "" });
   const [activeQuestion, setActiveQuestion] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const admin = localStorage.getItem("Admin") === "true";
-  console.log(admin);
+  const { getIdTokenClaims } = useAuth0();
+
+  useEffect(() => {
+    (async () => {
+      const claims = await getIdTokenClaims();
+      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+    })();
+  }, []);
 
   const imageSelector = useRef();
 
@@ -213,7 +219,7 @@ const SurveyEditor = ({ setProgressBar }) => {
 
   return (
     <>
-      {admin && (
+      {isAdmin && (
         <div className="se-container">
           <div className="se__top-cut-off" />
           <Container className="se__content">
@@ -348,7 +354,7 @@ const SurveyEditor = ({ setProgressBar }) => {
           </div>
         </div>
       )}
-      {!admin && <NotAuthenticated />}
+      {!isAdmin && <NotAuthenticated />}
     </>
   );
 };

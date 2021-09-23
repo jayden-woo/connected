@@ -38,6 +38,8 @@ body {
 .img-thumbnail {
   background-color: #190e89;
   padding: 0;
+  width: 140px;
+  height: 140px
 }
 
 .user-profile {
