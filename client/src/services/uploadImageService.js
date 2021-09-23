@@ -1,4 +1,4 @@
-import http from "./httpService";
+import axios from "./axios";
 import notify from "./notifyService";
 
 const cloudinaryApiEndpoint = "https://api.cloudinary.com/v1_1/ip-connected/image/upload";
@@ -32,7 +32,7 @@ const uploadImage = (file, setProgressBar) => {
   data.append("file", file);
   data.append("upload_preset", "jbqt2xhd");
 
-  return http.post(cloudinaryApiEndpoint, data, {
+  return axios.post(cloudinaryApiEndpoint, data, {
     onUploadProgress: (progressEvent) => {
       setProgressBar((prevState) => ({
         ...prevState,

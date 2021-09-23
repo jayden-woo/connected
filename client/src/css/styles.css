@@ -19,14 +19,6 @@ html {
   width: 100vw;
 }
 
-body {
-  color: var(--color-text);
-}
-
-#root {
-  width: 100vw;
-}
-
 * {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -217,7 +209,7 @@ a:visited {
 .se__btn-add {
   font-size: 1.3rem;
   width: 100%;
-  height: 4rem;
+  height: 4.5rem;
   border-width: none;
   background-color: transparent;
   color: var(--color-primary);
@@ -268,10 +260,15 @@ a:visited {
   border: 1px solid transparent;
   min-height: 10rem;
   padding: 0.5rem 0 0.5rem;
+  transition: all 0.3s;
+}
+
+.se__qp:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .se__qp--active {
-  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .se__qp input:focus {
@@ -283,9 +280,25 @@ a:visited {
 }
 
 .se__pp__title {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 500;
   margin-bottom: 1rem;
+}
+
+.se__tb__title {
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  padding-left: 2rem;
+}
+
+.se__empty {
+  color: rgb(172, 172, 172);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
 }
 
 /* Question Editor */
@@ -297,6 +310,10 @@ a:visited {
 
 .qe .container form {
   margin-bottom: 0;
+}
+
+.qe .ck-container {
+  margin: 2rem 0;
 }
 
 .qe__btn {
@@ -381,7 +398,7 @@ a:visited {
   min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
   background-color: var(--color-background);
   margin-top: var(--height-nav-bar);
-  margin-bottom: 70px;
+  padding-bottom: 25px;
 }
 
 .sp__survey {
@@ -504,6 +521,36 @@ a:visited {
   margin-left: 2.5rem;
 }
 
+/* Surveys List */
+
+.sl-container {
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  background-color: var(--color-background);
+  margin-top: var(--height-nav-bar);
+  padding-bottom: 25px;
+}
+
+.sl__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sl__more-icon {
+  background-image: url(../assets/more-vertical.svg);
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.sl--invisible {
+  color: rgb(172, 172, 172);
+}
+
+.sl-container .dropdown-toggle::after {
+  display: none;
+}
+
 /* Override SurveyJS Library Styles */
 
 .sv-question__content input:focus {
@@ -572,15 +619,6 @@ a:visited {
   border-color: var(--color-primary) !important;
 }
 
-.qe .sv-body__page {
-  margin-top: 2.4rem;
-  margin-bottom: 1rem;
-}
-
-.qe .sv-footer {
-  display: none;
-}
-
 /* header image*/
 .center-headerImage {
   text-align: center;
@@ -589,8 +627,4 @@ a:visited {
   align-items: center;
   margin: auto;
   width: 100%;
-}
-
-.dropdown-item.active, .dropdown-item:active {
-  background-color: white;
 }
