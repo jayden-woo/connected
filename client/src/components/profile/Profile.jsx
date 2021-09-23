@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./profile.css";
 import { Card, Container, Row, Col, Image, Modal, Spinner } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 import PasswordResetButton from "./Reset";
 // import EditButton from "./editButton";
+import "./profile.css";
 
 const Profile = ({ sub }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;

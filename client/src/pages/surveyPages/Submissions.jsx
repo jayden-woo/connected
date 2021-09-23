@@ -4,9 +4,9 @@ import Spinner from "react-bootstrap/Spinner";
 
 import PropTypes from "prop-types";
 import qs from "query-string";
-import http from "../../services/httpService";
+import axios from "../../services/axios";
 import notify from "../../services/notifyService";
-import Pair from "./Pair";
+import Pair from "../../components/submissions/Pair";
 
 const Submissions = ({ location }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,8 +17,8 @@ const Submissions = ({ location }) => {
 
   useEffect(async () => {
     try {
-      const { data: surveyData } = await http.get(`http://localhost:3000/api/surveys/${query.survey}`);
-      const { data: submissionsData } = await http.get(`http://localhost:3000/api/submissions/?survey=${query.survey}`);
+      const { data: surveyData } = await axios.get(`/api/surveys/${query.survey}`);
+      const { data: submissionsData } = await axios.get(`/api/submissions/?survey=${query.survey}`);
 
       const pairs = {};
 

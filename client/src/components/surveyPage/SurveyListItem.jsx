@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -15,9 +15,9 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
         <li className={className}>
           <Row>
             <Col>
-              <Link to={`/surveys/${survey._id}`}>
+              <NavLink to={`/surveys/${survey._id}`}>
                 <p>{survey.title}</p>
-              </Link>
+              </NavLink>
             </Col>
             <Col xs={1}>
               {isAdmin && (
@@ -26,7 +26,9 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
                     <div className="sl__more-icon" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item href={`submissions/?survey=${survey._id}`}>View submissions</Dropdown.Item>
+                    <Dropdown.Item as={NavLink} to={`submissions/?survey=${survey._id}`}>
+                      View submissions
+                    </Dropdown.Item>
                     {survey.visible && (
                       <Dropdown.Item onClick={() => updateSurvey(survey._id, { visible: false })}>
                         Hide this survey

@@ -260,10 +260,15 @@ a:visited {
   border: 1px solid transparent;
   min-height: 10rem;
   padding: 0.5rem 0 0.5rem;
+  transition: all 0.3s;
+}
+
+.se__qp:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .se__qp--active {
-  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .se__qp input:focus {

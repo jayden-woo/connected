@@ -1,6 +1,6 @@
 import React from "react";
 import { Auth0Provider } from "@auth0/auth0-react";
-import history from "./history";
+import { useHistory } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const Auth0ProviderWithHistory = ({ children }) => {
@@ -8,8 +8,10 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
 
+  const history = useHistory();
+
   const onRedirectCallback = (appState) => {
-    history.push(appState && appState.returnTo ? appState.returnTo : window.location.pathname);
+    history.push(appState?.returnTo || window.location.pathname);
   };
 
   return (
