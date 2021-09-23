@@ -9,7 +9,7 @@
     "client": "npm start --prefix client",
     "server": "npm run server --prefix server",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "build": "concurrently \"cd client && npm install && npm run build\" \"cd server && npm install\"",
+    "build": "concurrently \"cd client && yarn install && npm run build\" \"cd server && yarn install\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

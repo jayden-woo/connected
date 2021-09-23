@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faArrowRight,
   faSearch,
   faFilter,
   faEye,
@@ -13,8 +14,9 @@ import {
   faTimesCircle,
   faBell,
   faBellSlash,
-  faEllipsisV,
+  faReply,
 } from "@fortawesome/free-solid-svg-icons";
+import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 import PostSummary from "./PostSummary";
 import SearchBar from "./SearchBar";
@@ -22,7 +24,18 @@ import FilterMenu from "./FilterMenu";
 
 const INITIAL_MAX_POSTS = 3;
 
-library.add(faSearch, faFilter, faEye, faComments, faCheckCircle, faTimesCircle, faBell, faBellSlash, faEllipsisV);
+library.add(
+  faArrowRight,
+  faSearch,
+  faFilter,
+  faEye,
+  faComments,
+  faCheckCircle,
+  faTimesCircle,
+  faBell,
+  faBellSlash,
+  faReply
+);
 
 const StyledDiv = styled.div`
   margin: 0 8vw;
@@ -96,19 +109,21 @@ const ShowButton = styled(StyledButton)`
 `;
 
 const QuestionBoard = () => {
+  const { user, isAuthenticated } = useAuth0();
   const [allPosts, setAllPosts] = useState([]);
   const [searchTok, setSearchTok] = useState("");
   const [showFilter, setShowFilter] = useState(false);
   const [filter, setFilter] = useState({
     solved: "none",
     following: "none",
+    mine: "none",
     sort: "newest",
   });
   const [maxPosts, setMaxPosts] = useState(INITIAL_MAX_POSTS);
 
-  useEffect(() => {
-    const apiUrl = `http://localhost:3000/api/posts`;
-    axios.get(apiUrl).then((res) => {
+  useEffect(async () => {
+    const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
+    await axios.get(`${baseUrl}/api/posts`).then((res) => {
       console.log(res);
       setAllPosts(res.data);
     });
@@ -119,9 +134,11 @@ const QuestionBoard = () => {
     setFilter({
       solved: e.target.elements.filterSolvedOption.value,
       following: e.target.elements.filterFollowingOption.value,
+      mine: e.target.elements.filterMineOption.value,
       sort: e.target.elements.filterSortRadios.value,
     });
     setShowFilter(!showFilter);
+    setMaxPosts(INITIAL_MAX_POSTS);
   };
 
   const handleShowButtonClick = (e) => {
@@ -133,6 +150,10 @@ const QuestionBoard = () => {
   };
 
   const posts = allPosts
+    .map((post) => ({
+      ...post,
+      following: isAuthenticated && post.followers.includes(user.sub),
+    }))
     .filter((post) => {
       if (searchTok !== "") {
         return post.title.includes(searchTok) || post.content.includes(searchTok);
@@ -147,6 +168,14 @@ const QuestionBoard = () => {
       if (filter.following !== "none" && post.following.toString() !== filter.following) {
         display = false;
       }
+      if (isAuthenticated && filter.mine !== "none") {
+        if (filter.mine === "true" && post.uid !== user.sub) {
+          display = false;
+        }
+        if (filter.mine === "false" && post.uid === user.sub) {
+          display = false;
+        }
+      }
       return display;
     })
     .sort((a, b) => {
@@ -157,10 +186,10 @@ const QuestionBoard = () => {
         return a.title < b.title ? -1 : 1;
       }
       if (filter.sort === "views") {
-        return a.numViews > b.numViews ? -1 : 1;
+        return a.views > b.views ? -1 : 1;
       }
       if (filter.sort === "comments") {
-        return a.numComments > b.numComments ? -1 : 1;
+        return a.comments.length > b.comments.length ? -1 : 1;
       }
       return 0;
     });
@@ -180,7 +209,7 @@ const QuestionBoard = () => {
         </Row>
         <Collapse in={showFilter}>
           <div>
-            <FilterMenu handleFilterSubmit={handleFilterSubmit} />
+            <FilterMenu isAuthenticated={isAuthenticated} handleFilterSubmit={handleFilterSubmit} />
           </div>
         </Collapse>
       </StyledContainer>
@@ -192,8 +221,8 @@ const QuestionBoard = () => {
           title={post.title}
           body={post.content}
           createdAt={post.createdAt}
-          views={post.numViews}
-          comments={post.numComments}
+          views={post.views}
+          comments={post.comments}
           solved={post.solved}
           following={post.following}
         />

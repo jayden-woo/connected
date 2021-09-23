@@ -16,6 +16,7 @@
 
 html {
   font-size: 87.5%;
+  width: 100vw;
 }
 
 * {
@@ -30,6 +31,10 @@ html {
 
 input[type="file"] {
   display: none;
+}
+
+.link {
+  color: var(--color-text);
 }
 
 a:link,

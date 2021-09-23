@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "test": "jest --watchAll"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "Team Connected",
@@ -21,9 +21,14 @@
     "mongoose": "^5.13.5",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "request": "2.83.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "jest": "^27.1.0"
+    "jest": "^27.1.0",
+    "chai": "4.1.2",
+    "debug": "2.2.0",
+    "mocha": "5.2.0"
   }
 }

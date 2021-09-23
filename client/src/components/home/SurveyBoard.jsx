@@ -44,12 +44,12 @@ const StyledImage = styled.img`
 `;
 
 const SurveyBoard = () => {
-  console.log(allSurveys);
   // const [allSurveys, setAllSurveys] = useState([]);
+  console.log(allSurveys);
 
   // useEffect(() => {
-  //   const apiUrl = `http://localhost:3000/api/surveys`;
-  //   axios.get(apiUrl).then((res) => {
+  //   const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
+  //   axios.get(`${baseUrl}/api/surveys`).then((res) => {
   //     console.log(res);
   //     setAllSurveys(res.data);
   //   });
