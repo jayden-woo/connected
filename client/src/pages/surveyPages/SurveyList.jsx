@@ -18,7 +18,7 @@ const SurveyList = () => {
     try {
       const res = await axios.get("/api/surveys");
       setSurveys(res.data);
-
+      console.log(res);
       const claims = await getIdTokenClaims();
       if (claims) setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
       else setIsAdmin(false);
@@ -31,7 +31,7 @@ const SurveyList = () => {
 
   const updateSurvey = async (id, changes) => {
     const index = _.findIndex(surveys, { _id: id });
-    const { data } = await axios.put(`http://localhost:3000/api/surveys/${id}`, changes);
+    const { data } = await axios.put(`/api/surveys/${id}`, changes);
     const survey = _.pick(data, ["_id", "title", "thumbnail", "updatedAt", "visible"]);
     const newSurveys = [...surveys];
     newSurveys[index] = survey;
