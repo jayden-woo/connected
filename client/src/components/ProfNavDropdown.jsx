@@ -8,11 +8,11 @@ import ModalProfile from "./profile/ModalProfile";
 const ProfNavDropdown = () => {
   const [modalShow, setModalShow] = useState(false);
 
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { user, getAccessTokenSilently, isLoading, getIdTokenClaims } = useAuth0();
   const [state, setState] = useState({
     error: null,
-    admin: false,
     userId: null,
+    isAdmin: false,
     loading: true,
   });
 
@@ -40,13 +40,13 @@ const ProfNavDropdown = () => {
             },
           });
 
-          const { user_metadata, user_id } = await res.json();
+          const { user_id } = await res.json();
+          const claims = await getIdTokenClaims();
           setState({
-            admin: user_metadata.Role === "Admin",
             userId: user_id,
             loading: false,
+            isAdmin: claims["https://it-project-connected.herokuapp.com/roles"] === "admin",
           });
-          localStorage.setItem("isAdmin", user_metadata.Role === "Admin");
         } catch (error) {
           setState({
             ...state,
@@ -59,7 +59,7 @@ const ProfNavDropdown = () => {
     })();
   }, [getAccessTokenSilently, user?.sub]);
 
-  if (state.loading) {
+  if (state.loading || isLoading) {
     return <Spinner className="text-center" animation="grow" />;
   }
 
@@ -70,12 +70,12 @@ const ProfNavDropdown = () => {
         id="collasible-nav-dropdown"
         style={{ backgroundColor: "rgba(var(--bs-light-rgb)" }}
       >
-        {state.admin && (
+        {state.isAdmin && (
           <NavDropdown.Item as={NavLink} to="/create-survey" style={dropdownItemStyle} exact>
             CREATE SURVEY
           </NavDropdown.Item>
         )}
-        {state.admin && (
+        {state.isAdmin && (
           <NavDropdown.Item as={NavLink} to="/" style={dropdownItemStyle} exact>
             SUBMISSION
           </NavDropdown.Item>

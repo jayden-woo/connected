@@ -21,8 +21,8 @@ const Navigation = () => {
             <Nav.Link as={NavLink} to="/" exact>
               HOME
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/survey" exact>
-              SURVEY
+            <Nav.Link as={NavLink} to="/surveys" exact>
+              SURVEYS
             </Nav.Link>
             <Nav.Link as={NavLink} to="/about" exact>
               ABOUT
@@ -33,7 +33,16 @@ const Navigation = () => {
           {!isAuthenticated && (
             <Nav fill>
               <Nav.Item>
-                <Nav.Link style={{ fontWeight: "bold", color: "#000766" }} onClick={() => loginWithRedirect()}>
+                <Nav.Link
+                  style={{ fontWeight: "bold", color: "#000766" }}
+                  onClick={() =>
+                    loginWithRedirect({
+                      appState: {
+                        returnTo: window.location.pathname,
+                      },
+                    })
+                  }
+                >
                   LOG IN
                 </Nav.Link>
               </Nav.Item>

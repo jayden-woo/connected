@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -8,30 +8,36 @@ import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 
 import _ from "lodash";
-import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-import Loading from "../Loading";
+import { useAuth0 } from "@auth0/auth0-react";
+import UploadProgressBar from "../../components/common/UploadProgressBar";
 import uploadImage from "../../services/uploadImageService";
-import http from "../../services/httpService";
+import axios from "../../services/axios";
 import notify from "../../services/notifyService";
 
-import QuestionEditor from "./QuestionEditor";
-import QuestionPreview from "./QuestionPreview";
+import QuestionEditor from "../../components/surveyEditor/QuestionEditor";
+import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 
-// import isAdmin from "../profile/isAdmin";
 import NotAuthenticated from "../NotAuthenticated";
 
-const SurveyEditor = ({ setProgressBar }) => {
+const SurveyEditor = () => {
   const [survey, setSurvey] = useState({ questions: [] });
   const [thumbnail, setThumbnail] = useState({ src: "", alt: "" });
   const [activeQuestion, setActiveQuestion] = useState("");
-
-  const admin = localStorage.getItem("Admin") === "true";
-  console.log(admin);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [progressBar, setProgressBar] = useState({
+    visible: false,
+    progress: 0,
+  });
 
   const imageSelector = useRef();
+
+  const { user, getIdTokenClaims } = useAuth0();
+  useEffect(async () => {
+    const claims = await getIdTokenClaims();
+    setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+  }, []);
 
   // TODO: remove this
   const history = useHistory();
@@ -143,6 +149,7 @@ const SurveyEditor = ({ setProgressBar }) => {
   };
 
   // TODO: proper validation
+  // TODO: unique choices
   const validate = () => {
     // if (survey.questions.length === 0) {
     //   alert("Survey cannot be empty.");
@@ -191,19 +198,16 @@ const SurveyEditor = ({ setProgressBar }) => {
       title: survey.title,
       description: survey.description,
       questions: newQuestions,
-      creator: "auth0|6110b5c4c61fd70077d2819d",
+      creator: user.sub,
       thumbnail: survey.thumbnail,
     };
 
     if (!data.thumbnail) delete data.thumbnail;
 
-    console.log(data);
-
-    // TODO: remove unneccesary lines
     try {
-      const res = await http.post("http://localhost:3000/api/surveys", data);
+      const res = await axios.post("/api/surveys", data);
       notify.successNotify("Successfully Published!");
-      console.log(res.data);
+
       // eslint-disable-next-line no-underscore-dangle
       history.push(`/surveys/${res.data._id}`);
     } catch (e) {
@@ -213,12 +217,14 @@ const SurveyEditor = ({ setProgressBar }) => {
 
   return (
     <>
-      {admin && (
+      <UploadProgressBar progressBar={progressBar} />
+      {isAdmin && (
         <div className="se-container">
           <div className="se__top-cut-off" />
           <Container className="se__content">
             <Row>
               <Col className="se__add-btn-group" md={12} xl={2}>
+                <p className="se__tb__title">TOOLBOX</p>
                 <Button className="se__btn-add shadow-none" onClick={() => handleAdd("text")}>
                   + Simple Text
                 </Button>
@@ -348,15 +354,9 @@ const SurveyEditor = ({ setProgressBar }) => {
           </div>
         </div>
       )}
-      {!admin && <NotAuthenticated />}
+      {!isAdmin && <NotAuthenticated />}
     </>
   );
 };
 
-SurveyEditor.propTypes = {
-  setProgressBar: PropTypes.func.isRequired,
-};
-
-export default withAuthenticationRequired(SurveyEditor, {
-  onRedirecting: () => <Loading />,
-});
+export default SurveyEditor;

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import Auth0ProviderWithHistory from "./utils/Auth0ProviderWithHistory";
 import "normalize.css";
@@ -11,10 +12,10 @@ import "./css/styles.css";
 
 // Please see https://auth0.github.io/auth0-react/interfaces/auth0_provider.auth0provideroptions.html
 ReactDOM.render(
-  <React.StrictMode>
+  <Router>
     <Auth0ProviderWithHistory>
       <App />
     </Auth0ProviderWithHistory>
-  </React.StrictMode>,
+  </Router>,
   document.getElementById("root")
 );
