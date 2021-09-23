@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Col, Collapse, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowRight,
@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
+import axios from "../../services/axios";
 import PostSummary from "./PostSummary";
 import SearchBar from "./SearchBar";
 import FilterMenu from "./FilterMenu";
@@ -122,8 +123,9 @@ const QuestionBoard = () => {
   const [maxPosts, setMaxPosts] = useState(INITIAL_MAX_POSTS);
 
   useEffect(async () => {
-    const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
-    await axios.get(`${baseUrl}/api/posts`).then((res) => {
+    // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
+    // await axios.get(`${baseUrl}/api/posts`).then((res) => {
+    await axios.get("/api/posts").then((res) => {
       console.log(res);
       setAllPosts(res.data);
     });
@@ -161,22 +163,29 @@ const QuestionBoard = () => {
       return true;
     })
     .filter((post) => {
-      let display = true;
+      // let display = true;
       if (filter.solved !== "none" && post.solved.toString() !== filter.solved) {
-        display = false;
+        // display = false;
+        return false;
       }
       if (filter.following !== "none" && post.following.toString() !== filter.following) {
-        display = false;
+        // display = false;
+        return false;
       }
       if (isAuthenticated && filter.mine !== "none") {
-        if (filter.mine === "true" && post.uid !== user.sub) {
-          display = false;
+        // if (filter.mine === "true" && post.uid !== user.sub) {
+        if (filter.mine === "true" && post.author.uid !== user.sub) {
+          // display = false;
+          return false;
         }
-        if (filter.mine === "false" && post.uid === user.sub) {
-          display = false;
+        // if (filter.mine === "false" && post.uid === user.sub) {
+        if (filter.mine === "false" && post.author.uid === user.sub) {
+          // display = false;
+          return false;
         }
       }
-      return display;
+      // return display;
+      return true;
     })
     .sort((a, b) => {
       if (filter.sort === "newest") {
@@ -220,6 +229,7 @@ const QuestionBoard = () => {
           postId={post._id}
           title={post.title}
           body={post.content}
+          author={post.author.name}
           createdAt={post.createdAt}
           views={post.views}
           comments={post.comments}

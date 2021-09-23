@@ -62,7 +62,7 @@ const Navigation = () => {
                     style={{ fontWeight: "bold", color: "#000766" }}
                     onClick={() => {
                       logout({ returnTo: window.location.origin });
-                      localStorage.removeItem("Admin");
+                      localStorage.removeItem("isAdmin");
                     }}
                   >
                     LOG OUT
