@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Col, Collapse, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowRight,
@@ -18,6 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
+import axios from "../../services/axios";
 import PostSummary from "./PostSummary";
 import SearchBar from "./SearchBar";
 import FilterMenu from "./FilterMenu";
@@ -122,8 +123,9 @@ const QuestionBoard = () => {
   const [maxPosts, setMaxPosts] = useState(INITIAL_MAX_POSTS);
 
   useEffect(async () => {
-    const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
-    await axios.get(`${baseUrl}/api/posts`).then((res) => {
+    // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
+    // await axios.get(`${baseUrl}/api/posts`).then((res) => {
+    await axios.get("/api/posts").then((res) => {
       console.log(res);
       setAllPosts(res.data);
     });

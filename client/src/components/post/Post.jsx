@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Col, Container, Row, Modal } from "react-bootstrap";
 import MediaQuery from "react-responsive";
-import axios from "axios";
+// import axios from "axios";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import axios from "../../services/axios";
 import backgroundImg from "../../assets/mainHeader.png";
 import PostStats from "./PostStats";
 import PostContent from "./PostContent";
@@ -107,22 +108,25 @@ const CancelButton = styled(ConfirmDeleteButton)`
 `;
 
 const Post = () => {
-  const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
+  // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   const { id } = useParams();
   const history = useHistory();
-  const { user, isAuthenticated } = useAuth0();
-  const isAdmin = localStorage.getItem("isAdmin");
+  const { user, getIdTokenClaims, isAuthenticated } = useAuth0();
+  // const isAdmin = localStorage.getItem("isAdmin");
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthor, setIsAuthor] = useState(false);
   const [post, setPost] = useState();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/api/posts/${id}`)
+      // .get(`${baseUrl}/api/posts/${id}`)
+      .get(`/api/posts/${id}`)
       .then((res) => {
         console.log(res);
         // Increment the post view count
-        return axios.put(`${baseUrl}/api/posts/${id}`, { views: res.data.views + 1 });
+        // return axios.put(`${baseUrl}/api/posts/${id}`, { views: res.data.views + 1 });
+        return axios.put(`/api/posts/${id}`, { views: res.data.views + 1 });
       })
       .then((res) => {
         console.log(res);
@@ -131,19 +135,27 @@ const Post = () => {
       });
   }, []);
 
+  // Check for admin status everytime when isAuthenticated changes its value
+  useEffect(async () => {
+    const claims = await getIdTokenClaims();
+    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+  }, [isAuthenticated]);
+
   const handleFollowClick = () => {
     const { followers } = post;
     const index = followers.indexOf(user.sub);
     // eslint-disable-next-line no-unused-expressions
     index === -1 ? followers.push(user.sub) : followers.splice(index, 1);
-    axios.put(`${baseUrl}/api/posts/${id}`, { followers }).then((res) => {
+    // axios.put(`${baseUrl}/api/posts/${id}`, { followers }).then((res) => {
+    axios.put(`/api/posts/${id}`, { followers }).then((res) => {
       console.log(res);
       setPost(res.data);
     });
   };
 
   const handleSolveClick = () => {
-    axios.put(`${baseUrl}/api/posts/${id}`, { solved: !post.solved }).then((res) => {
+    // axios.put(`${baseUrl}/api/posts/${id}`, { solved: !post.solved }).then((res) => {
+    axios.put(`/api/posts/${id}`, { solved: !post.solved }).then((res) => {
       console.log(res);
       setPost(res.data);
     });
@@ -151,7 +163,8 @@ const Post = () => {
 
   const handleDeleteClick = () => {
     setShowConfirmation(false);
-    axios.delete(`${baseUrl}/api/posts/${id}`).then((res) => {
+    // axios.delete(`${baseUrl}/api/posts/${id}`).then((res) => {
+    axios.delete(`/api/posts/${id}`).then((res) => {
       console.log(res);
       toast.success("Your post has been successfully deleted.", {
         position: "top-center",
@@ -178,7 +191,8 @@ const Post = () => {
       },
       content: reply,
     };
-    axios.put(`${baseUrl}/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
+    // axios.put(`${baseUrl}/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
+    axios.put(`/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
       console.log(res);
       setPost(res.data);
     });
@@ -191,7 +205,7 @@ const Post = () => {
     <Background>
       <StyledImage src={backgroundImg} />
       <StyledHeader>
-        <a className="text-white" href="/">{` Question Board `}</a>
+        <Link className="text-white" to="/">{` Question Board `}</Link>
         &nbsp;&nbsp;&nbsp;
         <FontAwesomeIcon icon="arrow-right" size="sm" color="white" />
         &nbsp;&nbsp;&nbsp;

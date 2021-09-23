@@ -21,7 +21,7 @@ const App = () => (
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/about" exact component={About} />
-      <Route path="/posts/add" exact component={AddPost} />
+      <ProtectedRoute path="/posts/add" exact component={AddPost} />
       <Route path="/posts/:id" exact component={Post} />
       <Route path="/surveys/:id" exact component={SurveyPage} />
       <Route path="/surveys" exact component={SurveyList} />

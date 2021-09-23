@@ -3,6 +3,7 @@
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import axios from "axios";
+// import axios from "../../services/axios";
 import styled from "styled-components";
 
 // TEMP
@@ -50,6 +51,7 @@ const SurveyBoard = () => {
   // useEffect(() => {
   //   const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   //   axios.get(`${baseUrl}/api/surveys`).then((res) => {
+  //   axios.get("/api/surveys").then((res) => {
   //     console.log(res);
   //     setAllSurveys(res.data);
   //   });
@@ -73,7 +75,7 @@ const SurveyBoard = () => {
         ))}
       </Carousel>
       <h3 className="pt-3 pb-4">
-        Click <a href="/surveys">Here</a> for More Surveys!
+        Click <Link to="/surveys">Here</Link> for More Surveys!
       </h3>
     </StyledDiv>
   );
