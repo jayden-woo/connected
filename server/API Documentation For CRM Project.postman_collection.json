@@ -415,6 +415,78 @@
 					]
 				},
 				{
+					"name": "Edit A Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Lorem Ipsum Testing Post Edited\",\n    \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment.\",\n    \"history\": {\n        \"title\": \"Lorem Ipsum Testing Post\",\n        \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment. Collected few extremity suffering met had sportsman.\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/posts/{{post_id}}/edit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"{{post_id}}",
+								"edit"
+							]
+						},
+						"description": "Edit the title and content of the post specified by the `post_id` parameter and the request body.\n> On success, a HTTP `200` status code would be returned, along with the updated post.\n>\n> If the format of the request body is illegal, a `400` status code would be returned.\n>\n> If the post with the given `post_id` was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Edit A Post Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Lorem Ipsum Testing Post Edited\",\n    \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment.\",\n    \"history\": {\n        \"title\": \"Lorem Ipsum Testing Post\",\n        \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment. Collected few extremity suffering met had sportsman.\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/posts/{{post_id}}/edit",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"posts",
+										"{{post_id}}",
+										"edit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"author\": {\n        \"uid\": \"google-oauth2|116202772159521559604\",\n        \"name\": \"Jun Cheng Woo\",\n        \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n    },\n    \"views\": 6,\n    \"solved\": false,\n    \"followers\": [],\n    \"_id\": \"614e1a6d6a2b89e3e2a9996f\",\n    \"title\": \"Lorem Ipsum Testing Post Edited\",\n    \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment.\",\n    \"comments\": [\n        {\n            \"author\": {\n                \"uid\": \"google-oauth2|116202772159521559604\",\n                \"name\": \"Jun Cheng Woo\",\n                \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n            },\n            \"_id\": \"614e1a8f6a2b89e3e2a99973\",\n            \"content\": \"Some additional information to clarify the question even further.\",\n            \"updatedAt\": \"2021-09-24T18:36:18.057Z\",\n            \"createdAt\": \"2021-09-24T18:35:59.500Z\",\n            \"history\": [\n                {\n                    \"_id\": \"614e1aa26a2b89e3e2a99976\",\n                    \"content\": \"Some additional information to clarify the question.\",\n                    \"createdAt\": \"2021-09-24T18:36:18.057Z\",\n                    \"updatedAt\": \"2021-09-24T18:36:18.057Z\"\n                }\n            ]\n        }\n    ],\n    \"history\": [\n        {\n            \"_id\": \"614e1e040e6759e8ccb382ff\",\n            \"title\": \"Lorem Ipsum Testing Post\",\n            \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment. Collected few extremity suffering met had sportsman.\",\n            \"updatedAt\": \"2021-09-24T18:50:44.111Z\",\n            \"createdAt\": \"2021-09-24T18:50:44.111Z\"\n        }\n    ],\n    \"createdAt\": \"2021-09-24T18:35:25.847Z\",\n    \"updatedAt\": \"2021-09-24T18:50:44.197Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
 					"name": "Add Comments to A Post",
 					"request": {
 						"method": "PUT",
@@ -487,6 +559,80 @@
 					]
 				},
 				{
+					"name": "Edit A Comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Some additional information to clarify the question even further. Here's some additional info again.\",\n    \"history\": {\n        \"content\": \"Some additional information to clarify the question even further.\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/posts/{{post_id}}/comment/{{comment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"{{post_id}}",
+								"comment",
+								"{{comment_id}}"
+							]
+						},
+						"description": "Edit the content of the comment specified by the `comment_id` of the post specified by the `post_id` parameter and the request body.\n> On success, a HTTP `200` status code would be returned, along with the updated post.\n>\n> If the format of the request body is illegal, a `400` status code would be returned.\n>\n> If the post with the given `post_id` was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Edit A Comment Example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"content\": \"Some additional information to clarify the question even further. Here's some additional info again.\",\n    \"history\": {\n        \"content\": \"Some additional information to clarify the question even further.\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/posts/{{post_id}}/comment/{{comment_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"posts",
+										"{{post_id}}",
+										"comment",
+										"{{comment_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"author\": {\n        \"uid\": \"google-oauth2|116202772159521559604\",\n        \"name\": \"Jun Cheng Woo\",\n        \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n    },\n    \"views\": 6,\n    \"solved\": false,\n    \"followers\": [],\n    \"_id\": \"614e1a6d6a2b89e3e2a9996f\",\n    \"title\": \"Lorem Ipsum Testing Post Edited\",\n    \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment.\",\n    \"comments\": [\n        {\n            \"author\": {\n                \"uid\": \"google-oauth2|116202772159521559604\",\n                \"name\": \"Jun Cheng Woo\",\n                \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n            },\n            \"_id\": \"614e1a8f6a2b89e3e2a99973\",\n            \"content\": \"Some additional information to clarify the question even further. Here's some additional info again.\",\n            \"updatedAt\": \"2021-09-24T18:56:25.348Z\",\n            \"createdAt\": \"2021-09-24T18:35:59.500Z\",\n            \"history\": [\n                {\n                    \"_id\": \"614e1aa26a2b89e3e2a99976\",\n                    \"content\": \"Some additional information to clarify the question.\",\n                    \"createdAt\": \"2021-09-24T18:36:18.057Z\",\n                    \"updatedAt\": \"2021-09-24T18:36:18.057Z\"\n                },\n                {\n                    \"_id\": \"614e1f590e6759e8ccb38303\",\n                    \"content\": \"Some additional information to clarify the question even further.\",\n                    \"createdAt\": \"2021-09-24T18:56:25.348Z\",\n                    \"updatedAt\": \"2021-09-24T18:56:25.348Z\"\n                }\n            ]\n        }\n    ],\n    \"history\": [\n        {\n            \"_id\": \"614e1e040e6759e8ccb382ff\",\n            \"title\": \"Lorem Ipsum Testing Post\",\n            \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment. Collected few extremity suffering met had sportsman.\",\n            \"updatedAt\": \"2021-09-24T18:50:44.111Z\",\n            \"createdAt\": \"2021-09-24T18:50:44.111Z\"\n        }\n    ],\n    \"createdAt\": \"2021-09-24T18:35:25.847Z\",\n    \"updatedAt\": \"2021-09-24T18:56:25.348Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
 					"name": "Delete A Post",
 					"request": {
 						"method": "DELETE",
@@ -511,14 +657,14 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{base_url}}/api/posts/614bb421e5cd8c8d0b341a8f",
+									"raw": "{{base_url}}/api/posts/{{post_id}}",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"api",
 										"posts",
-										"614bb421e5cd8c8d0b341a8f"
+										"{{post_id}}"
 									]
 								}
 							},
@@ -567,9 +713,58 @@
 							"body": "{\n    \"author\": {\n        \"uid\": \"google-oauth2|116202772159521559604\",\n        \"name\": \"Jun Cheng Woo\",\n        \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n    },\n    \"views\": 1,\n    \"solved\": false,\n    \"followers\": [],\n    \"_id\": \"614bb421e5cd8c8d0b341a8f\",\n    \"title\": \"Test Post\",\n    \"content\": \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum nemo a temporibus nobis animi ipsam sint impedit, nostrum soluta adipisci.\",\n    \"comments\": [],\n    \"createdAt\": \"2021-09-22T22:54:25.247Z\",\n    \"updatedAt\": \"2021-09-22T22:54:28.462Z\",\n    \"__v\": 0\n}"
 						}
 					]
+				},
+				{
+					"name": "Delete A Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/posts/{{post_id}}/comments/{{comment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"{{post_id}}",
+								"comments",
+								"{{comment_id}}"
+							]
+						},
+						"description": "Delete the comment specified by the given `comment_id` in the post with the given `post_id`.\n> On success, a HTTP `200` status code would be returned, along with the deleted post.\n>\n> If the post with the given `post_id` was not found, a `404` status code would be returned."
+					},
+					"response": [
+						{
+							"name": "Delete A Comment Example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/posts/{{post_id}}/comments/{{comment_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"posts",
+										"{{post_id}}",
+										"comments",
+										"{{comment_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"author\": {\n        \"uid\": \"google-oauth2|116202772159521559604\",\n        \"name\": \"Jun Cheng Woo\",\n        \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n    },\n    \"views\": 7,\n    \"solved\": false,\n    \"followers\": [],\n    \"_id\": \"614e1a6d6a2b89e3e2a9996f\",\n    \"title\": \"Lorem Ipsum Testing Post Edited\",\n    \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment.\",\n    \"comments\": [\n        {\n            \"author\": {\n                \"uid\": \"google-oauth2|116202772159521559604\",\n                \"name\": \"Jun Cheng Woo\",\n                \"picture\": \"https://lh3.googleusercontent.com/a/AATXAJx0-6Lh_RUE4bacJeyAk1CQB6crWvXCWJs3I_vY=s96-c\"\n            },\n            \"_id\": \"614e1a8f6a2b89e3e2a99973\",\n            \"content\": \"Some additional information to clarify the question even further. Here's some additional info again.\",\n            \"updatedAt\": \"2021-09-24T18:56:25.348Z\",\n            \"createdAt\": \"2021-09-24T18:35:59.500Z\",\n            \"history\": [\n                {\n                    \"_id\": \"614e1aa26a2b89e3e2a99976\",\n                    \"content\": \"Some additional information to clarify the question.\",\n                    \"createdAt\": \"2021-09-24T18:36:18.057Z\",\n                    \"updatedAt\": \"2021-09-24T18:36:18.057Z\"\n                },\n                {\n                    \"_id\": \"614e1f590e6759e8ccb38303\",\n                    \"content\": \"Some additional information to clarify the question even further.\",\n                    \"createdAt\": \"2021-09-24T18:56:25.348Z\",\n                    \"updatedAt\": \"2021-09-24T18:56:25.348Z\"\n                }\n            ]\n        }\n    ],\n    \"history\": [\n        {\n            \"_id\": \"614e1e040e6759e8ccb382ff\",\n            \"title\": \"Lorem Ipsum Testing Post\",\n            \"content\": \"In up so discovery my middleton eagerness dejection explained. Estimating excellence ye contrasted insensible as. Oh up unsatiable advantages decisively as at interested. Present suppose in esteems in demesne colonel it to. End horrible she landlord screened stanhill. Repeated offended you opinions off dissuade ask packages screened. She alteration everything sympathize impossible his get compliment. Collected few extremity suffering met had sportsman.\",\n            \"updatedAt\": \"2021-09-24T18:50:44.111Z\",\n            \"createdAt\": \"2021-09-24T18:50:44.111Z\"\n        }\n    ],\n    \"createdAt\": \"2021-09-24T18:35:25.847Z\",\n    \"updatedAt\": \"2021-09-24T18:59:34.013Z\",\n    \"__v\": 1\n}"
+						}
+					]
 				}
 			],
-			"description": "API calls related to post section. <br><br>\nA `post` has the following schema: <br>\n> - `author` : details of the user who authored this post\n> > object\n>  - `uid` : user id of the author\n> > string, generated by Auth0\n>  - `name` : name of the author\n> > string, generated by Auth0\n>  - `picture` : link to the source of the picture of the author\n> > string, generated by Auth0\n> - `title` : title of this post\n> > string, 5 - 100 characters\n> - `content` : main body of this post\n> > string, 5 - 1000 characters\n> - `views` : number of views of this post\n> > int, default: 0\n> - `solved` : if this post has been solved\n> > bool, default: false\n> - `followers` : followers of this post\n> > [string], array of string, default: []\n> - `comments` : comments of this post\n> > [`comment`], array of `comment` objects which is defined below\n> - `createdAt` : date when the user published this post\n> > date, auto generated by MongoDB when this post is added\n\n<br>\n\nA `comment` has the following schema: <br>\n> - `author` : details of the user who authored this post\n> > object\n>  - `uid` : user id of the author\n> > string, generated by Auth0\n>  - `name` : name of the author\n> > string, generated by Auth0\n>  - `picture` : link to the source of the picture of the author\n> > string, generated by Auth0\n> - `content` : content of this comment\n> > string, 5 - 1000 characters\n> - `createdAt` : date when the user added this comment\n> > date, auto generated by MongoDB when this comment is added"
+			"description": "API calls related to post section. <br><br>\nA `post` has the following schema: <br>\n> - `author` : details of the user who authored this post\n> > object\n>  - `uid` : user id of the author\n> > string, generated by Auth0\n>  - `name` : name of the author\n> > string, generated by Auth0\n>  - `picture` : link to the source of the picture of the author\n> > string, generated by Auth0\n> - `title` : title of this post\n> > string, 5 - 100 characters\n> - `content` : main body of this post\n> > string, 5 - 1000 characters\n> - `views` : number of views of this post\n> > int, default: 0\n> - `solved` : if this post has been solved\n> > bool, default: false\n> - `followers` : followers of this post\n> > [string], array of string, default: []\n> - `comments` : comments of this post\n> > [`comment`], array of `comment` objects which is defined below\n> - `history` : history of this post\n> > [`history`], array of `history` objects which is defined below\n> - `createdAt` : date when the user published this post\n> > date, auto generated by MongoDB when this post is added\n\n<br>\n\nA `comment` has the following schema: <br>\n> - `author` : details of the user who authored this post\n> > object\n>  - `uid` : user id of the author\n> > string, generated by Auth0\n>  - `name` : name of the author\n> > string, generated by Auth0\n>  - `picture` : link to the source of the picture of the author\n> > string, generated by Auth0\n> - `content` : content of this comment\n> > string, 5 - 1000 characters\n> - `history` : history of this comment\n> > [`history`], array of `history` objects which is defined below\n> - `createdAt` : date when the user added this comment\n> > date, auto generated by MongoDB when this comment is added\n\n<br>\n\nA `history` has the following schema: <br>\n> - `title` : title of this post / comment before the change\n> > string, 5 - 1000 characters\n> - `content` : content of this post / comment before the change\n> > string, 5 - 1000 characters\n> - `createdAt` : date when the user made this change\n> > date, auto generated by MongoDB when this comment is added"
 		},
 		{
 			"name": "Submission",
