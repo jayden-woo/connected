@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import axios from "../../services/axios";
 import backgroundImg from "../../assets/mainHeader.png";
 import PostStats from "./PostStats";
+import PostComment from "./PostComment";
 import PostContent from "./PostContent";
 import PostReply from "./PostReply";
 import Loading from "../Loading";
@@ -131,7 +132,7 @@ const Post = () => {
       .then((res) => {
         console.log(res);
         setPost(res.data);
-        setIsAuthor(isAuthenticated && res.data.author.uid === user.sub);
+        // setIsAuthor(isAuthenticated && res.data.author.uid === user.sub);
       });
   }, []);
 
@@ -140,6 +141,12 @@ const Post = () => {
     const claims = await getIdTokenClaims();
     setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
   }, [isAuthenticated]);
+
+  useEffect(async () => {
+    if (isAuthenticated && post !== undefined) {
+      setIsAuthor(post.author.uid === user.sub);
+    }
+  }, [isAuthenticated, post]);
 
   const handleFollowClick = () => {
     const { followers } = post;
@@ -161,7 +168,7 @@ const Post = () => {
     });
   };
 
-  const handleDeleteClick = () => {
+  const handlePostDeleteClick = () => {
     setShowConfirmation(false);
     // axios.delete(`${baseUrl}/api/posts/${id}`).then((res) => {
     axios.delete(`/api/posts/${id}`).then((res) => {
@@ -217,22 +224,33 @@ const Post = () => {
             <Col xs="8" className="ps-4">
               <Row>
                 <PostContent
-                  author={post.author.name}
-                  picture={post.author.picture}
+                  // eslint-disable-next-line no-underscore-dangle
+                  pid={post._id}
+                  isAuthor={isAuthor}
+                  author={post.author}
                   createdAt={post.createdAt}
                   title={post.title}
                   content={post.content}
+                  history={post.history}
+                  onDeleteClick={() => setShowConfirmation(true)}
+                  setPost={setPost}
                 />
               </Row>
               <Row>
                 {post.comments.map((comment) => (
-                  <PostContent
+                  <PostComment
                     // eslint-disable-next-line no-underscore-dangle
                     key={comment._id}
-                    author={comment.author.name}
-                    picture={comment.author.picture}
+                    // eslint-disable-next-line no-underscore-dangle
+                    pid={post._id}
+                    // eslint-disable-next-line no-underscore-dangle
+                    cid={comment._id}
+                    author={comment.author}
                     createdAt={comment.createdAt}
                     content={comment.content}
+                    history={comment.history}
+                    // onDeleteClick={handleCommentDeleteClick}
+                    setPost={setPost}
                   />
                 ))}
               </Row>
@@ -270,28 +288,26 @@ const Post = () => {
                   </SolveButton>
                 </Row>
               )}
-              {/* Only show marking as solved for admin and post owner only */}
+              {/* Only delete post for admin and post owner only */}
               {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
               {(isAdmin || isAuthor) && (
-                <>
-                  <Row>
-                    <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
-                  </Row>
-                  <Modal className="vw-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
-                    <Modal.Header className="px-4" closeButton>
-                      <Modal.Title>Delete Post?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className="px-5 py-4 text-center">
-                      <p className="m-0 p-1">Do you really want to permanently delete this post?</p>
-                      <p className="m-0 p-1">This process cannot be undone.</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <CancelButton onClick={() => setShowConfirmation(false)}>Cancel</CancelButton>
-                      <ConfirmDeleteButton onClick={handleDeleteClick}>Delete</ConfirmDeleteButton>
-                    </Modal.Footer>
-                  </Modal>
-                </>
+                <Row>
+                  <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
+                </Row>
               )}
+              <Modal className="vw-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
+                <Modal.Header className="px-4" closeButton>
+                  <Modal.Title>Delete Post?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="px-5 py-4 text-center">
+                  <p className="m-0 p-1">Do you really want to permanently delete this post?</p>
+                  <p className="m-0 p-1">This process cannot be undone.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <CancelButton onClick={() => setShowConfirmation(false)}>Cancel</CancelButton>
+                  <ConfirmDeleteButton onClick={handlePostDeleteClick}>Delete</ConfirmDeleteButton>
+                </Modal.Footer>
+              </Modal>
             </Col>
           </Row>
         </Container>
