@@ -22,7 +22,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
       redirectUri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
       cacheLocation="memory"
-      useRefreshTokens
       scope="read:users read:user_idp_tokens read:current_user"
     >
       {children}

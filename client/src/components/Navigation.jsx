@@ -9,7 +9,7 @@ const Navigation = () => {
   const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
   return (
-    <Navbar fixed="top" expand="xl" bg="light">
+    <Navbar fixed="top" expand="xl" bg="light" className="Navbar">
       <Container>
         <Navbar.Brand as={NavLink} style={{ fontWeight: "bold", color: "#000766" }} to="/">
           <Image src={logo} width="50" height="50" alt="TEAM CONNECTED logo" />

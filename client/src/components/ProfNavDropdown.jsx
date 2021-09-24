@@ -8,7 +8,7 @@ import ModalProfile from "./profile/ModalProfile";
 const ProfNavDropdown = () => {
   const [modalShow, setModalShow] = useState(false);
 
-  const { user, getAccessTokenSilently, isLoading, getIdTokenClaims } = useAuth0();
+  const { user, isLoading, getIdTokenClaims } = useAuth0();
   const [state, setState] = useState({
     error: null,
     userId: null,
@@ -19,31 +19,15 @@ const ProfNavDropdown = () => {
   const dropdownItemStyle = {
     textAlign: "center",
     padding: "1rem 2.5rem",
-    color: "#919aa3",
   };
 
   useEffect(() => {
     (async () => {
       const CheckRole = async () => {
-        const domain = process.env.REACT_APP_AUTH0_DOMAIN;
         try {
-          const accessToken = await getAccessTokenSilently({
-            audience: `https://${domain}/api/v2/`,
-            scope: "read:users read:user_idp_tokens",
-          });
-
-          const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-
-          const res = await fetch(userDetailsByIdUrl, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          });
-
-          const { user_id } = await res.json();
           const claims = await getIdTokenClaims();
           setState({
-            userId: user_id,
+            userId: user.sub,
             loading: false,
             isAdmin: claims["https://it-project-connected.herokuapp.com/roles"] === "admin",
           });
@@ -57,7 +41,7 @@ const ProfNavDropdown = () => {
       };
       CheckRole();
     })();
-  }, [getAccessTokenSilently, user?.sub]);
+  }, [getIdTokenClaims, user?.sub]);
 
   if (state.loading || isLoading) {
     return <Spinner className="text-center" animation="grow" />;

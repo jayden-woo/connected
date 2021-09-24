@@ -6,15 +6,20 @@ import SurveyBoard from "./SurveyBoard";
 
 const Background = styled.div`
   background-color: var(--color-background);
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  margin-top: 80px;
   padding: 0 0 8vh;
 `;
 
 const StyledImage = styled.img`
-  height: 300px;
+  height: 350px;
   width: 100%;
   max-width: 100%;
   object-fit: cover;
   object-position: left bottom;
+  @media (max-width: 480px) {
+    height: 250px;
+  }
 `;
 
 const StyledNavContainer = styled(Nav)`
