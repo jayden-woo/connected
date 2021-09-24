@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { useAuth0 } from "@auth0/auth0-react";
+import Masonry from "react-masonry-css";
 import axios from "../../services/axios";
 import SurveyListItem from "../../components/surveyPage/SurveyListItem";
 import notify from "../../services/notifyService";
@@ -40,14 +41,19 @@ const SurveyList = () => {
 
   if (isLoading) return <Loading />;
 
+  const breakpointColumnsObj = {
+    default: 2,
+    768: 1,
+  };
+
   return (
     <div className="sl-container">
       <div className="sl__content">
-        <ul>
+        <Masonry breakpointCols={breakpointColumnsObj} className="sl-grid" columnClassName="sl-grid_column">
           {surveys.map((s) => (
             <SurveyListItem key={s.updatedAt} survey={s} isAdmin={isAdmin} updateSurvey={updateSurvey} />
           ))}
-        </ul>
+        </Masonry>
       </div>
     </div>
   );
