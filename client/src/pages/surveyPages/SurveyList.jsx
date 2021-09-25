@@ -7,7 +7,7 @@ import Masonry from "react-masonry-css";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import SurveyListItem from "../../components/surveyPage/SurveyListItem";
 import SurveyImageItem from "../../components/surveyPage/SurveyImageItem";
 import notify from "../../helpers/notifyService";

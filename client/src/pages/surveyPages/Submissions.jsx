@@ -4,11 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import PropTypes from "prop-types";
 import qs from "query-string";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import notify from "../../helpers/notifyService";
 import Pair from "../../components/submissions/Pair";
 import Loading from "../../components/Loading";
-import NotAuthenticated from "../NotAuthenticated";
+import Forbidden from "../Forbidden";
 
 const Submissions = ({ location }) => {
   const [loadingResponses, setLoadingResponses] = useState(true);
@@ -79,7 +79,7 @@ const Submissions = ({ location }) => {
           </div>
         </div>
       )}
-      {!isAdmin && <NotAuthenticated />}
+      {!isAdmin && <Forbidden />}
     </div>
   );
 };

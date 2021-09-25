@@ -19,7 +19,7 @@ import notify from "../../helpers/notifyService";
 import QuestionEditor from "../../components/surveyEditor/QuestionEditor";
 import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 
-import NotAuthenticated from "../NotAuthenticated";
+import Forbidden from "../Forbidden";
 import Loading from "../../components/Loading";
 
 const SurveyEditor = () => {
@@ -359,7 +359,7 @@ const SurveyEditor = () => {
           </div>
         </div>
       )}
-      {!isAdmin && <NotAuthenticated />}
+      {!isAdmin && <Forbidden />}
     </>
   );
 };
