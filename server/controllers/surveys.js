@@ -1,9 +1,7 @@
 const { Survey, validate } = require("../models/survey");
 
 const getAllSurveys = async (req, res) => {
-	const surveys = await Survey.find()
-		.select("title description updatedAt thumbnail visible")
-		.sort("-updatedAt");
+	const surveys = await Survey.find().select("-questions").sort("-updatedAt");
 	res.send(surveys);
 };
 

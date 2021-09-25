@@ -218,7 +218,7 @@ const SurveyEditor = () => {
     }
   };
 
-  if (isLoading && !isAuthenticated) return <Loading />;
+  if (isLoading || !isAuthenticated) return <Loading />;
 
   return (
     <>

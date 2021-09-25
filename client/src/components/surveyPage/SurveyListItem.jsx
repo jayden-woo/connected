@@ -1,67 +1,82 @@
 /* eslint-disable no-underscore-dangle */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-// import Dropdown from "react-bootstrap/Dropdown";
-import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
-const SurveyListItem = ({ survey, isAdmin }) => {
-  // const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
+const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
+  const [width, setWidth] = useState(1000);
   const visible = survey.visible ? "" : "sli--invisible";
+
+  const updateWindowWidth = () => {
+    setWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWindowWidth);
+    return () => {
+      window.removeEventListener("resize", updateWindowWidth);
+    };
+  }, []);
 
   if (!isAdmin && !survey.visible) return <div />;
 
   return (
-    // <div>
-    //   <li className={className}>
-    //     <Row>
-    //       <Col>
-    //         <NavLink to={`/surveys/${survey._id}`}>
-    //           <p>{survey.title}</p>
-    //         </NavLink>
-    //       </Col>
-    //       <Col xs={1}>
-    //         {isAdmin && (
-    //           <Dropdown align="end">
-    //             <Dropdown.Toggle className="shadow-none">
-    //               <div className="sl__more-icon" />
-    //             </Dropdown.Toggle>
-    //             <Dropdown.Menu>
-    //               <Dropdown.Item as={NavLink} to={`submissions/?survey=${survey._id}`}>
-    //                 View submissions
-    //               </Dropdown.Item>
-    //               {survey.visible && (
-    //                 <Dropdown.Item onClick={() => updateSurvey(survey._id, { visible: false })}>
-    //                   Hide this survey
-    //                 </Dropdown.Item>
-    //               )}
-    //               {!survey.visible && (
-    //                 <Dropdown.Item onClick={() => updateSurvey(survey._id, { visible: true })}>
-    //                   Unhide this survey
-    //                 </Dropdown.Item>
-    //               )}
-    //             </Dropdown.Menu>
-    //           </Dropdown>
-    //         )}
-    //       </Col>
-    //     </Row>
-    //   </li>
-    // </div>
-    <Card className="sli-container">
-      {survey.thumbnail && <Card.Img src={survey.thumbnail} alt="Survey Thumbnail" className="sli__thumbnail" />}
-      {!survey.thumbnail && <div className="sli__thumbnail sli__thumbnail--placeholder" />}
-      <Card.ImgOverlay style={{ padding: 0 }}>
-        <div className="sli__background">
-          <Card.Title className={`sli__title ${visible}`} as={NavLink} to={`surveys/${survey._id}`}>
-            {/* <Card.Title className={`sli__title ${visible}`} as={NavLink} to={`submissions/?survey=${survey._id}`}> */}
+    <li className="sli-container">
+      <Row>
+        <Col>
+          <NavLink className={`sli__title ${visible}`} to={`surveys/${survey._id}`}>
             {survey.title}
-          </Card.Title>
-          <Card.Text className="sli__description">{survey.description}</Card.Text>
-        </div>
-      </Card.ImgOverlay>
-    </Card>
+          </NavLink>
+          <p className="sli__description">{survey.description}</p>
+        </Col>
+        {isAdmin && (
+          <Col xs={12} sm={1}>
+            <div className="sli__btn-container">
+              {survey.visible && (
+                <OverlayTrigger
+                  key="hide survey"
+                  placement={width <= 576 ? "top" : "left"}
+                  overlay={<Tooltip id="tooltip-hide-survey">Hide Survey</Tooltip>}
+                >
+                  <Button className="shadow-none sli__btn" onClick={() => updateSurvey(survey._id, { visible: false })}>
+                    <i className="fas fa-eye-slash" />
+                  </Button>
+                </OverlayTrigger>
+              )}
+              {!survey.visible && (
+                <OverlayTrigger
+                  key="unhide survey"
+                  placement={width <= 576 ? "top" : "left"}
+                  overlay={<Tooltip id="tooltip-unhide-survey">Unhide Survey</Tooltip>}
+                >
+                  <Button className="shadow-none sli__btn" onClick={() => updateSurvey(survey._id, { visible: true })}>
+                    <i className="fas fa-eye" />
+                  </Button>
+                </OverlayTrigger>
+              )}
+            </div>
+            <div className="sli__btn-container">
+              <OverlayTrigger
+                key="view submissions"
+                placement={width <= 576 ? "top" : "left"}
+                overlay={<Tooltip id="tooltip-view-submissions">View Submissions</Tooltip>}
+              >
+                <Button className="shadow-none sli__btn">
+                  <NavLink to={`submissions/?survey=${survey._id}`}>
+                    <i className="fas fa-stream" />
+                  </NavLink>
+                </Button>
+              </OverlayTrigger>
+            </div>
+          </Col>
+        )}
+      </Row>
+    </li>
   );
 };
 
@@ -75,7 +90,7 @@ SurveyListItem.propTypes = {
     visible: PropTypes.bool.isRequired,
   }).isRequired,
   isAdmin: PropTypes.bool.isRequired,
-  // updateSurvey: PropTypes.func.isRequired,
+  updateSurvey: PropTypes.func.isRequired,
 };
 
 export default SurveyListItem;

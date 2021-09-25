@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 // import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // import axios from "axios";
 import styled from "styled-components";
 
@@ -73,7 +73,7 @@ const SurveyBoard = () => {
         ))}
       </Carousel>
       <h3 className="pt-3 pb-4">
-        Click <a href="/surveys">Here</a> for More Surveys!
+        Click <NavLink to="/surveys">Here</NavLink> for More Surveys!
       </h3>
     </StyledDiv>
   );
