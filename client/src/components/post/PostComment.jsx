@@ -6,7 +6,7 @@ import moment from "moment";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import _ from "lodash";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import CommentEdit from "./CommentEdit";
 
 const LineBreak = styled.hr`

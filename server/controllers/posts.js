@@ -90,7 +90,6 @@ const addComments = async (req, res) => {
 const editComment = async (req, res) => {
   const { error } = historyValidationSchema.validate(req.body.history);
   if (error) return res.status(400).send(error.details[0].message);
-  console.log(req.body);
 
   const post = await Post.findById(req.params.id);
   if (!post)

@@ -1,16 +1,17 @@
 /* eslint-disable no-underscore-dangle */
 // import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import axios from "axios";
-// import axios from "../../services/axios";
+// import axios from "../../helpers/axios";
 import styled from "styled-components";
 
 // TEMP
 import allSurveys from "./surveys";
 
 const StyledDiv = styled.div`
-  margin: 0 8vw;
+  // margin: 0 8vw;
+  margin: 0;
   border: 1px solid var(--color-accent);
   background-color: white;
   text-align: center;

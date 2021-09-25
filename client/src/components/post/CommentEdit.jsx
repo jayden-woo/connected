@@ -4,7 +4,7 @@ import { Col, Form, FloatingLabel, Overlay, Row, Tooltip } from "react-bootstrap
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 
 const SubmitButton = styled.button`
   padding: 0.5rem 1rem;

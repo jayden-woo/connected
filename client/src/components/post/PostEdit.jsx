@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 
 const ConfirmButton = styled.button`
   padding: 0.5rem 1rem;
