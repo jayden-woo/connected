@@ -3,8 +3,9 @@ import { Card, Container, Row, Col, Image, Modal, Spinner } from "react-bootstra
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 import PasswordResetButton from "./Reset";
+import errorNotify from "../../helpers/notifyService";
 // import EditButton from "./editButton";
-import "./profile.css";
+import "../../css/profile.css";
 
 const Profile = ({ sub }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -13,7 +14,7 @@ const Profile = ({ sub }) => {
     data: null,
     loading: true,
   });
-  const { user, getAccessTokenSilently } = useAuth0();
+  const { user, getAccessTokenSilently, isLoading } = useAuth0();
 
   useEffect(() => {
     (async () => {
@@ -47,15 +48,19 @@ const Profile = ({ sub }) => {
     })();
   }, [getAccessTokenSilently, user?.sub]);
 
-  if (state.loading) {
+  if (state.loading || isLoading) {
     return <Spinner animation="grow" />;
+  }
+
+  if (state.error != null) {
+    return errorNotify(state.error.message);
   }
 
   const { picture, username, name, nickname, email, identities } = state.data;
   const passwordReset = identities[0].connection === "Username-Password-Authentication";
 
   return (
-    <Card className="user-card-full" style={{ height: "100%", margin: 0 }}>
+    <Card className="user-card-full" style={{ margin: 0 }}>
       <Container fluid>
         <Row>
           <Col sm={4} className="bg-c-lite-green user-profile">

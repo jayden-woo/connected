@@ -36,9 +36,10 @@ body {
 }
 
 .img-thumbnail {
-  background-color: #190e89;
   width: 140px;
   height: 140px;
+  padding: 0;
+  border: 4px solid #fff;
 }
 
 .user-profile {
@@ -66,7 +67,7 @@ h6 {
 }
 
 @media only screen and (min-width: 1400px) {
-  .user-card-full p {
+  p {
     font-size: 14px;
   }
 }
@@ -101,3 +102,4 @@ h6 {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+

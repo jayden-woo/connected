@@ -36,7 +36,7 @@ const SearchBoxIcon = styled(InputGroup.Text)`
 
 const SearchBoxButton = styled(SearchBoxIcon)`
   &:hover {
-    background-color: var(--color-border);
+    // background-color: var(--color-border);
     filter: brightness(75%);
   }
 `;

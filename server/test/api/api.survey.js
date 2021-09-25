@@ -24,8 +24,8 @@ describe('API survey', function () {
     expect(body).to.be.an('array');
   });
 
-  for (let i = 0; i < testCases.addCompleteCase.length; i++) {
-    it('add right survey index: ' + i, async () => {
+  it('add some right survey', async () => {
+    for (let i = 0; i < testCases.addCompleteCase.length; i++) {
       let body = await rp({
         method: 'POST',
         url: common.BASE_URL + '/surveys',
@@ -39,11 +39,11 @@ describe('API survey', function () {
       expect(body._id).to.be.a('string');
       // survey id 
       survey_id = body._id;
-    });
-  }
+    }
+  })
 
-  for (let i = 0; i < testCases.addErrorCase.length; i++) {
-    it('add error survey index : ' + i, async () => {
+  it('add some error survey', async () => {
+    for (let i = 0; i < testCases.addErrorCase.length; i++) {
       try {
         let body = await rp({
           method: 'POST',
@@ -57,8 +57,9 @@ describe('API survey', function () {
       } catch (error) {
         expect(error.statusCode).to.equal(400);
       }
-    });
-  }
+    }
+  })
+
 
   it('get a survey_id exist survey', async () => {
     let body = await rp({
@@ -89,23 +90,8 @@ describe('API survey', function () {
     expect(body.title).to.equal('title to update');
   });
 
-  for (let i = 0; i < testCases.updateCompleteCase.length; i++) {
-    it('update right survey index :' + i, async () => {
-      let body = await rp({
-        method: 'PUT',
-        url: common.BASE_URL + '/surveys/' + survey_id,
-        headers: {
-          'authorization': ''     //no token info
-        },
-        body: testCases.updateCompleteCase[i],
-        json: true
-      });
-      expect(body).to.be.an('object');
-    });
-  }
-
-  for (let i = 0; i < testCases.updateErrorCase.length; i++) {
-    it('update error survey index :' + i, async () => {
+  it('update error survey', async () => {
+    for (let i = 0; i < testCases.addErrorCase.length; i++) {
       try {
         let body = await rp({
           method: 'PUT',
@@ -113,14 +99,14 @@ describe('API survey', function () {
           headers: {
             'authorization': ''     //no token info
           },
-          body: testCases.updateCompleteCase[i],
+          body: testCases.addErrorCase[i],
           json: true
         });
       } catch (error) {
         expect(error.statusCode).to.equal(400);
       }
-    });
-  }
+    }
+  });
 
   it('get a survey_id no exist survey', async () => {
     try {
