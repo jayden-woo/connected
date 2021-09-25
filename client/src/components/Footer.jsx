@@ -27,7 +27,8 @@ const StyledP = styled.p`
   color: #190e89;
   @media (max-width: 576px) {
     height: 30px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+    align-items: end;
     justify-content: center;
     margin: 0px 5px 0px 5px;
   }

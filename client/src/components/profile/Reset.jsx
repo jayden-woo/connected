@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Spinner, Modal } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import PropTypes from "prop-types";
-import errorNotify from "../../helpers/notifyService";
+import notify from "../../helpers/notifyService";
 
 const PasswordResetButton = ({ email }) => {
   const [isLoading, setLoading] = useState(false);
@@ -39,19 +39,14 @@ const PasswordResetButton = ({ email }) => {
           console.log(response);
         })
         .catch((error) => {
-          setState({
-            ...state,
-            data: error,
-            show: true,
-          });
+          notify.errorNotify(error.response.data.message);
           setLoading(false);
         });
     }
+    if (!isLoading && state.show) {
+      notify.successNotify(state.data);
+    }
   }, [isLoading]);
-
-  if (state.error != null) {
-    return errorNotify(state.error.message);
-  }
 
   return (
     <>
@@ -59,9 +54,6 @@ const PasswordResetButton = ({ email }) => {
         {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
         {isLoading ? "Loading…" : "Reset Password"}
       </Button>
-      <Modal show={state.show} onHide={() => setState({ show: false })} centered>
-        <Modal.Header closeButton>{state.data}</Modal.Header>
-      </Modal>
     </>
   );
 };

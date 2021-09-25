@@ -94,6 +94,12 @@ h6 {
 
 .f-w-600 {
   font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.profile-title {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .user-card-full .social-link li a {
@@ -101,4 +107,47 @@ h6 {
   margin: 0 10px 0 0;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+.profile-content {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+@media screen and (max-width: 576px) {
+  .profile-content {
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+  .profile-title {
+    font-size: 1.4rem;
+  }
+  .f-w-600 {
+    font-size: 1.2rem;
+  }
+  .img-thumbnail {
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    border: 2px solid #fff;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .profile-content {
+    font-weight: 300;
+    font-size: 0.8rem;
+  }
+  .profile-title {
+    font-size: 1.3rem;
+  }
+  .f-w-600 {
+    font-size: 1.1rem;
+  }
+  .img-thumbnail {
+    width: 90px;
+    height: 90px;
+    padding: 0;
+    border: 1.5px solid #fff;
+  }
 }

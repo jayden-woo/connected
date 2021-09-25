@@ -3,14 +3,13 @@ import { Card, Container, Row, Col, Image, Modal, Spinner } from "react-bootstra
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 import PasswordResetButton from "./Reset";
-import errorNotify from "../../helpers/notifyService";
+import notify from "../../helpers/notifyService";
 // import EditButton from "./editButton";
 import "../../css/profile.css";
 
 const Profile = ({ sub }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const [state, setState] = useState({
-    error: null,
     data: null,
     loading: true,
   });
@@ -39,9 +38,9 @@ const Profile = ({ sub }) => {
         } catch (error) {
           setState({
             ...state,
-            error,
             loading: false,
           });
+          notify.errorNotify(error.response.data.message);
         }
       };
       getUser();
@@ -52,34 +51,32 @@ const Profile = ({ sub }) => {
     return <Spinner animation="grow" />;
   }
 
-  if (state.error != null) {
-    return errorNotify(state.error.message);
-  }
-
   const { picture, username, name, nickname, email, identities } = state.data;
   const passwordReset = identities[0].connection === "Username-Password-Authentication";
 
   return (
     <Card className="user-card-full" style={{ margin: 0 }}>
       <Container fluid>
-        <Row>
-          <Col sm={4} className="bg-c-lite-green user-profile">
+        <Row xs={2}>
+          <Col xs={4} md={4} className="bg-c-lite-green user-profile">
             <div className="m-b-20 text-center">
               <Image src={picture} className="img-thumbnail" alt="User-Profile-Pic" roundedCircle />
             </div>
             <div className="text-center text-white">
-              <p style={{ marginTop: 5 }}>{!username && name}</p>
+              <p style={{ marginTop: 5 }} className="profile-content">
+                {!username && name}
+              </p>
               <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" />
             </div>
           </Col>
-          <Col sm={8}>
+          <Col xs={8} md={8}>
             <div className="card-block">
               <Row style={{ paddingBottom: "7px" }}>
                 <Modal.Header
                   style={{ paddingTop: 0, paddingBottom: "7px", paddingLeft: "10.5px", paddingRight: "10.5px" }}
                   closeButton
                 >
-                  <h4 className="f-w-600" style={{ margin: 0 }}>
+                  <h4 className="profile-title" style={{ margin: 0 }}>
                     Information
                   </h4>
                 </Modal.Header>
@@ -95,7 +92,7 @@ const Profile = ({ sub }) => {
                     </Col> */}
                   </Row>
                   <Row>
-                    <p className="text-muted f-w-400">
+                    <p className="text-muted profile-content">
                       {username}
                       {!username && nickname}
                     </p>
@@ -113,7 +110,7 @@ const Profile = ({ sub }) => {
                     </Col> */}
                   </Row>
                   <Row>
-                    <p className="text-muted f-w-400">{email}</p>
+                    <p className="text-muted profile-content">{email}</p>
                   </Row>
                 </Col>
               </Row>
@@ -122,7 +119,7 @@ const Profile = ({ sub }) => {
                   <Col>
                     <Row>
                       <Col>
-                        <PasswordResetButton className="f-w-400" email={email} />
+                        <PasswordResetButton className="profile-content" email={email} />
                       </Col>
                     </Row>
                   </Col>

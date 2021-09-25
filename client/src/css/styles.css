@@ -106,7 +106,7 @@ a:visited {
 /* Survey Editor */
 
 .se-container {
-  height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
   background-color: var(--color-background);
   /* padding-bottom: calc(25px + var(--height-footer)); */
   margin-top: var(--height-nav-bar);
@@ -347,7 +347,7 @@ a:visited {
 }
 
 .qe__btn-group {
-  text-align: end;
+  text-align: flex-end;
 }
 
 .qe__btn:disabled {
@@ -675,7 +675,7 @@ a:visited {
 
 .sli__btn-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 0;
 }
 
