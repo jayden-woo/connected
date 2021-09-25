@@ -520,6 +520,48 @@ a:visited {
 
 /* Surveys List */
 
+.sl-container {
+  min-height: calc(100vh - var(--height-nav-bar)- var(--height-footer));
+  background-color: var(--color-background);
+  margin-top: var(--height-nav-bar);
+  padding-bottom: 2rem;
+}
+
+.sl__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: var(--height-nav-bar) auto 0;
+  padding-top: 0.5rem;
+}
+
+.sl__toggle-display {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 0.5rem;
+}
+
+.sl__btn-toggle {
+  font-size: 1.8rem;
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.sl__btn-toggle:hover {
+  background-color: transparent;
+  color: var(--color-secondary);
+}
+
+.sl-grid {
+  display: flex;
+  margin-left: 0; /* gutter size offset */
+  width: auto;
+}
+
+.sl-grid_column {
+  padding-left: 0; /* gutter size */
+  background-clip: padding-box;
+}
+
 /* Override SurveyJS Library Styles */
 
 .sv-question__content input:focus {
