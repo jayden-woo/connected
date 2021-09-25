@@ -64,11 +64,6 @@ const ProfNavDropdown = () => {
             CREATE SURVEY
           </NavDropdown.Item>
         )}
-        {state.isAdmin && (
-          <NavDropdown.Item as={NavLink} to="/" style={dropdownItemStyle} exact>
-            SUBMISSION
-          </NavDropdown.Item>
-        )}
         <NavDropdown.Item onClick={() => setModalShow(true)} style={dropdownItemStyle}>
           PROFILE
         </NavDropdown.Item>
