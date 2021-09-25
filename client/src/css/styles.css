@@ -643,3 +643,9 @@ a:visited {
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show > .nav-link {
   color: #190e89;
 }
+
+@media screen and (max-width: 576px) {
+  .footer-icon {
+    text-align: center;
+  }
+}
