@@ -5,7 +5,7 @@ import headerImage from "../assets/aboutHeader.png";
 
 const Background = styled.div`
   min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
-  margin-top: 80px;
+  margin-top: var(--height-nav-bar);
   padding: 0 0 8vh;
 `;
 

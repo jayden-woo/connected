@@ -20,6 +20,7 @@ import QuestionEditor from "../../components/surveyEditor/QuestionEditor";
 import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 
 import Forbidden from "../Forbidden";
+import Loading from "../../components/Loading";
 
 const SurveyEditor = () => {
   const [survey, setSurvey] = useState({ questions: [] });
@@ -33,11 +34,13 @@ const SurveyEditor = () => {
 
   const imageSelector = useRef();
 
-  const { user, getIdTokenClaims } = useAuth0();
+  const { user, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
   useEffect(async () => {
+    if (isLoading || !isAuthenticated) return;
+
     const claims = await getIdTokenClaims();
     setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
-  }, []);
+  }, [isAuthenticated, isLoading]);
 
   // TODO: remove this
   const history = useHistory();
@@ -214,6 +217,8 @@ const SurveyEditor = () => {
       notify.errorNotify(e.response.data.message);
     }
   };
+
+  if (isLoading || !isAuthenticated) return <Loading />;
 
   return (
     <>
