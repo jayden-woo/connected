@@ -557,6 +557,11 @@ a:visited {
   width: auto;
 }
 
+.sl-grid_column {
+  padding-left: 0; /* gutter size */
+  background-clip: padding-box;
+}
+
 .sii-container {
   color: rgb(255, 255, 255);
   margin-bottom: 0;
