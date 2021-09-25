@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import PropTypes from "prop-types";
 import qs from "query-string";
-import axios from "../../helpers/axios";
+import axios from "../../services/axios";
 import notify from "../../helpers/notifyService";
 import Pair from "../../components/submissions/Pair";
+import Loading from "../../components/Loading";
+import NotAuthenticated from "../NotAuthenticated";
 
 const Submissions = ({ location }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadingResponses, setLoadingResponses] = useState(true);
   const [survey, setSurvey] = useState({});
   const [qrPair, setQrPair] = useState({});
-  const query = qs.parse(location.search);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const history = useHistory();
+
+  const { getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
+  const query = qs.parse(location.search);
 
   useEffect(async () => {
     try {
@@ -38,7 +44,12 @@ const Submissions = ({ location }) => {
 
       setSurvey(surveyData);
       setQrPair(pairs);
-      setIsLoading(false);
+      setLoadingResponses(false);
+
+      if (isLoading || !isAuthenticated) return;
+
+      const claims = await getIdTokenClaims();
+      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
     } catch (e) {
       // TODO: redirect to not found page
       if (e.response && e.response.status === 404) {
@@ -47,30 +58,28 @@ const Submissions = ({ location }) => {
         notify.errorNotify(e.message);
       }
     }
-  }, []);
+  }, [isAuthenticated, isLoading]);
+
+  if (loadingResponses) return <Loading />;
 
   return (
-    <div className="sb-container">
-      {!isLoading && (
-        <div className="sb__content">
-          <h3 className="sb__title">{survey.title}</h3>
-          <h5 className="sb__desc">{survey.description}</h5>
-          {Object.keys(qrPair).map((question) => (
-            <Pair
-              key={question}
-              question={survey.questions.filter((q) => q.name === question)[0]}
-              responses={qrPair[question]}
-            />
-          ))}
+    <div>
+      {isAdmin && (
+        <div className="sb-container">
+          <div className="sb__content">
+            <h3 className="sb__title">{survey.title}</h3>
+            <h5 className="sb__desc">{survey.description}</h5>
+            {Object.keys(qrPair).map((question) => (
+              <Pair
+                key={question}
+                question={survey.questions.filter((q) => q.name === question)[0]}
+                responses={qrPair[question]}
+              />
+            ))}
+          </div>
         </div>
       )}
-      {isLoading && (
-        <div className="text-center">
-          <Spinner animation="border" role="status" className="loading">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
-      )}
+      {!isAdmin && <NotAuthenticated />}
     </div>
   );
 };
