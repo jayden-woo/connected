@@ -6,15 +6,11 @@ Framework : React
 
 Deployment : Heroku
 
-Testing : 
-
-
+Testing :
 
 ### Links
 
 [Heroku Front-end URL](https://it-project-connected.herokuapp.com)
-
-
 
 ### File structure
 
@@ -30,8 +26,6 @@ Testing :
 | `├── server.js`    | Entry file of the api server                   |
 | `├── package.json` | Holds various metadata relevant to the project |
 
-
-
 ### Local Development
 
 #### Enviroment setup
@@ -44,26 +38,22 @@ For local testing, front-end will be run at port 5000.
 
 Other enviromental setups for the safety consideration will be not listed here (will be post in the chat)
 
-
-
 #### Install denpendencies
 
 ```bash
 yarn
 ```
 
+#### Starting scripts
 
-
-#### Staring scripts
-
-*Run front-end*
+_Run front-end_
 
 ```bash
 # under client folder
 yarn start
 ```
 
-*Run front-end and back-end together*
+_Run front-end and back-end together_
 `cd ..` (cs back to root folder) and run the follwing command
 
 ```bash
@@ -72,6 +62,3 @@ yarn
 
 yarn dev
 ```
-
-
-
