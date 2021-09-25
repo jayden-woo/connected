@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { commentSchema, validationSchema } = require("./comment");
+const { commentSchema, commentValidationSchema } = require("./comment");
+const { historySchema, historyValidationSchema } = require("./history");
 
 const postSchema = new mongoose.Schema(
   {
@@ -45,7 +46,14 @@ const postSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
-    comments: [commentSchema],
+    comments: {
+      type: [commentSchema],
+      default: [],
+    },
+    history: {
+      type: [historySchema],
+      default: [],
+    },
   },
   {
     timestamps: true,
@@ -76,7 +84,8 @@ function validatePost(post, update = false) {
     views: Joi.number().min(0),
     solved: Joi.boolean(),
     followers: Joi.array().items(Joi.string()),
-    comments: Joi.array().items(validationSchema),
+    comments: Joi.array().items(commentValidationSchema),
+    history: Joi.array().items(historyValidationSchema),
   });
 
   if (update) return updateSchema.validate(post);

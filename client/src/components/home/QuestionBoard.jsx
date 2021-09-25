@@ -39,7 +39,8 @@ library.add(
 );
 
 const StyledDiv = styled.div`
-  margin: 0 8vw;
+  // margin: 0 8vw;
+  margin: 0;
   border: 1px solid var(--color-primary);
   background-color: white;
   @media (min-width: 768px) {
