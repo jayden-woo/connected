@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 // import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // import axios from "axios";
 // import axios from "../../services/axios";
 import styled from "styled-components";

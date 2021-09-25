@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Spinner, Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
+import errorNotify from "../../helpers/notifyService";
 
 const PasswordResetButton = ({ email }) => {
   const [isLoading, setLoading] = useState(false);
@@ -47,6 +48,10 @@ const PasswordResetButton = ({ email }) => {
         });
     }
   }, [isLoading]);
+
+  if (state.error != null) {
+    return errorNotify(state.error.message);
+  }
 
   return (
     <>

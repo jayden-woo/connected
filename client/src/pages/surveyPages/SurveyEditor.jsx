@@ -12,14 +12,15 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import UploadProgressBar from "../../components/common/UploadProgressBar";
-import uploadImage from "../../services/uploadImageService";
-import axios from "../../services/axios";
-import notify from "../../services/notifyService";
+import uploadImage from "../../helpers/uploadImageService";
+import axios from "../../helpers/axios";
+import notify from "../../helpers/notifyService";
 
 import QuestionEditor from "../../components/surveyEditor/QuestionEditor";
 import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 
-import NotAuthenticated from "../NotAuthenticated";
+import Forbidden from "../Forbidden";
+import Loading from "../../components/Loading";
 
 const SurveyEditor = () => {
   const [survey, setSurvey] = useState({ questions: [] });
@@ -33,11 +34,13 @@ const SurveyEditor = () => {
 
   const imageSelector = useRef();
 
-  const { user, getIdTokenClaims } = useAuth0();
+  const { user, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
   useEffect(async () => {
+    if (isLoading || !isAuthenticated) return;
+
     const claims = await getIdTokenClaims();
     setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
-  }, []);
+  }, [isAuthenticated, isLoading]);
 
   // TODO: remove this
   const history = useHistory();
@@ -215,6 +218,8 @@ const SurveyEditor = () => {
     }
   };
 
+  if (isLoading || !isAuthenticated) return <Loading />;
+
   return (
     <>
       <UploadProgressBar progressBar={progressBar} />
@@ -354,7 +359,7 @@ const SurveyEditor = () => {
           </div>
         </div>
       )}
-      {!isAdmin && <NotAuthenticated />}
+      {!isAdmin && <Forbidden />}
     </>
   );
 };

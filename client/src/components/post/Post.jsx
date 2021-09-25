@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import backgroundImg from "../../assets/mainHeader.png";
 import PostStats from "./PostStats";
 import PostComment from "./PostComment";
@@ -17,16 +17,21 @@ import Loading from "../Loading";
 
 const Background = styled.div`
   background-color: var(--color-background);
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  margin-top: 80px;
   padding: 0 0 8vh;
   position: relative;
 `;
 
 const StyledImage = styled.img`
-  height: 300px;
+  height: 350px;
   width: 100%;
   max-width: 100%;
   object-fit: cover;
   object-position: left bottom;
+  @media (max-width: 480px) {
+    height: 250px;
+  }
 `;
 
 const StyledHeader = styled(Container)`

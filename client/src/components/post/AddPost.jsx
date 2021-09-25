@@ -5,9 +5,8 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
-// import axios from "axios";
-import axios from "../../services/axios";
 import backgroundImg from "../../assets/mainHeader.png";
+import axios from "../../helpers/axios";
 
 const Background = styled.div`
   background-color: var(--color-background);

@@ -17,8 +17,7 @@ const EditButton = ({ updateFiled }) => {
     try {
       const accessToken = await getAccessTokenSilently({
         audience: `https://${domain}/api/v2/`,
-        scope:
-          "read:users update:users update:users_app_metadata update:current_user_metadata create:current_user_metadata",
+        scope: "read:users update:users",
       });
 
       const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
@@ -55,7 +54,7 @@ const EditButton = ({ updateFiled }) => {
             <Form.Control
               placeholder={updateFiled}
               aria-label="UpdateFiled"
-              value={state.val}
+              value={state}
               onChange={(e) => setState(e.target.value)}
               type="text"
             />
