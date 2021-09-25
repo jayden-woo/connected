@@ -673,7 +673,7 @@ a:visited {
 
 .sli__btn-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 0;
 }
 
