@@ -10,7 +10,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import axios from "../../services/axios";
 import SurveyListItem from "../../components/surveyPage/SurveyListItem";
 import SurveyImageItem from "../../components/surveyPage/SurveyImageItem";
-import notify from "../../services/notifyService";
+import notify from "../../helpers/notifyService";
 import Loading from "../../components/Loading";
 
 const SurveyList = () => {

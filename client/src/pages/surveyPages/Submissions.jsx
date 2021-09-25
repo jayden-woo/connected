@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import PropTypes from "prop-types";
 import qs from "query-string";
 import axios from "../../services/axios";
-import notify from "../../services/notifyService";
+import notify from "../../helpers/notifyService";
 import Pair from "../../components/submissions/Pair";
 import Loading from "../../components/Loading";
 import NotAuthenticated from "../NotAuthenticated";

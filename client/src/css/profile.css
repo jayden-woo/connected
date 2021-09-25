@@ -67,7 +67,7 @@ h6 {
 }
 
 @media only screen and (min-width: 1400px) {
-  p {
+  .user-card-full p {
     font-size: 14px;
   }
 }
@@ -102,4 +102,3 @@ h6 {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-

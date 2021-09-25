@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import * as Survey from "survey-react";
 import PropTypes from "prop-types";
 import Spinner from "react-bootstrap/Spinner";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 
 Survey.StylesManager.applyTheme("modern");
 
