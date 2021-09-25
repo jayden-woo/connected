@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { NavDropdown, Spinner } from "react-bootstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import ModalProfile from "./profile/ModalProfile";
+import errorNotify from "../helpers/notifyService";
 
 const ProfNavDropdown = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -45,6 +46,10 @@ const ProfNavDropdown = () => {
 
   if (state.loading || isLoading) {
     return <Spinner className="text-center" animation="grow" />;
+  }
+
+  if (state.error != null) {
+    return errorNotify(state.error.message);
   }
 
   return (

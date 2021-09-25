@@ -1,4 +1,5 @@
 import { Container } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import "../css/error.css";
 
 // This templates was made by Colorlib (https://colorlib.com), https://colorlib.com/wp/template/colorlib-error-404-17/
@@ -12,7 +13,7 @@ const Error = () => (
         </div>
         <h2>404 - Page not found</h2>
         <p>Sorry, an error has occured and the requested page is not found!</p>
-        <a href="/">home page</a>
+        <NavLink to="/">home page</NavLink>
       </div>
     </div>
   </Container>

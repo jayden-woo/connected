@@ -4,8 +4,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 import PropTypes from "prop-types";
 import qs from "query-string";
-import axios from "../../services/axios";
-import notify from "../../services/notifyService";
+import axios from "../../helpers/axios";
+import notify from "../../helpers/notifyService";
 import Pair from "../../components/submissions/Pair";
 
 const Submissions = ({ location }) => {

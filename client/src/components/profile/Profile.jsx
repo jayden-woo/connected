@@ -3,6 +3,7 @@ import { Card, Container, Row, Col, Image, Modal, Spinner } from "react-bootstra
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 import PasswordResetButton from "./Reset";
+import errorNotify from "../../helpers/notifyService";
 // import EditButton from "./editButton";
 import "../../css/profile.css";
 
@@ -49,6 +50,10 @@ const Profile = ({ sub }) => {
 
   if (state.loading || isLoading) {
     return <Spinner animation="grow" />;
+  }
+
+  if (state.error != null) {
+    return errorNotify(state.error.message);
   }
 
   const { picture, username, name, nickname, email, identities } = state.data;

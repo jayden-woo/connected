@@ -1,4 +1,5 @@
 import { Container } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import "../css/error.css";
 
 // This templates was made by Colorlib (https://colorlib.com), https://colorlib.com/wp/template/colorlib-error-404-17/
@@ -12,7 +13,7 @@ const Forbidden = () => (
         </div>
         <h2>403 - Forbidden</h2>
         <p>Sorry, Authentication needed to visit this page.</p>
-        <a href="/">home page</a>
+        <NavLink to="/">home page</NavLink>
       </div>
     </div>
   </Container>

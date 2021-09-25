@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import SurveyListItem from "../../components/surveyPage/SurveyListItem";
-import notify from "../../services/notifyService";
+import notify from "../../helpers/notifyService";
 import Loading from "../../components/Loading";
 
 const SurveyList = () => {

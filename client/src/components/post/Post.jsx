@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import backgroundImg from "../../assets/mainHeader.png";
 import PostStats from "./PostStats";
 import PostContent from "./PostContent";

@@ -18,7 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
-import axios from "../../services/axios";
+import axios from "../../helpers/axios";
 import PostSummary from "./PostSummary";
 import SearchBar from "./SearchBar";
 import FilterMenu from "./FilterMenu";
