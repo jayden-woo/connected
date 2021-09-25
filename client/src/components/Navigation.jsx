@@ -9,22 +9,22 @@ const Navigation = () => {
   const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
 
   return (
-    <Navbar fixed="top" expand="xl" bg="light" className="Navbar">
-      <Container>
-        <Navbar.Brand as={NavLink} style={{ fontWeight: "bold", color: "#000766" }} to="/">
+    <Navbar fixed="top" expand="md" bg="light" className="Navbar">
+      <Container style={{ maxWidth: "1400px" }}>
+        <Navbar.Brand as={NavLink} style={{ fontWeight: "bold", color: "#000766", marginRight: "2rem" }} to="/">
           <Image src={logo} width="50" height="50" alt="TEAM CONNECTED logo" />
           &nbsp;CONNECTED
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse>
           <Nav fill>
-            <Nav.Link as={NavLink} to="/" exact>
+            <Nav.Link className="my-nav-item" as={NavLink} to="/" exact>
               HOME
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/surveys" exact>
+            <Nav.Link className="my-nav-item" as={NavLink} to="/surveys" exact>
               SURVEYS
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/about" exact>
+            <Nav.Link className="my-nav-item" as={NavLink} to="/about" exact>
               ABOUT
             </Nav.Link>
           </Nav>

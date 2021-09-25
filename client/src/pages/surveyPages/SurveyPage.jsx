@@ -21,7 +21,7 @@ const SurveyPage = ({ match }) => {
     } catch (e) {
       // TODO: redirect to not found page
       if (e.response.status === 404) {
-        history.push("/");
+        history.push("/404");
       }
     }
   }, []);

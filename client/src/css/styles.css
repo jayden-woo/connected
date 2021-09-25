@@ -807,6 +807,17 @@ a:visited {
   width: 100vw;
 }
 
+.my-nav-item {
+  margin: 0 1rem;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .my-nav-item {
+    width: 70px;
+  }
+}
+
 .dropdown-item.active,
 .dropdown-item:active {
   background-color: #f0f7ff;
@@ -816,4 +827,10 @@ a:visited {
 .navbar-light .navbar-nav .nav-link.active,
 .navbar-light .navbar-nav .show > .nav-link {
   color: #190e89;
+}
+
+@media screen and (max-width: 576px) {
+  .footer-icon {
+    text-align: center;
+  }
 }
