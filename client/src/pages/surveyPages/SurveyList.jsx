@@ -79,7 +79,7 @@ const SurveyList = () => {
           </Masonry>
         )}
         {listView && (
-          <ul>
+          <ul style={{ padding: "0" }}>
             {surveys.map((s) => (
               <SurveyListItem key={s._id} survey={s} isAdmin={isAdmin} updateSurvey={updateSurvey} />
             ))}

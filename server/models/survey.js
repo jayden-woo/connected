@@ -67,8 +67,8 @@ const questionSchema = new mongoose.Schema({
 	maxRateDescription: String,
 	html: String,
 	imageFit: String,
-	imageHeight: String,
-	imageWidth: String,
+	imageHeight: Number,
+	imageWidth: Number,
 	imageLink: String,
 });
 
@@ -127,7 +127,7 @@ function validateSurvey(survey, update = false) {
 		title: Joi.alternatives().conditional("type", {
 			is: Joi.string().valid("image", "html", "boolean"),
 			then: Joi.string().allow(""),
-			otherwise: Joi.string().required(),
+			otherwise: Joi.string().min(5).max(100).required(),
 		}),
 		isRequired: Joi.bool().required(),
 		placeHolder: Joi.alternatives().conditional("type", {
@@ -223,12 +223,12 @@ function validateSurvey(survey, update = false) {
 		}),
 		imageHeight: Joi.alternatives().conditional("type", {
 			is: "image",
-			then: Joi.string().required(),
+			then: Joi.number().required(),
 			otherwise: Joi.forbidden(),
 		}),
 		imageWidth: Joi.alternatives().conditional("type", {
 			is: "image",
-			then: Joi.string().required(),
+			then: Joi.number().required(),
 			otherwise: Joi.forbidden(),
 		}),
 		imageFit: Joi.alternatives().conditional("type", {

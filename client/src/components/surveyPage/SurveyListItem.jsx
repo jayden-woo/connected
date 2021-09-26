@@ -23,7 +23,7 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
     };
   }, []);
 
-  if (!isAdmin && !survey.visible) return <div />;
+  if (!isAdmin && !survey.visible) return <></>;
 
   return (
     <li className="sli-container">

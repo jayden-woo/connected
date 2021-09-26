@@ -63,7 +63,7 @@ const Submissions = ({ location }) => {
   if (loadingResponses) return <Loading />;
 
   return (
-    <div>
+    <>
       {isAdmin && (
         <div className="sb-container">
           <div className="sb__content">
@@ -80,7 +80,7 @@ const Submissions = ({ location }) => {
         </div>
       )}
       {!isAdmin && <Forbidden />}
-    </div>
+    </>
   );
 };
 

@@ -23,11 +23,7 @@ const HTML = ({ question, updateQuestion }) => {
           setHtml(data);
         }}
         onBlur={() => {
-          if (html) {
-            updateQuestion(question.name, "html", html);
-          } else {
-            updateQuestion(question.name, "html", "<p>Add your html here ... </p>");
-          }
+          updateQuestion(question.name, "html", html);
         }}
       />
     </div>

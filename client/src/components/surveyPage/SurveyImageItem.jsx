@@ -12,7 +12,7 @@ import Card from "react-bootstrap/Card";
 const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
   const visible = survey.visible ? "" : "sii--invisible";
 
-  if (!isAdmin && !survey.visible) return <div />;
+  if (!isAdmin && !survey.visible) return <></>;
 
   return (
     <Card className="sii-container">
