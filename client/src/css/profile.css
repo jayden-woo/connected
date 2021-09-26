@@ -117,7 +117,6 @@ h6 {
 @media screen and (max-width: 576px) {
   .profile-content {
     font-weight: 400;
-    font-size: 0.9rem;
   }
   .profile-title {
     font-size: 1.4rem;
@@ -126,17 +125,17 @@ h6 {
     font-size: 1.2rem;
   }
   .img-thumbnail {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     padding: 0;
     border: 2px solid #fff;
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 480px) {
   .profile-content {
-    font-weight: 300;
-    font-size: 0.8rem;
+    font-weight: 400;
+    font-size: 0.9rem;
   }
   .profile-title {
     font-size: 1.3rem;
@@ -145,8 +144,8 @@ h6 {
     font-size: 1.1rem;
   }
   .img-thumbnail {
-    width: 90px;
-    height: 90px;
+    width: 125px;
+    height: 125px;
     padding: 0;
     border: 1.5px solid #fff;
   }

@@ -10,7 +10,7 @@ const Navigation = () => {
 
   return (
     <Navbar fixed="top" expand="md" bg="light" className="Navbar">
-      <Container style={{ maxWidth: "1400px" }}>
+      <Container className="nav-container" fluid>
         <Navbar.Brand as={NavLink} style={{ fontWeight: "bold", color: "#000766", marginRight: "2rem" }} to="/">
           <Image src={logo} width="50" height="50" alt="TEAM CONNECTED logo" />
           &nbsp;CONNECTED
