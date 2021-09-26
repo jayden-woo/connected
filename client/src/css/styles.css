@@ -276,7 +276,7 @@ a:visited {
 }
 
 .se__qp--error {
-  background-color: rgba(255, 0, 0, 0.05);
+  border-bottom: 1px solid var(--color-accent);
 }
 
 .se__qp input:focus {
@@ -317,6 +317,11 @@ a:visited {
 .se__text--error {
   color: var(--color-accent);
   margin: 0.2rem 0 0.2rem 1rem;
+}
+
+.se__qp__text--error {
+  color: var(--color-accent);
+  margin: 0.2rem 0.2rem 1rem;
 }
 
 /* Question Editor */

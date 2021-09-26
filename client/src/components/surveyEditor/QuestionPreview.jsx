@@ -102,7 +102,7 @@ const QuestionPreview = ({ question, isActive, setActiveQuestion }) => {
       >
         <Survey.Survey json={json} showQuestionNumbers="off" focusFirstQuestionAutomatic={false} />
       </div>
-      <p className="se__text--error">{message}</p>
+      {message && <p className="se__qp__text--error">* {message}</p>}
     </>
   );
 };
