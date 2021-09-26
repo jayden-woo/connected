@@ -57,8 +57,8 @@ const Profile = ({ sub }) => {
   return (
     <Card className="user-card-full" style={{ margin: 0 }}>
       <Container fluid>
-        <Row xs={2} sm={2} md={2}>
-          <Col xs={4} sm={4} md={4} className="bg-c-lite-green user-profile">
+        <Row xs={2} sm={2}>
+          <Col xs={4} sm={4} className="bg-c-lite-green user-profile">
             <div className="m-b-20 text-center">
               <Image src={picture} className="img-thumbnail" alt="User-Profile-Pic" roundedCircle />
             </div>
@@ -69,7 +69,7 @@ const Profile = ({ sub }) => {
               <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16" />
             </div>
           </Col>
-          <Col xs={8} sm={8} md={8} className="profile-padding">
+          <Col xs={8} sm={8}>
             <div className="card-block">
               <Row style={{ paddingBottom: "7px" }}>
                 <Modal.Header
