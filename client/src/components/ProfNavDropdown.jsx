@@ -4,14 +4,13 @@ import { NavLink } from "react-router-dom";
 import { NavDropdown, Spinner } from "react-bootstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import ModalProfile from "./profile/ModalProfile";
-import errorNotify from "../helpers/notifyService";
+import notify from "../helpers/notifyService";
 
 const ProfNavDropdown = () => {
   const [modalShow, setModalShow] = useState(false);
 
   const { user, isLoading, getIdTokenClaims } = useAuth0();
   const [state, setState] = useState({
-    error: null,
     userId: null,
     isAdmin: false,
     loading: true,
@@ -35,9 +34,9 @@ const ProfNavDropdown = () => {
         } catch (error) {
           setState({
             ...state,
-            error,
             loading: false,
           });
+          notify.errorNotify(error.response.data.message);
         }
       };
       CheckRole();
@@ -46,10 +45,6 @@ const ProfNavDropdown = () => {
 
   if (state.loading || isLoading) {
     return <Spinner className="text-center" animation="grow" />;
-  }
-
-  if (state.error != null) {
-    return errorNotify(state.error.message);
   }
 
   return (

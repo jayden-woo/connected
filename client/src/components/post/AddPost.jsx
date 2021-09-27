@@ -23,9 +23,11 @@ const StyledImage = styled.img`
 `;
 
 const StyledHeader = styled(Container)`
-  margin: -20px 8vw 0;
+  // margin: -20px 8vw 0;
+  margin: -20px 0 0;
   padding: 1.5rem 2rem;
-  width: 84vw;
+  // width: 84vw;
+  width: 100vw;
   font-size: 1.2rem;
   text-align: left;
   color: white;
@@ -44,13 +46,16 @@ const StyledHeader = styled(Container)`
 `;
 
 const StyledDiv = styled.div`
-  margin: 0 8vw;
-  padding: 60px 2rem 30px;
+  // margin: 0 8vw;
+  margin: 0;
+  // padding: 60px 2rem 30px;
+  padding: 60px 0 30px;
   border: 1px solid var(--color-primary);
   background-color: white;
   max-width: 100vw;
   @media (min-width: 768px) {
     margin: 0 12vw;
+    padding: 60px 2rem 30px;
   }
   @media (min-width: 1200px) {
     margin: 0 20vw;

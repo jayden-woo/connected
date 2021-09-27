@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useEffect, useState } from "react";
-import { Col, Collapse, Container, Row } from "react-bootstrap";
+import { Col, Collapse, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -39,7 +39,8 @@ library.add(
 );
 
 const StyledDiv = styled.div`
-  margin: 0 8vw;
+  // margin: 0 8vw;
+  margin: 0;
   border: 1px solid var(--color-primary);
   background-color: white;
   @media (min-width: 768px) {
@@ -48,6 +49,12 @@ const StyledDiv = styled.div`
   @media (min-width: 1200px) {
     margin: 0 20vw;
   }
+`;
+
+const LoadingContainer = styled.div`
+  margin: 6vh 0;
+  width: 100%;
+  text-align: center;
 `;
 
 const StyledContainer = styled(Container)`
@@ -111,6 +118,7 @@ const ShowButton = styled(StyledButton)`
 
 const QuestionBoard = () => {
   const { user, isAuthenticated } = useAuth0();
+  const [isLoading, setIsLoading] = useState(true);
   const [allPosts, setAllPosts] = useState([]);
   const [searchTok, setSearchTok] = useState("");
   const [showFilter, setShowFilter] = useState(false);
@@ -128,6 +136,7 @@ const QuestionBoard = () => {
     await axios.get("/api/posts").then((res) => {
       console.log(res);
       setAllPosts(res.data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -223,6 +232,11 @@ const QuestionBoard = () => {
         </Collapse>
       </StyledContainer>
 
+      {isLoading && (
+        <LoadingContainer>
+          <Spinner animation="border" role="status" />
+        </LoadingContainer>
+      )}
       {posts.slice(0, Math.min(posts.length, maxPosts)).map((post) => (
         <PostSummary
           key={post._id}
@@ -237,7 +251,7 @@ const QuestionBoard = () => {
           following={post.following}
         />
       ))}
-      {posts.length === 0 && (
+      {!isLoading && posts.length === 0 && (
         <CenterDiv className="px-5 pb-4">
           <h4>Sorry, no results found.</h4>
           <h4>Try using different keywords or remove some filters to broaden your search.</h4>
