@@ -13,13 +13,16 @@ import SurveyImageItem from "../../components/surveyPage/SurveyImageItem";
 import notify from "../../helpers/notifyService";
 import Loading from "../../components/Loading";
 
+const audience =
+  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+
 const SurveyList = () => {
   const [surveys, setSurveys] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [listView, setListView] = useState(false);
   const [loadingSurveys, setLoadingSurveys] = useState(true);
 
-  const { getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
+  const { getAccessTokenSilently, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(async () => {
     try {
@@ -30,18 +33,31 @@ const SurveyList = () => {
       if (isLoading || !isAuthenticated) return;
 
       const claims = await getIdTokenClaims();
-      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+      console.log(claims);
+      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
     } catch (e) {
       notify.errorNotify(e.message);
     }
   }, [isAuthenticated, isLoading]);
 
   const updateSurvey = async (id, changes) => {
-    const index = _.findIndex(surveys, { _id: id });
-    const { data: survey } = await axios.put(`/api/surveys/${id}`, changes);
-    const newSurveys = [...surveys];
-    newSurveys[index] = survey;
-    setSurveys(newSurveys);
+    try {
+      const accessToken = await getAccessTokenSilently({
+        audience,
+        scope: "edit:survey",
+      });
+      const index = _.findIndex(surveys, { _id: id });
+      const { data: survey } = await axios.put(`/api/surveys/${id}`, changes, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const newSurveys = [...surveys];
+      newSurveys[index] = survey;
+      setSurveys(newSurveys);
+    } catch (e) {
+      notify.errorNotify(e.message);
+    }
   };
 
   if (isLoading || loadingSurveys) return <Loading />;

@@ -13,6 +13,7 @@ import Error from "./pages/Error";
 import Home from "./components/home/Home";
 import Post from "./components/post/Post";
 import AddPost from "./components/post/AddPost";
+import Forbidden from "./pages/Forbidden";
 
 const App = () => (
   <>
@@ -27,6 +28,7 @@ const App = () => (
       <Route path="/surveys" exact component={SurveyList} />
       <ProtectedRoute path="/create-survey" exact component={SurveyEditor} />
       <ProtectedRoute path="/submissions" exact component={Submissions} />
+      <Route path="/403" exact component={Forbidden} />
       <Route component={Error} />
     </Switch>
     <Footer />

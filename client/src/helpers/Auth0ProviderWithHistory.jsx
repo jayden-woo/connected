@@ -8,7 +8,8 @@ import { useHistory } from "react-router-dom";
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
+  const audience =
+    process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
 
   const history = useHistory();
 
@@ -25,7 +26,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
       onRedirectCallback={onRedirectCallback}
       cacheLocation="localstorage"
       useRefreshTokens
-      scope="read:users read:user_idp_tokens read:current_user"
+      scope="read:users read:user_idp_tokens read:current_user read:submission edit:survey"
     >
       {children}
     </Auth0Provider>

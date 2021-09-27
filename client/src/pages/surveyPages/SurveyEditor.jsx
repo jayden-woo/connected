@@ -22,6 +22,9 @@ import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 import Forbidden from "../Forbidden";
 import Loading from "../../components/Loading";
 
+const audience =
+  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+
 const SurveyEditor = () => {
   const [survey, setSurvey] = useState({ questions: [] });
   const [thumbnail, setThumbnail] = useState({ src: "", alt: "" });
@@ -36,12 +39,12 @@ const SurveyEditor = () => {
   const imageSelector = useRef();
   const topRef = useRef(null);
 
-  const { user, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
+  const { user, getAccessTokenSilently, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
   useEffect(async () => {
     if (isLoading || !isAuthenticated) return;
 
     const claims = await getIdTokenClaims();
-    setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+    setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
   }, [isAuthenticated, isLoading]);
 
   // TODO: remove this
@@ -280,7 +283,16 @@ const SurveyEditor = () => {
     console.log(data);
 
     try {
-      const res = await axios.post("/api/surveys", data);
+      const accessToken = await getAccessTokenSilently({
+        audience,
+        scope: "edit:survey",
+      });
+
+      const res = await axios.post("/api/surveys", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       notify.successNotify("Successfully Published!");
 
       // eslint-disable-next-line no-underscore-dangle
@@ -346,7 +358,7 @@ const SurveyEditor = () => {
                         setError((prevState) => ({ ...prevState, title: "" }));
                       }}
                     />
-                    {error.title && <p className="se__text--error">{error.title}</p>}
+                    {error.title && <p className="se__text--error">* {error.title}</p>}
                   </Form.Group>
                   <Form.Group>
                     <Form.Label style={{ display: "none" }}>Survey Description</Form.Label>
@@ -360,7 +372,7 @@ const SurveyEditor = () => {
                       }}
                     />
                   </Form.Group>
-                  {error.description && <p className="se__text--error">{error.description}</p>}
+                  {error.description && <p className="se__text--error">* {error.description}</p>}
                 </Form>
                 <div className="se__thumbnail">
                   {thumbnail.src && <Image src={thumbnail.src} alt={thumbnail.alt} />}

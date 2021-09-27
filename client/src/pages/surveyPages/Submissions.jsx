@@ -8,23 +8,35 @@ import axios from "../../helpers/axios";
 import notify from "../../helpers/notifyService";
 import Pair from "../../components/submissions/Pair";
 import Loading from "../../components/Loading";
-import Forbidden from "../Forbidden";
+
+const audience =
+  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
 
 const Submissions = ({ location }) => {
   const [loadingResponses, setLoadingResponses] = useState(true);
   const [survey, setSurvey] = useState({});
   const [qrPair, setQrPair] = useState({});
-  const [isAdmin, setIsAdmin] = useState(false);
 
   const history = useHistory();
 
-  const { getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated, isLoading } = useAuth0();
   const query = qs.parse(location.search);
 
   useEffect(async () => {
+    if (isLoading || !isAuthenticated) return;
+
     try {
+      const accessToken = await getAccessTokenSilently({
+        audience,
+        scope: "read:submission",
+      });
+
       const { data: surveyData } = await axios.get(`/api/surveys/${query.survey}`);
-      const { data: submissionsData } = await axios.get(`/api/submissions/?survey=${query.survey}`);
+      const { data: submissionsData } = await axios.get(`/api/submissions/?survey=${query.survey}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       const pairs = {};
 
@@ -45,15 +57,13 @@ const Submissions = ({ location }) => {
       setSurvey(surveyData);
       setQrPair(pairs);
       setLoadingResponses(false);
-
-      if (isLoading || !isAuthenticated) return;
-
-      const claims = await getIdTokenClaims();
-      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
     } catch (e) {
+      console.log(e);
       // TODO: redirect to not found page
       if (e.response && e.response.status === 404) {
-        history.push("/");
+        history.push("/404");
+      } else if (e.response && e.response.status === 403) {
+        history.push("/403");
       } else {
         notify.errorNotify(e.message);
       }
@@ -63,24 +73,19 @@ const Submissions = ({ location }) => {
   if (loadingResponses) return <Loading />;
 
   return (
-    <>
-      {isAdmin && (
-        <div className="sb-container">
-          <div className="sb__content">
-            <h3 className="sb__title">{survey.title}</h3>
-            <h5 className="sb__desc">{survey.description}</h5>
-            {Object.keys(qrPair).map((question) => (
-              <Pair
-                key={question}
-                question={survey.questions.filter((q) => q.name === question)[0]}
-                responses={qrPair[question]}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-      {!isAdmin && <Forbidden />}
-    </>
+    <div className="sb-container">
+      <div className="sb__content">
+        <h3 className="sb__title">{survey.title}</h3>
+        <h5 className="sb__desc">{survey.description}</h5>
+        {Object.keys(qrPair).map((question) => (
+          <Pair
+            key={question}
+            question={survey.questions.filter((q) => q.name === question)[0]}
+            responses={qrPair[question]}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
