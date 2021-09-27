@@ -1,9 +1,7 @@
 const { Survey, validate } = require("../models/survey");
 
 const getAllSurveys = async (req, res) => {
-	const surveys = await Survey.find({ visible: true })
-		.select("title updatedAt thumbnail")
-		.sort("-updatedAt");
+	const surveys = await Survey.find().select("-questions").sort("-updatedAt");
 	res.send(surveys);
 };
 
@@ -11,7 +9,9 @@ const getSurveyByID = async (req, res) => {
 	const survey = await Survey.findById(req.params.id);
 
 	if (!survey)
-		return res.status(404).send("The survey with the given ID was not found.");
+		return res
+			.status(404)
+			.send("The survey with the given ID was not found.");
 
 	res.send(survey);
 };
@@ -40,7 +40,9 @@ const updateSurvey = async (req, res) => {
 		new: true,
 	});
 	if (!survey)
-		return res.status(404).send("The survey with the given ID was not found.");
+		return res
+			.status(404)
+			.send("The survey with the given ID was not found.");
 
 	res.send(survey);
 };

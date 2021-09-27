@@ -6,21 +6,28 @@ import SurveyBoard from "./SurveyBoard";
 
 const Background = styled.div`
   background-color: var(--color-background);
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  margin-top: 80px;
   padding: 0 0 8vh;
 `;
 
 const StyledImage = styled.img`
-  height: 300px;
+  height: 350px;
   width: 100%;
   max-width: 100%;
   object-fit: cover;
   object-position: left bottom;
+  @media (max-width: 480px) {
+    height: 250px;
+  }
 `;
 
 const StyledNavContainer = styled(Nav)`
-  margin: -20px 8vw 0;
+  // margin: -20px 8vw 0;
+  margin: -20px 0 0;
   padding: 0;
-  width: 84vw;
+  // width: 84vw;
+  width: 100vw;
   @media (min-width: 768px) {
     margin: -30px 12vw 0;
     width: 76vw;
@@ -52,6 +59,10 @@ const SurveyNav = styled(StyledNav)`
 
 const StyledNavLink = styled(Nav.Link)`
   color: white;
+  &:hover {
+    color: white;
+    filter: brightness(75%);
+  }
 `;
 
 const Home = () => (

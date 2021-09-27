@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, following }) => {
+const PostSummary = ({ postId, title, body, author, createdAt, views, comments, solved, following }) => {
   const date = new Date(createdAt);
 
   return (
@@ -31,21 +31,25 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
                 <Card.Title>{title.length < 170 ? title : title.substring(0, 170).concat("...")}</Card.Title>
                 <Card.Text>{body.length < 300 ? body : body.substring(0, 300).concat("...")}</Card.Text>
                 <Card.Text>
-                  <small className="text-muted">Posted on {date.toUTCString()}</small>
+                  <small className="text-muted">
+                    {`Posted `}
+                    <MediaQuery minWidth={768}>{`by ( ${author} ) `}</MediaQuery>
+                    {`on ( ${date.toUTCString()} )`}
+                  </small>
                 </Card.Text>
                 <Card.Text as="div">
                   <Row className="align-items-center">
-                    <Col xs={4} sm={5} lg={3}>
+                    <Col xs={3} sm={4} lg={3}>
                       <FontAwesomeIcon icon="eye" size="lg" color="var(--color-primary)" />
                       {` ${views}`}
                       <MediaQuery minWidth={768}>{views > 1 ? ` Views` : ` View`}</MediaQuery>
                     </Col>
-                    <Col xs={4} sm={5} lg={3}>
+                    <Col xs={3} sm={4} lg={3}>
                       <FontAwesomeIcon icon="comments" size="lg" color="var(--color-primary)" />
                       {` ${comments.length}`}
                       <MediaQuery minWidth={768}>{comments.length > 1 ? ` Comments` : ` Comment`}</MediaQuery>
                     </Col>
-                    <Col xs={2} sm={1} lg={3}>
+                    <Col xs={3} sm={2} lg={3}>
                       {solved ? (
                         <>
                           <FontAwesomeIcon icon="check-circle" size="lg" color="var(--bs-success)" />
@@ -58,7 +62,7 @@ const PostSummary = ({ postId, title, body, createdAt, views, comments, solved, 
                         </>
                       )}
                     </Col>
-                    <Col xs={2} sm={1} lg={3}>
+                    <Col xs={3} sm={2} lg={3}>
                       {following ? (
                         <>
                           <FontAwesomeIcon icon="bell" size="lg" color="var(--color-primary)" />
@@ -93,6 +97,7 @@ PostSummary.propTypes = {
   postId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   views: PropTypes.number,
   comments: PropTypes.arrayOf(PropTypes.object),

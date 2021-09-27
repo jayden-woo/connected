@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import * as Survey from "survey-react";
 import PropTypes from "prop-types";
 import Spinner from "react-bootstrap/Spinner";
-import http from "../../services/httpService";
+import axios from "../../helpers/axios";
 
 Survey.StylesManager.applyTheme("modern");
 
@@ -15,13 +15,13 @@ const SurveyPage = ({ match }) => {
 
   useEffect(async () => {
     try {
-      const res = await http.get(`http://localhost:3000/api/surveys/${match.params.id}`);
+      const res = await axios.get(`/api/surveys/${match.params.id}`);
       setIsLoading(false);
       setSurvey(res.data);
     } catch (e) {
       // TODO: redirect to not found page
       if (e.response.status === 404) {
-        history.push("/");
+        history.push("/404");
       }
     }
   }, []);
@@ -39,7 +39,7 @@ const SurveyPage = ({ match }) => {
     }, survey.questions);
 
     try {
-      await http.post("http://localhost:3000/api/submissions", submission);
+      await axios.post("/api/submissions", submission);
     } catch (e) {
       console.log(e.response.data.message);
     }

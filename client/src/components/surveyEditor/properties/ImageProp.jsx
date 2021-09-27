@@ -4,8 +4,8 @@ import Image from "react-bootstrap/Image";
 import Form from "react-bootstrap/Form";
 import PropTypes from "prop-types";
 
-import uploadImage from "../../../services/uploadImageService";
-import notify from "../../../services/notifyService";
+import uploadImage from "../../../helpers/uploadImageService";
+import notify from "../../../helpers/notifyService";
 
 const ImageProp = ({ question, updateQuestion, setProgressBar }) => {
   const [imageHeight, setImageHeight] = useState("");

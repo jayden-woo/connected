@@ -87,7 +87,7 @@ const surveySchema = new mongoose.Schema(
 		description: {
 			type: String,
 			min: 5,
-			max: 100,
+			max: 1000,
 		},
 		thumbnail: {
 			type: String,
@@ -162,7 +162,12 @@ function validateSurvey(survey, update = false) {
 			otherwise: Joi.forbidden(),
 		}),
 		choices: Joi.alternatives().conditional("type", {
-			is: Joi.string().valid("radiogroup", "checkbox", "dropdown", "ranking"),
+			is: Joi.string().valid(
+				"radiogroup",
+				"checkbox",
+				"dropdown",
+				"ranking",
+			),
 			then: Joi.array().items(Joi.string()).min(2).required(),
 			otherwise: Joi.forbidden(),
 		}),
@@ -228,7 +233,9 @@ function validateSurvey(survey, update = false) {
 		}),
 		imageFit: Joi.alternatives().conditional("type", {
 			is: "image",
-			then: Joi.string().required().valid("none", "contain", "cover", "fill"),
+			then: Joi.string()
+				.required()
+				.valid("none", "contain", "cover", "fill"),
 			otherwise: Joi.forbidden(),
 		}),
 		html: Joi.alternatives().conditional("type", {
@@ -241,7 +248,7 @@ function validateSurvey(survey, update = false) {
 	const surveySchema = Joi.object({
 		creator: Joi.string().required(),
 		title: Joi.string().required().min(5).max(100),
-		description: Joi.string().min(5).max(100),
+		description: Joi.string().min(5).max(1000),
 		thumbnail: Joi.string(),
 		questions: Joi.array().required().items(questionSchema).min(1),
 	});
@@ -249,7 +256,7 @@ function validateSurvey(survey, update = false) {
 	const updateSchema = Joi.object({
 		creator: Joi.string(),
 		title: Joi.string().min(5).max(100),
-		description: Joi.string().min(5).max(100),
+		description: Joi.string().min(5).max(1000),
 		thumbnail: Joi.string(),
 		questions: Joi.array().items(questionSchema).min(1),
 		visible: Joi.bool(),

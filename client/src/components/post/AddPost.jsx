@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 import { Image, Col, Container, Row, Form, FloatingLabel, Tooltip, Overlay, Alert } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
 import backgroundImg from "../../assets/mainHeader.png";
+import axios from "../../helpers/axios";
 
 const Background = styled.div`
   background-color: var(--color-background);
@@ -23,9 +23,11 @@ const StyledImage = styled.img`
 `;
 
 const StyledHeader = styled(Container)`
-  margin: -20px 8vw 0;
+  // margin: -20px 8vw 0;
+  margin: -20px 0 0;
   padding: 1.5rem 2rem;
-  width: 84vw;
+  // width: 84vw;
+  width: 100vw;
   font-size: 1.2rem;
   text-align: left;
   color: white;
@@ -44,13 +46,16 @@ const StyledHeader = styled(Container)`
 `;
 
 const StyledDiv = styled.div`
-  margin: 0 8vw;
-  padding: 60px 2rem 30px;
+  // margin: 0 8vw;
+  margin: 0;
+  // padding: 60px 2rem 30px;
+  padding: 60px 0 30px;
   border: 1px solid var(--color-primary);
   background-color: white;
   max-width: 100vw;
   @media (min-width: 768px) {
     margin: 0 12vw;
+    padding: 60px 2rem 30px;
   }
   @media (min-width: 1200px) {
     margin: 0 20vw;
@@ -89,7 +94,7 @@ const CancelButton = styled(SubmitButton)`
 `;
 
 const AddPost = () => {
-  const baseUrl = process.env.PUBLIC_URL || "http://localhost:3000";
+  // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   const { user, isAuthenticated } = useAuth0();
   const [showTooltip, setShowTooltip] = useState(false);
   const target = useRef(null);
@@ -106,30 +111,41 @@ const AddPost = () => {
       setValidated(true);
       return;
     }
-    axios.post(`${baseUrl}/api/posts`, { uid: user.sub, title, content }).then((res) => {
-      console.log(res);
-      toast.success("Your post has been successfully submitted.", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        pauseOnFocusLoss: false,
-        draggable: false,
-        progress: undefined,
+    axios
+      // .post(`${baseUrl}/api/posts`, {
+      .post("/api/posts", {
+        author: {
+          uid: user.sub,
+          name: user.name === user.email ? user.nickname : user.name,
+          picture: user.picture,
+        },
+        title,
+        content,
+      })
+      .then((res) => {
+        console.log(res);
+        toast.success("Your post has been successfully submitted.", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          pauseOnFocusLoss: false,
+          draggable: false,
+          progress: undefined,
+        });
+        setTimeout(() => {
+          // eslint-disable-next-line no-underscore-dangle
+          history.push(`/posts/${res.data._id}`);
+        }, 3000);
       });
-      setTimeout(() => {
-        // eslint-disable-next-line no-underscore-dangle
-        history.push(`/posts/${res.data._id}`);
-      }, 3000);
-    });
   };
 
   return (
     <Background>
       <StyledImage src={backgroundImg} />
       <StyledHeader>
-        <a className="text-white" href="/">{` Question Board `}</a>
+        <Link className="text-white" to="/">{` Question Board `}</Link>
         &nbsp;&nbsp;&nbsp;
         <FontAwesomeIcon icon="arrow-right" size="sm" color="white" />
         &nbsp;&nbsp;&nbsp;
@@ -220,4 +236,7 @@ const AddPost = () => {
   );
 };
 
+// export default withAuthenticationRequired(AddPost, {
+//   onRedirecting: () => <Loading />,
+// });
 export default AddPost;

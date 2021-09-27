@@ -1,5 +1,5 @@
 import React from "react";
-import loading from "../assets/loading.svg";
+import { Spinner } from "react-bootstrap";
 
 const Loading = () => (
   <div
@@ -11,7 +11,9 @@ const Loading = () => (
       transform: "translate(-50%, -50%)",
     }}
   >
-    <img src={loading} alt="Loading" />
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
   </div>
 );
 

@@ -1,12 +1,23 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { commentSchema, validationSchema } = require("./comment");
+const { commentSchema, commentValidationSchema } = require("./comment");
+const { historySchema, historyValidationSchema } = require("./history");
 
 const postSchema = new mongoose.Schema(
   {
-    uid: {
-      type: String,
-      required: true,
+    author: {
+      uid: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      picture: {
+        type: String,
+        required: true,
+      },
     },
     title: {
       type: String,
@@ -35,7 +46,14 @@ const postSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
-    comments: [commentSchema],
+    comments: {
+      type: [commentSchema],
+      default: [],
+    },
+    history: {
+      type: [historySchema],
+      default: [],
+    },
   },
   {
     timestamps: true,
@@ -46,19 +64,28 @@ const Post = mongoose.model("Posts", postSchema);
 
 function validatePost(post, update = false) {
   const creationSchema = Joi.object({
-    uid: Joi.string().required(),
+    author: Joi.object({
+      uid: Joi.string().required(),
+      name: Joi.string().required(),
+      picture: Joi.string().required(),
+    }),
     title: Joi.string().required().min(5).max(100),
     content: Joi.string().required().min(5).max(1000),
   });
 
   const updateSchema = Joi.object({
-    uid: Joi.string(),
+    author: Joi.object({
+      uid: Joi.string().required(),
+      name: Joi.string().required(),
+      picture: Joi.string().required(),
+    }),
     title: Joi.string().min(5).max(100),
     content: Joi.string().min(5).max(1000),
     views: Joi.number().min(0),
     solved: Joi.boolean(),
     followers: Joi.array().items(Joi.string()),
-    comments: Joi.array().items(validationSchema),
+    comments: Joi.array().items(commentValidationSchema),
+    history: Joi.array().items(historyValidationSchema),
   });
 
   if (update) return updateSchema.validate(post);

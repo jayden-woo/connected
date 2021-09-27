@@ -1,29 +1,37 @@
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Spinner, Col, Container, Row, Modal } from "react-bootstrap";
+import { Link, useParams, useHistory } from "react-router-dom";
+import { Col, Container, Row, Modal } from "react-bootstrap";
 import MediaQuery from "react-responsive";
-import axios from "axios";
+// import axios from "axios";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import axios from "../../helpers/axios";
 import backgroundImg from "../../assets/mainHeader.png";
 import PostStats from "./PostStats";
+import PostComment from "./PostComment";
 import PostContent from "./PostContent";
 import PostReply from "./PostReply";
+import Loading from "../Loading";
 
 const Background = styled.div`
   background-color: var(--color-background);
+  min-height: calc(100vh - var(--height-nav-bar) - var(--height-footer));
+  margin-top: 80px;
   padding: 0 0 8vh;
   position: relative;
 `;
 
 const StyledImage = styled.img`
-  height: 300px;
+  height: 350px;
   width: 100%;
   max-width: 100%;
   object-fit: cover;
   object-position: left bottom;
+  @media (max-width: 480px) {
+    height: 250px;
+  }
 `;
 
 const StyledHeader = styled(Container)`
@@ -106,48 +114,69 @@ const CancelButton = styled(ConfirmDeleteButton)`
 `;
 
 const Post = () => {
-  const baseUrl = process.env.PUBLIC_URL || "http://localhost:3000";
+  // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   const { id } = useParams();
   const history = useHistory();
-  const { user, isAuthenticated } = useAuth0();
+  const { user, getIdTokenClaims, isAuthenticated } = useAuth0();
+  // const isAdmin = localStorage.getItem("isAdmin");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuthor, setIsAuthor] = useState(false);
   const [post, setPost] = useState();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/api/posts/${id}`)
+      // .get(`${baseUrl}/api/posts/${id}`)
+      .get(`/api/posts/${id}`)
       .then((res) => {
         console.log(res);
         // Increment the post view count
-        return axios.put(`${baseUrl}/api/posts/${id}`, { views: res.data.views + 1 });
+        // return axios.put(`${baseUrl}/api/posts/${id}`, { views: res.data.views + 1 });
+        return axios.put(`/api/posts/${id}`, { views: res.data.views + 1 });
       })
       .then((res) => {
         console.log(res);
         setPost(res.data);
+        // setIsAuthor(isAuthenticated && res.data.author.uid === user.sub);
       });
   }, []);
+
+  // Check for admin status everytime when isAuthenticated changes its value
+  useEffect(async () => {
+    const claims = await getIdTokenClaims();
+    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+  }, [isAuthenticated]);
+
+  useEffect(async () => {
+    if (isAuthenticated && post !== undefined) {
+      setIsAuthor(post.author.uid === user.sub);
+    }
+  }, [isAuthenticated, post]);
 
   const handleFollowClick = () => {
     const { followers } = post;
     const index = followers.indexOf(user.sub);
     // eslint-disable-next-line no-unused-expressions
     index === -1 ? followers.push(user.sub) : followers.splice(index, 1);
-    axios.put(`${baseUrl}/api/posts/${id}`, { followers }).then((res) => {
+    // axios.put(`${baseUrl}/api/posts/${id}`, { followers }).then((res) => {
+    axios.put(`/api/posts/${id}`, { followers }).then((res) => {
       console.log(res);
       setPost(res.data);
     });
   };
 
   const handleSolveClick = () => {
-    axios.put(`${baseUrl}/api/posts/${id}`, { solved: !post.solved }).then((res) => {
+    // axios.put(`${baseUrl}/api/posts/${id}`, { solved: !post.solved }).then((res) => {
+    axios.put(`/api/posts/${id}`, { solved: !post.solved }).then((res) => {
       console.log(res);
       setPost(res.data);
     });
   };
 
-  const handleDeleteClick = () => {
+  const handlePostDeleteClick = () => {
     setShowConfirmation(false);
-    axios.delete(`${baseUrl}/api/posts/${id}`).then((res) => {
+    // axios.delete(`${baseUrl}/api/posts/${id}`).then((res) => {
+    axios.delete(`/api/posts/${id}`).then((res) => {
       console.log(res);
       toast.success("Your post has been successfully deleted.", {
         position: "top-center",
@@ -167,29 +196,28 @@ const Post = () => {
 
   const handlePublish = (reply) => {
     const comment = {
-      uid: user.sub,
+      author: {
+        uid: user.sub,
+        name: user.email === user.name ? user.nickname : user.name,
+        picture: user.picture,
+      },
       content: reply,
     };
-    axios.put(`${baseUrl}/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
+    // axios.put(`${baseUrl}/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
+    axios.put(`/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
       console.log(res);
       setPost(res.data);
     });
   };
 
   if (post === undefined) {
-    return (
-      <div className="text-center">
-        <Spinner animation="border" role="status" className="loading">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <Background>
       <StyledImage src={backgroundImg} />
       <StyledHeader>
-        <a className="text-white" href="/">{` Question Board `}</a>
+        <Link className="text-white" to="/">{` Question Board `}</Link>
         &nbsp;&nbsp;&nbsp;
         <FontAwesomeIcon icon="arrow-right" size="sm" color="white" />
         &nbsp;&nbsp;&nbsp;
@@ -200,16 +228,34 @@ const Post = () => {
           <Row>
             <Col xs="8" className="ps-4">
               <Row>
-                <PostContent user={post.uid} createdAt={post.createdAt} title={post.title} content={post.content} />
+                <PostContent
+                  // eslint-disable-next-line no-underscore-dangle
+                  pid={post._id}
+                  isAuthor={isAuthor}
+                  author={post.author}
+                  createdAt={post.createdAt}
+                  title={post.title}
+                  content={post.content}
+                  history={post.history}
+                  onDeleteClick={() => setShowConfirmation(true)}
+                  setPost={setPost}
+                />
               </Row>
               <Row>
                 {post.comments.map((comment) => (
-                  <PostContent
+                  <PostComment
                     // eslint-disable-next-line no-underscore-dangle
                     key={comment._id}
-                    user={comment.uid}
+                    // eslint-disable-next-line no-underscore-dangle
+                    pid={post._id}
+                    // eslint-disable-next-line no-underscore-dangle
+                    cid={comment._id}
+                    author={comment.author}
                     createdAt={comment.createdAt}
                     content={comment.content}
+                    history={comment.history}
+                    // onDeleteClick={handleCommentDeleteClick}
+                    setPost={setPost}
                   />
                 ))}
               </Row>
@@ -240,31 +286,33 @@ const Post = () => {
                 </Row>
               )}
               {/* Only show marking as solved for post owner */}
-              {isAuthenticated && post.uid === user.sub && (
-                <>
-                  <Row>
-                    <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
-                      Mark as {post.solved ? " Unsolved" : " Solved"}
-                    </SolveButton>
-                  </Row>
-                  <Row>
-                    <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
-                  </Row>
-                  <Modal className="vw-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
-                    <Modal.Header className="px-4" closeButton>
-                      <Modal.Title>Delete Post?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className="px-5 py-4 text-center">
-                      <p className="m-0 p-1">Do you really want to permanently delete this post?</p>
-                      <p className="m-0 p-1">This process cannot be undone.</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <CancelButton onClick={() => setShowConfirmation(false)}>Cancel</CancelButton>
-                      <ConfirmDeleteButton onClick={handleDeleteClick}>Delete</ConfirmDeleteButton>
-                    </Modal.Footer>
-                  </Modal>
-                </>
+              {isAuthor && (
+                <Row>
+                  <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
+                    Mark as {post.solved ? " Unsolved" : " Solved"}
+                  </SolveButton>
+                </Row>
               )}
+              {/* Only delete post for admin and post owner only */}
+              {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
+              {(isAdmin || isAuthor) && (
+                <Row>
+                  <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
+                </Row>
+              )}
+              <Modal className="vw-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
+                <Modal.Header className="px-4" closeButton>
+                  <Modal.Title>Delete Post?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="px-5 py-4 text-center">
+                  <p className="m-0 p-1">Do you really want to permanently delete this post?</p>
+                  <p className="m-0 p-1">This process cannot be undone.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <CancelButton onClick={() => setShowConfirmation(false)}>Cancel</CancelButton>
+                  <ConfirmDeleteButton onClick={handlePostDeleteClick}>Delete</ConfirmDeleteButton>
+                </Modal.Footer>
+              </Modal>
             </Col>
           </Row>
         </Container>
