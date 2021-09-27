@@ -839,3 +839,13 @@ a:visited {
     text-align: center;
   }
 }
+
+.nav-container {
+  margin: 0 5% 0 0;
+}
+
+@media screen and (min-width: 1400px) {
+  .nav-container {
+    margin: 0 18% 0 18%;
+  }  
+}

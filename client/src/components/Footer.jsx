@@ -27,8 +27,8 @@ const StyledP = styled.p`
   color: #190e89;
   @media (max-width: 576px) {
     height: 30px;
-    font-size: 0.8rem;
-    align-items: end;
+    font-size: 0.9rem;
+    align-items: flex-end;
     justify-content: center;
     margin: 0px 5px 0px 5px;
   }
@@ -36,7 +36,7 @@ const StyledP = styled.p`
 
 const Footer = () => (
   <Container style={{ background: "#FFF", bottom: 0, alignItems: "center", height: "60px" }} fluid>
-    <Row sm="auto" className="justify-content-sm-center" style={{ display: "flex", alignItems: "center" }}>
+    <Row sm="auto" className="justify-content-sm-center" style={{ alignItems: "center" }}>
       <Col md="auto">
         <StyledP>© 2021 Proudly Created by Team 15 Connected</StyledP>
       </Col>
