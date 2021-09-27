@@ -3,21 +3,26 @@ const Joi = require("joi");
 const { commentSchema, commentValidationSchema } = require("./comment");
 const { historySchema, historyValidationSchema } = require("./history");
 
+const authorSchema = new mongoose.Schema({
+    uid: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    picture: {
+      type: String,
+      required: true,
+    },
+  });
+  
 const postSchema = new mongoose.Schema(
   {
     author: {
-      uid: {
-        type: String,
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      picture: {
-        type: String,
-        required: true,
-      },
+      type: authorSchema,
+      required: true,
     },
     title: {
       type: String,
@@ -68,7 +73,7 @@ function validatePost(post, update = false) {
       uid: Joi.string().required(),
       name: Joi.string().required(),
       picture: Joi.string().required(),
-    }),
+    }).required(),
     title: Joi.string().required().min(5).max(100),
     content: Joi.string().required().min(5).max(1000),
   });
