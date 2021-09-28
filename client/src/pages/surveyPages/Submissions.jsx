@@ -49,7 +49,7 @@ const Submissions = ({ location }) => {
       if (isLoading || !isAuthenticated) return;
 
       const claims = await getIdTokenClaims();
-      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+      setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
     } catch (e) {
       // TODO: redirect to not found page
       if (e.response && e.response.status === 404) {

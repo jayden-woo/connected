@@ -39,7 +39,7 @@ const SurveyEditor = () => {
     if (isLoading || !isAuthenticated) return;
 
     const claims = await getIdTokenClaims();
-    setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+    setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
   }, [isAuthenticated, isLoading]);
 
   // TODO: remove this

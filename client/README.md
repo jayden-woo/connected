@@ -54,7 +54,7 @@ yarn start
 ```
 
 _Run front-end and back-end together_
-`cd ..` (cs back to root folder) and run the follwing command
+`cd ..` (cd back to root folder) and run the follwing command
 
 ```bash
 # make sure all dependencies are installed

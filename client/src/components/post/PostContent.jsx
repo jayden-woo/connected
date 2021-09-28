@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
 import _ from "lodash";
 import PostEdit from "./PostEdit";
+import ModalProfile from "../profile/ModalProfile";
 
 const TextButton = styled.button`
   padding: 0;
@@ -38,17 +39,33 @@ const LineBreak = styled.hr`
   }
 `;
 
-const PostContent = ({ pid, isAuthor, author, createdAt, title, content, history, onDeleteClick, setPost }) => {
+const PostContent = ({
+  pid,
+  isAuthor,
+  author,
+  createdAt,
+  title,
+  content,
+  history,
+  onDeleteClick,
+  setPost,
+  isAdmin,
+  sub,
+}) => {
   const date = new Date(createdAt);
   const editDate = history.length > 0 ? _.last(history).createdAt : null;
   const [isEditing, setIsEditing] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
       <Container>
         <Row>
           <Col as="p" xs="8" className="ps-4 pe-2 pt-3">
-            <Image src={author.picture} width="35" height="35" alt="ProfilePic" roundedCircle />
+            <Button className="post-img-button" disabled={!isAdmin} onClick={() => setModalShow(true)} variant="link">
+              <Image src={author.picture} width="35" height="35" alt="ProfilePic" roundedCircle />
+            </Button>
+            <ModalProfile show={modalShow} onHide={() => setModalShow(false)} sub={sub} />
             &nbsp; {author.name}
           </Col>
           <Col as="p" xs="4" className="pe-4 pt-3 text-end">
@@ -115,6 +132,7 @@ PostContent.defaultProps = {
     picture: "",
   },
   history: [],
+  isAdmin: false,
 };
 
 PostContent.propTypes = {
@@ -130,6 +148,8 @@ PostContent.propTypes = {
   history: PropTypes.arrayOf(PropTypes.object),
   onDeleteClick: PropTypes.func.isRequired,
   setPost: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool,
+  sub: PropTypes.string.isRequired,
 };
 
 export default PostContent;

@@ -144,7 +144,7 @@ const Post = () => {
   // Check for admin status everytime when isAuthenticated changes its value
   useEffect(async () => {
     const claims = await getIdTokenClaims();
-    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
   }, [isAuthenticated]);
 
   useEffect(async () => {
@@ -239,6 +239,8 @@ const Post = () => {
                   history={post.history}
                   onDeleteClick={() => setShowConfirmation(true)}
                   setPost={setPost}
+                  isAdmin={isAdmin}
+                  sub={post.author.uid}
                 />
               </Row>
               <Row>
@@ -256,6 +258,7 @@ const Post = () => {
                     history={comment.history}
                     // onDeleteClick={handleCommentDeleteClick}
                     setPost={setPost}
+                    sub={comment.author.uid}
                   />
                 ))}
               </Row>

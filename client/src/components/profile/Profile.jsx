@@ -1,39 +1,40 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Card, Container, Row, Col, Image, Modal, Spinner } from "react-bootstrap";
+import { Card, Container, Row, Col, Image, Nav, Modal, Spinner } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 import PasswordResetButton from "./Reset";
 import notify from "../../helpers/notifyService";
-// import EditButton from "./editButton";
+import EditButton from "./editButton";
+import axios from "../../helpers/axios";
 import "../../css/profile.css";
 
 const Profile = ({ sub }) => {
-  const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+  const [modalEditPaShow, setModalEditPaShow] = useState(false);
+  const [modalEditUsShow, setModalEditUsShow] = useState(false);
   const [state, setState] = useState({
     data: null,
     loading: true,
+    dbconnect: false,
   });
-  const { user, getAccessTokenSilently, isLoading } = useAuth0();
+  const { user, isLoading } = useAuth0();
+
+  const handleEditClose = () => {
+    setModalEditPaShow(false);
+    setModalEditUsShow(false);
+  };
+  const handleEditPaShow = () => setModalEditPaShow(true);
+  const handleEditUsShow = () => setModalEditUsShow(true);
 
   useEffect(() => {
     (async () => {
       const getUser = async () => {
         try {
-          const accessToken = await getAccessTokenSilently({
-            audience: `https://${domain}/api/v2/`,
-            scope: "read:users read:user_idp_tokens",
-          });
-
-          const userDetailsByIdUrl = `https://${domain}/api/v2/users/${sub}`;
-
-          const apiResponse = await fetch(userDetailsByIdUrl, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          });
+          const res = await axios.get(`/api/auth0/getuserinfo/${sub}`);
           setState({
-            data: await apiResponse.json(),
+            data: res.data,
             loading: false,
+            dbconnect: res.data.identities[0].connection === "Username-Password-Authentication" && user.sub === sub,
           });
         } catch (error) {
           setState({
@@ -45,14 +46,13 @@ const Profile = ({ sub }) => {
       };
       getUser();
     })();
-  }, [getAccessTokenSilently, user?.sub]);
+  }, [user?.sub, modalEditPaShow, modalEditUsShow]);
 
   if (state.loading || isLoading) {
     return <Spinner animation="grow" />;
   }
 
-  const { picture, username, name, nickname, email, identities } = state.data;
-  const passwordReset = identities[0].connection === "Username-Password-Authentication";
+  const { picture, username, name, nickname, email } = state.data;
 
   return (
     <Card className="user-card-full" style={{ margin: 0 }}>
@@ -87,9 +87,14 @@ const Profile = ({ sub }) => {
                     <Col>
                       <h5 className="f-w-600">Username</h5>
                     </Col>
-                    {/* <Col>
-                      <EditButton updateFiled="Username" />
-                    </Col> */}
+                    {state.dbconnect && (
+                      <Col>
+                        <Nav.Link onClick={handleEditUsShow} style={{ paddingTop: 0, color: "rgba(0,0,0,.55)" }}>
+                          Edit
+                        </Nav.Link>
+                        <EditButton show={modalEditUsShow} onHide={handleEditClose} sub={sub} updateFiled="username" />
+                      </Col>
+                    )}
                   </Row>
                   <Row>
                     <p className="text-muted profile-content">
@@ -105,16 +110,21 @@ const Profile = ({ sub }) => {
                     <Col>
                       <h5 className="f-w-600">Email</h5>
                     </Col>
-                    {/* <Col>
-                      <EditButton updateFiled="Email" />
-                    </Col> */}
+                    {state.dbconnect && (
+                      <Col>
+                        <Nav.Link onClick={handleEditPaShow} style={{ paddingTop: 0, color: "rgba(0,0,0,.55)" }}>
+                          Edit
+                        </Nav.Link>
+                        <EditButton show={modalEditPaShow} onHide={handleEditClose} sub={sub} updateFiled="email" />
+                      </Col>
+                    )}
                   </Row>
                   <Row>
                     <p className="text-muted profile-content">{email}</p>
                   </Row>
                 </Col>
               </Row>
-              {passwordReset && (
+              {state.dbconnect && (
                 <Row>
                   <Col>
                     <Row>

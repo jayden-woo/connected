@@ -36,7 +36,6 @@ const PasswordResetButton = ({ email }) => {
             show: true,
           });
           setLoading(false);
-          console.log(response);
         })
         .catch((error) => {
           notify.errorNotify(error.response.data.message);
