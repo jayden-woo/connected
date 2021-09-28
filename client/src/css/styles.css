@@ -853,9 +853,16 @@ a:visited {
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
   .my-nav-item {
     width: 70px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .my-nav-item {
+    margin: 0 0;
+    text-align: center;
   }
 }
 
@@ -884,4 +891,12 @@ a:visited {
   .nav-container {
     margin: 0 18% 0 18%;
   }  
+}
+
+.post-img-button {
+  background-color: transparent;
+  width: 35;
+  height: 35;
+  border-radius: 50%;
+  padding: 0;
 }

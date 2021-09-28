@@ -11,7 +11,6 @@ const ProfNavDropdown = () => {
 
   const { user, isLoading, getIdTokenClaims } = useAuth0();
   const [state, setState] = useState({
-    userId: null,
     isAdmin: false,
     loading: true,
   });
@@ -27,9 +26,8 @@ const ProfNavDropdown = () => {
         try {
           const claims = await getIdTokenClaims();
           setState({
-            userId: user.sub,
             loading: false,
-            isAdmin: claims["https://it-project-connected.herokuapp.com/roles"] === "admin",
+            isAdmin: claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin",
           });
         } catch (error) {
           setState({
@@ -62,7 +60,7 @@ const ProfNavDropdown = () => {
         <NavDropdown.Item onClick={() => setModalShow(true)} style={dropdownItemStyle}>
           PROFILE
         </NavDropdown.Item>
-        <ModalProfile show={modalShow} onHide={() => setModalShow(false)} userId={state.userId} />
+        <ModalProfile show={modalShow} onHide={() => setModalShow(false)} sub={user.sub} />
       </NavDropdown>
     </>
   );

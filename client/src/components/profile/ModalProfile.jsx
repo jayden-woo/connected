@@ -4,10 +4,10 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 import PropTypes from "prop-types";
 import ProfileDisplay from "./Profile";
 
-const ModalProfile = ({ show, onHide, userId }) => (
+const ModalProfile = ({ show, onHide, sub }) => (
   <Modal show={show} onHide={onHide} centered style={{ justifyContent: "center" }}>
     <div style={{ padding: 0, margin: 5 }}>
-      <ProfileDisplay sub={userId} />
+      <ProfileDisplay sub={sub} />
     </div>
   </Modal>
 );
@@ -19,5 +19,5 @@ export default withAuthenticationRequired(ModalProfile, {
 ModalProfile.propTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
-  userId: PropTypes.string.isRequired,
+  sub: PropTypes.string.isRequired,
 };

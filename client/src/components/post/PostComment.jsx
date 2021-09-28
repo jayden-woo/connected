@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Image, Row, Modal } from "react-bootstrap";
+import { Col, Container, Image, Button, Row, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -8,6 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import _ from "lodash";
 import axios from "../../helpers/axios";
 import CommentEdit from "./CommentEdit";
+import ModalProfile from "../profile/ModalProfile";
 
 const LineBreak = styled.hr`
   border: 0;
@@ -68,7 +69,7 @@ const CancelButton = styled(ConfirmDeleteButton)`
   background-color: grey;
 `;
 
-const PostComment = ({ pid, cid, author, createdAt, content, history, setPost }) => {
+const PostComment = ({ pid, cid, author, createdAt, content, history, setPost, sub }) => {
   const date = new Date(createdAt);
   const editDate = history.length > 0 ? _.last(history).createdAt : null;
   const { user, getIdTokenClaims, isAuthenticated } = useAuth0();
@@ -76,10 +77,11 @@ const PostComment = ({ pid, cid, author, createdAt, content, history, setPost })
   const [isAuthor, setIsAuthor] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(async () => {
     const claims = await getIdTokenClaims();
-    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"] === "admin");
+    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
     setIsAuthor(isAuthenticated && author.uid === user.sub);
   }, [isAuthenticated]);
 
@@ -106,7 +108,10 @@ const PostComment = ({ pid, cid, author, createdAt, content, history, setPost })
       <Container>
         <Row>
           <Col as="p" xs="8" className="ps-4 pe-2 pt-3">
-            <Image src={author.picture} width="35" height="35" alt="ProfilePic" roundedCircle />
+            <Button className="post-img-button" disabled={!isAdmin} onClick={() => setModalShow(true)} variant="link">
+              <Image src={author.picture} width="35" height="35" alt="ProfilePic" roundedCircle />
+            </Button>
+            <ModalProfile show={modalShow} onHide={() => setModalShow(false)} sub={sub} />
             &nbsp; {author.name}
           </Col>
           <Col as="p" xs="4" className="pe-4 pt-3 text-end">
@@ -195,6 +200,7 @@ PostComment.propTypes = {
   content: PropTypes.string.isRequired,
   history: PropTypes.arrayOf(PropTypes.object),
   setPost: PropTypes.func.isRequired,
+  sub: PropTypes.string.isRequired,
 };
 
 export default PostComment;

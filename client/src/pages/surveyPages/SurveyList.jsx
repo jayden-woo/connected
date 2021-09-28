@@ -33,7 +33,6 @@ const SurveyList = () => {
       if (isLoading || !isAuthenticated) return;
 
       const claims = await getIdTokenClaims();
-      console.log(claims);
       setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
     } catch (e) {
       notify.errorNotify(e.message);
