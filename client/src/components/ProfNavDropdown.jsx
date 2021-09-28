@@ -26,7 +26,7 @@ const ProfNavDropdown = () => {
       const CheckRole = async () => {
         try {
           const claims = await getIdTokenClaims();
-          let un;
+          let un = null;
           if (claims["https://it-project-connected.herokuapp.com/username"]) {
             un = claims["https://it-project-connected.herokuapp.com/username"];
           } else {
@@ -42,12 +42,12 @@ const ProfNavDropdown = () => {
             ...state,
             loading: false,
           });
-          notify.errorNotify(error.response.data.message);
+          notify.errorNotify(error.message);
         }
       };
       CheckRole();
-    })();
-  }, [getIdTokenClaims, user?.sub, user?.email]);
+    })(modalShow);
+  }, [getIdTokenClaims, user?.sub, modalShow]);
 
   if (state.loading || isLoading) {
     return <Spinner className="text-center" animation="grow" />;
@@ -58,7 +58,8 @@ const ProfNavDropdown = () => {
       <NavDropdown
         title={state.username}
         id="collasible-nav-dropdown"
-        style={{ backgroundColor: "rgba(var(--bs-light-rgb)" }}
+        className="my-nav-item"
+        style={{ marginLeft: "0.1rem", backgroundColor: "rgba(var(--bs-light-rgb)" }}
       >
         {state.isAdmin && (
           <NavDropdown.Item as={NavLink} to="/create-survey" style={dropdownItemStyle} exact>

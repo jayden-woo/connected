@@ -49,7 +49,13 @@ const PasswordResetButton = ({ email }) => {
 
   return (
     <>
-      <Button variant="primary" disabled={isLoading} onClick={!isLoading ? handleClick : null}>
+      <Button
+        variant="primary"
+        style={{ borderRadius: "0.3rem", fontSize: "0.8rem", padding: 6 }}
+        className="reset-button"
+        disabled={isLoading}
+        onClick={!isLoading ? handleClick : null}
+      >
         {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
         {isLoading ? "Loading…" : "Reset Password"}
       </Button>

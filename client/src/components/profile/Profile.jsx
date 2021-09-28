@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import { Card, Container, Row, Col, Image, Nav, Modal, Spinner } from "react-bootstrap";
+import { Card, Container, Row, Col, Image, Nav, Modal, Spinner, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useAuth0 } from "@auth0/auth0-react";
 import PasswordResetButton from "./Reset";
@@ -8,6 +8,7 @@ import notify from "../../helpers/notifyService";
 import EditButton from "./editButton";
 import axios from "../../helpers/axios";
 import "../../css/profile.css";
+import edit from "../../assets/editing.png";
 
 const Profile = ({ sub }) => {
   const [modalEditPaShow, setModalEditPaShow] = useState(false);
@@ -77,21 +78,21 @@ const Profile = ({ sub }) => {
                   closeButton
                 >
                   <h4 className="profile-title" style={{ margin: 0 }}>
-                    Information
+                    PROFILE
                   </h4>
                 </Modal.Header>
               </Row>
-              <Row>
+              <Row style={{ marginTop: "0.5rem" }}>
                 <Col>
                   <Row>
                     <Col>
-                      <h5 className="f-w-600">Username</h5>
+                      <h5 className="f-w-600">User name</h5>
                     </Col>
                     {state.dbconnect && (
-                      <Col>
-                        <Nav.Link onClick={handleEditUsShow} style={{ paddingTop: 0, color: "rgba(0,0,0,.55)" }}>
-                          Edit
-                        </Nav.Link>
+                      <Col className="align-center">
+                        <Button className="editIconButton" style={{ display: "flex" }} onClick={handleEditUsShow}>
+                          <Image src={edit} width="14" height="14" alt="edit-pic" />
+                        </Button>
                         <EditButton show={modalEditUsShow} onHide={handleEditClose} sub={sub} updateFiled="username" />
                       </Col>
                     )}
@@ -104,17 +105,17 @@ const Profile = ({ sub }) => {
                   </Row>
                 </Col>
               </Row>
-              <Row>
+              <Row style={{ marginTop: "0.5rem" }}>
                 <Col>
                   <Row>
                     <Col>
                       <h5 className="f-w-600">Email</h5>
                     </Col>
                     {state.dbconnect && (
-                      <Col>
-                        <Nav.Link onClick={handleEditPaShow} style={{ paddingTop: 0, color: "rgba(0,0,0,.55)" }}>
-                          Edit
-                        </Nav.Link>
+                      <Col className="align-center">
+                        <Button className="editIconButton" style={{ display: "flex" }} onClick={handleEditPaShow}>
+                          <Image src={edit} width="14" height="14" alt="edit-pic" />
+                        </Button>
                         <EditButton show={modalEditPaShow} onHide={handleEditClose} sub={sub} updateFiled="email" />
                       </Col>
                     )}
@@ -125,7 +126,7 @@ const Profile = ({ sub }) => {
                 </Col>
               </Row>
               {state.dbconnect && (
-                <Row>
+                <Row style={{ marginTop: "0.5rem" }}>
                   <Col>
                     <Row>
                       <Col>

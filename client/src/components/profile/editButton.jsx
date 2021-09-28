@@ -57,17 +57,23 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
   return (
     <>
       <Modal show={show} onHide={onHide} centered>
-        <Modal.Header style={{ paddingTop: "10px", paddingBottom: "10px" }} closeButton />
-        <Modal.Body style={{ paddingTop: "10px", paddingBottom: "0px" }}>
+        <Modal.Body style={{ paddingTop: "15px", paddingBottom: "0px" }}>
           <InputGroup className="mb-3">
             <Form.Control
-              placeholder={updateFiled}
+              placeholder={`New ${updateFiled}`}
               aria-label="UpdateFiled"
               value={state}
               onChange={(e) => setState(e.target.value)}
               type="text"
+              style={{ border: "1px solid rgb(167, 175, 183)" }}
             />
-            <Button onClick={!isLoading ? handleClick : null} disabled={isLoading} variant="outline-secondary">
+            <Button
+              onClick={!isLoading ? handleClick : null}
+              className="editUpdateBtn"
+              style={{ border: "1px solid #21457d", padding: "5 10 5 10" }}
+              disabled={isLoading}
+              variant="outline-secondary"
+            >
               {isLoading && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
               {isLoading ? "Loading…" : "Update"}
             </Button>
