@@ -51,17 +51,33 @@ const StyledNav = styled(Nav.Item)`
 
 const QuestionNav = styled(StyledNav)`
   background-color: var(--color-primary);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
 `;
 
 const SurveyNav = styled(StyledNav)`
   background-color: var(--color-accent);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledNavLink = styled(Nav.Link)`
   color: white;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     color: white;
     filter: brightness(75%);
+    cursor: pointer;
   }
 `;
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { Modal, Spinner } from "react-bootstrap";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { Modal } from "react-bootstrap";
+// import { withAuthenticationRequired } from "@auth0/auth0-react";
 import PropTypes from "prop-types";
 import ProfileDisplay from "./Profile";
 
@@ -12,9 +12,10 @@ const ModalProfile = ({ show, onHide, sub }) => (
   </Modal>
 );
 
-export default withAuthenticationRequired(ModalProfile, {
-  onRedirecting: () => <Spinner animation="grow" />,
-});
+export default ModalProfile;
+// export default withAuthenticationRequired(ModalProfile, {
+//   onRedirecting: () => <Spinner animation="grow" />,
+// });
 
 ModalProfile.propTypes = {
   show: PropTypes.bool.isRequired,

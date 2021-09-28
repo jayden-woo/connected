@@ -145,9 +145,7 @@ const Post = () => {
   useEffect(async () => {
     const claims = await getIdTokenClaims();
     setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
-  }, [isAuthenticated]);
 
-  useEffect(async () => {
     if (isAuthenticated && post !== undefined) {
       setIsAuthor(post.author.uid === user.sub);
     }

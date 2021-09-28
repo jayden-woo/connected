@@ -17,9 +17,9 @@ html {
   width: 100vw;
 }
 
-.modal-open{
+.modal-open {
   overflow: auto;
-  padding-right:0 !important;
+  padding-right: 0 !important;
 }
 
 * {
@@ -890,10 +890,11 @@ a:visited {
 @media screen and (min-width: 1400px) {
   .nav-container {
     margin: 0 18% 0 18%;
-  }  
+  }
 }
 
 .post-img-button {
+  opacity: 1 !important;
   background-color: transparent;
   width: 35;
   height: 35;
