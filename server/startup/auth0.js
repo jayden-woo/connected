@@ -2,10 +2,11 @@ const jwt = require("express-jwt");
 const jwtAuthz = require("express-jwt-authz");
 const jwksRsa = require("jwks-rsa");
 
-const audience =
-	process.env.NODE_ENV === "production"
-		? "https://it-project-connected-api.herokuapp.com/"
-		: "localhost:3000/api/";
+const audience = "localhost:3000/api/";
+// const audience =
+// 	process.env.NODE_ENV === "production"
+// 		? "https://it-project-connected-api.herokuapp.com/"
+// 		: "localhost:3000/api/";
 
 const checkJwt = jwt({
 	secret: jwksRsa.expressJwtSecret({
