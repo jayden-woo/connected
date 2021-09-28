@@ -13,6 +13,7 @@ const ProfNavDropdown = () => {
   const [state, setState] = useState({
     isAdmin: false,
     loading: true,
+    username: "",
   });
 
   const dropdownItemStyle = {
@@ -25,9 +26,16 @@ const ProfNavDropdown = () => {
       const CheckRole = async () => {
         try {
           const claims = await getIdTokenClaims();
+          let un;
+          if (claims["https://it-project-connected.herokuapp.com/username"]) {
+            un = claims["https://it-project-connected.herokuapp.com/username"];
+          } else {
+            un = user.name;
+          }
           setState({
             loading: false,
             isAdmin: claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin",
+            username: un,
           });
         } catch (error) {
           setState({
@@ -48,7 +56,7 @@ const ProfNavDropdown = () => {
   return (
     <>
       <NavDropdown
-        title={user.email}
+        title={state.username}
         id="collasible-nav-dropdown"
         style={{ backgroundColor: "rgba(var(--bs-light-rgb)" }}
       >

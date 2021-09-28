@@ -53,17 +53,40 @@
   background-color: #4c5085;
 }
 
+@media only screen and (max-width: 768px) {
+  .notfound-container {
+    padding-top: 0;
+    align-items: center;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .notfound {
     text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .notfound .notfound-404 {
     position: relative;
     width: 100%;
     margin-bottom: 15px;
   }
-  .notfound {
-    padding-left: 15px;
-    padding-right: 15px;
+  .notfound h2 {
+    font-size: 1.9rem;
+    letter-spacing: 2.0px;
+  }
+  
+  .notfound p {
+    font-size: 0.9rem;
+  }
+  .notfound a {
+    font-size: 10px;
+  }
+  .notfound-container {
+    padding-top: 0;
+    margin-top: var(--height-nav-bar);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
