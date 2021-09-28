@@ -24,7 +24,7 @@ module.exports = function (app) {
 	app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
 
-	app.get("/api/test", checkJwt, (req, res) => res.send("test"));
+	app.get("/api/test", (req, res) => res.send("test"));
 
 	app.use("/api/posts", posts);
 	app.use("/api/surveys", surveys);
