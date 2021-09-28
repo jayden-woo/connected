@@ -2,7 +2,23 @@ const express = require("express");
 const posts = require("../routes/posts");
 const surveys = require("../routes/surveys");
 const submissions = require("../routes/submissions");
-const { checkJwt } = require("../startup/auth0");
+
+const jwt = require("express-jwt");
+const jwtAuthz = require("express-jwt-authz");
+const jwksRsa = require("jwks-rsa");
+
+const checkJwt = jwt({
+	secret: jwksRsa.expressJwtSecret({
+		cache: true,
+		rateLimit: true,
+		jwksRequestsPerMinute: 5,
+		jwksUri: `https://dev-8p7irqly.us.auth0.com/.well-known/jwks.json`,
+	}),
+
+	audience: "localhost:3000/api/",
+	issuer: [`https://dev-8p7irqly.us.auth0.com/`],
+	algorithms: ["RS256"],
+});
 
 module.exports = function (app) {
 	app.use(express.json());
