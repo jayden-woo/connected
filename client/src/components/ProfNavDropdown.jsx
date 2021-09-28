@@ -41,7 +41,7 @@ const ProfNavDropdown = () => {
       };
       CheckRole();
     })();
-  }, [getIdTokenClaims, user?.sub]);
+  }, [getIdTokenClaims, user?.sub, user?.email]);
 
   if (state.loading || isLoading) {
     return <Spinner className="text-center" animation="grow" />;
@@ -50,7 +50,7 @@ const ProfNavDropdown = () => {
   return (
     <>
       <NavDropdown
-        title={user.nickname}
+        title={user.email}
         id="collasible-nav-dropdown"
         style={{ backgroundColor: "rgba(var(--bs-light-rgb)" }}
       >
