@@ -23,7 +23,7 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
     };
   }, []);
 
-  if (!isAdmin && !survey.visible) return <div />;
+  if (!isAdmin && !survey.visible) return <></>;
 
   return (
     <li className="sli-container">
@@ -84,7 +84,7 @@ SurveyListItem.propTypes = {
   survey: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     thumbnail: PropTypes.string,
     updatedAt: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,

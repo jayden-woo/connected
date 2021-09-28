@@ -12,7 +12,7 @@ import Card from "react-bootstrap/Card";
 const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
   const visible = survey.visible ? "" : "sii--invisible";
 
-  if (!isAdmin && !survey.visible) return <div />;
+  if (!isAdmin && !survey.visible) return <></>;
 
   return (
     <Card className="sii-container">
@@ -83,7 +83,7 @@ SurveyListItem.propTypes = {
   survey: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     thumbnail: PropTypes.string,
     updatedAt: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,

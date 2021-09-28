@@ -22,6 +22,9 @@ import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 import Forbidden from "../Forbidden";
 import Loading from "../../components/Loading";
 
+const audience =
+  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+
 const SurveyEditor = () => {
   const [survey, setSurvey] = useState({ questions: [] });
   const [thumbnail, setThumbnail] = useState({ src: "", alt: "" });
@@ -31,10 +34,12 @@ const SurveyEditor = () => {
     visible: false,
     progress: 0,
   });
+  const [error, setError] = useState({});
 
   const imageSelector = useRef();
+  const topRef = useRef(null);
 
-  const { user, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
+  const { user, getAccessTokenSilently, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
   useEffect(async () => {
     if (isLoading || !isAuthenticated) return;
 
@@ -67,7 +72,7 @@ const SurveyEditor = () => {
         newQ.choices = [];
         break;
       case "boolean":
-        newQ.label = "Question label";
+        newQ.label = "";
         newQ.labelTrue = "Yes";
         newQ.labelFalse = "No";
         newQ.showTitle = false;
@@ -85,8 +90,8 @@ const SurveyEditor = () => {
       case "image":
         newQ.imageLink =
           "https://res.cloudinary.com/ip-connected/image/upload/v1630900645/connected/oixg4zsudf6t5wx70knu.jpg";
-        newQ.imageHeight = "300px";
-        newQ.imageWidth = "400px";
+        newQ.imageHeight = 300;
+        newQ.imageWidth = 400;
         newQ.imageFit = "contain";
         break;
       case "html":
@@ -151,39 +156,107 @@ const SurveyEditor = () => {
     }));
   };
 
-  // TODO: proper validation
-  // TODO: unique choices
+  const validateQuestion = (question) => {
+    if (!["image", "html"].includes(question.type)) {
+      if (!question.title) return "Question title can not be empty.";
+      if (question.title.length < 5 || question.title.length > 100)
+        return "Question title length must be between 5 - 100 characters.";
+    }
+
+    const values = new Set();
+
+    switch (question.type) {
+      case "radiogroup":
+      case "checkbox":
+        if (!question.choices || question.choices.length < 2)
+          return "Multi-choices question must contain at least two choices";
+        question.choices.forEach((c) => {
+          values.add(c.value);
+        });
+        if (values.size !== question.choices.length || values.has(""))
+          return "Multi-choices question can not have empty or duplicate choices.";
+        if (question.colCount < 1 || question.colCount > 5) return "Column Count must be between 1 - 5.";
+        break;
+      case "dropdown":
+      case "ranking":
+        if (!question.choices || question.choices.length < 2)
+          return "Multi-choices question must contain at least two choices";
+        question.choices.forEach((c) => {
+          values.add(c.value);
+        });
+        if (values.size !== question.choices.length || values.has(""))
+          return "Multi-choices question can not have empty or duplicate choices.";
+        break;
+      case "boolean":
+        if (!question.showTitle && !question.label) return "If no showing title, this question must have a label";
+        if (!question.labelTrue || !question.labelFalse)
+          return "Boolean question must have labels for both true and false sides.";
+        break;
+      case "rating":
+        if (question.rateMax <= question.rateMin) return "Min rating must be lower than max rating.";
+        if (question.rateStep < 1) return "Rate step must be greater or equal to 1";
+        if (!question.minRateDescription || !question.maxRateDescription)
+          return "Rating question must have descriptions for both min and max sides.";
+        break;
+      case "image":
+        if (question.imageHeight <= 0 || question.imageWidth <= 0)
+          return "Image width and height must be greater than 0 pixel.";
+        break;
+      case "html":
+        if (!question.html || question.html.length === 0) return "HTML content can not be empty";
+        break;
+      default:
+        break;
+    }
+
+    return "";
+  };
+
   const validate = () => {
-    // if (survey.questions.length === 0) {
-    //   alert("Survey cannot be empty.");
-    //   return false;
-    // }
-    // /* eslint-disable-next-line */
-    // for (const q of survey.questions) {
-    //   if (q.title === "") {
-    //     alert("All questions must have a title.");
-    //     return false;
-    //   }
-    //   if (q.type !== "text") {
-    //     if (!q.choices || q.choices.length < 2) {
-    //       alert("Multiple option question must have at least 2 options.");
-    //       return false;
-    //     }
-    //     /* eslint-disable-next-line */
-    //     for (const c of q.choices) {
-    //       if (c === "") {
-    //         alert("Question cannot have empty option.");
-    //         return false;
-    //       }
-    //     }
-    //   }
-    // }
-    // return true;
+    if (!survey.title) {
+      setError((prevState) => ({
+        ...prevState,
+        title: "Survey title can not be empty",
+      }));
+      return false;
+    }
+
+    if (survey.title.length < 5 || survey.title.length > 100) {
+      setError((prevState) => ({
+        ...prevState,
+        title: "Survey title length must be between 5 - 100 characters",
+      }));
+      return false;
+    }
+
+    if (survey.description && (survey.description.length < 5 || survey.description.length > 100)) {
+      setError((prevState) => ({
+        ...prevState,
+        description: "Survey description length must be between 5 - 1000 characters",
+      }));
+      return false;
+    }
+
+    if (!survey.questions || survey.questions.length === 0) {
+      notify.errorNotify("Survey cannot be empty.");
+      return false;
+    }
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const q of survey.questions) {
+      const message = validateQuestion(q);
+      if (message) {
+        notify.errorNotify(message);
+        return false;
+      }
+    }
+
+    setError({});
+    return true;
   };
 
   const onSubmit = async () => {
-    if (!validate()) console.log("sdfsdf");
-
+    if (!validate()) return;
     const newQuestions = [];
 
     survey.questions.forEach((q) => {
@@ -207,8 +280,19 @@ const SurveyEditor = () => {
 
     if (!data.thumbnail) delete data.thumbnail;
 
+    console.log(data);
+
     try {
-      const res = await axios.post("/api/surveys", data);
+      const accessToken = await getAccessTokenSilently({
+        audience,
+        scope: "edit:survey",
+      });
+
+      const res = await axios.post("/api/surveys", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       notify.successNotify("Successfully Published!");
 
       // eslint-disable-next-line no-underscore-dangle
@@ -261,26 +345,34 @@ const SurveyEditor = () => {
                   + Image
                 </Button>
               </Col>
-              <Col className="se__survey-preview" md={12} xl={6}>
-                <Form id="survey-top">
+              <Col className="se__survey-preview" md={12} xl={6} style={{ scrollBehavior: "smooth" }}>
+                <Form ref={topRef}>
                   <Form.Group>
                     <Form.Label style={{ display: "none" }}>Survey Title</Form.Label>
                     <Form.Control
-                      className="shadow-none se__title"
+                      className={`shadow-none se__title ${error.title ? "se__input--error" : ""}`}
                       type="text"
                       placeholder="Enter survey title here ..."
-                      onChange={(e) => setSurvey((prevState) => ({ ...prevState, title: e.target.value }))}
+                      onChange={(e) => {
+                        setSurvey((prevState) => ({ ...prevState, title: e.target.value }));
+                        setError((prevState) => ({ ...prevState, title: "" }));
+                      }}
                     />
+                    {error.title && <p className="se__text--error">* {error.title}</p>}
                   </Form.Group>
                   <Form.Group>
                     <Form.Label style={{ display: "none" }}>Survey Description</Form.Label>
                     <Form.Control
-                      className="shadow-none se__title se__desc"
+                      className={`shadow-none se__title se__desc ${error.description ? "se__input--error" : ""}`}
                       type="text"
                       placeholder="Enter survey description here ..."
-                      onChange={(e) => setSurvey((prevState) => ({ ...prevState, description: e.target.value }))}
+                      onChange={(e) => {
+                        setSurvey((prevState) => ({ ...prevState, description: e.target.value }));
+                        setError((prevState) => ({ ...prevState, description: "" }));
+                      }}
                     />
                   </Form.Group>
+                  {error.description && <p className="se__text--error">* {error.description}</p>}
                 </Form>
                 <div className="se__thumbnail">
                   {thumbnail.src && <Image src={thumbnail.src} alt={thumbnail.alt} />}
@@ -347,7 +439,15 @@ const SurveyEditor = () => {
             </Row>
           </Container>
           <div className="se__bottom-cut-off">
-            <a href="#survey-top">BACK TO TOP</a>
+            <Button
+              className="shadow-none se__btn-back-to-top"
+              onClick={(e) => {
+                topRef.current.scrollIntoView();
+                e.currentTarget.blur();
+              }}
+            >
+              BACK TO TOP
+            </Button>
           </div>
           <div className="se__publish">
             <Button className="se__btn-cancel shadow-none" onClick={history.goBack}>

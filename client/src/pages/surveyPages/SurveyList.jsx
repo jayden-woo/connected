@@ -13,13 +13,16 @@ import SurveyImageItem from "../../components/surveyPage/SurveyImageItem";
 import notify from "../../helpers/notifyService";
 import Loading from "../../components/Loading";
 
+const audience =
+  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+
 const SurveyList = () => {
   const [surveys, setSurveys] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [listView, setListView] = useState(false);
   const [loadingSurveys, setLoadingSurveys] = useState(true);
 
-  const { getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
+  const { getAccessTokenSilently, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(async () => {
     try {
@@ -37,11 +40,23 @@ const SurveyList = () => {
   }, [isAuthenticated, isLoading]);
 
   const updateSurvey = async (id, changes) => {
-    const index = _.findIndex(surveys, { _id: id });
-    const { data: survey } = await axios.put(`/api/surveys/${id}`, changes);
-    const newSurveys = [...surveys];
-    newSurveys[index] = survey;
-    setSurveys(newSurveys);
+    try {
+      const accessToken = await getAccessTokenSilently({
+        audience,
+        scope: "edit:survey",
+      });
+      const index = _.findIndex(surveys, { _id: id });
+      const { data: survey } = await axios.put(`/api/surveys/${id}`, changes, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const newSurveys = [...surveys];
+      newSurveys[index] = survey;
+      setSurveys(newSurveys);
+    } catch (e) {
+      notify.errorNotify(e.message);
+    }
   };
 
   if (isLoading || loadingSurveys) return <Loading />;
@@ -79,7 +94,7 @@ const SurveyList = () => {
           </Masonry>
         )}
         {listView && (
-          <ul>
+          <ul style={{ padding: "0" }}>
             {surveys.map((s) => (
               <SurveyListItem key={s._id} survey={s} isAdmin={isAdmin} updateSurvey={updateSurvey} />
             ))}

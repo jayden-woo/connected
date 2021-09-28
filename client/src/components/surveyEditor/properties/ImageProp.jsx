@@ -24,18 +24,18 @@ const ImageProp = ({ question, updateQuestion, setProgressBar }) => {
   return (
     <Form>
       <Form.Group>
-        <Form.Label>Image Height</Form.Label>
+        <Form.Label>Image Height (px)</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           value={imageHeight}
           onChange={(e) => setImageHeight(e.target.value)}
           onBlur={() => updateQuestion(question.name, "imageHeight", imageHeight)}
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Image Width</Form.Label>
+        <Form.Label>Image Width (px)</Form.Label>
         <Form.Control
-          type="text"
+          type="number"
           value={imageWidth}
           onChange={(e) => setImageWidth(e.target.value)}
           onBlur={() => updateQuestion(question.name, "imageWidth", imageWidth)}
@@ -91,8 +91,8 @@ const ImageProp = ({ question, updateQuestion, setProgressBar }) => {
 ImageProp.propTypes = {
   question: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    imageHeight: PropTypes.string.isRequired,
-    imageWidth: PropTypes.string.isRequired,
+    imageHeight: PropTypes.number.isRequired,
+    imageWidth: PropTypes.number.isRequired,
     imageFit: PropTypes.string.isRequired,
   }).isRequired,
   updateQuestion: PropTypes.func.isRequired,
