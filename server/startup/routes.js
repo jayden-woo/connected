@@ -15,7 +15,7 @@ const checkJwt = jwt({
 		jwksUri: `https://dev-8p7irqly.us.auth0.com/.well-known/jwks.json`,
 	}),
 
-	audience: "localhost:3000/api/",
+	audience: "https://it-project-connected-api.herokuapp.com/",
 	issuer: [`https://dev-8p7irqly.us.auth0.com/`],
 	algorithms: ["RS256"],
 });
