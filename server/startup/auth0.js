@@ -23,5 +23,4 @@ const checkJwt = jwt({
 
 const checkScopes = jwtAuthz(["read:submission", "edit:survey"]);
 
-exports.checkJwt = checkJwt;
-exports.checkScopes = checkScopes;
+module.exports = { checkJwt, checkScopes };
