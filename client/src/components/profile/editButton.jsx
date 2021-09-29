@@ -32,7 +32,7 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
         }
       } catch (e) {
         setErr(true);
-        notify.errorNotify(`This ${updateFiled} is already been taken`);
+        notify.errorNotify(e.response.data.message);
         setLoading(false);
         setErr(false);
       }

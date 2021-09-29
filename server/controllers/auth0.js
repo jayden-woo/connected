@@ -33,7 +33,7 @@ const getuserInfo = async (req, res) => {
         }
         return res.status(400).send({message : "Network Error!"});
     } catch (e) {
-        return res.status(404).send(e);
+        return res.status(e.response.status).send(e.response.data);
     }
 };
 
@@ -70,7 +70,7 @@ const updateUser = async (req, res) => {
         return res.status(400).send({message: "Filed missing!"});
     }
     catch (e) {
-        return res.status(404).send(e);
+        return res.status(e.response.status).send(e.response.data);
     }
 };
 
