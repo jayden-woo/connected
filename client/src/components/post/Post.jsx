@@ -124,8 +124,13 @@ const Post = () => {
   const [post, setPost] = useState();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  useEffect(() => {
-    axios
+  useEffect(async () => {
+    const users = await axios.get("/api/auth0/users").then((res) => {
+      console.log(res);
+      return res.data;
+    });
+    console.log(users);
+    await axios
       // .get(`${baseUrl}/api/posts/${id}`)
       .get(`/api/posts/${id}`)
       .then((res) => {
@@ -136,8 +141,26 @@ const Post = () => {
       })
       .then((res) => {
         console.log(res);
-        setPost(res.data);
-        // setIsAuthor(isAuthenticated && res.data.author.uid === user.sub);
+        const { data } = res;
+        const postAuthor = users.find((u) => u.user_id === data.author.uid);
+        console.log(postAuthor);
+        data.author = {
+          uid: postAuthor.user_id,
+          name: postAuthor.nickname,
+          picture: postAuthor.picture,
+        };
+        data.comments.map((comment) => {
+          const commentAuthor = users.find((u) => u.user_id === comment.author.uid);
+          console.log(commentAuthor);
+          // eslint-disable-next-line no-param-reassign
+          comment.author = {
+            uid: commentAuthor.user_id,
+            name: commentAuthor.nickname,
+            picture: commentAuthor.picture,
+          };
+          return comment;
+        });
+        setPost(data);
       });
   }, []);
 

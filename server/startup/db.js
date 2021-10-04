@@ -25,7 +25,6 @@ module.exports = function () {
     "<db>",
     process.env.MONGO_DB
   );
-  console.log(CONNECTION_STRING);
 
   mongoose.connect(MONGO_URL || "mongodb://localhost", {
     useNewUrlParser: true,
