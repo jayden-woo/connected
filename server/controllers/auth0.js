@@ -1,4 +1,3 @@
-
 var axios = require('axios')
 
 var options = {
@@ -28,7 +27,24 @@ const getuserInfo = async (req, res) => {
             headers: {'Authorization': `Bearer ${access_token}`,
                     'Content-Type': 'application/json'}
         })
-        if(response) {
+        if (response) {
+            return res.status(200).send(response.data);
+        }
+        return res.status(400).send({message : "Network Error!"});
+    } catch (e) {
+        return res.status(e.response.status).send(e.response.data);
+    }
+};
+
+const getAllUsers = async (req, res) => {
+    try {
+        const response = await axios({
+            method: 'GET',
+            url: `https://dev-8p7irqly.us.auth0.com/api/v2/users`,
+            headers: {'Authorization': `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'}
+        })
+        if (response) {
             return res.status(200).send(response.data);
         }
         return res.status(400).send({message : "Network Error!"});
@@ -52,7 +68,7 @@ const updateUser = async (req, res) => {
                 "connection": "Username-Password-Authentication",
                 username
             }})
-            if(response) {
+            if (response) {
                 return res.status(200).json(response.data);
             }
             return res.status(400).send({message : "Network Error!"});
@@ -62,7 +78,7 @@ const updateUser = async (req, res) => {
                 "connection": "Username-Password-Authentication",
                 email
             }})
-            if(response) {
+            if (response) {
                 return res.status(200).json(response.data);
             }
             return res.status(400).send({message : "Network Error!"});
@@ -76,5 +92,6 @@ const updateUser = async (req, res) => {
 
 module.exports = {
     getuserInfo,
+    getAllUsers,
     updateUser
 };
