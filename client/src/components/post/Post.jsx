@@ -35,9 +35,11 @@ const StyledImage = styled.img`
 `;
 
 const StyledHeader = styled(Container)`
-  margin: -20px 8vw 0;
+  // margin: -20px 8vw 0;
+  margin: -20px 0 0;
   padding: 1.5rem 2rem;
-  width: 84vw;
+  // width: 84vw;
+  width: 100vw;
   font-size: 1.2rem;
   text-align: left;
   color: white;
@@ -56,7 +58,8 @@ const StyledHeader = styled(Container)`
 `;
 
 const StyledDiv = styled.div`
-  margin: 0 8vw;
+  // margin: 0 8vw;
+  margin: 0;
   padding: 80px 2rem 30px;
   border: 1px solid var(--color-primary);
   background-color: white;
@@ -71,7 +74,8 @@ const StyledDiv = styled.div`
 
 const FollowButton = styled.button`
   padding: 0.75rem 1rem;
-  margin: 1rem 10%;
+  // margin: 1rem 10%;
+  margin: 0.5rem 10%;
   max-width: 80%;
   font-size: 1.1rem;
   text-align: center;
@@ -83,6 +87,7 @@ const FollowButton = styled.button`
     filter: brightness(75%);
   }
   @media (min-width: 768px) {
+    margin: 1rem 10%;
     padding: 1rem 1.3rem;
     font-size: 1.2rem;
   }
@@ -124,8 +129,13 @@ const Post = () => {
   const [post, setPost] = useState();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  useEffect(() => {
-    axios
+  useEffect(async () => {
+    const users = await axios.get("/api/auth0/users").then((res) => {
+      console.log(res);
+      return res.data;
+    });
+    console.log(users);
+    await axios
       // .get(`${baseUrl}/api/posts/${id}`)
       .get(`/api/posts/${id}`)
       .then((res) => {
@@ -136,8 +146,26 @@ const Post = () => {
       })
       .then((res) => {
         console.log(res);
-        setPost(res.data);
-        // setIsAuthor(isAuthenticated && res.data.author.uid === user.sub);
+        const { data } = res;
+        const postAuthor = users.find((u) => u.user_id === data.author.uid);
+        console.log(postAuthor);
+        data.author = {
+          uid: postAuthor.user_id,
+          name: postAuthor.nickname,
+          picture: postAuthor.picture,
+        };
+        data.comments.map((comment) => {
+          const commentAuthor = users.find((u) => u.user_id === comment.author.uid);
+          console.log(commentAuthor);
+          // eslint-disable-next-line no-param-reassign
+          comment.author = {
+            uid: commentAuthor.user_id,
+            name: commentAuthor.nickname,
+            picture: commentAuthor.picture,
+          };
+          return comment;
+        });
+        setPost(data);
       });
   }, []);
 
@@ -224,7 +252,49 @@ const Post = () => {
       <StyledDiv>
         <Container>
           <Row>
-            <Col xs="8" className="ps-4">
+            <Col xs="12" sm="8" className="ps-md-4">
+              <MediaQuery maxWidth={767}>
+                <Row>
+                  <Col xs="7">
+                    <PostStats views={post.views} comments={post.comments.length} solved={post.solved} />
+                  </Col>
+                  <Col>
+                    {/* Only show following button for authenticated users */}
+                    {isAuthenticated && (
+                      <Row>
+                        <FollowButton type="button" onClick={handleFollowClick}>
+                          {post.followers.includes(user.sub) ? (
+                            <>
+                              <FontAwesomeIcon icon="bell" size="lg" color="white" />
+                              <MediaQuery minWidth={1024}>&nbsp;{` Following`}</MediaQuery>
+                            </>
+                          ) : (
+                            <>
+                              <FontAwesomeIcon icon="bell-slash" size="lg" color="white" />
+                              <MediaQuery minWidth={1024}>&nbsp;{` Unfollowed`}</MediaQuery>
+                            </>
+                          )}
+                        </FollowButton>
+                      </Row>
+                    )}
+                    {/* Only show marking as solved for post owner */}
+                    {isAuthor && (
+                      <Row>
+                        <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
+                          Mark {post.solved ? " Unsolved" : " Solved"}
+                        </SolveButton>
+                      </Row>
+                    )}
+                    {/* Only delete post for admin and post owner only */}
+                    {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
+                    {(isAdmin || isAuthor) && (
+                      <Row>
+                        <DeleteButton onClick={() => setShowConfirmation(true)}>Delete</DeleteButton>
+                      </Row>
+                    )}
+                  </Col>
+                </Row>
+              </MediaQuery>
               <Row>
                 <PostContent
                   // eslint-disable-next-line no-underscore-dangle
@@ -264,43 +334,45 @@ const Post = () => {
                 <PostReply onPublish={handlePublish} />
               </Row>
             </Col>
-            <Col xs="4">
-              <Row>
-                <PostStats views={post.views} comments={post.comments.length} solved={post.solved} />
-              </Row>
-              {/* Only show following button for authenticated users */}
-              {isAuthenticated && (
+            <Col xs="0" sm="4">
+              <MediaQuery minWidth={768}>
                 <Row>
-                  <FollowButton type="button" onClick={handleFollowClick}>
-                    {post.followers.includes(user.sub) ? (
-                      <>
-                        <FontAwesomeIcon icon="bell" size="lg" color="white" />
-                        <MediaQuery minWidth={1024}>&nbsp;{` Following`}</MediaQuery>
-                      </>
-                    ) : (
-                      <>
-                        <FontAwesomeIcon icon="bell-slash" size="lg" color="white" />
-                        <MediaQuery minWidth={1024}>&nbsp;{` Unfollowed`}</MediaQuery>
-                      </>
-                    )}
-                  </FollowButton>
+                  <PostStats views={post.views} comments={post.comments.length} solved={post.solved} />
                 </Row>
-              )}
-              {/* Only show marking as solved for post owner */}
-              {isAuthor && (
-                <Row>
-                  <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
-                    Mark as {post.solved ? " Unsolved" : " Solved"}
-                  </SolveButton>
-                </Row>
-              )}
-              {/* Only delete post for admin and post owner only */}
-              {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
-              {(isAdmin || isAuthor) && (
-                <Row>
-                  <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
-                </Row>
-              )}
+                {/* Only show following button for authenticated users */}
+                {isAuthenticated && (
+                  <Row>
+                    <FollowButton type="button" onClick={handleFollowClick}>
+                      {post.followers.includes(user.sub) ? (
+                        <>
+                          <FontAwesomeIcon icon="bell" size="lg" color="white" />
+                          <MediaQuery minWidth={1024}>&nbsp;{` Following`}</MediaQuery>
+                        </>
+                      ) : (
+                        <>
+                          <FontAwesomeIcon icon="bell-slash" size="lg" color="white" />
+                          <MediaQuery minWidth={1024}>&nbsp;{` Unfollowed`}</MediaQuery>
+                        </>
+                      )}
+                    </FollowButton>
+                  </Row>
+                )}
+                {/* Only show marking as solved for post owner */}
+                {isAuthor && (
+                  <Row>
+                    <SolveButton type="button" className={post.solved && "solved"} onClick={handleSolveClick}>
+                      Mark as {post.solved ? " Unsolved" : " Solved"}
+                    </SolveButton>
+                  </Row>
+                )}
+                {/* Only delete post for admin and post owner only */}
+                {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
+                {(isAdmin || isAuthor) && (
+                  <Row>
+                    <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>
+                  </Row>
+                )}
+              </MediaQuery>
               <Modal className="vw-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
                 <Modal.Header className="px-4" closeButton>
                   <Modal.Title>Delete Post?</Modal.Title>

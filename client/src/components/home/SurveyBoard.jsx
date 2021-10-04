@@ -1,13 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // import axios from "axios";
-// import axios from "../../helpers/axios";
 import styled from "styled-components";
-
-// TEMP
-import allSurveys from "./surveys";
+import axios from "../../helpers/axios";
 
 const StyledDiv = styled.div`
   // margin: 0 8vw;
@@ -46,30 +43,35 @@ const StyledImage = styled.img`
 `;
 
 const SurveyBoard = () => {
-  // const [allSurveys, setAllSurveys] = useState([]);
-  console.log(allSurveys);
+  const [allSurveys, setAllSurveys] = useState([]);
 
-  // useEffect(() => {
-  //   const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
-  //   axios.get(`${baseUrl}/api/surveys`).then((res) => {
-  //   axios.get("/api/surveys").then((res) => {
-  //     console.log(res);
-  //     setAllSurveys(res.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
+    // axios.get(`${baseUrl}/api/surveys`).then((res) => {
+    axios.get("/api/surveys").then((res) => {
+      console.log(res);
+      setAllSurveys(res.data);
+    });
+  }, []);
+
+  const surveys = allSurveys.filter((survey) => survey.visible).sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
 
   return (
     <StyledDiv>
       <Title className="pt-4 pb-2">Recommended for You</Title>
       <Carousel className="mx-5 my-3 border border-dark">
-        {allSurveys.map((survey) => (
+        {surveys.map((survey) => (
           <Carousel.Item key={survey._id}>
             <Link to={`/surveys/${survey._id}`}>
-              <StyledImage className="d-block w-100" src={survey.imageUrl} alt="" />
+              <StyledImage
+                className="d-block w-100"
+                src={survey.thumbnail ? survey.thumbnail : "https://source.unsplash.com/random"}
+                alt="survey-thumbnail"
+              />
               <Carousel.Caption>
                 <h3>{survey.title}</h3>
                 <p>{survey.description}</p>
-                <small>Added on {new Date(survey.updatedAt).toUTCString()}</small>
+                <small>Added on {new Date(survey.createdAt).toUTCString()}</small>
               </Carousel.Caption>
             </Link>
           </Carousel.Item>
