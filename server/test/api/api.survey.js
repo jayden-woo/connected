@@ -1,15 +1,15 @@
 const expect = require('chai').expect;
-const common = require('../common');
+const common = require('../common/index');
 const rp = require('request-promise');
 const testCases = require('./api.survey.testCase');
 
 describe('API survey', function () {
   this.timeout(10000);
   /**
-   * no role needed
+   * get access_token befor to testcase
    */
   before(async function () {
-    // this.timeout(20000);
+    access_token = common.getAccessToken;
   });
 
   it('get survey list', async () => {
@@ -30,7 +30,7 @@ describe('API survey', function () {
         method: 'POST',
         url: common.BASE_URL + '/surveys',
         headers: {
-          'authorization': ''     //no token info
+          'Authorization': `Bearer ${access_token}`
         },
         body: testCases.addCompleteCase[i],
         json: true
@@ -49,7 +49,7 @@ describe('API survey', function () {
           method: 'POST',
           url: common.BASE_URL + '/surveys',
           headers: {
-            'authorization': ''     //no token info
+            'Authorization': `Bearer ${access_token}`
           },
           body: testCases.addErrorCase[i],
           json: true
@@ -79,7 +79,7 @@ describe('API survey', function () {
       method: 'PUT',
       url: common.BASE_URL + '/surveys/' + survey_id,
       headers: {
-        'authorization': ''     //no token info
+        'Authorization': `Bearer ${access_token}`
       },
       body: {
         title: 'title to update'
@@ -97,7 +97,7 @@ describe('API survey', function () {
           method: 'PUT',
           url: common.BASE_URL + '/surveys/' + survey_id,
           headers: {
-            'authorization': ''     //no token info
+            'Authorization': `Bearer ${access_token}`
           },
           body: testCases.addErrorCase[i],
           json: true
