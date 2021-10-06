@@ -48,6 +48,14 @@ describe('home page', function () {
     }
   })
 
+  it('home page goto survey page', async () => {
+    await page.click("text=Survey Board");
+    await page.click("text=Here");
+    const url = await page.url();
+    expect(url).to.equal(common.BACK_BASE_URL + '/surveys');
+    await page.click('text=HOME');
+  })
+
   it('ask a question', async () => {
     console.log('ask a question......');
     await page.waitForTimeout("3000");
@@ -93,14 +101,6 @@ describe('home page', function () {
     await page.waitForTimeout("2000");
     const y = await page.innerText('.container >> nth=3 >> .px-4');
     expect(y).to.be.equal("update some code");
-    await page.click('text=HOME');
-  })
-
-  it('home page goto survey page', async () => {
-    await page.click("text=Survey Board");
-    await page.click("text=Here");
-    const url = await page.url();
-    expect(url).to.equal(common.BACK_BASE_URL + '/surveys');
     await page.click('text=HOME');
   })
 
