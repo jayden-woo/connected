@@ -1,5 +1,24 @@
 /* testing for local setup */
+var axios = require('axios')
 
-exports.getAccessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InVTLXZrR21jM01SdTBneXJVS0RkZCJ9.eyJpc3MiOiJodHRwczovL2Rldi04cDdpcnFseS51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTU2NTUzNzg3ODQ4MDI1MzE2NTgiLCJhdWQiOlsibG9jYWxob3N0OjMwMDAvYXBpLyIsImh0dHBzOi8vZGV2LThwN2lycWx5LnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MzMzNTU1MTEsImV4cCI6MTYzMzQ0MTkxMSwiYXpwIjoiblF1cTBSUnZxMXFISm03MWZWeXdlbnhKbmRmaE12QVkiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIHJlYWQ6c3VibWlzc2lvbiBlZGl0OnN1cnZleSIsInBlcm1pc3Npb25zIjpbImVkaXQ6c3VydmV5IiwicmVhZDpzdWJtaXNzaW9uIl19.Oe4FOMrQD3D6eJnxJ7VYcYbzcCRhVC0Ln6pgKbUUnpCMiKdgU0xe2ZThEUq2GQMsnC-cnuVrO0xEmdiPsMsUrproAfCxiS6acJ4aVAM5naHV_CXTFYakxdVYDvzE2voU45-uHzVuarqGB_3J0_I9N6c78xQKtbo0dnLb6KHmLEIjNm7WKuEW6tC391Rk-i8EaMknE6ImFTIKY0IwKE5UxVnn0Vba3dIe0QUQPoq_ocqETnUTDNYEc9wG6BDny71oLSJkmKAHtfrBDLqspVsc5GCMDi3ZUsEO82HqF1klp6x5f4s1TlVHa-lLYNIQlBMfTIByQ5WCflcIlj-l6Ye-Bg";
+var options = {
+  method: 'POST',
+  url: 'https://dev-8p7irqly.us.auth0.com/oauth/token',
+  headers: { 'content-type': 'application/json' },
+  data: {
+    "client_id": "FmU3TIDMMQHe7ANvJuY5zRQbztbsbEVG",
+    "client_secret": "zy-p9VqIR9jrn1UC5jrLoHy6BZRe9Tq7JCY3ROMqlZhh1M2VzjbSLvPbNJMpf_9g",
+    "audience": "localhost:3000/api/",
+    "grant_type": "client_credentials"
+}
+};
+
+exports.getAccessToken = async () => {
+  return new Promise((resolve, reject) => {
+    axios.request(options).then(response => {
+      resolve(response.data.access_token);
+    });
+  })
+}
 
 exports.BASE_URL = 'http://localhost:3000/api';

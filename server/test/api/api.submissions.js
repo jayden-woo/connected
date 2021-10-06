@@ -8,7 +8,7 @@ describe('API submissions', function () {
   before('', async () => {
     this.timeout(5000);
     //get access_token befor to testcase
-    access_token = common.getAccessToken;
+    access_token = await common.getAccessToken();
     //create a post
     let body = await rp({
       method: 'POST',

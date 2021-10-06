@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node server.js",
 		"server": "nodemon server.js",
-		"test": "mocha ./test/units/ && mocha ./test/api/"
+		"test": "mocha ./test/units/ && mocha ./test/api/ && mocha ./test/backend"
 	},
 	"keywords": [],
 	"author": "Team Connected",

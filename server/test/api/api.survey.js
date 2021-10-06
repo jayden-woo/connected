@@ -9,7 +9,7 @@ describe('API survey', function () {
    * get access_token befor to testcase
    */
   before(async function () {
-    access_token = common.getAccessToken;
+    access_token = await common.getAccessToken();
   });
 
   it('get survey list', async () => {
