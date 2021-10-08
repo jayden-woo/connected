@@ -42,8 +42,8 @@ describe('home page', function () {
       await page.waitForTimeout("3000");
       const url = await page.url();
       const result = url.match(new RegExp(common.BACK_BASE_URL));
-      expect(result.length).to.be.above(0);
       await page.click('text=HOME');
+      expect(result.length).to.be.above(0);
       console.log('logined......');
     }
   })
@@ -52,8 +52,8 @@ describe('home page', function () {
     await page.click("text=Survey Board");
     await page.click("text=Here");
     const url = await page.url();
-    expect(url).to.equal(common.BACK_BASE_URL + '/surveys');
     await page.click('text=HOME');
+    expect(url).to.equal(common.BACK_BASE_URL + '/surveys');
   })
 
   it('ask a question', async () => {
@@ -73,35 +73,28 @@ describe('home page', function () {
     await page.fill("#postTitle", "script to publish a title");
     await page.click("#postBody");
     await page.fill("#postBody", "script some body");
-    await page.click('text=Submit');
+    await page.click('button[type=\"submit\"]');
     await page.waitForTimeout("2000");
     const url2 = await page.url();
     const result = url2.match(new RegExp(common.BACK_BASE_URL + '/posts'));
     expect(result.length).to.be.above(0);
-    await page.click('text=HOME');
   })
 
   it('reply a question', async () => {
     console.log('reply a question......');
-    await page.waitForTimeout("5000");
-    await page.click('.card-title');
-    const url = await page.url();
-    const result = url.match(new RegExp(common.BACK_BASE_URL + '/posts'));
-    expect(result.length).to.be.above(0);
-    await page.waitForTimeout("5000");
     await page.fill("#postReply", "reply some code");
-    await page.click('text=Publish');
+    await page.click('.sc-bZSRNg');
     await page.waitForTimeout("5000");
     const x = await page.innerText('.container >> nth=3 >> .px-4');
     expect(x).to.be.equal("reply some code");
-    await page.click('text=Edit');
+    await page.click('.sc-iktFfs >> .text-muted');
     await page.click('#postBody');
     await page.fill("#postBody", "update some code");
-    await page.click('text=Submit');
+    await page.click('.sc-ezredP');
     await page.waitForTimeout("2000");
     const y = await page.innerText('.container >> nth=3 >> .px-4');
-    expect(y).to.be.equal("update some code");
     await page.click('text=HOME');
+    expect(y).to.be.equal("update some code");
   })
 
   after(async function () {

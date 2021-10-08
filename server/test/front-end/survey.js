@@ -19,6 +19,7 @@ describe('survey page', function () {
 
   it('goto survey page info', async () => {
     await page.waitForTimeout("3000");
+    // await page.screenshot({path:'1.png', fullPage: true});
     await page.click(".sii__title");
     const url = await page.url();
     const result = url.match(new RegExp(common.BACK_BASE_URL + '/surveys'));
