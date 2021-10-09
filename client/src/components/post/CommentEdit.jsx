@@ -87,7 +87,7 @@ const CommentEdit = ({ pid, cid, prevContent, onSubmit, onCancelClick }) => {
               ref={contentRef}
               value={content}
               placeholder="Enter your main body here"
-              className="lh-base"
+              className="shadow-none lh-base"
               onChange={(e) => setContent(e.target.value)}
               minLength="5"
               maxLength="1000"

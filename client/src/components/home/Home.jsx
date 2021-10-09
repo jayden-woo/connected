@@ -87,10 +87,14 @@ const Home = () => (
     <TabContainer id="homeTab" defaultActiveKey="questionBoard">
       <StyledNavContainer>
         <QuestionNav>
-          <StyledNavLink eventKey="questionBoard">Question Board</StyledNavLink>
+          <StyledNavLink className="shadow-none" eventKey="questionBoard">
+            Question Board
+          </StyledNavLink>
         </QuestionNav>
         <SurveyNav>
-          <StyledNavLink eventKey="surveyBoard">Survey Board</StyledNavLink>
+          <StyledNavLink className="shadow-none" eventKey="surveyBoard">
+            Survey Board
+          </StyledNavLink>
         </SurveyNav>
       </StyledNavContainer>
       <TabContent>

@@ -174,7 +174,7 @@ const AddPost = () => {
                   <Form.Control
                     as="textarea"
                     placeholder="Enter your title here"
-                    className="lh-base"
+                    className="shadow-none lh-base"
                     style={{ height: "10rem" }}
                     onChange={(e) => setTitle(e.target.value)}
                     minLength="5"
@@ -194,7 +194,7 @@ const AddPost = () => {
                   <Form.Control
                     as="textarea"
                     placeholder="Enter your main body here"
-                    className="lh-base"
+                    className="shadow-none lh-base"
                     style={{ height: "30rem" }}
                     onChange={(e) => setContent(e.target.value)}
                     minLength="5"

@@ -46,7 +46,7 @@ const SearchBar = ({ onSearchEntry, onFilterClick }) => (
     <SearchBoxIcon>
       <FontAwesomeIcon icon="search" size="lg" color="var(--color-primary)" />
     </SearchBoxIcon>
-    <SearchEntry placeholder="Search" onChange={(e) => onSearchEntry(e.target.value)} />
+    <SearchEntry className="shadow-none" placeholder="Search" onChange={(e) => onSearchEntry(e.target.value)} />
     <SearchBoxButton as="button" onClick={onFilterClick} aria-controls="filterMenu">
       <FontAwesomeIcon icon="filter" size="lg" color="var(--color-primary)" />
       <MediaQuery minWidth={768}>&nbsp;Filter</MediaQuery>

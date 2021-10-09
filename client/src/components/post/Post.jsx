@@ -252,10 +252,10 @@ const Post = () => {
       <StyledDiv>
         <Container>
           <Row>
-            <Col xs="12" sm="8" className="ps-md-4">
+            <Col xs="12" md="8" className="ps-md-4">
               <MediaQuery maxWidth={767}>
                 <Row>
-                  <Col xs="7">
+                  <Col xs={isAuthenticated ? 8 : 12}>
                     <PostStats views={post.views} comments={post.comments.length} solved={post.solved} />
                   </Col>
                   <Col>

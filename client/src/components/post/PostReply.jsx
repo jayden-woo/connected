@@ -62,7 +62,7 @@ const PostReply = ({ onPublish }) => {
               <Form.Control
                 as="textarea"
                 placeholder="Enter your reply here"
-                className="lh-base"
+                className="shadow-none lh-base"
                 style={{ height: "15rem" }}
                 onChange={(e) => setReply(e.target.value)}
                 minLength="5"

@@ -112,7 +112,6 @@ h6 {
 .profile-content {
   font-weight: 300;
   font-size: 1.1rem;
-  text-transform: capitalize;
 }
 
 @media screen and (max-width: 576px) {
@@ -137,7 +136,7 @@ h6 {
 @media screen and (max-width: 400px) {
   .profile-content {
     font-weight: 300;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .profile-title {
     font-size: 1.2rem;
@@ -166,4 +165,10 @@ h6 {
 
 .editIconButton:hover {
   background-color: transparent !important;
+}
+
+@media screen and (max-width: 576px) {
+  .profile .modal-dialog {
+    width: calc(100vw - 1rem);
+  }
 }

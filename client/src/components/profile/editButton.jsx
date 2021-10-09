@@ -27,6 +27,7 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
           setNotifyShow(true);
           setLoading(false);
           onHide();
+          localStorage.setItem(updateFiled, state);
         } else {
           notify.errorNotify("Oops, some error occured!");
         }
@@ -60,6 +61,7 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
         <Modal.Body style={{ paddingTop: "15px", paddingBottom: "0px" }}>
           <InputGroup className="mb-3">
             <Form.Control
+              className="shadow-none"
               placeholder={`New ${updateFiled}`}
               aria-label="UpdateFiled"
               value={state}
@@ -69,7 +71,7 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
             />
             <Button
               onClick={!isLoading ? handleClick : null}
-              className="editUpdateBtn"
+              className="shadow-none editUpdateBtn"
               style={{ border: "1px solid #21457d", padding: "5 10 5 10" }}
               disabled={isLoading}
               variant="outline-secondary"

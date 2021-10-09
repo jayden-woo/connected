@@ -239,7 +239,9 @@ const QuestionBoard = () => {
           </Col>
           <Col xs={6}>
             <StyledLink to="/posts/add">
-              <AddButton type="button">Ask a Question</AddButton>
+              <AddButton className="shadow-none" type="button">
+                Ask a Question
+              </AddButton>
             </StyledLink>
           </Col>
         </Row>

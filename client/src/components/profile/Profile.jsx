@@ -90,7 +90,11 @@ const Profile = ({ sub }) => {
                     </Col>
                     {state.dbconnect && (
                       <Col className="align-center">
-                        <Button className="editIconButton" style={{ display: "flex" }} onClick={handleEditUsShow}>
+                        <Button
+                          className="shadow-none editIconButton"
+                          style={{ display: "flex" }}
+                          onClick={handleEditUsShow}
+                        >
                           <Image src={edit} width="14" height="14" alt="edit-pic" />
                         </Button>
                         <EditButton show={modalEditUsShow} onHide={handleEditClose} sub={sub} updateFiled="username" />
@@ -113,7 +117,11 @@ const Profile = ({ sub }) => {
                     </Col>
                     {state.dbconnect && (
                       <Col className="align-center">
-                        <Button className="editIconButton" style={{ display: "flex" }} onClick={handleEditPaShow}>
+                        <Button
+                          className="shadow-none editIconButton"
+                          style={{ display: "flex" }}
+                          onClick={handleEditPaShow}
+                        >
                           <Image src={edit} width="14" height="14" alt="edit-pic" />
                         </Button>
                         <EditButton show={modalEditPaShow} onHide={handleEditClose} sub={sub} updateFiled="email" />

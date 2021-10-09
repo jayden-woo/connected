@@ -59,7 +59,7 @@ const SurveyBoard = () => {
   return (
     <StyledDiv>
       <Title className="pt-4 pb-2">Recommended for You</Title>
-      <Carousel className="mx-5 my-3 border border-dark">
+      <Carousel className="mx-5 my-3 border border-dark home__survey-board">
         {surveys.map((survey) => (
           <Carousel.Item key={survey._id}>
             <Link to={`/surveys/${survey._id}`}>

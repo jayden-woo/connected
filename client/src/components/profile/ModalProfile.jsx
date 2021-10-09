@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ProfileDisplay from "./Profile";
 
 const ModalProfile = ({ show, onHide, sub }) => (
-  <Modal show={show} onHide={onHide} centered style={{ justifyContent: "center" }}>
+  <Modal className="profile" show={show} onHide={onHide} centered style={{ justifyContent: "center" }}>
     <div style={{ padding: 0, margin: 5 }}>
       <ProfileDisplay sub={sub} />
     </div>
