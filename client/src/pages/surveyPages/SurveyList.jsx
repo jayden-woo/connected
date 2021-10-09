@@ -62,8 +62,10 @@ const SurveyList = () => {
   if (isLoading || loadingSurveys) return <Loading />;
 
   const breakpointColumnsObj = {
-    default: 2,
-    768: 1,
+    default: 4,
+    2400: 3,
+    1600: 2,
+    800: 1,
   };
 
   return (
