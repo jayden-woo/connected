@@ -5,7 +5,7 @@ const username = "yihe";
 const password = "hsn-123456";
 
 describe('home page', function () {
-  this.timeout(100000);
+  this.timeout(300000);
 
   before(async function () {
     browser = await chromium.launch();

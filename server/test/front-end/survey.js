@@ -3,7 +3,7 @@ const common = require('../common');
 const { chromium } = require('playwright');
 
 describe('survey page', function () {
-  this.timeout(20000);
+  this.timeout(300000);
 
   before(async function () {
     browser = await chromium.launch();

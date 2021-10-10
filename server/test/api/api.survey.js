@@ -4,7 +4,7 @@ const rp = require('request-promise');
 const testCases = require('./api.survey.testCase');
 
 describe('API survey', function () {
-  this.timeout(10000);
+  this.timeout(300000);
   /**
    * get access_token befor to testcase
    */

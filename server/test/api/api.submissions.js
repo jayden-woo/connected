@@ -5,8 +5,9 @@ const testCases = require('./api.submissions.testCase');
 const surveyTestCases = require('./api.survey.testCase');
 
 describe('API submissions', function () {
+  this.timeout(300000);
   before('', async () => {
-    this.timeout(5000);
+    this.timeout(300000);
     //get access_token befor to testcase
     access_token = await common.getAccessToken();
     //create a post
