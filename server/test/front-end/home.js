@@ -38,7 +38,7 @@ describe('home page', function () {
       await page.fill("input[name=\"username\"]", username);
       await page.click("input[name=\"password\"]");
       await page.fill("input[name=\"password\"]", password);
-      await page.click(".auth0-lock-submit");
+      await page.click("button[name=\"action\"]");
       await page.waitForTimeout("3000");
       const url = await page.url();
       const result = url.match(new RegExp(common.BACK_BASE_URL));
