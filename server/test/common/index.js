@@ -10,11 +10,8 @@ var options = {
     client_id: 'FmU3TIDMMQHe7ANvJuY5zRQbztbsbEVG',
     client_secret: 'zy-p9VqIR9jrn1UC5jrLoHy6BZRe9Tq7JCY3ROMqlZhh1M2VzjbSLvPbNJMpf_9g',
     audience: "https://it-project-connected-api.herokuapp.com/"
+    // "audience": "localhost:3000/api/",
 }
-// "client_id": "FmU3TIDMMQHe7ANvJuY5zRQbztbsbEVG",
-//     "client_secret": "zy-p9VqIR9jrn1UC5jrLoHy6BZRe9Tq7JCY3ROMqlZhh1M2VzjbSLvPbNJMpf_9g",
-//     "audience": "localhost:3000/api/",
-//     "grant_type": "client_credentials"
 };
 
 exports.getAccessToken = async () => {
