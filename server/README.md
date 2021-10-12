@@ -10,13 +10,14 @@ Deployment : Heroku
 
 Testing : Mocha
 
-[API documentation : Postman](https://documenter.getpostman.com/view/15417117/UUxwBoPp)
+[API documentation : Postman](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
 ### Links
 
-[API documentation](https://documenter.getpostman.com/view/15417117/UUxwBoPp)
+[API documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
-[Heroku Back-end URL](https://it-project-connected-api.herokuapp.com)
+[Heroku Back-end URL - pord](https://it-project-connected-api.herokuapp.com) <br />
+[Heroku Back-end URL - dev](https://it-project-connected-api-dev.herokuapp.com)
 
 ### File structure
 
@@ -27,12 +28,8 @@ Testing : Mocha
 | `├── models`       | Mongoose schemas                                    |
 | `├── routes`       | Routers                                             |
 | `├── startup`      | Basic setups for api server (DB, cors, jwt , etc..) |
-| `├── test`         | Mocha testing                                       |
-| `├── api`          |                                                     |
-| ` └── common`      |                                                     |
-| `├── server.js`    | Entry file of the api server                        |
-| `├── package.json` | Holds various metadata relevant to the project      |
-| `└── yarn.lock`    | Specify dependencies' version for installation      |
+| `├── test`         | Mocha testing for front-end and back-end                                       |
+| `└── server.js`    | Entry file of the api server                        |
 
 ### Local Development
 

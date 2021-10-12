@@ -46,7 +46,7 @@ A CRM web app provides to small businnesses, which allows thier customers to pos
     -   [Road map](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
     -   [Backlog](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/backlog)
     -   [Board](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1)
--   [API Documentation](https://documenter.getpostman.com/view/15417117/UUxwBoPp)
+-   [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
 ### Project Link
 
@@ -76,8 +76,6 @@ API documentation: [Postman](https://documenter.getpostman.com/view/15417117/UUx
 | :----------------- | :--------------------------------------------- |
 | `├── server`       | Backend(API) server                            |
 | `├── client`       | Front-end UI                                   |
-| `├── package.json` | Holds various metadata relevant to the project |
-| `└── yarn.lock`    | Specify dependencies' version for installation |
 
 ### Local Development
 
