@@ -19,17 +19,4 @@ describe('API post', function () {
     });
     expect(body).to.be.an('object');
   });
-
-  it('update user info', async () => {
-    let body = await rp({
-      method: 'PATCH',
-      url: common.BASE_URL + '/auth0/updateUser',
-      json: true,
-      body: {
-        username: 'update zhihui chen by he',
-        sub: "google-oauth2|101384514038333635972"
-      },
-    });
-    console.log(body);
-  });
 });
