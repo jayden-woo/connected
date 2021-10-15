@@ -22,8 +22,9 @@ html {
 }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif; */
+  font-family: "Open Sans", sans-serif;
 }
 
 ::selection {
@@ -107,6 +108,10 @@ a:visited {
 .se-container {
   background-color: var(--color-background);
   margin-top: var(--height-nav-bar);
+}
+
+.se-container .btn {
+  border-radius: 0.75rem;
 }
 
 .se__top-cut-off {
@@ -206,6 +211,7 @@ a:visited {
 }
 
 .se__thumbnail-btn {
+  border-radius: 0.75rem;
   background-color: var(--color-primary);
   height: 3rem;
   font-size: 1.2rem;
@@ -219,6 +225,7 @@ a:visited {
   width: 100%;
   height: 4.5rem;
   border-width: none;
+  border-radius: 0 !important;
   background-color: transparent;
   color: var(--color-primary);
   border-bottom: 1px solid #ccc;
@@ -233,7 +240,14 @@ a:visited {
   border-color: var(--color-primary);
 }
 
+.se__btn-add:focus {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 .se__btn-publish {
+  border-radius: 0.75rem;
   margin: 0 3rem;
   width: 20rem;
   height: 4rem;
@@ -245,6 +259,7 @@ a:visited {
 }
 
 .se__btn-cancel {
+  border-radius: 0.75rem;
   margin: 0 3rem;
   width: 20rem;
   height: 4rem;
@@ -562,10 +577,44 @@ a:visited {
   padding-top: 0.5rem;
 }
 
+.sl__bg-image {
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+  background: rgb(66, 66, 66);
+  background: linear-gradient(158deg, rgba(66, 66, 66, 1) 0%, rgba(55, 113, 181, 1) 100%);
+}
+
+.sl__header-section {
+  padding: 40px 10%;
+  min-height: 250px;
+  background-color: white;
+}
+
+.sl__title {
+  font-size: 3.5rem;
+  color: #000767;
+  margin-bottom: 0.5rem;
+}
+
+.sl__new-survey {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #ff0909;
+}
+
+.sl__new-survey:hover {
+  color: #ff0909;
+}
+
+.sl__new-survey:focus {
+  color: #ff0909;
+}
+
 .sl__toggle-display {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
 }
 
 .sl__btn-toggle {
@@ -810,9 +859,18 @@ a:visited {
   border-color: var(--color-primary) !important;
 }
 
+.sv-rating__item-text {
+  border-radius: 0.75rem !important;
+}
+
 .sv-rating input:focus + .sv-rating__min-text + .sv-rating__item-text,
 .sv-rating input:focus + .sv-rating__item-text {
   outline-color: var(--color-primary) !important;
+}
+
+.sv-ranking-item__index {
+  padding: 4px 11px !important;
+  border-radius: 0.75rem !important;
 }
 
 .sv-item__control:focus:focus + .sv-item__decorator {
@@ -964,7 +1022,7 @@ a:visited {
 
 .editUpdateBtn {
   color: #21457d;
-  border-radius: 0 0.25rem 0.25rem 0;
+  border-radius: 0 0.75rem 0.75rem 0;
 }
 
 .editUpdateBtn:hover {
@@ -981,4 +1039,10 @@ a:visited {
 .home__survey-board {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+@media screen and (max-width: 430px) {
+  .post-reply {
+    padding-top: 3rem !important;
+  }
 }

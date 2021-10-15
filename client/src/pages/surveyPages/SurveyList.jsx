@@ -1,17 +1,19 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from "react";
-// import { NavLink } from "react-router-dom";
 import _ from "lodash";
+import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Masonry from "react-masonry-css";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Image from "react-bootstrap/Image";
 import axios from "../../helpers/axios";
 import SurveyListItem from "../../components/surveyPage/SurveyListItem";
 import SurveyImageItem from "../../components/surveyPage/SurveyImageItem";
 import notify from "../../helpers/notifyService";
 import Loading from "../../components/Loading";
+import backgroundImg from "../../assets/surveyHeader.png";
 
 const audience =
   process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
@@ -71,6 +73,14 @@ const SurveyList = () => {
   return (
     <div className="sl-container">
       <div className="sl__content">
+        {/* <div className="sl__bg-image" /> */}
+        <Image className="sl__bg-image" src={backgroundImg} />
+        <div className="sl__header-section">
+          <h1 className="sl__title">Do Our Surveys Here</h1>
+          <NavLink className="sl__new-survey" to="create-survey">
+            Create a new survey
+          </NavLink>
+        </div>
         <div className="sl__toggle-display">
           <OverlayTrigger
             key="toggle display layout"

@@ -67,7 +67,11 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
               value={state}
               onChange={(e) => setState(e.target.value)}
               type="text"
-              style={{ border: "1px solid rgb(167, 175, 183)" }}
+              style={{
+                border: "1px solid rgb(167, 175, 183)",
+                borderTopLeftRadius: ".75rem",
+                borderBottomLeftRadius: ".75rem",
+              }}
             />
             <Button
               onClick={!isLoading ? handleClick : null}

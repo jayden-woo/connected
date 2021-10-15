@@ -51,7 +51,7 @@ const PasswordResetButton = ({ email }) => {
     <>
       <Button
         variant="primary"
-        style={{ borderRadius: "0.3rem", fontSize: "0.8rem", padding: 6 }}
+        style={{ borderRadius: "0.75rem", fontSize: "0.8rem", padding: "6px 10px" }}
         className="shadow-none reset-button"
         disabled={isLoading}
         onClick={!isLoading ? handleClick : null}
