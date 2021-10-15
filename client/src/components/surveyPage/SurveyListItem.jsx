@@ -1,46 +1,33 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
-  const [width, setWidth] = useState(1000);
   const visible = survey.visible ? "" : "sli--invisible";
-
-  const updateWindowWidth = () => {
-    setWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateWindowWidth);
-    return () => {
-      window.removeEventListener("resize", updateWindowWidth);
-    };
-  }, []);
 
   if (!isAdmin && !survey.visible) return <></>;
 
   return (
     <li className="sli-container">
-      <Row>
-        <Col>
+      <Row style={{ width: "100%", margin: "0" }}>
+        <div className="sli__content">
           <NavLink className={`sli__title ${visible}`} to={`surveys/${survey._id}`}>
             {survey.title}
           </NavLink>
           <p className="sli__description">{survey.description}</p>
-        </Col>
+        </div>
         {isAdmin && (
-          <Col xs={12} sm={1}>
+          <div className="sli__btns">
             <div className="sli__btn-container">
               {survey.visible && (
                 <OverlayTrigger
                   key="hide survey"
-                  placement={width <= 576 ? "top" : "left"}
+                  placement="left"
                   overlay={<Tooltip id="tooltip-hide-survey">Hide Survey</Tooltip>}
                 >
                   <Button className="shadow-none sli__btn" onClick={() => updateSurvey(survey._id, { visible: false })}>
@@ -51,7 +38,7 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
               {!survey.visible && (
                 <OverlayTrigger
                   key="unhide survey"
-                  placement={width <= 576 ? "top" : "left"}
+                  placement="left"
                   overlay={<Tooltip id="tooltip-unhide-survey">Unhide Survey</Tooltip>}
                 >
                   <Button className="shadow-none sli__btn" onClick={() => updateSurvey(survey._id, { visible: true })}>
@@ -63,7 +50,7 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
             <div className="sli__btn-container">
               <OverlayTrigger
                 key="view submissions"
-                placement={width <= 576 ? "top" : "left"}
+                placement="left"
                 overlay={<Tooltip id="tooltip-view-submissions">View Submissions</Tooltip>}
               >
                 <Button className="shadow-none sli__btn">
@@ -73,7 +60,7 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
                 </Button>
               </OverlayTrigger>
             </div>
-          </Col>
+          </div>
         )}
       </Row>
     </li>

@@ -8,7 +8,7 @@ import styled from "styled-components";
 const StyledCard = styled(Card)`
   border: 1px solid var(--color-primary);
   border-radius: 0.75rem;
-  margin: 40px 5vw;
+  margin: 30px 5%;
 `;
 
 const StyledLink = styled(Link)`
