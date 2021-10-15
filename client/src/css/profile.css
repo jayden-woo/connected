@@ -169,6 +169,10 @@ h6 {
 
 @media screen and (max-width: 576px) {
   .profile .modal-dialog {
-    width: calc(100vw - 1rem);
+    width: calc(100% - 1rem);
   }
+}
+
+.modal {
+  padding-right: 0 !important;
 }
