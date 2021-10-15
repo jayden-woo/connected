@@ -22,8 +22,8 @@ exports.getAccessToken = async () => {
   })
 }
 
-exports.BASE_URL = 'https://it-project-connected-api.herokuapp.com/api';
-exports.BACK_BASE_URL = "https://it-project-connected.herokuapp.com"
+exports.BASE_URL = 'ttps://it-project-connected-api-dev.herokuapp.com/';
+exports.BACK_BASE_URL = "https://it-project-connected-dev.herokuapp.com/"
 
 // exports.BASE_URL = 'http://localhost:3000/api';
 // exports.BACK_BASE_URL = "http://localhost:5000"
