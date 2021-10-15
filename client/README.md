@@ -6,25 +6,25 @@ Framework : React
 
 Deployment : Heroku
 
-Testing :
+Testing : Mocha
 
 ### Links
 
-[Heroku Front-end URL](https://it-project-connected.herokuapp.com)
+[Heroku Front-end URL - Prod](https://it-project-connected.herokuapp.com) <br />
+[Heroku Front-end URL - Dev](https://it-project-connected-dev.herokuapp.com)
 
 ### File structure
 
 | File/Folder        | Description                                    |
 | :----------------- | :--------------------------------------------- |
 | `├── public`       | Static files, icons                            |
-| `├── src`          | Middlewares (guards)                           |
-| `├── assets`       | Assets, icons                                  |
-| `├── components`   | Reusable components                            |
-| `├── css`          | Css                                            |
-| `├── pages`        | The client side application                    |
-| ` └── helpers`     | Helper functions                               |
-| `├── server.js`    | Entry file of the api server                   |
-| `├── package.json` | Holds various metadata relevant to the project |
+| `├── src`          |                           |
+| &emsp;`├── assets`       | Assets, icons                                  |
+| &emsp;`├── components`   | Reusable components                            |
+| &emsp;`├── css`          | Css                                            |
+| &emsp;`├── pages`        | The client side application                    |
+| &emsp;`├── index.js`    | Entry file of the api server                   |
+| &emsp;`└── helpers`     | Helper functions                               |
 
 ### Local Development
 

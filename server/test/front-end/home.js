@@ -5,7 +5,7 @@ const username = "yihe";
 const password = "hsn-123456";
 
 describe('home page', function () {
-  this.timeout(100000);
+  this.timeout(300000);
 
   before(async function () {
     browser = await chromium.launch();
@@ -38,7 +38,7 @@ describe('home page', function () {
       await page.fill("input[name=\"username\"]", username);
       await page.click("input[name=\"password\"]");
       await page.fill("input[name=\"password\"]", password);
-      await page.click(".auth0-lock-submit");
+      await page.click("button[name=\"action\"]");
       await page.waitForTimeout("3000");
       const url = await page.url();
       const result = url.match(new RegExp(common.BACK_BASE_URL));
