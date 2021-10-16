@@ -10,7 +10,7 @@ describe('home page', function () {
   before(async function () {
     browser = await chromium.launch();
     page = await browser.newPage();
-    await page.goto(common.BACK_BASE_URL);
+    await page.goto(common.FROUT_BASE_URL);
   });
 
   it('check title', async () => {
@@ -41,7 +41,7 @@ describe('home page', function () {
       await page.click("button[name=\"action\"]");
       await page.waitForTimeout("3000");
       const url = await page.url();
-      const result = url.match(new RegExp(common.BACK_BASE_URL));
+      const result = url.match(new RegExp(common.FROUT_BASE_URL));
       await page.click('text=HOME');
       expect(result.length).to.be.above(0);
       console.log('logined......');
@@ -53,7 +53,7 @@ describe('home page', function () {
     await page.click("text=Here");
     const url = await page.url();
     await page.click('text=HOME');
-    expect(url).to.equal(common.BACK_BASE_URL + '/surveys');
+    expect(url).to.equal(common.FROUT_BASE_URL + '/surveys');
   })
 
   it('ask a question', async () => {
@@ -61,10 +61,10 @@ describe('home page', function () {
     await page.waitForTimeout("3000");
     await page.click("text='Ask a Question'");
     let url = await page.url();
-    expect(url).to.equal(common.BACK_BASE_URL + '/posts/add');
+    expect(url).to.equal(common.FROUT_BASE_URL + '/posts/add');
     //cacel a question
     await page.click('text=Cancel');
-    expect(await page.url()).to.equal(common.BACK_BASE_URL + '/');
+    expect(await page.url()).to.equal(common.FROUT_BASE_URL + '/');
     await page.waitForTimeout("1000");
     await page.click("text='Ask a Question'");
     await page.waitForTimeout("1000");
@@ -76,7 +76,7 @@ describe('home page', function () {
     await page.click('button[type=\"submit\"]');
     await page.waitForTimeout("2000");
     const url2 = await page.url();
-    const result = url2.match(new RegExp(common.BACK_BASE_URL + '/posts'));
+    const result = url2.match(new RegExp(common.FROUT_BASE_URL + '/posts'));
     expect(result.length).to.be.above(0);
   })
 
