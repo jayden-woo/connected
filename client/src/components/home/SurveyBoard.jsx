@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../helpers/axios";
 
+const DEFAULT_MAX_SURVEYS = 10;
+
 const StyledDiv = styled.div`
   // margin: 0 8%;
   margin: 0;
@@ -54,7 +56,10 @@ const SurveyBoard = () => {
     });
   }, []);
 
-  const surveys = allSurveys.filter((survey) => survey.visible).sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+  const surveys = allSurveys
+    .filter((survey) => survey.visible)
+    .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+    .slice(0, DEFAULT_MAX_SURVEYS);
 
   return (
     <StyledDiv>
@@ -65,7 +70,7 @@ const SurveyBoard = () => {
             <Link to={`/surveys/${survey._id}`}>
               <StyledImage
                 className="d-block w-100"
-                src={survey.thumbnail ? survey.thumbnail : "https://source.unsplash.com/random"}
+                src={survey.thumbnail ? survey.thumbnail : "https://source.unsplash.com/_xzx1XZ1taI/800x600"}
                 alt="survey-thumbnail"
               />
               <Carousel.Caption>
