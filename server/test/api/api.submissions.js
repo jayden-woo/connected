@@ -1,22 +1,21 @@
 const expect = require('chai').expect;
-const common = require('../common');
+const common = require('../common/index');
 const rp = require('request-promise');
 const testCases = require('./api.submissions.testCase');
 const surveyTestCases = require('./api.survey.testCase');
 
 describe('API submissions', function () {
-  // this.timeout(100000);
-  /**
-   * no role token
-   */
+  this.timeout(300000);
   before('', async () => {
-    this.timeout(5000);
+    this.timeout(300000);
+    //get access_token befor to testcase
+    access_token = await common.getAccessToken();
     //create a post
     let body = await rp({
       method: 'POST',
       url: common.BASE_URL + '/surveys',
       headers: {
-        'authorization': ''     //no token info
+        'Authorization': `Bearer ${access_token}`
       },
       body: surveyTestCases.addCompleteCase[0],
       json: true
@@ -29,7 +28,7 @@ describe('API submissions', function () {
       method: 'GET',
       url: common.BASE_URL + '/submissions',
       headers: {
-        'authorization': ''     //no token info
+        'Authorization': `Bearer ${access_token}`
       },
       json: true
     });
@@ -81,7 +80,7 @@ describe('API submissions', function () {
       method: 'GET',
       url: common.BASE_URL + '/submissions/' + submissions_id,
       headers: {
-        'authorization': ''     //no token info
+        'Authorization': `Bearer ${access_token}`
       },
       json: true
     });
@@ -95,7 +94,7 @@ describe('API submissions', function () {
         method: 'GET',
         url: common.BASE_URL + '/submissions/' + '111',
         headers: {
-          'authorization': ''     //no token info
+          'Authorization': `Bearer ${access_token}`
         },
         json: true
       });

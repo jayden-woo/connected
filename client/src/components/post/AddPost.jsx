@@ -23,11 +23,11 @@ const StyledImage = styled.img`
 `;
 
 const StyledHeader = styled(Container)`
-  // margin: -20px 8vw 0;
+  // margin: -20px 8% 0;
   margin: -20px 0 0;
   padding: 1.5rem 2rem;
-  // width: 84vw;
-  width: 100vw;
+  // width: 84%;
+  width: 100%;
   font-size: 1.2rem;
   text-align: left;
   color: white;
@@ -35,30 +35,30 @@ const StyledHeader = styled(Container)`
   position: absolute;
   max-width: 100%;
   @media (min-width: 768px) {
-    margin: -30px 12vw 0;
-    width: 76vw;
+    margin: -30px 12% 0;
+    width: 76%;
     font-size: 1.5rem;
   }
   @media (min-width: 1200px) {
-    margin: -30px 20vw 0;
-    width: 60vw;
+    margin: -30px 20% 0;
+    width: 60%;
   }
 `;
 
 const StyledDiv = styled.div`
-  // margin: 0 8vw;
+  // margin: 0 8%;
   margin: 0;
   // padding: 60px 2rem 30px;
   padding: 60px 0 30px;
   border: 1px solid var(--color-primary);
   background-color: white;
-  max-width: 100vw;
+  max-width: 100%;
   @media (min-width: 768px) {
-    margin: 0 12vw;
+    margin: 0 12%;
     padding: 60px 2rem 30px;
   }
   @media (min-width: 1200px) {
-    margin: 0 20vw;
+    margin: 0 20%;
   }
 `;
 
@@ -174,7 +174,7 @@ const AddPost = () => {
                   <Form.Control
                     as="textarea"
                     placeholder="Enter your title here"
-                    className="lh-base"
+                    className="shadow-none lh-base"
                     style={{ height: "10rem" }}
                     onChange={(e) => setTitle(e.target.value)}
                     minLength="5"
@@ -194,7 +194,7 @@ const AddPost = () => {
                   <Form.Control
                     as="textarea"
                     placeholder="Enter your main body here"
-                    className="lh-base"
+                    className="shadow-none lh-base"
                     style={{ height: "30rem" }}
                     onChange={(e) => setContent(e.target.value)}
                     minLength="5"

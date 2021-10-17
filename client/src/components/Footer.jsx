@@ -9,6 +9,7 @@ const StyledImage = styled.img`
   width: 20px;
   height: 20px;
   margin: 20px 10px 20px 10px;
+  cursor: pointer;
   @media (max-width: 576px) {
     justify-content: center;
     width: 15px;

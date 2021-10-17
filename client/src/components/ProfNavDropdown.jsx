@@ -56,7 +56,7 @@ const ProfNavDropdown = () => {
   return (
     <>
       <NavDropdown
-        title={state.username}
+        title={localStorage.getItem("username") ? localStorage.getItem("username") : state.username}
         id="collasible-nav-dropdown"
         className="my-nav-item"
         style={{ marginLeft: "0.1rem", backgroundColor: "rgba(var(--bs-light-rgb)" }}

@@ -23,18 +23,18 @@ const StyledImage = styled.img`
 `;
 
 const StyledNavContainer = styled(Nav)`
-  // margin: -20px 8vw 0;
+  // margin: -20px 8% 0;
   margin: -20px 0 0;
   padding: 0;
-  // width: 84vw;
-  width: 100vw;
+  // width: 84%;
+  width: 100%;
   @media (min-width: 768px) {
-    margin: -30px 12vw 0;
-    width: 76vw;
+    margin: -30px 12% 0;
+    width: 76%;
   }
   @media (min-width: 1200px) {
-    margin: -30px 20vw 0;
-    width: 60vw;
+    margin: -30px 20% 0;
+    width: 60%;
   }
 `;
 
@@ -87,10 +87,14 @@ const Home = () => (
     <TabContainer id="homeTab" defaultActiveKey="questionBoard">
       <StyledNavContainer>
         <QuestionNav>
-          <StyledNavLink eventKey="questionBoard">Question Board</StyledNavLink>
+          <StyledNavLink className="shadow-none" eventKey="questionBoard">
+            Question Board
+          </StyledNavLink>
         </QuestionNav>
         <SurveyNav>
-          <StyledNavLink eventKey="surveyBoard">Survey Board</StyledNavLink>
+          <StyledNavLink className="shadow-none" eventKey="surveyBoard">
+            Survey Board
+          </StyledNavLink>
         </SurveyNav>
       </StyledNavContainer>
       <TabContent>

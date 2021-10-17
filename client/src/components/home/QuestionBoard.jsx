@@ -39,15 +39,15 @@ library.add(
 );
 
 const StyledDiv = styled.div`
-  // margin: 0 8vw;
+  // margin: 0 8%;
   margin: 0;
   border: 1px solid var(--color-primary);
   background-color: white;
   @media (min-width: 768px) {
-    margin: 0 12vw;
+    margin: 0 12%;
   }
   @media (min-width: 1200px) {
-    margin: 0 20vw;
+    margin: 0 20%;
   }
 `;
 
@@ -58,9 +58,9 @@ const LoadingContainer = styled.div`
 `;
 
 const StyledContainer = styled(Container)`
-  margin: 0 0 30px;
-  padding: 20px 0 0;
-  max-width: 100vw;
+  margin: 30px 0;
+  padding: 0;
+  max-width: 100%;
 `;
 
 const StyledLink = styled(Link)`
@@ -81,6 +81,7 @@ const StyledButton = styled.button`
   color: white;
   border: 0;
   border-radius: 0.75rem;
+  transition: filter 0.3s;
   &:hover {
     filter: brightness(75%);
   }
@@ -93,14 +94,13 @@ const StyledButton = styled.button`
 `;
 
 const AddButton = styled(StyledButton)`
-  padding: 0.5rem 1rem;
-  margin: 0 5vw 0 0;
+  // padding: auto 1rem;
   float: right;
-  @media (min-width: 768px) {
-    padding: 0.75rem 1.3rem;
-  }
-  @media (min-width: 1024px) {
-    padding: 0.75rem 2rem;
+  height: 100%;
+  width: 90%;
+  @media (max-width: 576px) {
+    width: 100%;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -131,11 +131,29 @@ const QuestionBoard = () => {
   const [maxPosts, setMaxPosts] = useState(INITIAL_MAX_POSTS);
 
   useEffect(async () => {
+    const users = await axios.get("/api/auth0/users").then((res) => {
+      console.log(res);
+      return res.data;
+    });
+    console.log(users);
     // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
     // await axios.get(`${baseUrl}/api/posts`).then((res) => {
     await axios.get("/api/posts").then((res) => {
       console.log(res);
-      setAllPosts(res.data);
+      const { data } = res;
+      data.map((post) => {
+        const author = users.find((u) => u.user_id === post.author.uid);
+        console.log(author);
+        // eslint-disable-next-line no-param-reassign
+        post.author = {
+          uid: author.user_id,
+          name: author.nickname,
+          picture: author.picture,
+        };
+        return post;
+      });
+      // setAllPosts(res.data);
+      setAllPosts(data);
       setIsLoading(false);
     });
   }, []);
@@ -215,13 +233,15 @@ const QuestionBoard = () => {
   return (
     <StyledDiv>
       <StyledContainer>
-        <Row className="align-items-center">
-          <Col xs={6}>
+        <Row className="align-items-center" style={{ margin: "0 5%" }}>
+          <Col xs={12} sm={8} style={{ padding: "0", height: "3rem", display: "flex", alignItems: "center" }}>
             <SearchBar onSearchEntry={setSearchTok} onFilterClick={() => setShowFilter(!showFilter)} />
           </Col>
-          <Col xs={6}>
+          <Col xs={14} sm={4} style={{ padding: "0", height: "3rem" }}>
             <StyledLink to="/posts/add">
-              <AddButton type="button">Ask a Question</AddButton>
+              <AddButton className="shadow-none" type="button">
+                Ask a Question
+              </AddButton>
             </StyledLink>
           </Col>
         </Row>

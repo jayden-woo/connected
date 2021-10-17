@@ -409,14 +409,16 @@ const SurveyEditor = () => {
                     </Col>
                   </Row>
                 </div>
-                {survey.questions.map((q) => (
-                  <QuestionPreview
-                    key={q.name}
-                    question={q}
-                    isActive={activeQuestion === q.name}
-                    setActiveQuestion={setActiveQuestion}
-                  />
-                ))}
+                {survey.questions.length !== 0 &&
+                  survey.questions.map((q) => (
+                    <QuestionPreview
+                      key={q.name}
+                      question={q}
+                      isActive={activeQuestion === q.name}
+                      setActiveQuestion={setActiveQuestion}
+                    />
+                  ))}
+                {survey.questions.length === 0 && <p className="se__empty">Add a question from the toolbox</p>}
               </Col>
               <Col md={12} xl={4}>
                 <div className="se__pp">
