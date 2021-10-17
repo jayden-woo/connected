@@ -48,8 +48,6 @@ const SurveyBoard = () => {
   const [allSurveys, setAllSurveys] = useState([]);
 
   useEffect(() => {
-    // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
-    // axios.get(`${baseUrl}/api/surveys`).then((res) => {
     axios.get("/api/surveys").then((res) => {
       console.log(res);
       setAllSurveys(res.data);
