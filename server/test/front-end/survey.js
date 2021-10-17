@@ -10,7 +10,7 @@ describe('survey page', function () {
   before(async function () {
     browser = await chromium.launch();
     page = await browser.newPage();
-    await page.goto(common.BACK_BASE_URL);
+    await page.goto(common.FROUT_BASE_URL);
     await page.click("text=LOG IN");
     await page.waitForTimeout("3000");
     await page.click("input[name=\"username\"]");
@@ -24,14 +24,14 @@ describe('survey page', function () {
   it('click to survey page', async () => {
     await page.click("text=SURVEYS");
     const url = await page.url();
-    expect(url).to.equal(common.BACK_BASE_URL+'/surveys');
+    expect(url).to.equal(common.FROUT_BASE_URL+'/surveys');
   });
 
   it('goto survey page info', async () => {
     await page.waitForTimeout("3000");
     await page.click(".sii__title");
     const url = await page.url();
-    const result = url.match(new RegExp(common.BACK_BASE_URL + '/surveys'));
+    const result = url.match(new RegExp(common.FROUT_BASE_URL + '/surveys'));
     expect(result.length).to.be.above(0);
     await page.click(".sv-text");
     await page.fill(".sv-text", "this is a title");

@@ -6,9 +6,6 @@ import PropTypes from "prop-types";
 
 const SearchBox = styled(InputGroup)`
   background-color: transparent;
-  margin: 0px 5vw;
-  width: 35vw;
-  max-width: 30rem;
   height: 2rem;
   outline: none;
   border-radius: 0px;
@@ -21,6 +18,9 @@ const SearchEntry = styled(FormControl)`
   border: 0px;
   border-radius: 0px;
   border-bottom: 1px solid var(--color-primary);
+  &:focus {
+    border-bottom: 1px solid var(--color-primary);
+  }
   @media (min-width: 1024px) {
     font-size: 1.1rem;
   }
@@ -46,7 +46,7 @@ const SearchBar = ({ onSearchEntry, onFilterClick }) => (
     <SearchBoxIcon>
       <FontAwesomeIcon icon="search" size="lg" color="var(--color-primary)" />
     </SearchBoxIcon>
-    <SearchEntry placeholder="Search" onChange={(e) => onSearchEntry(e.target.value)} />
+    <SearchEntry className="shadow-none" placeholder="Search" onChange={(e) => onSearchEntry(e.target.value)} />
     <SearchBoxButton as="button" onClick={onFilterClick} aria-controls="filterMenu">
       <FontAwesomeIcon icon="filter" size="lg" color="var(--color-primary)" />
       <MediaQuery minWidth={768}>&nbsp;Filter</MediaQuery>

@@ -14,17 +14,17 @@
 
 html {
   font-size: 87.5%;
-  width: 100vw;
 }
 
 .modal-open {
-  overflow: auto;
+  overflow: auto !important;
   padding-right: 0 !important;
 }
 
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif; */
+  font-family: "Open Sans", sans-serif;
 }
 
 ::selection {
@@ -110,6 +110,10 @@ a:visited {
   margin-top: var(--height-nav-bar);
 }
 
+.se-container .btn {
+  border-radius: 0.75rem;
+}
+
 .se__top-cut-off {
   height: 4rem;
   background-color: var(--color-primary);
@@ -144,7 +148,7 @@ a:visited {
 }
 
 .se__content {
-  max-width: 1800px;
+  max-width: 100%;
   margin: 2rem auto;
 }
 
@@ -207,6 +211,7 @@ a:visited {
 }
 
 .se__thumbnail-btn {
+  border-radius: 0.75rem;
   background-color: var(--color-primary);
   height: 3rem;
   font-size: 1.2rem;
@@ -220,6 +225,7 @@ a:visited {
   width: 100%;
   height: 4.5rem;
   border-width: none;
+  border-radius: 0 !important;
   background-color: transparent;
   color: var(--color-primary);
   border-bottom: 1px solid #ccc;
@@ -234,7 +240,14 @@ a:visited {
   border-color: var(--color-primary);
 }
 
+.se__btn-add:focus {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 .se__btn-publish {
+  border-radius: 0.75rem;
   margin: 0 3rem;
   width: 20rem;
   height: 4rem;
@@ -246,6 +259,7 @@ a:visited {
 }
 
 .se__btn-cancel {
+  border-radius: 0.75rem;
   margin: 0 3rem;
   width: 20rem;
   height: 4rem;
@@ -430,7 +444,7 @@ a:visited {
 
 .sp__survey {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -524,11 +538,11 @@ a:visited {
 
 .sb__list {
   height: 100%;
+  min-height: 300px;
   max-height: 400px;
   overflow: auto;
   font-size: 1.4rem;
-  margin: 2.5rem 0;
-  padding: 0 5rem;
+  padding: 2.5rem 4rem;
 }
 
 .sb__chart {
@@ -558,21 +572,56 @@ a:visited {
 
 .sl__content {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: var(--height-nav-bar) auto 0;
   padding-top: 0.5rem;
+}
+
+.sl__bg-image {
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+  background: rgb(66, 66, 66);
+  background: linear-gradient(158deg, rgba(66, 66, 66, 1) 0%, rgba(55, 113, 181, 1) 100%);
+}
+
+.sl__header-section {
+  padding: 40px 10%;
+  min-height: 250px;
+  background-color: white;
+}
+
+.sl__title {
+  font-size: 3.5rem;
+  color: #000767;
+  margin-bottom: 0.5rem;
+}
+
+.sl__new-survey {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #ff0909;
+}
+
+.sl__new-survey:hover {
+  color: #ff0909;
+}
+
+.sl__new-survey:focus {
+  color: #ff0909;
 }
 
 .sl__toggle-display {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0;
 }
 
 .sl__btn-toggle {
   font-size: 1.8rem;
   background-color: transparent;
   color: var(--color-primary);
+  margin-right: 2rem;
 }
 
 .sl__btn-toggle:hover {
@@ -636,19 +685,45 @@ a:visited {
   font-weight: 100;
   color: rgb(224, 224, 224);
   margin-top: 0.3rem;
-  max-height: 85%;
+  padding: 0;
+  max-height: 80%;
   overflow: auto;
   text-shadow: 4px 4px 5px black;
+}
+
+@media screen and (max-width: 576px) {
+  .sii__description {
+    max-height: 65%;
+  }
 }
 
 .sii--invisible {
   color: rgb(146, 146, 146);
 }
 
+.sii__title-container {
+  width: calc(100% - 100px);
+  max-height: 100px;
+  overflow: auto;
+  padding: 0;
+}
+
+.sii__btns {
+  display: flex;
+  width: 80;
+  /* min-width: 70px; */
+  height: 40px;
+  padding: 0;
+  margin-top: 0.3rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .sii__btn {
   background-color: transparent;
-  margin-top: 0.5rem;
   text-shadow: 4px 4px 5px black;
+  width: 40px;
+  padding: 0;
 }
 
 .sii__btn:hover {
@@ -663,12 +738,17 @@ a:visited {
 .sli-container {
   transition: background-color 0.3s;
   list-style-type: none;
-  padding: 1rem 2rem;
-  margin-bottom: 0.5rem;
+  padding: 1rem 2rem 1.5rem;
 }
 
 .sli-container:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.sli__content {
+  width: calc(100% - 35px - 0.5rem);
+  padding: 0;
+  padding-right: 0.5rem;
 }
 
 .sli__title {
@@ -697,10 +777,20 @@ a:visited {
   margin-bottom: 0;
 }
 
+.sli__btns {
+  width: 35px;
+  padding: 0;
+}
+
 .sli__btn-container {
   display: flex;
   justify-content: flex-end;
   margin: 0;
+  width: 35px;
+  height: 35px;
+}
+
+@media only screen and (max-width: 576px) {
 }
 
 .sli__btn {
@@ -742,17 +832,6 @@ a:visited {
   margin-bottom: 0;
 }
 
-@media only screen and (max-width: 576px) {
-  .sli__btn-container {
-    display: inline;
-    height: 35px;
-  }
-
-  .sli__btn {
-    margin-top: 1rem;
-  }
-}
-
 /* Override SurveyJS Library Styles */
 
 .sv-question__content input:focus {
@@ -780,9 +859,18 @@ a:visited {
   border-color: var(--color-primary) !important;
 }
 
+.sv-rating__item-text {
+  border-radius: 0.75rem !important;
+}
+
 .sv-rating input:focus + .sv-rating__min-text + .sv-rating__item-text,
 .sv-rating input:focus + .sv-rating__item-text {
   outline-color: var(--color-primary) !important;
+}
+
+.sv-ranking-item__index {
+  padding: 4px 11px !important;
+  border-radius: 0.75rem !important;
 }
 
 .sv-item__control:focus:focus + .sv-item__decorator {
@@ -845,7 +933,8 @@ a:visited {
 
 .Navbar {
   min-height: 80px;
-  width: 100vw;
+  width: 100%;
+  padding-right: 0 !important;
 }
 
 .my-nav-item {
@@ -891,14 +980,20 @@ a:visited {
 }
 
 .nav-container {
-  margin: 0 5% 0 0;
+  margin: 0 2rem;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (max-width: 576px) {
   .nav-container {
-    margin: 0 18% 0 18%;
+    margin: 0 1rem;
   }
 }
+
+/* @media screen and (min-width: 1400px) {
+  .nav-container {
+    margin: 0 5rem;
+  }
+} */
 
 .post-img-button {
   opacity: 1 !important;
@@ -914,7 +1009,6 @@ a:visited {
   opacity: 0.7;
 }
 
-
 .reset-button {
   /* background-color: var(--color-primary); */
   background-color: transparent;
@@ -929,7 +1023,7 @@ a:visited {
 
 .editUpdateBtn {
   color: #21457d;
-  border-radius: 0 .25rem .25rem 0;
+  border-radius: 0 0.75rem 0.75rem 0;
 }
 
 .editUpdateBtn:hover {
@@ -941,4 +1035,15 @@ a:visited {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.home__survey-board {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@media screen and (max-width: 430px) {
+  .post-reply {
+    padding-top: 3rem !important;
+  }
 }

@@ -158,7 +158,7 @@ const PostComment = ({ pid, cid, author, createdAt, content, history, setPost, s
                 </Col>
               )}
             </Row>
-            <Modal className="vw-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
+            <Modal className="%-100" show={showConfirmation} onHide={() => setShowConfirmation(false)}>
               <Modal.Header className="px-4" closeButton>
                 <Modal.Title>Delete Comment?</Modal.Title>
               </Modal.Header>

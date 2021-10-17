@@ -6,17 +6,19 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../helpers/axios";
 
+const DEFAULT_MAX_SURVEYS = 10;
+
 const StyledDiv = styled.div`
-  // margin: 0 8vw;
+  // margin: 0 8%;
   margin: 0;
   border: 1px solid var(--color-accent);
   background-color: white;
   text-align: center;
   @media (min-width: 768px) {
-    margin: 0 12vw;
+    margin: 0 12%;
   }
   @media (min-width: 1200px) {
-    margin: 0 20vw;
+    margin: 0 20%;
   }
 `;
 
@@ -31,14 +33,14 @@ const Title = styled.p`
 `;
 
 const StyledImage = styled.img`
-  height: 100vw;
-  width: 40vw;
+  height: 100%;
+  width: 40%;
   max-height: 100%;
   max-width: 100%;
   object-fit: cover;
   object-position: left top;
   @media (min-width: 768px) {
-    height: 40vw;
+    height: 40%;
   }
 `;
 
@@ -46,26 +48,27 @@ const SurveyBoard = () => {
   const [allSurveys, setAllSurveys] = useState([]);
 
   useEffect(() => {
-    // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
-    // axios.get(`${baseUrl}/api/surveys`).then((res) => {
     axios.get("/api/surveys").then((res) => {
       console.log(res);
       setAllSurveys(res.data);
     });
   }, []);
 
-  const surveys = allSurveys.filter((survey) => survey.visible).sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+  const surveys = allSurveys
+    .filter((survey) => survey.visible)
+    .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+    .slice(0, DEFAULT_MAX_SURVEYS);
 
   return (
     <StyledDiv>
       <Title className="pt-4 pb-2">Recommended for You</Title>
-      <Carousel className="mx-5 my-3 border border-dark">
+      <Carousel className="mx-5 my-3 border border-dark home__survey-board">
         {surveys.map((survey) => (
           <Carousel.Item key={survey._id}>
             <Link to={`/surveys/${survey._id}`}>
               <StyledImage
                 className="d-block w-100"
-                src={survey.thumbnail ? survey.thumbnail : "https://source.unsplash.com/random"}
+                src={survey.thumbnail ? survey.thumbnail : "https://source.unsplash.com/_xzx1XZ1taI/800x600"}
                 alt="survey-thumbnail"
               />
               <Carousel.Caption>

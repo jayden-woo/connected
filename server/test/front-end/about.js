@@ -8,13 +8,13 @@ describe('about page', function () {
   before(async function () {
     browser = await chromium.launch();
     page = await browser.newPage();
-    await page.goto(common.BACK_BASE_URL);
+    await page.goto(common.FROUT_BASE_URL);
   });
 
   it('click to about page', async () => {
     await page.click("text=ABOUT");
     const url = await page.url();
-    expect(url).to.equal(common.BACK_BASE_URL+'/about');
+    expect(url).to.equal(common.FROUT_BASE_URL+'/about');
   });
 
   after(async function () {

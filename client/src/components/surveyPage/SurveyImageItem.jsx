@@ -21,58 +21,50 @@ const SurveyListItem = ({ survey, isAdmin, updateSurvey }) => {
       <Card.ImgOverlay style={{ padding: 0 }}>
         <div className="sii__background">
           <Row>
-            <Col xs={12} sm={10}>
+            <Col className="sii__title-container">
               <Card.Title className={`sii__title ${visible}`} as={NavLink} to={`surveys/${survey._id}`}>
                 {survey.title}
               </Card.Title>
             </Col>
-            {isAdmin && (
-              <Col xs={6} sm={1}>
-                {!survey.visible && (
-                  <OverlayTrigger
-                    key="unhide survey"
-                    placement="left"
-                    overlay={<Tooltip id="tooltip-unhide-survey">Unhide Survey</Tooltip>}
-                  >
-                    <Button
-                      className="shadow-none sii__btn"
-                      onClick={() => updateSurvey(survey._id, { visible: true })}
-                    >
-                      <i className="fas fa-eye" />
-                    </Button>
-                  </OverlayTrigger>
-                )}
-                {survey.visible && (
-                  <OverlayTrigger
-                    key="hide survey"
-                    placement="left"
-                    overlay={<Tooltip id="tooltip-hide-survey">Hide Survey</Tooltip>}
-                  >
-                    <Button
-                      className="shadow-none sii__btn"
-                      onClick={() => updateSurvey(survey._id, { visible: false })}
-                    >
-                      <i className="fas fa-eye-slash" />
-                    </Button>
-                  </OverlayTrigger>
-                )}
-              </Col>
-            )}
-            {isAdmin && (
-              <Col xs={6} sm={1}>
+            <Col xs={3} className="sii__btns">
+              {isAdmin && !survey.visible && (
+                <OverlayTrigger
+                  key="unhide survey"
+                  placement="left"
+                  overlay={<Tooltip id="tooltip-unhide-survey">Unhide Survey</Tooltip>}
+                >
+                  <Button className="shadow-none sii__btn" onClick={() => updateSurvey(survey._id, { visible: true })}>
+                    <i className="fas fa-eye" />
+                  </Button>
+                </OverlayTrigger>
+              )}
+              {isAdmin && survey.visible && (
+                <OverlayTrigger
+                  key="hide survey"
+                  placement="left"
+                  overlay={<Tooltip id="tooltip-hide-survey">Hide Survey</Tooltip>}
+                >
+                  <Button className="shadow-none sii__btn" onClick={() => updateSurvey(survey._id, { visible: false })}>
+                    <i className="fas fa-eye-slash" />
+                  </Button>
+                </OverlayTrigger>
+              )}
+              {isAdmin && (
                 <OverlayTrigger
                   key="view submissions"
-                  placement="right"
+                  placement="left"
                   overlay={<Tooltip id="tooltip-view-submissions">View Submissions</Tooltip>}
                 >
                   <Button className="shadow-none sii__btn" as={NavLink} to={`submissions/?survey=${survey._id}`}>
                     <i className="fas fa-stream" />
                   </Button>
                 </OverlayTrigger>
-              </Col>
-            )}
+              )}
+            </Col>
           </Row>
-          <Card.Text className="sii__description">{survey.description}</Card.Text>
+          <Row>
+            <Card.Text className="sii__description">{survey.description}</Card.Text>
+          </Row>
         </div>
       </Card.ImgOverlay>
     </Card>
