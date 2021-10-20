@@ -70,6 +70,7 @@ const Navigation = () => {
                     style={{ fontWeight: "bold", fontSize: "1.1rem", color: "#000766" }}
                     onClick={() => {
                       logout({ returnTo: window.location.origin });
+                      localStorage.removeItem("username");
                     }}
                   >
                     LOG OUT

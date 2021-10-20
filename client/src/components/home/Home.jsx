@@ -79,6 +79,9 @@ const StyledNavLink = styled(Nav.Link)`
     filter: brightness(75%);
     cursor: pointer;
   }
+  &:focus {
+    color: white;
+  }
 `;
 
 const Home = () => (
