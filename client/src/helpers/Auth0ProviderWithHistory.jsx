@@ -8,8 +8,7 @@ import { useHistory } from "react-router-dom";
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const audience =
-    process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+  const audience = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "localhost:3000/api/";
 
   const history = useHistory();
 

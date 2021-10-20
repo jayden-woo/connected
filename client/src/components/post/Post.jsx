@@ -119,36 +119,22 @@ const CancelButton = styled(ConfirmDeleteButton)`
 `;
 
 const Post = () => {
-  // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
   const { id } = useParams();
   const history = useHistory();
   const { user, getIdTokenClaims, isAuthenticated } = useAuth0();
-  // const isAdmin = localStorage.getItem("isAdmin");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthor, setIsAuthor] = useState(false);
   const [post, setPost] = useState();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(async () => {
-    const users = await axios.get("/api/auth0/users").then((res) => {
-      console.log(res);
-      return res.data;
-    });
-    console.log(users);
+    const users = await axios.get("/api/auth0/users").then((res) => res.data);
     await axios
-      // .get(`${baseUrl}/api/posts/${id}`)
       .get(`/api/posts/${id}`)
+      .then((res) => axios.put(`/api/posts/${id}`, { views: res.data.views + 1 }))
       .then((res) => {
-        console.log(res);
-        // Increment the post view count
-        // return axios.put(`${baseUrl}/api/posts/${id}`, { views: res.data.views + 1 });
-        return axios.put(`/api/posts/${id}`, { views: res.data.views + 1 });
-      })
-      .then((res) => {
-        console.log(res);
         const { data } = res;
         const postAuthor = users.find((u) => u.user_id === data.author.uid);
-        console.log(postAuthor);
         data.author = {
           uid: postAuthor.user_id,
           name: postAuthor.nickname,
@@ -156,7 +142,6 @@ const Post = () => {
         };
         data.comments.map((comment) => {
           const commentAuthor = users.find((u) => u.user_id === comment.author.uid);
-          console.log(commentAuthor);
           // eslint-disable-next-line no-param-reassign
           comment.author = {
             uid: commentAuthor.user_id,
@@ -184,26 +169,20 @@ const Post = () => {
     const index = followers.indexOf(user.sub);
     // eslint-disable-next-line no-unused-expressions
     index === -1 ? followers.push(user.sub) : followers.splice(index, 1);
-    // axios.put(`${baseUrl}/api/posts/${id}`, { followers }).then((res) => {
     axios.put(`/api/posts/${id}`, { followers }).then((res) => {
-      console.log(res);
       setPost(res.data);
     });
   };
 
   const handleSolveClick = () => {
-    // axios.put(`${baseUrl}/api/posts/${id}`, { solved: !post.solved }).then((res) => {
     axios.put(`/api/posts/${id}`, { solved: !post.solved }).then((res) => {
-      console.log(res);
       setPost(res.data);
     });
   };
 
   const handlePostDeleteClick = () => {
     setShowConfirmation(false);
-    // axios.delete(`${baseUrl}/api/posts/${id}`).then((res) => {
-    axios.delete(`/api/posts/${id}`).then((res) => {
-      console.log(res);
+    axios.delete(`/api/posts/${id}`).then(() => {
       toast.success("Your post has been successfully deleted.", {
         position: "top-center",
         autoClose: 3000,
@@ -231,7 +210,6 @@ const Post = () => {
     };
     // axios.put(`${baseUrl}/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
     axios.put(`/api/posts/${id}/comment`, { comments: [comment] }).then((res) => {
-      console.log(res);
       setPost(res.data);
     });
   };
@@ -366,7 +344,6 @@ const Post = () => {
                   </Row>
                 )}
                 {/* Only delete post for admin and post owner only */}
-                {/* {(isAdmin || (isAuthenticated && post.uid === user.sub)) && ( */}
                 {(isAdmin || isAuthor) && (
                   <Row>
                     <DeleteButton onClick={() => setShowConfirmation(true)}>Delete Post</DeleteButton>

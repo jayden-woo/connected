@@ -280,8 +280,6 @@ const SurveyEditor = () => {
 
     if (!data.thumbnail) delete data.thumbnail;
 
-    console.log(data);
-
     try {
       const accessToken = await getAccessTokenSilently({
         audience,

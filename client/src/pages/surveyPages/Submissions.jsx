@@ -58,7 +58,6 @@ const Submissions = ({ location }) => {
       setQrPair(pairs);
       setLoadingResponses(false);
     } catch (e) {
-      console.log(e);
       // TODO: redirect to not found page
       if (e.response && e.response.status === 404) {
         history.push("/404");

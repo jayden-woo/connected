@@ -49,7 +49,6 @@ const SurveyBoard = () => {
 
   useEffect(() => {
     axios.get("/api/surveys").then((res) => {
-      console.log(res);
       setAllSurveys(res.data);
     });
   }, []);
