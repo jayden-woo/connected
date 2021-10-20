@@ -7,16 +7,27 @@ import Masonry from "react-masonry-css";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import Image from "react-bootstrap/Image";
+import styled from "styled-components";
 import axios from "../../helpers/axios";
 import SurveyListItem from "../../components/surveyPage/SurveyListItem";
 import SurveyImageItem from "../../components/surveyPage/SurveyImageItem";
 import notify from "../../helpers/notifyService";
 import Loading from "../../components/Loading";
-import backgroundImg from "../../assets/surveyHeader.png";
+import backgroundImg from "../../assets/surveyHeader.JPG";
 
 const audience =
   process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+
+const StyledImage = styled.img`
+  height: 350px;
+  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: middle;
+  @media (max-width: 480px) {
+    height: 250px;
+  }
+`;
 
 const SurveyList = () => {
   const [surveys, setSurveys] = useState([]);
@@ -72,9 +83,9 @@ const SurveyList = () => {
 
   return (
     <div className="sl-container">
-      <div className="sl__content">
+      <div className="sl__content" style={{ paddingTop: 0 }}>
         {/* <div className="sl__bg-image" /> */}
-        <Image className="sl__bg-image" src={backgroundImg} />
+        <StyledImage className="sl__bg-image" src={backgroundImg} />
         <div className="sl__header-section">
           <h1 className="sl__title">Do Our Surveys Here</h1>
           <NavLink className="sl__new-survey" to="create-survey">
