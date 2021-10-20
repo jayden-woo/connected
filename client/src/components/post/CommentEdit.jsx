@@ -56,7 +56,6 @@ const CommentEdit = ({ pid, cid, prevContent, onSubmit, onCancelClick }) => {
         },
       })
       .then((res) => {
-        console.log(res);
         toast.success("Your comment has been successfully edited.", {
           position: "top-center",
           autoClose: 3000,

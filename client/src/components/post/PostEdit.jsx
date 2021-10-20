@@ -60,7 +60,6 @@ const PostEdit = ({ pid, prevTitle, prevContent, onSubmit, onCancelClick }) => {
         },
       })
       .then((res) => {
-        console.log(res);
         toast.success("Your post has been successfully edited.", {
           position: "top-center",
           autoClose: 3000,
