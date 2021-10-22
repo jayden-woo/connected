@@ -88,7 +88,6 @@ const PostComment = ({ pid, cid, author, createdAt, content, history, setPost, s
   const handleDeleteClick = () => {
     setShowConfirmation(false);
     axios.delete(`/api/posts/${pid}/comments/${cid}`).then((res) => {
-      console.log(res);
       toast.success("Your comment has been successfully deleted.", {
         position: "top-center",
         autoClose: 3000,

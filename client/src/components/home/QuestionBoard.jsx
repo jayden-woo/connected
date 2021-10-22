@@ -131,19 +131,11 @@ const QuestionBoard = () => {
   const [maxPosts, setMaxPosts] = useState(INITIAL_MAX_POSTS);
 
   useEffect(async () => {
-    const users = await axios.get("/api/auth0/users").then((res) => {
-      console.log(res);
-      return res.data;
-    });
-    console.log(users);
-    // const baseUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "http://localhost:3000";
-    // await axios.get(`${baseUrl}/api/posts`).then((res) => {
+    const users = await axios.get("/api/auth0/users").then((res) => res.data);
     await axios.get("/api/posts").then((res) => {
-      console.log(res);
       const { data } = res;
       data.map((post) => {
         const author = users.find((u) => u.user_id === post.author.uid);
-        console.log(author);
         // eslint-disable-next-line no-param-reassign
         post.author = {
           uid: author.user_id,

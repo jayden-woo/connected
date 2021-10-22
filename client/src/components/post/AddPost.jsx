@@ -123,7 +123,6 @@ const AddPost = () => {
         content,
       })
       .then((res) => {
-        console.log(res);
         toast.success("Your post has been successfully submitted.", {
           position: "top-center",
           autoClose: 3000,
