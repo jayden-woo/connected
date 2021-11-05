@@ -16,7 +16,7 @@
 
 ### Description
 
-A CRM web app provides to small businnesses, which allows thier customers to post question on the web app's forum page and answer surveys on the survey page.
+A CRM web app provides to small businesses, which allows their customers to post question on the web app's forum page and answer surveys on the survey page.
 
 ### Team Members
 
@@ -37,7 +37,7 @@ A CRM web app provides to small businnesses, which allows thier customers to pos
     -   [Motivational Model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473555/Motivational+Model)
     -   [User stories](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473546/User+Stories)
     -   [Personas](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473537/Personas)
-    -   [Database domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
+    -   [Domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
 -   [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
 ## Getting started
@@ -66,9 +66,9 @@ A CRM web app provides to small businnesses, which allows thier customers to pos
 
 ### Local Development
 
-#### Enviroment setup
+#### Environment setup
 
-Although this project is deployed on Heroku seperatly, but for convinince we put them in the same folder.
+Although this project is deployed on Heroku separately, but for convenience we put them in the same folder.
 
 For local testing, front-end will be run at port 5000 while back-end running at port 3000 as default.
 
@@ -76,9 +76,9 @@ For local testing, front-end will be run at port 5000 while back-end running at 
 | --------- |
 | PORT=5000 |
 
-Other enviromental setups for the safety consideration will be not listed here.
+Other environmental setups for the safety consideration will be not listed here.
 
-#### Install denpendencies
+#### Install dependencies
 
 Install yarn firstly
 
@@ -125,7 +125,7 @@ This monorepo project is deployed on Heroku currently, backend and frontend is d
 -   [Front-end](https://it-project-connected.herokuapp.com/)
 -   [Back-end](https://it-project-connected-api.herokuapp.com)
 
-Some autodeplyment is settet up for development server but not production server, for more information please check out ([CICD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
+Some auto-deployment is set up for development server but not production server, for more information please check out ([CICD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
 
 Settings can be updated via [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) or [Heroku dashboard](https://dashboard.heroku.com/apps)
 
@@ -134,14 +134,17 @@ Settings can be updated via [Heroku CLI](https://devcenter.heroku.com/articles/h
 ##### Heroku CLI
 
 1. Download [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
-2. [Setup Herku account](https://signup.heroku.com/)
+2. [Setup Heroku account](https://signup.heroku.com/)
 3. [Create an new app](https://devcenter.heroku.com/articles/creating-apps)
 
 ```bash
 heroku login
 
-# To create a new app named “example”
-heroku create example
+# To create a new app named “example_server_name”
+heroku create example_server_name
+
+# To create a new app named “example_client_name”
+heroku create example_client_name
 ```
 
 4. [Add remote and deploy](https://devcenter.heroku.com/articles/git)
