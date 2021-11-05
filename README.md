@@ -1,5 +1,8 @@
-# Team Connected 
-
+<p align="center">
+  <a href="https://it-project-connected.herokuapp.com/">
+    <img src="https://i.imgur.com/MYHeh0S.png" alt="Team Connected logo" />
+  </a>
+</p>
 ## Navigation
 
 -   [Project Background](#Project-Background)
@@ -11,8 +14,11 @@
     -   [Requirements](#Requirements)
     -   [Local Development setup](#Local-Development)
     -   [Deployment](#deployment-guidelines)
+    -   [Auth0 setup](#Auth0)
 
 ## Project Background
+
+Project for COMP30022 IT Project 2021 Semester 2 (Team 15, CONNECTED)
 
 ### Description
 
@@ -51,16 +57,26 @@ A CRM web app provides to small businesses, which allows their customers to post
 
 ### Requirements
 
-**Node :** 
+#### System requirements
 
-- [NodeJS](https://nodejs.org/en/) \>= 12.x
-- [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) \>= 6.x
+- **[Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)**
 
-**Database:**
+- **Node :** 
+    - [NodeJS](https://nodejs.org/en/) \>= 12.x
+    - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) \>= 6.x
 
-- [MongoDB](https://www.mongodb.com/) >= 4.4
+- **Database:**
+    - [MongoDB](https://www.mongodb.com/) >= 4.4
 
 *Further requirements please check the package.json*
+
+
+
+#### Account with
+
+- [MongoDB](https://account.mongodb.com/account/register)
+- [Heroku](https://dashboard.heroku.com/apps)
+- [Auth0](https://auth0.com/signup?place=header&type=button&text=sign%20up)
 
 
 
@@ -76,7 +92,7 @@ For local testing, front-end will be run at port 5000 while back-end running at 
 | --------- |
 | PORT=5000 |
 
-Other environmental setups for the safety consideration will be not listed here.
+*Other environmental setups for the safety consideration will not listed here. Please check the environment.md*
 
 #### Install dependencies
 
@@ -166,10 +182,10 @@ git push heroku main
 buildpacks:add https://github.com/lstoll/heroku-buildpack-monorepo
 
 # buildpack for front end
-https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz
+buildpacks:add https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz
 
 # buildpack for back end
-heroku/nodejs
+buildpacks:add heroku/nodejs
 ```
 
 ```bash
@@ -200,23 +216,37 @@ heroku config:set APP_BASE=client
 
 ##### [Heroku dashboard](https://dashboard.heroku.com/apps)
 
-Heroku dashboard have ui interfaces which make more strait forward to use, more information please checkout ([Heroku documentation](https://devcenter.heroku.com/categories/reference))
+Heroku dashboard have ui interfaces which is more strait forward to setup, more information please checkout ([Heroku documentation](https://devcenter.heroku.com/categories/reference))
 
 
 
+### Auth0
+
+This project used Auth0 to handle with the user authentications.
+
+Users are separated into two roles
+
+| Role  | Permissions                                                  |
+| ----- | ------------------------------------------------------------ |
+| Admin | Admin has permissions to remove posts or post surveys and check survey results |
+| User  | Normal user with permission to add and view posts.           |
+
+#### How to assign roles to users
+
+All user will be assigned with `User` role automatically when first time signning up on the website, to assign Admin to a user
+
+1. [Signup](https://auth0.com/signup?place=header&type=button&text=sign%20up) for Auth0
+2. Access to [Dashboard](https://manage.auth0.com/dashboard/us/dev-8p7irqly/)
+
+3. Check user management - Roles
+
+<img src="https://i.imgur.com/VaWZNGo.png" alt="Auth0 dashboard usermanagement" style="zoom:50%;" />
+
+4. Click the Add Users button, assign role to the user
 
 
 
-
-
-
-
-
-
-
-
-
-
+<img src="https://i.imgur.com/urrB1Ju.png" style="zoom:30%;" />
 
 
 
