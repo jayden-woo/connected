@@ -1,4 +1,4 @@
-# IT-Project CRM - Team Connected
+# Team Connected 
 
 ## Navigation
 
@@ -6,14 +6,11 @@
     -   [Description](#Description)
     -   [Team Members](#Team-Members)
     -   [Documentation](#Documentation)
-    -   [Project Link](#Project-Link)
-    -   [Stacks](#stacks)
 -   [Getting started](#Getting-started)
     -   [File structure](#File-structure)
-    -   [Local Development](#Local-Development)
-        -   [Enviroment setup](#Enviroment-setup)
-        -   [Install denpendencies](#Install-denpendencies)
-        -   [Staring scripts](#Staring-scripts)
+    -   [Requirements](#Requirements)
+    -   [Local Development setup](#Local-Development)
+    -   [Deployment](#deployment-guidelines)
 
 ## Project Background
 
@@ -36,46 +33,36 @@ A CRM web app provides to small businnesses, which allows thier customers to pos
 ### Documentation
 
 -   [Confluence](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/overview?homepageId=163848)
-    -   [Requirement CheckList](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473871/Requirement+Checklist)
+    -   [Architecture Diagram](https://i.imgur.com/h0NCDqB.png)
     -   [Motivational Model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473555/Motivational+Model)
     -   [User stories](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473546/User+Stories)
     -   [Personas](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473537/Personas)
-    -   [Domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
-    -   [Acceptance Criteria](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/18154149/Acceptance+Criteria+Page)
--   [Jira](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
-    -   [Road map](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
-    -   [Backlog](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/backlog)
-    -   [Board](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1)
+    -   [Database domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
 -   [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
-
-### Project Link
-
--   Heroku URL
-    -   [Front-end](https://it-project-connected.herokuapp.com/)
-    -   [Back-end](https://it-project-connected-api.herokuapp.com)
-
-### Stacks
-
-Front End: React
-
-Back End: NodeJS + Express
-
-Database: MongoDB
-
-Deployment: Heroku
-
-Testing: Mocha
-
-API documentation: [Postman](https://documenter.getpostman.com/view/15417117/UUxwBoPp)
 
 ## Getting started
 
 ### File structure
 
-| File/Folder        | Description                                    |
-| :----------------- | :--------------------------------------------- |
-| `├── server`       | Backend(API) server                            |
-| `├── client`       | Front-end UI                                   |
+| File/Folder  | Description         |
+| :----------- | :------------------ |
+| `├── server` | Backend(API) server |
+| `└── client` | Front-end UI        |
+
+### Requirements
+
+**Node :** 
+
+- [NodeJS](https://nodejs.org/en/) \>= 12.x
+- [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) \>= 6.x
+
+**Database:**
+
+- [MongoDB](https://www.mongodb.com/) >= 4.4
+
+*Further requirements please check the package.json*
+
+
 
 ### Local Development
 
@@ -92,6 +79,12 @@ For local testing, front-end will be run at port 5000 while back-end running at 
 Other enviromental setups for the safety consideration will be not listed here.
 
 #### Install denpendencies
+
+Install yarn firstly
+
+```bash
+npm install --global yarn
+```
 
 Scripts defined at root directory, Install all dependencies by command:
 
@@ -120,3 +113,109 @@ yarn server
 ```bash
 yarn dev
 ```
+
+
+
+### Deployment guidelines
+
+#### Current deployment
+
+This monorepo project is deployed on Heroku currently, backend and frontend is deployed separately with link below
+
+-   [Front-end](https://it-project-connected.herokuapp.com/)
+-   [Back-end](https://it-project-connected-api.herokuapp.com)
+
+Some autodeplyment is settet up for development server but not production server, for more information please check out ([CICD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
+
+Settings can be updated via [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) or [Heroku dashboard](https://dashboard.heroku.com/apps)
+
+#### How to deploy
+
+##### Heroku CLI
+
+1. Download [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+2. [Setup Herku account](https://signup.heroku.com/)
+3. [Create an new app](https://devcenter.heroku.com/articles/creating-apps)
+
+```bash
+heroku login
+
+# To create a new app named “example”
+heroku create example
+```
+
+4. [Add remote and deploy](https://devcenter.heroku.com/articles/git)
+
+```bash
+# For an existing heroku app
+heroku git:remote -a it-project-connected
+
+# push the code from your local repository’s master or main branch to your heroku remote
+git push heroku main
+```
+
+5. Setup buildpacks
+
+```bash
+# add new app buildpack, inserting into list of buildpacks if neccessary
+
+# monorepo buildpack, notice that need to specify the app_base env in the config
+buildpacks:add https://github.com/lstoll/heroku-buildpack-monorepo
+
+# buildpack for front end
+https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz
+
+# buildpack for back end
+heroku/nodejs
+```
+
+```bash
+# Other helpful cml
+# clear all buildpacks set on the app
+buildpacks:clear          
+
+# remove a buildpack set on the app
+buildpacks:remove [BUILDPACK_URL]  
+
+# set new app buildpack, overwriting into list of buildpacks if neccessary
+buildpacks:set BUILDPACK_URL       
+```
+
+6. Setup env
+
+```bash
+# setup enviroment variables
+
+# specify backend app entry for buildpack
+heroku config:set APP_BASE=server
+
+# specify frontend app entry for buildpack
+heroku config:set APP_BASE=client
+
+# all env variables listed in the Enviroment.md needs to be add to the app
+```
+
+##### [Heroku dashboard](https://dashboard.heroku.com/apps)
+
+Heroku dashboard have ui interfaces which make more strait forward to use, more information please checkout ([Heroku documentation](https://devcenter.heroku.com/categories/reference))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
