@@ -1,25 +1,30 @@
-# IT-Project CRM - Team Connected
-
+<p align="center">
+  <a href="https://it-project-connected.herokuapp.com/">
+    <img src="https://i.imgur.com/MYHeh0S.png" alt="Team Connected logo" />
+  </a>
+</p>
 ## Navigation
 
 -   [Project Background](#Project-Background)
     -   [Description](#Description)
     -   [Team Members](#Team-Members)
+    -   [Contact](#contact)
     -   [Documentation](#Documentation)
-    -   [Project Link](#Project-Link)
-    -   [Stacks](#stacks)
 -   [Getting started](#Getting-started)
     -   [File structure](#File-structure)
-    -   [Local Development](#Local-Development)
-        -   [Enviroment setup](#Enviroment-setup)
-        -   [Install denpendencies](#Install-denpendencies)
-        -   [Staring scripts](#Staring-scripts)
+    -   [Requirements](#Requirements)
+    -   [Local Development setup](#Local-Development)
+    -   [Deployment](#deployment-guidelines)
+    -   [Auth0 setup](#Auth0)
+-   [Version History](#version-history)
 
 ## Project Background
 
+Project for COMP30022 IT Project 2021 Semester 2 (Team 15, CONNECTED)
+
 ### Description
 
-A CRM web app provides to small businnesses, which allows thier customers to post question on the web app's forum page and answer surveys on the survey page.
+A CRM web app provides to small businesses, which allows their customers to post question on the web app's forum page and answer surveys on the survey page.
 
 ### Team Members
 
@@ -33,55 +38,62 @@ A CRM web app provides to small businnesses, which allows thier customers to pos
 | **Jun Cheng Woo** |  1045457   |    [jayden-woo](https://github.com/jayden-woo)    |     [woojw@student.unimelb.edu.au](mailto:woojw@student.unimelb.edu.au)     |   Front-end Lead    |
 |  **Linyan Zhu**   |  1074009   |       [LinyanZ](https://github.com/LinyanZ)       |  [linyanz1@student.unimelb.edu.au](mailto:linyanz1@student.unimelb.edu.au)  |    Back-end Lead    |
 
+### Contact
+
+If you have any questions with the website. Please contact us via [Discord](https://discord.gg/hzNFjUAZ).
+
+
+
 ### Documentation
 
 -   [Confluence](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/overview?homepageId=163848)
-    -   [Requirement CheckList](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473871/Requirement+Checklist)
+    -   [Architecture Diagram](https://i.imgur.com/h0NCDqB.png)
     -   [Motivational Model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473555/Motivational+Model)
     -   [User stories](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473546/User+Stories)
     -   [Personas](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473537/Personas)
     -   [Domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
-    -   [Acceptance Criteria](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/18154149/Acceptance+Criteria+Page)
--   [Jira](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
-    -   [Road map](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/roadmap)
-    -   [Backlog](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1/backlog)
-    -   [Board](https://21s2-comp30022-team-15.atlassian.net/jira/software/projects/IP/boards/1)
+    -   [Database Structure](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/40927233/Database+Structure)
 -   [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
-
-### Project Link
-
--   Heroku URL
-    -   [Front-end](https://it-project-connected.herokuapp.com/)
-    -   [Back-end](https://it-project-connected-api.herokuapp.com)
-
-### Stacks
-
-Front End: React
-
-Back End: NodeJS + Express
-
-Database: MongoDB
-
-Deployment: Heroku
-
-Testing: Mocha
-
-API documentation: [Postman](https://documenter.getpostman.com/view/15417117/UUxwBoPp)
 
 ## Getting started
 
 ### File structure
 
-| File/Folder        | Description                                    |
-| :----------------- | :--------------------------------------------- |
-| `├── server`       | Backend(API) server                            |
-| `├── client`       | Front-end UI                                   |
+| File/Folder  | Description         |
+| :----------- | :------------------ |
+| `├── server` | Backend(API) server |
+| `└── client` | Front-end UI        |
+
+### Requirements
+
+#### System requirements
+
+- **[Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)**
+
+- **Node :** 
+    - [NodeJS](https://nodejs.org/en/) \>= 12.x
+    - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) \>= 6.x
+
+- **Database:**
+    - [MongoDB](https://www.mongodb.com/) >= 4.4
+
+*Further requirements please check the package.json*
+
+
+
+#### Account with
+
+- [MongoDB](https://account.mongodb.com/account/register)
+- [Heroku](https://dashboard.heroku.com/apps)
+- [Auth0](https://auth0.com/signup?place=header&type=button&text=sign%20up)
+
+
 
 ### Local Development
 
-#### Enviroment setup
+#### Environment setup
 
-Although this project is deployed on Heroku seperatly, but for convinince we put them in the same folder.
+Although this project is deployed on Heroku separately, but for convenience we put them in the same folder.
 
 For local testing, front-end will be run at port 5000 while back-end running at port 3000 as default.
 
@@ -89,9 +101,15 @@ For local testing, front-end will be run at port 5000 while back-end running at 
 | --------- |
 | PORT=5000 |
 
-Other enviromental setups for the safety consideration will be not listed here.
+*Other environmental setups for the safety consideration will not listed here. Please check the environment.md*
 
-#### Install denpendencies
+#### Install dependencies
+
+Install yarn firstly
+
+```bash
+npm install --global yarn
+```
 
 Scripts defined at root directory, Install all dependencies by command:
 
@@ -120,3 +138,158 @@ yarn server
 ```bash
 yarn dev
 ```
+
+
+
+### Deployment guidelines
+
+#### Current deployment
+
+This monorepo project is deployed on Heroku currently, backend and frontend is deployed separately with link below
+
+-   [Front-end](https://it-project-connected.herokuapp.com/)
+-   [Back-end](https://it-project-connected-api.herokuapp.com)
+
+Some auto-deployment is set up for development server but not production server, for more information please check out ([CICD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
+
+Settings can be updated via [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) or [Heroku dashboard](https://dashboard.heroku.com/apps)
+
+#### How to deploy
+
+##### Heroku CLI
+
+1. Download [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+2. [Setup Heroku account](https://signup.heroku.com/)
+3. [Create an new app](https://devcenter.heroku.com/articles/creating-apps)
+
+```bash
+heroku login
+
+# To create a new app named “example_server_name”
+heroku create example_server_name
+
+# To create a new app named “example_client_name”
+heroku create example_client_name
+```
+
+4. [Add remote and deploy](https://devcenter.heroku.com/articles/git)
+
+```bash
+# For an existing heroku app
+heroku git:remote -a it-project-connected
+
+# push the code from your local repository’s master or main branch to your heroku remote
+git push heroku main
+```
+
+5. Setup buildpacks
+
+```bash
+# add new app buildpack, inserting into list of buildpacks if neccessary
+
+# monorepo buildpack, notice that need to specify the app_base env in the config
+buildpacks:add https://github.com/lstoll/heroku-buildpack-monorepo
+
+# buildpack for front end
+buildpacks:add https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz
+
+# buildpack for back end
+buildpacks:add heroku/nodejs
+```
+
+```bash
+# Other helpful cml
+# clear all buildpacks set on the app
+buildpacks:clear          
+
+# remove a buildpack set on the app
+buildpacks:remove [BUILDPACK_URL]  
+
+# set new app buildpack, overwriting into list of buildpacks if neccessary
+buildpacks:set BUILDPACK_URL       
+```
+
+6. Setup env
+
+```bash
+# setup enviroment variables
+
+# specify backend app entry for buildpack
+heroku config:set APP_BASE=server
+
+# specify frontend app entry for buildpack
+heroku config:set APP_BASE=client
+
+# all env variables listed in the Enviroment.md needs to be add to the app
+```
+
+##### [Heroku dashboard](https://dashboard.heroku.com/apps)
+
+Heroku dashboard have ui interfaces which is more strait forward to setup, more information please checkout ([Heroku documentation](https://devcenter.heroku.com/categories/reference))
+
+
+
+### Auth0
+
+This project used Auth0 to handle with the user authentications.
+
+Users are separated into two roles
+
+| Role  | Permissions                                                  |
+| ----- | ------------------------------------------------------------ |
+| Admin | Admin has permissions to remove posts or post surveys and check survey results |
+| User  | Normal user with permission to add and view posts.           |
+
+#### How to assign roles to users
+
+All user will be assigned with `User` role automatically when first time signning up on the website, to assign Admin to a user
+
+1. [Signup](https://auth0.com/signup?place=header&type=button&text=sign%20up) for Auth0
+2. Access to [Dashboard](https://manage.auth0.com/dashboard/us/dev-8p7irqly/)
+
+3. Check user management - Roles
+
+<img src="https://i.imgur.com/VaWZNGo.png" alt="Auth0 dashboard usermanagement" style="zoom:50%;" />
+
+4. Click the Add Users button, assign role to the user
+
+
+
+<img src="https://i.imgur.com/urrB1Ju.png" style="zoom:20%;" />
+
+
+
+## Version History
+
+[VERSION.md](./VERSION.md)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
