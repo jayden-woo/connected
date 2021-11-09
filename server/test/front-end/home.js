@@ -83,18 +83,11 @@ describe('home page', function () {
   it('reply a question', async () => {
     console.log('reply a question......');
     await page.fill("#postReply", "reply some code");
-    await page.click('.sc-bZSRNg');
+    await page.click('.sc-iUuxjF');
     await page.waitForTimeout("5000");
     const x = await page.innerText('.container >> nth=3 >> .px-4');
     expect(x).to.be.equal("reply some code");
-    await page.click('.sc-iktFfs >> .text-muted');
-    await page.click('#postBody');
-    await page.fill("#postBody", "update some code");
-    await page.click('.sc-ezredP');
-    await page.waitForTimeout("2000");
-    const y = await page.innerText('.container >> nth=3 >> .px-4');
     await page.click('text=HOME');
-    expect(y).to.be.equal("update some code");
   })
 
   after(async function () {
