@@ -8,6 +8,7 @@
 -   [Project Background](#Project-Background)
     -   [Description](#Description)
     -   [Team Members](#Team-Members)
+    -   [Contact](#contact)
     -   [Documentation](#Documentation)
 -   [Getting started](#Getting-started)
     -   [File structure](#File-structure)
@@ -15,6 +16,7 @@
     -   [Local Development setup](#Local-Development)
     -   [Deployment](#deployment-guidelines)
     -   [Auth0 setup](#Auth0)
+-   [Version History](version-history)
 
 ## Project Background
 
@@ -35,6 +37,12 @@ A CRM web app provides to small businesses, which allows their customers to post
 |  **Zhihui Chen**  |   920971   | [Aaronchen0319](https://github.com/Aaronchen0319) |  [zhihuic2@student.unimelb.edu.au](mailto:zhihuic2@student.unimelb.edu.au)  | Testing and QA Lead |
 | **Jun Cheng Woo** |  1045457   |    [jayden-woo](https://github.com/jayden-woo)    |     [woojw@student.unimelb.edu.au](mailto:woojw@student.unimelb.edu.au)     |   Front-end Lead    |
 |  **Linyan Zhu**   |  1074009   |       [LinyanZ](https://github.com/LinyanZ)       |  [linyanz1@student.unimelb.edu.au](mailto:linyanz1@student.unimelb.edu.au)  |    Back-end Lead    |
+
+### Contact
+
+If you have any questions with the website. Please contact us via [Discord](https://discord.gg/hzNFjUAZ).
+
+
 
 ### Documentation
 
@@ -246,7 +254,39 @@ All user will be assigned with `User` role automatically when first time signnin
 
 
 
-<img src="https://i.imgur.com/urrB1Ju.png" style="zoom:30%;" />
+<img src="https://i.imgur.com/urrB1Ju.png" style="zoom:20%;" />
+
+
+
+## Version History
+
+[VERSION.md](./VERSION.md)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
