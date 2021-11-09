@@ -16,7 +16,7 @@
     -   [Local Development setup](#Local-Development)
     -   [Deployment](#deployment-guidelines)
     -   [Auth0 setup](#Auth0)
--   [Version History](version-history)
+-   [Version History](#version-history)
 
 ## Project Background
 
@@ -52,6 +52,7 @@ If you have any questions with the website. Please contact us via [Discord](http
     -   [User stories](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473546/User+Stories)
     -   [Personas](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473537/Personas)
     -   [Domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
+    -   [Database Structure](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/40927233/Database+Structure)
 -   [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
 ## Getting started
