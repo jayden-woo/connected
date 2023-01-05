@@ -197,6 +197,7 @@ PostComment.propTypes = {
   }),
   createdAt: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.arrayOf(PropTypes.object),
   setPost: PropTypes.func.isRequired,
   sub: PropTypes.string.isRequired,

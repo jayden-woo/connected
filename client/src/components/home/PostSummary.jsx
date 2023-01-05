@@ -100,6 +100,7 @@ PostSummary.propTypes = {
   author: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   views: PropTypes.number,
+  // eslint-disable-next-line react/forbid-prop-types
   comments: PropTypes.arrayOf(PropTypes.object),
   solved: PropTypes.bool,
   following: PropTypes.bool,

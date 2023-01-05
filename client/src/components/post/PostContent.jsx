@@ -145,6 +145,7 @@ PostContent.propTypes = {
   createdAt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   history: PropTypes.arrayOf(PropTypes.object),
   onDeleteClick: PropTypes.func.isRequired,
   setPost: PropTypes.func.isRequired,
