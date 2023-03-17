@@ -39,6 +39,10 @@ Command line listed below works the same either under root `/` directory or unde
 
 For local testing, back-end will be running at port 3000 by default.
 
+|  Back-End   |
+| :---------: |
+| Port = 3000 |
+
 Other environmental setups will be not listed here due to safety considerations (will be posted in the chat)
 
 #### Install Dependencies

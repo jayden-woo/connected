@@ -1,4 +1,4 @@
-# React UI of the CRM
+# React User Interface of the CRM
 
 ### Stacks
 
@@ -10,35 +10,35 @@ Testing : Mocha
 
 ### Links
 
-[Heroku Front-end URL - Prod](https://it-project-connected.herokuapp.com) <br />
-[Heroku Front-end URL - Dev](https://it-project-connected-dev.herokuapp.com)
+[Heroku Front-End URL - Production](https://it-project-connected.herokuapp.com) <br />
+[Heroku Front-End URL - Development](https://it-project-connected-dev.herokuapp.com)
 
-### File structure
+### File Structure
 
-| File/Folder        | Description                                    |
-| :----------------- | :--------------------------------------------- |
-| `├── public`       | Static files, icons                            |
-| `├── src`          |                           |
-| &emsp;`├── assets`       | Assets, icons                                  |
-| &emsp;`├── components`   | Reusable components                            |
-| &emsp;`├── css`          | Css                                            |
-| &emsp;`├── pages`        | The client side application                    |
-| &emsp;`├── index.js`    | Entry file of the api server                   |
-| &emsp;`└── helpers`     | Helper functions                               |
+| File/Folder            | Description                  |
+| :--------------------- | :--------------------------- |
+| `├── public`           | Static files, icons          |
+| `├── src`              |                              |
+| &emsp;`├── assets`     | Assets, icons                |
+| &emsp;`├── components` | Reusable components          |
+| &emsp;`├── css`        | CSS                          |
+| &emsp;`├── pages`      | The client side application  |
+| &emsp;`├── index.js`   | Entry file for the react app |
+| &emsp;`└── helpers`    | Helper functions             |
 
 ### Local Development
 
-#### Enviroment setup
+#### Environment Setup
 
-For local testing, front-end will be run at port 5000.
+For local testing, front-end will be running at port 8080 by default.
 
-| Front-end |
-| --------- |
-| PORT=5000 |
+|  Front-End  |
+| :---------: |
+| Port = 8080 |
 
-Other enviromental setups for the safety consideration will be not listed here (will be post in the chat)
+Other environmental setups will be not listed here due to safety considerations (will be posted in the chat)
 
-#### Install denpendencies
+#### Install Dependencies
 
 ```bash
 yarn
@@ -53,8 +53,8 @@ _Run front-end_
 yarn start
 ```
 
-_Run front-end and back-end together_
-`cd ..` (cd back to root folder) and run the follwing command
+_Run front-end and back-end simultaneously_
+`cd ..` (cd back to root folder) and run the following command
 
 ```bash
 # make sure all dependencies are installed

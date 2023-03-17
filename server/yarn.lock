@@ -1917,9 +1917,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"connected-api-server@workspace:.":
+"connected-api@workspace:.":
   version: 0.0.0-use.local
-  resolution: "connected-api-server@workspace:."
+  resolution: "connected-api@workspace:."
   dependencies:
     axios: ^0.21.4
     chai: 4.1.2

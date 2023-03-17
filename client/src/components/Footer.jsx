@@ -39,7 +39,7 @@ const Footer = () => (
   <Container style={{ background: "#FFF", bottom: 0, alignItems: "center", height: "60px" }} fluid>
     <Row sm="auto" className="justify-content-sm-center" style={{ alignItems: "center" }}>
       <Col md="auto">
-        <StyledP>© 2021 Proudly Created by Team 15 Connected</StyledP>
+        <StyledP>© 2021 Proudly Created by Connected</StyledP>
       </Col>
       <Col md="auto" className="footer-icon">
         <StyledImage src={FaceBook} alt="Face Book Logo" />
