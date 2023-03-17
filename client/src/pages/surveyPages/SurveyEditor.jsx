@@ -22,8 +22,8 @@ import QuestionPreview from "../../components/surveyEditor/QuestionPreview";
 import Forbidden from "../Forbidden";
 import Loading from "../../components/Loading";
 
-const audience =
-  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+// const audience = process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+const audience = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "localhost:3000/api/";
 
 const SurveyEditor = () => {
   const [survey, setSurvey] = useState({ questions: [] });
@@ -44,7 +44,8 @@ const SurveyEditor = () => {
     if (isLoading || !isAuthenticated) return;
 
     const claims = await getIdTokenClaims();
-    setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
+    // setIsAdmin(claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
+    setIsAdmin(claims[`${process.env.REACT_APP_BASE_URL}roles`][0] === "Admin");
   }, [isAuthenticated, isLoading]);
 
   // TODO: remove this

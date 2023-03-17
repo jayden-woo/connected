@@ -100,7 +100,26 @@ PostSummary.propTypes = {
   author: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   views: PropTypes.number,
-  comments: PropTypes.arrayOf(PropTypes.object),
+  // comments: PropTypes.arrayOf(PropTypes.object),
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      author: PropTypes.shape({
+        uid: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        picture: PropTypes.string.isRequired,
+      }),
+      createdAt: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      history: PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          content: PropTypes.string.isRequired,
+          createdAt: PropTypes.string.isRequired,
+        })
+      ),
+    })
+  ),
   solved: PropTypes.bool,
   following: PropTypes.bool,
 };

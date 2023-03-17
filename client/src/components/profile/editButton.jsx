@@ -29,7 +29,7 @@ const EditButton = ({ updateFiled, sub, show, onHide }) => {
           onHide();
           localStorage.setItem(updateFiled, state);
         } else {
-          notify.errorNotify("Oops, some error occured!");
+          notify.errorNotify("Oops, some error occurred!");
         }
       } catch (e) {
         setErr(true);

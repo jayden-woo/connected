@@ -35,7 +35,9 @@ const Title = styled.p`
 const StyledImage = styled.img`
   height: 100%;
   width: 40%;
-  max-height: 100%;
+  // max-height: 100%;
+  min-height: 60vh;
+  max-height: 60vh;
   max-width: 100%;
   object-fit: cover;
   object-position: left top;

@@ -81,7 +81,8 @@ const PostComment = ({ pid, cid, author, createdAt, content, history, setPost, s
 
   useEffect(async () => {
     const claims = await getIdTokenClaims();
-    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
+    // setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
+    setIsAdmin(isAuthenticated && claims[`${process.env.REACT_APP_BASE_URL}roles`][0] === "Admin");
     setIsAuthor(isAuthenticated && author.uid === user.sub);
   }, [isAuthenticated]);
 
@@ -197,7 +198,14 @@ PostComment.propTypes = {
   }),
   createdAt: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  history: PropTypes.arrayOf(PropTypes.object),
+  // history: PropTypes.arrayOf(PropTypes.object),
+  history: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+    })
+  ),
   setPost: PropTypes.func.isRequired,
   sub: PropTypes.string.isRequired,
 };

@@ -9,8 +9,8 @@ import notify from "../../helpers/notifyService";
 import Pair from "../../components/submissions/Pair";
 import Loading from "../../components/Loading";
 
-const audience =
-  process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+// const audience = process.env.NODE_ENV === "production" ? "https://it-project-connected-api.herokuapp.com/" : "localhost:3000/api/";
+const audience = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "localhost:3000/api/";
 
 const Submissions = ({ location }) => {
   const [loadingResponses, setLoadingResponses] = useState(true);

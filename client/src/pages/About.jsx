@@ -50,7 +50,7 @@ const About = () => (
       </Row>
       <Row>
         <StyledH4>
-          Connected Customer relationship management (CRM) is a technology for managing all your company’s relationships
+          Connected Customer Relationship Management (CRM) is a technology for managing all your company’s relationships
           and interactions with customers and potential customers. The goal is simple: Improve business relationships.
           Our system helps companies stay connected to customers, streamline processes, and improve profitability.
           <br />

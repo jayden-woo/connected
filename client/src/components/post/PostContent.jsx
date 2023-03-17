@@ -145,7 +145,15 @@ PostContent.propTypes = {
   createdAt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  history: PropTypes.arrayOf(PropTypes.object),
+  // history: PropTypes.arrayOf(PropTypes.object),
+  history: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+    })
+  ),
   onDeleteClick: PropTypes.func.isRequired,
   setPost: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool,

@@ -27,14 +27,17 @@ const ProfNavDropdown = () => {
         try {
           const claims = await getIdTokenClaims();
           let un = null;
-          if (claims["https://it-project-connected.herokuapp.com/username"]) {
-            un = claims["https://it-project-connected.herokuapp.com/username"];
+          // if (claims["https://it-project-connected.herokuapp.com/username"]) {
+          //   un = claims["https://it-project-connected.herokuapp.com/username"];
+          if (claims[`${process.env.REACT_APP_BASE_URL}username`]) {
+            un = claims[`${process.env.REACT_APP_BASE_URL}username`];
           } else {
             un = user.name;
           }
           setState({
             loading: false,
-            isAdmin: claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin",
+            // isAdmin: claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin",
+            isAdmin: claims[`${process.env.REACT_APP_BASE_URL}roles`][0] === "Admin",
             username: un,
           });
         } catch (error) {

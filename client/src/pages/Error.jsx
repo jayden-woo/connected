@@ -6,8 +6,8 @@ import "../css/error.css";
 const Error = () => (
   <div className="notfound-container">
     <div className="notfound">
-      <h2>404 - Page not found</h2>
-      <p>Sorry, an error has occured and the requested page is not found!</p>
+      <h2>404 - Page Not Found</h2>
+      <p>Sorry, an error has occurred and the requested page was not found!</p>
       <NavLink to="/">home page</NavLink>
     </div>
   </div>

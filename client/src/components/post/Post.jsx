@@ -154,10 +154,11 @@ const Post = () => {
       });
   }, []);
 
-  // Check for admin status everytime when isAuthenticated changes its value
+  // Check for admin status every time when isAuthenticated changes its value
   useEffect(async () => {
     const claims = await getIdTokenClaims();
-    setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
+    // setIsAdmin(isAuthenticated && claims["https://it-project-connected.herokuapp.com/roles"][0] === "Admin");
+    setIsAdmin(isAuthenticated && claims[`${process.env.REACT_APP_BASE_URL}roles`][0] === "Admin");
 
     if (isAuthenticated && post !== undefined) {
       setIsAuthor(post.author.uid === user.sub);
