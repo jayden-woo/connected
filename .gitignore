@@ -1,5 +1,4 @@
 ## Mac OS
-
 .package.json
 .package-lock.json
 
@@ -23,7 +22,6 @@
 Network Trash Folder
 Temporary Items
 .apdisk
-
 
 Enviroment.md
 .vscode/
@@ -133,4 +131,11 @@ dist
 # TernJS port file
 .tern-port
 
-
+# Yarn generated files
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

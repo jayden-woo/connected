@@ -1,123 +1,120 @@
 <p align="center">
   <a href="https://it-project-connected.herokuapp.com/">
-    <img src="https://i.imgur.com/MYHeh0S.png" alt="Team Connected logo" />
+    <img src="https://i.imgur.com/MYHeh0S.png" alt="Team Connected Logo" />
   </a>
 </p>
+
 ## Navigation
 
--   [Project Background](#Project-Background)
-    -   [Description](#Description)
-    -   [Team Members](#Team-Members)
-    -   [Contact](#contact)
-    -   [Documentation](#Documentation)
--   [Getting started](#Getting-started)
-    -   [File structure](#File-structure)
-    -   [Requirements](#Requirements)
-    -   [Local Development setup](#Local-Development)
-    -   [Deployment](#deployment-guidelines)
-    -   [Auth0 setup](#Auth0)
--   [Version History](#version-history)
+- [Project Background](#project-background)
+  - [Description](#description)
+  - [Team Members](#team-members)
+  - [Contact](#contact)
+  - [Documentation](#documentation)
+- [Getting Started](#getting-started)
+  - [File Structure](#file-structure)
+  - [Requirements](#requirements)
+  - [Local Development](#local-development)
+  - [Deployment Guidelines](#deployment-guidelines)
+  - [Auth0 Setup](#auth0-setup)
+- [Version History](#version-history)
+- [License](#license)
 
 ## Project Background
 
-Project for COMP30022 IT Project 2021 Semester 2 (Team 15, CONNECTED)
+Project for COMP30022 IT Project 2021 Semester 2 (Team 15, Connected)
 
 ### Description
 
-A CRM web app provides to small businesses, which allows their customers to post question on the web app's forum page and answer surveys on the survey page.
+A Customer Relationship Management (CRM) web app provided to small businesses, allowing their customers to post questions, receive answers, and participate in discussions on the web app's forum page and also answering surveys on the survey page.
 
 ### Team Members
 
-**Supervisor :** [Abhisha Nirmalathas ](https://canvas.lms.unimelb.edu.au/courses/102164/users/83421)
+**Supervisor:** [Abhisha Nirmalathas](https://canvas.lms.unimelb.edu.au/courses/102164/users/83421)
 
 |       Name        | Student ID |                      Github                       |                                    Email                                    |        Role         |
 | :---------------: | :--------: | :-----------------------------------------------: | :-------------------------------------------------------------------------: | :-----------------: |
 | **Xinyue Zhang**  |   984983   |         [Jpiec](https://github.com/Jpiec)         |      [zxz1@student.unimelb.edu.au](mailto:zxz1@student.unimelb.edu.au)      |    Scrum Master     |
 |  **Chen Jiang**   |  1127411   | [chenjiang0819](https://github.com/chenjiang0819) | [chenjiang@student.unimelb.edu.au](mailto:chenjiang@student.unimelb.edu.au) |    Product Owner    |
 |  **Zhihui Chen**  |   920971   | [Aaronchen0319](https://github.com/Aaronchen0319) |  [zhihuic2@student.unimelb.edu.au](mailto:zhihuic2@student.unimelb.edu.au)  | Testing and QA Lead |
-| **Jun Cheng Woo** |  1045457   |    [jayden-woo](https://github.com/jayden-woo)    |     [woojw@student.unimelb.edu.au](mailto:woojw@student.unimelb.edu.au)     |   Front-end Lead    |
-|  **Linyan Zhu**   |  1074009   |       [LinyanZ](https://github.com/LinyanZ)       |  [linyanz1@student.unimelb.edu.au](mailto:linyanz1@student.unimelb.edu.au)  |    Back-end Lead    |
+| **Jun Cheng Woo** |  1045457   |    [jayden-woo](https://github.com/jayden-woo)    |     [woojw@student.unimelb.edu.au](mailto:woojw@student.unimelb.edu.au)     |   Front-End Lead    |
+|  **Linyan Zhu**   |  1074009   |       [LinyanZ](https://github.com/LinyanZ)       |  [linyanz1@student.unimelb.edu.au](mailto:linyanz1@student.unimelb.edu.au)  |    Back-End Lead    |
 
 ### Contact
 
-If you have any questions with the website. Please contact us via [Discord](https://discord.gg/hzNFjUAZ).
-
-
+If you have any questions about the website. Please contact us via [Discord](https://discord.gg/hzNFjUAZ).
 
 ### Documentation
 
--   [Confluence](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/overview?homepageId=163848)
-    -   [Architecture Diagram](https://i.imgur.com/h0NCDqB.png)
-    -   [Motivational Model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473555/Motivational+Model)
-    -   [User stories](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473546/User+Stories)
-    -   [Personas](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473537/Personas)
-    -   [Domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
-    -   [Database Structure](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/40927233/Database+Structure)
--   [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
+- [Confluence](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/overview?homepageId=163848)
+  - [Architecture Diagram](https://i.imgur.com/h0NCDqB.png)
+  - [Motivational Model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473555/Motivational+Model)
+  - [User stories](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473546/User+Stories)
+  - [Personas](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/3473537/Personas)
+  - [Domain model](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/16220179/Domain+Model)
+  - [Database Structure](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/40927233/Database+Structure)
+- [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
-## Getting started
+## Getting Started
 
-### File structure
+### File Structure
 
-| File/Folder  | Description         |
-| :----------- | :------------------ |
-| `├── server` | Backend(API) server |
-| `└── client` | Front-end UI        |
+| File/Folder  |       Description        |
+| :----------: | :----------------------: |
+| `├── server` |  Back-End (API) Server   |
+| `└── client` | Front-End User Interface |
 
 ### Requirements
 
-#### System requirements
+#### System Requirements
 
 - **[Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)**
 
-- **Node :** 
-    - [NodeJS](https://nodejs.org/en/) \>= 12.x
-    - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) \>= 6.x
+- **Node:**
+
+  - [NodeJS](https://nodejs.org/en/) \>= 12.x
+  - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) \>= 6.x
 
 - **Database:**
-    - [MongoDB](https://www.mongodb.com/) >= 4.4
+  - [MongoDB](https://www.mongodb.com/) >= 4.4
 
-*Further requirements please check the package.json*
+_Further requirements please check the package.json_
 
-
-
-#### Account with
+#### Accounts With
 
 - [MongoDB](https://account.mongodb.com/account/register)
 - [Heroku](https://dashboard.heroku.com/apps)
 - [Auth0](https://auth0.com/signup?place=header&type=button&text=sign%20up)
 
-
-
 ### Local Development
 
-#### Environment setup
+#### Environment Setup
 
 Although this project is deployed on Heroku separately, but for convenience we put them in the same folder.
 
-For local testing, front-end will be run at port 5000 while back-end running at port 3000 as default.
+For local testing, front-end will be running at port 8080 while back-end will be running at port 3000 as default.
 
-| Front-end |
-| --------- |
-| PORT=5000 |
+|  Front-End  |  Back-End   |
+| :---------: | :---------: |
+| Port = 8080 | Port = 3000 |
 
-*Other environmental setups for the safety consideration will not listed here. Please check the environment.md*
+_Other environmental setups will not listed here due to safety consideration. Please check the environment.md_
 
-#### Install dependencies
+#### Install Dependencies
 
-Install yarn firstly
+Install yarn first
 
 ```bash
 npm install --global yarn
 ```
 
-Scripts defined at root directory, Install all dependencies by command:
+With scripts already defined at the root directory, install all dependencies by running the following command:
 
 ```bash
 yarn
 ```
 
-#### Starting scripts
+#### Starting Scripts
 
 _Run scripts in root directory_
 
@@ -133,34 +130,34 @@ yarn client
 yarn server
 ```
 
-**Run both front-end and back-end via concurrently**
+**Run both front-end and back-end simultaneously via concurrently**
 
 ```bash
 yarn dev
 ```
 
+### Deployment Guidelines
 
+#### Current Deployment
 
-### Deployment guidelines
+This monorepo project is deployed on Heroku currently, backend and frontend are deployed separately at the link below
 
-#### Current deployment
+- [Front-end](https://it-project-connected.herokuapp.com/)
+- [Back-end](https://it-project-connected-api.herokuapp.com)
 
-This monorepo project is deployed on Heroku currently, backend and frontend is deployed separately with link below
-
--   [Front-end](https://it-project-connected.herokuapp.com/)
--   [Back-end](https://it-project-connected-api.herokuapp.com)
-
-Some auto-deployment is set up for development server but not production server, for more information please check out ([CICD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
+Some auto-deployment is set up for the development server but not for the production server, for more information please check out ([CI/CD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
 
 Settings can be updated via [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) or [Heroku dashboard](https://dashboard.heroku.com/apps)
 
-#### How to deploy
+#### How to Deploy
 
 ##### Heroku CLI
 
 1. Download [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+
 2. [Setup Heroku account](https://signup.heroku.com/)
-3. [Create an new app](https://devcenter.heroku.com/articles/creating-apps)
+
+3. [Create a new app](https://devcenter.heroku.com/articles/creating-apps)
 
 ```bash
 heroku login
@@ -185,7 +182,7 @@ git push heroku main
 5. Setup buildpacks
 
 ```bash
-# add new app buildpack, inserting into list of buildpacks if neccessary
+# add new app buildpack, inserting into list of buildpacks if necessary
 
 # monorepo buildpack, notice that need to specify the app_base env in the config
 buildpacks:add https://github.com/lstoll/heroku-buildpack-monorepo
@@ -200,19 +197,19 @@ buildpacks:add heroku/nodejs
 ```bash
 # Other helpful cml
 # clear all buildpacks set on the app
-buildpacks:clear          
+buildpacks:clear
 
 # remove a buildpack set on the app
-buildpacks:remove [BUILDPACK_URL]  
+buildpacks:remove [BUILDPACK_URL]
 
-# set new app buildpack, overwriting into list of buildpacks if neccessary
-buildpacks:set BUILDPACK_URL       
+# set new app buildpack, overwriting into list of buildpacks if necessary
+buildpacks:set BUILDPACK_URL
 ```
 
 6. Setup env
 
 ```bash
-# setup enviroment variables
+# setup environment variables
 
 # specify backend app entry for buildpack
 heroku config:set APP_BASE=server
@@ -220,76 +217,50 @@ heroku config:set APP_BASE=server
 # specify frontend app entry for buildpack
 heroku config:set APP_BASE=client
 
-# all env variables listed in the Enviroment.md needs to be add to the app
+# all env variables listed in the Environment.md needs to be add to the app
 ```
 
-##### [Heroku dashboard](https://dashboard.heroku.com/apps)
+##### [Heroku Dashboard](https://dashboard.heroku.com/apps)
 
-Heroku dashboard have ui interfaces which is more strait forward to setup, more information please checkout ([Heroku documentation](https://devcenter.heroku.com/categories/reference))
+Heroku dashboard have UI interfaces which are more straightforward to setup, for more information please check out [Heroku documentation](https://devcenter.heroku.com/categories/reference)
 
+### Auth0 Setup
 
-
-### Auth0
-
-This project used Auth0 to handle with the user authentications.
+This project used Auth0 to handle the user authentications.
 
 Users are separated into two roles
 
-| Role  | Permissions                                                  |
-| ----- | ------------------------------------------------------------ |
-| Admin | Admin has permissions to remove posts or post surveys and check survey results |
-| User  | Normal user with permission to add and view posts.           |
+| Role  | Permissions                                                                              |
+| :---: | :--------------------------------------------------------------------------------------- |
+| Admin | Admin has additional permission to remove posts or post surveys and check survey results |
+| User  | Normal user only has permission to add and view posts.                                   |
 
-#### How to assign roles to users
+#### How to Assign Roles
 
-All user will be assigned with `User` role automatically when first time signning up on the website, to assign Admin to a user
+All user will be assigned with `User` role automatically when first signing up on the website.
 
-1. [Signup](https://auth0.com/signup?place=header&type=button&text=sign%20up) for Auth0
-2. Access to [Dashboard](https://manage.auth0.com/dashboard/us/dev-8p7irqly/)
+To assign the `Admin` role to a user:
 
-3. Check user management - Roles
+1. [Sign Up](https://auth0.com/signup?place=header&type=button&text=sign%20up) for an Auth0 account
+
+2. Navigate to the [Dashboard](https://manage.auth0.com/dashboard/us/dev-8p7irqly/)
+
+3. Click on the `User Management` button then the `Roles` button
 
 <img src="https://i.imgur.com/VaWZNGo.png" alt="Auth0 dashboard usermanagement" style="zoom:50%;" />
 
-4. Click the Add Users button, assign role to the user
+4. Click on the `Admin` role and then the `Users` tab
 
+<img src="https://imgur.com/RPMabMS.ong" style="zoom:5%;" />
 
+5. Click on the `Add Users` button then select the user to assign the `Admin` role to
 
 <img src="https://i.imgur.com/urrB1Ju.png" style="zoom:20%;" />
-
-
 
 ## Version History
 
 [VERSION.md](./VERSION.md)
 
+## License
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+See the [LICENSE](LICENSE) file for license rights and limitations (MIT).
