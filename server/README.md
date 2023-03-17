@@ -10,44 +10,44 @@ Deployment : Heroku
 
 Testing : Mocha
 
-[API documentation : Postman](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
+[API documentation: Postman](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
 ### Links
 
-[API documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
+[API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
-[Heroku Back-end URL - pord](https://it-project-connected-api.herokuapp.com) <br />
-[Heroku Back-end URL - dev](https://it-project-connected-api-dev.herokuapp.com)
+[Heroku Back-End URL - Production](https://it-project-connected-api.herokuapp.com) <br/>
+[Heroku Back-End URL - Development](https://it-project-connected-api-dev.herokuapp.com)
 
-### File structure
+### File Structure
 
-| File/Folder        | Description                                         |
-| :----------------- | :-------------------------------------------------- |
-| `├── controllers`  | Controllers                                         |
-| `├── middleware`   | Middlewares (guards)                                |
-| `├── models`       | Mongoose schemas                                    |
-| `├── routes`       | Routers                                             |
-| `├── startup`      | Basic setups for api server (DB, cors, jwt , etc..) |
-| `├── test`         | Mocha testing for front-end and back-end                                       |
-| `└── server.js`    | Entry file of the api server                        |
+| File/Folder       | Description                                        |
+| :---------------- | :------------------------------------------------- |
+| `├── controllers` | Controllers                                        |
+| `├── middleware`  | Middlewares (guards)                               |
+| `├── models`      | Mongoose schemas                                   |
+| `├── routes`      | Routers                                            |
+| `├── startup`     | Basic setups for api server (DB, CORS, JWT, etc..) |
+| `├── test`        | Mocha testing for front-end and back-end           |
+| `└── server.js`   | Entry file for the api server                      |
 
 ### Local Development
 
 Command line listed below works the same either under root `/` directory or under `/server` directory
 
-#### Enviroment setup
+#### Environment Setup
 
-For local testing, back-end will be run at port 3000 as default.
+For local testing, back-end will be running at port 3000 by default.
 
-Other enviromental setups for the safety consideration will be not listed here (will be post in the chat)
+Other environmental setups will be not listed here due to safety considerations (will be posted in the chat)
 
-#### Install denpendencies
+#### Install Dependencies
 
 ```bash
 yarn
 ```
 
-#### Starting scripts
+#### Starting Scripts
 
 ```bash
 yarn start
