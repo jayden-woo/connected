@@ -4,7 +4,6 @@
 	"description": "COMP30022 IT Project 2021 Semester 2 - CRM API Server",
 	"main": "server.js",
 	"scripts": {
-		"prebuild": "corepack enable && corepack prepare yarn@3.4.1 --activate",
 		"start": "node server.js",
 		"server": "nodemon server.js",
 		"test": "mocha ./test/units/ && mocha ./test/api/ && mocha ./test/front-end"
@@ -15,7 +14,6 @@
 	"dependencies": {
 		"axios": "^0.21.4",
 		"cors": "^2.8.5",
-		"debug": "^4.3.2",
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
 		"express-jwt": "^6.1.0",
@@ -24,17 +22,17 @@
 		"joi-objectid": "^3.0.1",
 		"jwks-rsa": "^2.0.4",
 		"mongoose": "^5.13.5",
-		"morgan": "^1.10.0",
-		"nodemon": "^2.0.12",
-		"path": "^0.12.7",
-		"playwright": "^1.0.0",
 		"request": "2.83.0",
 		"request-promise": "^4.2.2"
 	},
 	"devDependencies": {
 		"chai": "4.1.2",
+		"debug": "^4.3.2",
 		"jest": "^27.1.0",
-		"mocha": "5.2.0"
+		"mocha": "5.2.0",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.12",
+		"playwright": "^1.0.0"
 	},
 	"engines": {
 		"npm": ">=6.0.0",
