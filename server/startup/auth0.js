@@ -3,21 +3,24 @@ const jwtAuthz = require("express-jwt-authz");
 const jwksRsa = require("jwks-rsa");
 
 const audience =
-	process.env.NODE_ENV === "production"
-		? "https://it-project-connected-api.herokuapp.com/"
-		: "localhost:3000/api/";
+  process.env.NODE_ENV === "production"
+    ? // ? "https://it-project-connected-api.herokuapp.com/"
+      "https://connected-api.cyclic.app/"
+    : "localhost:3000/api/";
 
 const checkJwt = jwt({
-	secret: jwksRsa.expressJwtSecret({
-		cache: true,
-		rateLimit: true,
-		jwksRequestsPerMinute: 5,
-		jwksUri: `https://dev-8p7irqly.us.auth0.com/.well-known/jwks.json`,
-	}),
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    // jwksUri: `https://dev-8p7irqly.us.auth0.com/.well-known/jwks.json`,
+    jwksUri: `${process.env.REACT_APP_AUTH0_DOMAIN}.well-known/jwks.json`,
+  }),
 
   aud: audience,
-	issuer: [`https://dev-8p7irqly.us.auth0.com/`],
-	algorithms: ["RS256"],
+  // issuer: [`https://dev-8p7irqly.us.auth0.com/`],
+  issuer: [process.env.REACT_APP_AUTH0_DOMAIN],
+  algorithms: ["RS256"],
 });
 
 const checkScopes = jwtAuthz(["read:submission", "edit:survey"]);

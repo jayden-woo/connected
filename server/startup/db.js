@@ -4,7 +4,7 @@ const debug = require("debug")("app:db");
 
 module.exports = function () {
   CONNECTION_STRING =
-    "mongodb+srv://<username>:<password>@<db>/CRM?retryWrites=true&w=majority";
+    "mongodb+srv://<username>:<password>@<db>/?retryWrites=true&w=majority";
   MONGO_URL = CONNECTION_STRING
   .replace(
     "<username>",
@@ -22,7 +22,7 @@ module.exports = function () {
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    dbName: "CRM",
+    dbName: "Connected",
   });
 
   const db = mongoose.connection;
