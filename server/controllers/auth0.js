@@ -3,16 +3,16 @@ var axios = require("axios");
 var options = {
   method: "POST",
   // url: 'https://dev-8p7irqly.us.auth0.com/oauth/token',
-  url: `${process.env.REACT_APP_AUTH0_DOMAIN}oauth/token`,
+  url: `${process.env.AUTH0_DOMAIN}oauth/token`,
   headers: { "content-type": "application/json" },
   data: {
     grant_type: "client_credentials",
     // client_id: 'FmU3TIDMMQHe7ANvJuY5zRQbztbsbEVG',
     // client_secret: 'zy-p9VqIR9jrn1UC5jrLoHy6BZRe9Tq7JCY3ROMqlZhh1M2VzjbSLvPbNJMpf_9g',
     // audience: 'https://dev-8p7irqly.us.auth0.com/api/v2/'
-    client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
-    client_secret: process.env.REACT_APP_AUTH0_CLIENT_SECRET,
-    audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+    client_id: process.env.AUTH0_CLIENT_ID,
+    client_secret: process.env.AUTH0_CLIENT_SECRET,
+    audience: process.env.AUTH0_AUDIENCE,
   },
 };
 
@@ -28,7 +28,7 @@ const getUserInfo = async (req, res) => {
     const response = await axios({
       method: "GET",
       // url: `https://dev-8p7irqly.us.auth0.com/api/v2/users/${sub}`,
-      url: `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${sub}`,
+      url: `${process.env.AUTH0_AUDIENCE}users/${sub}`,
       headers: {
         Authorization: `Bearer ${access_token}`,
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const getAllUsers = async (req, res) => {
     const response = await axios({
       method: "GET",
       // url: `https://dev-8p7irqly.us.auth0.com/api/v2/users`,
-      url: `${process.env.REACT_APP_AUTH0_AUDIENCE}users`,
+      url: `${process.env.AUTH0_AUDIENCE}users`,
       headers: {
         Authorization: `Bearer ${access_token}`,
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const updateUser = async (req, res) => {
   let updateOption = {
     method: "PATCH",
     // url: `https://dev-8p7irqly.us.auth0.com/api/v2/users/${sub}`,
-    url: `${process.env.REACT_APP_AUTH0_AUDIENCE}users/${sub}`,
+    url: `${process.env.AUTH0_AUDIENCE}users/${sub}`,
     headers: {
       Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",

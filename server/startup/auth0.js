@@ -5,7 +5,7 @@ const jwksRsa = require("jwks-rsa");
 const audience =
   process.env.NODE_ENV === "production"
     ? // ? "https://it-project-connected-api.herokuapp.com/"
-      process.env.REACT_APP_BASE_URL
+      process.env.BASE_URL
     : "localhost:3000/api/";
 
 const checkJwt = jwt({
@@ -14,12 +14,12 @@ const checkJwt = jwt({
     rateLimit: true,
     jwksRequestsPerMinute: 5,
     // jwksUri: `https://dev-8p7irqly.us.auth0.com/.well-known/jwks.json`,
-    jwksUri: `${process.env.REACT_APP_AUTH0_DOMAIN}.well-known/jwks.json`,
+    jwksUri: `${process.env.AUTH0_DOMAIN}.well-known/jwks.json`,
   }),
 
   aud: audience,
   // issuer: [`https://dev-8p7irqly.us.auth0.com/`],
-  issuer: [process.env.REACT_APP_AUTH0_DOMAIN],
+  issuer: [process.env.AUTH0_DOMAIN],
   algorithms: ["RS256"],
 });
 
