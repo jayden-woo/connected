@@ -4,14 +4,15 @@
 
 Framework : React
 
-Deployment : Heroku
+Deployment : ~~Heroku~~ Render
 
 Testing : Mocha
 
 ### Links
 
-[Heroku Front-End URL - Production](https://it-project-connected.herokuapp.com) <br />
-[Heroku Front-End URL - Development](https://it-project-connected-dev.herokuapp.com)
+~~[Heroku Front-End URL - Production](https://it-project-connected.herokuapp.com)~~ <br />
+~~[Heroku Front-End URL - Development](https://it-project-connected-dev.herokuapp.com)~~ <br />
+[Render Front-End URL](https://connected-inwy.onrender.com)
 
 ### File Structure
 

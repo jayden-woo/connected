@@ -8,7 +8,7 @@ const Error = () => (
     <div className="notfound">
       <h2>404 - Page Not Found</h2>
       <p>Sorry, an error has occurred and the requested page was not found!</p>
-      <NavLink to="/">home page</NavLink>
+      <NavLink to="/">Homepage</NavLink>
     </div>
   </div>
 );

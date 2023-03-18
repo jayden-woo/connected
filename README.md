@@ -1,5 +1,6 @@
 <p align="center">
-  <a href="https://it-project-connected.herokuapp.com/">
+  <!-- <a href="https://it-project-connected.herokuapp.com/"> -->
+  <a href="https://connected-inwy.onrender.com/">
     <img src="https://i.imgur.com/MYHeh0S.png" alt="Team Connected Logo" />
   </a>
 </p>
@@ -83,16 +84,16 @@ _Further requirements please check the package.json_
 #### Accounts With
 
 - [MongoDB](https://account.mongodb.com/account/register)
-- [Heroku](https://dashboard.heroku.com/apps)
+- ~~[Heroku](https://dashboard.heroku.com/apps)~~ [Render](https://dashboard.render.com/register)
 - [Auth0](https://auth0.com/signup?place=header&type=button&text=sign%20up)
 
 ### Local Development
 
 #### Environment Setup
 
-Although this project is deployed on Heroku separately, but for convenience we put them in the same folder.
+Although this project is deployed on ~~Heroku~~ Render separately, but for convenience we put them in the same folder.
 
-For local testing, front-end will be running at port 8080 while back-end will be running at port 3000 as default.
+For local testing, front-end will be running at port 8080 while back-end will be running at port 3000 by default.
 
 |  Front-End  |  Back-End   |
 | :---------: | :---------: |
@@ -140,10 +141,10 @@ yarn dev
 
 #### Current Deployment
 
-This monorepo project is deployed on Heroku currently, backend and frontend are deployed separately at the link below
+This monorepo project is deployed on ~~Heroku~~ Render currently, backend and frontend are deployed separately at the link below
 
-- [Front-end](https://it-project-connected.herokuapp.com/)
-- [Back-end](https://it-project-connected-api.herokuapp.com)
+- ~~[Front-End](https://it-project-connected.herokuapp.com/)~~ [Front-End](https://connected-inwy.onrender.com/)
+- ~~[Back-End](https://it-project-connected-api.herokuapp.com)~~ [Back-End](https://connected-api-bo7p.onrender.com/)
 
 Some auto-deployment is set up for the development server but not for the production server, for more information please check out ([CI/CD pipeline setup](https://21s2-comp30022-team-15.atlassian.net/wiki/spaces/T1S/pages/39026700/Workflows+and+CICD))
 

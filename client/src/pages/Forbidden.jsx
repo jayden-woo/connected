@@ -8,7 +8,7 @@ const Forbidden = () => (
     <div className="notfound">
       <h2 style={{ color: "#c14d4d" }}>403 - Forbidden</h2>
       <p>Sorry, authentication is required to visit this page.</p>
-      <NavLink to="/">home page</NavLink>
+      <NavLink to="/">Homepage</NavLink>
     </div>
   </div>
 );

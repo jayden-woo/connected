@@ -64,7 +64,7 @@ const handleUpload = async (setProgressBar, image, successNotify, errorNotify) =
     if (successNotify) successNotify();
     return res.data.secure_url;
   } catch (e) {
-    if (errorNotify) errorNotify("An error occured:", e.message);
+    if (errorNotify) errorNotify("An error occurred:", e.message);
     setProgressBar((prevState) => ({ ...prevState, visible: false }));
     return undefined;
   }

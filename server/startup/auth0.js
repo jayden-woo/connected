@@ -5,7 +5,7 @@ const jwksRsa = require("jwks-rsa");
 const audience =
   process.env.NODE_ENV === "production"
     ? // ? "https://it-project-connected-api.herokuapp.com/"
-      "https://connected-api.cyclic.app/"
+      process.env.REACT_APP_BASE_URL
     : "localhost:3000/api/";
 
 const checkJwt = jwt({

@@ -6,7 +6,7 @@ Framework : NodeJS + Express
 
 Database : MongoDB
 
-Deployment : Heroku
+Deployment : ~~Heroku~~ Render
 
 Testing : Mocha
 
@@ -16,8 +16,9 @@ Testing : Mocha
 
 [API Documentation](https://documenter.getpostman.com/view/14853484/UV5TEJhS)
 
-[Heroku Back-End URL - Production](https://it-project-connected-api.herokuapp.com) <br/>
-[Heroku Back-End URL - Development](https://it-project-connected-api-dev.herokuapp.com)
+~~[Heroku Back-End URL - Production](https://it-project-connected-api.herokuapp.com)~~ <br/>
+~~[Heroku Back-End URL - Development](https://it-project-connected-api-dev.herokuapp.com)~~ <br/>
+[Render Back-End URL](https://connected-api-bo7p.onrender.com/)
 
 ### File Structure
 
