@@ -1,15 +1,14 @@
 require("dotenv").config();
 const cors = require("cors");
 
-const whitelist = process.env.CORS_WHITELIST.split(" ");
-
+const corsOptions = {
+  origin: process.env.CORS_WHITELIST.split(" "),
+  // access-control-allow-credentials: true,
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+console.log(corsOptions);
 module.exports = function (app) {
-	app.use(
-		cors({
-			origin: whitelist,
-			// access-control-allow-credentials: true,
-			credentials: true,
-			optionSuccessStatus: 200,
-		}),
-	);
+  app.use(cors(corsOptions));
+  app.options(cors(corsOptions));
 };
